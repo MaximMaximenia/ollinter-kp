@@ -148,6 +148,27 @@ details p{margin-top:10px;color:var(--muted);font-size:15.5px}
 .check input:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .check span{font-size:16px;font-weight:500}
 .check input:checked+span{color:var(--muted)}
+.config{display:grid;gap:16px;grid-template-columns:1fr 300px;align-items:start}
+@media (max-width:820px){.config{grid-template-columns:1fr}}
+.items{display:grid;gap:8px;min-width:0}
+.item{display:grid;grid-template-columns:auto 1fr auto;gap:13px;align-items:center;cursor:pointer;
+      padding:13px 16px;border:1px solid var(--line);border-radius:14px;background:var(--surface);transition:border-color .15s;min-width:0}
+.item:hover{border-color:var(--accent)}
+.item input{appearance:none;width:23px;height:23px;flex:none;border:2px solid var(--line);border-radius:7px;background:var(--bg);cursor:pointer;position:relative;transition:all .15s}
+.item input:checked{background:var(--accent);border-color:var(--accent)}
+.item input:checked::after{content:"";position:absolute;left:6px;top:2px;width:5px;height:10px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(42deg)}
+.item input:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.nm{display:grid;gap:1px;font-size:14.5px;color:var(--muted);min-width:0}
+.nm b{font-family:var(--display);font-size:16px;color:var(--ink);font-weight:700}
+.pr{font-family:var(--display);font-weight:700;font-size:16px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.item input:checked~.pr{color:var(--accent)}
+.total{position:sticky;top:calc(env(safe-area-inset-top,0px) + 70px);display:grid;gap:10px;
+       border:2px solid var(--accent);border-radius:20px;padding:22px;background:var(--surface)}
+.total-row{display:flex;justify-content:space-between;gap:10px;font-size:14.5px;color:var(--muted)}
+.total-row b{font-family:var(--display);color:var(--ink);font-variant-numeric:tabular-nums}
+.total-row.disc b{color:var(--ok)}
+.total .sum{font-family:var(--display);font-size:clamp(42px,9vw,62px);font-weight:900;letter-spacing:-.03em;line-height:1;color:var(--accent);font-variant-numeric:tabular-nums}
+.total p{font-size:13.5px}
 .scale{display:grid;grid-template-columns:repeat(11,1fr);gap:7px}
 .scale label{display:block}
 .scale input{position:absolute;opacity:0;width:0;height:0}
@@ -441,33 +462,38 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding-top:20px;font-si
   <section class="stage" data-stage="12" hidden>
     <div class="stage-head"><div class="num">12</div><div><p class="eyebrow">Реализация</p><h2>Запуск первого сегмента под ключ</h2></div></div>
     <div class="stage-body">
-      <div class="price">
-        <div><div class="sum">$1 900</div><p class="muted">Полный запуск направления «преподаватели английского»: фирменный стиль, макет, ролики, реклама, аналитика.</p></div>
-        <div style="display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
-          <div><h4 style="margin-bottom:10px">Входит</h4>
-            <ul class="inc">
-              <li>Брендбук: узнаваемый стиль, который выделит Ollinter на фоне остальных</li>
-              <li>Готовый макет сайта и посадочной страницы под регистрацию</li>
-              <li>Структура страницы: что и в каком порядке видит человек</li>
-              <li>Оформление инстаграма в этом же стиле, чтобы он не выглядел пустым</li>
-              <li>Три рекламных ролика под ключ — их легко переозвучить на другие языки</li>
-              <li>Настройка и запуск рекламных кампаний</li>
-              <li>Стратегия первого сегмента и предложение для обеих сторон</li>
-              <li>План привлечения стартовой группы преподавателей</li>
-              <li>Аналитика: регистрации и ключевые действия на понятном дашборде</li>
-              <li>Докрутка кампаний и объявлений по ходу первого теста</li>
-            </ul>
-          </div>
-          <div><h4 style="margin-bottom:10px">Отдельно</h4>
-            <ul class="inc exc">
-              <li>Рекламный бюджет — ориентир на первый тест $200–300</li>
-              <li>Перенос макета на сайт: функционал тяжёлый, это задача вашего разработчика</li>
-              <li>Доработка функционала платформы</li>
-              <li>Платные сторонние сервисы</li>
-              <li>Ведение рекламы после первого запуска</li>
-            </ul>
-          </div>
+      <p class="lead">Отмечайте то, что нужно. Чем больше работ в пакете, тем ниже общая цена — всё вместе выходит заметно дешевле, чем по отдельности.</p>
+      <div class="config">
+        <div class="items" id="items">
+          <label class="item"><input type="checkbox" data-price="450"><span class="nm"><b>Брендбук</b>Узнаваемый стиль, который выделит Ollinter на фоне остальных</span><span class="pr">$450</span></label>
+          <label class="item"><input type="checkbox" data-price="500"><span class="nm"><b>Макет сайта и посадочной страницы</b>Готовый дизайн под регистрацию</span><span class="pr">$500</span></label>
+          <label class="item"><input type="checkbox" data-price="100"><span class="nm"><b>Структура страницы</b>Что и в каком порядке видит человек</span><span class="pr">$100</span></label>
+          <label class="item"><input type="checkbox" data-price="200"><span class="nm"><b>Оформление инстаграма</b>В том же стиле, чтобы профиль не выглядел пустым</span><span class="pr">$200</span></label>
+          <label class="item"><input type="checkbox" data-price="450"><span class="nm"><b>Три рекламных ролика под ключ</b>Легко переозвучить на другие языки</span><span class="pr">$450</span></label>
+          <label class="item"><input type="checkbox" data-price="250"><span class="nm"><b>Настройка и запуск кампаний</b>Кабинеты, аудитории, объявления</span><span class="pr">$250</span></label>
+          <label class="item"><input type="checkbox" data-price="150"><span class="nm"><b>Стратегия первого сегмента</b>Предложение для преподавателей и для учеников</span><span class="pr">$150</span></label>
+          <label class="item"><input type="checkbox" data-price="50"><span class="nm"><b>План привлечения преподавателей</b>Как собрать стартовую группу</span><span class="pr">$50</span></label>
+          <label class="item"><input type="checkbox" data-price="100"><span class="nm"><b>Аналитика и дашборд</b>Регистрации и ключевые действия в одном окне</span><span class="pr">$100</span></label>
+          <label class="item"><input type="checkbox" data-price="50"><span class="nm"><b>Докрутка по ходу теста</b>Правки кампаний и страницы во время запуска</span><span class="pr">$50</span></label>
         </div>
+        <div class="total">
+          <div class="total-row"><span>Выбрано работ</span><b id="t-count">0 из 10</b></div>
+          <div class="total-row"><span>Сумма по отдельности</span><b id="t-sum">$0</b></div>
+          <div class="total-row disc"><span>Скидка за пакет</span><b id="t-disc">—</b></div>
+          <div class="sum" id="t-final">$0</div>
+          <p class="muted" id="t-note">Отметьте работы — цена посчитается сама.</p>
+          <button class="reset" type="button" id="t-all" style="justify-self:start">Выбрать всё</button>
+        </div>
+      </div>
+      <div style="display:grid;gap:10px">
+        <h4>Оплачивается отдельно</h4>
+        <ul class="inc exc">
+          <li>Рекламный бюджет — ориентир на первый тест $200–300</li>
+          <li>Перенос макета на сайт: функционал тяжёлый, это задача вашего разработчика</li>
+          <li>Доработка функционала платформы</li>
+          <li>Платные сторонние сервисы</li>
+          <li>Ведение рекламы после первого запуска</li>
+        </ul>
       </div>
 
       <h3>Сроки</h3>
@@ -559,5 +585,60 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding-top:20px;font-si
   });
 
   load(); render(false);
+})();
+
+/* калькулятор пакета */
+(function(){
+  var KEY='ollinter-cfg-v1';
+  var box=document.getElementById('items');
+  if(!box) return;
+  var items=[].slice.call(box.querySelectorAll('input'));
+  var all=items.length;
+  var fFinal=document.getElementById('t-final'), fSum=document.getElementById('t-sum'),
+      fDisc=document.getElementById('t-disc'), fCount=document.getElementById('t-count'),
+      fNote=document.getElementById('t-note'), btnAll=document.getElementById('t-all');
+
+  function money(n){ return '$' + n.toLocaleString('ru-RU').replace(/ /g,' '); }
+  function rate(n){
+    if(n>=9) return .15;
+    if(n>=7) return .12;
+    if(n>=5) return .08;
+    if(n>=3) return .04;
+    return 0;
+  }
+  function calc(){
+    var on=items.filter(function(i){return i.checked});
+    var sum=on.reduce(function(a,i){return a+parseInt(i.dataset.price,10)},0);
+    var final, disc;
+    if(on.length===all){ final=1900; disc=sum-final; }
+    else { disc=Math.round(sum*rate(on.length)/10)*10; final=sum-disc; }
+
+    fCount.textContent=on.length+' из '+all;
+    fSum.textContent=money(sum);
+    fFinal.textContent=money(final);
+    fDisc.textContent=disc>0?('−'+money(disc)):'—';
+
+    if(!on.length) fNote.textContent='Отметьте работы — цена посчитается сама.';
+    else if(on.length===all) fNote.textContent='Весь пакет: полный запуск первого сегмента под ключ.';
+    else {
+      var left=all-on.length;
+      fNote.textContent='Возьмёте весь пакет (ещё '+left+') — итог '+money(1900)+' вместо '+money(2300)+' по отдельности.';
+    }
+    btnAll.textContent=(on.length===all)?'Снять всё':'Выбрать всё';
+    try{ localStorage.setItem(KEY,JSON.stringify(items.map(function(i){return i.checked?1:0}))); }catch(e){}
+  }
+
+  box.addEventListener('change',calc);
+  btnAll.addEventListener('click',function(){
+    var on=items.every(function(i){return i.checked});
+    items.forEach(function(i){i.checked=!on});
+    calc();
+  });
+
+  try{
+    var st=JSON.parse(localStorage.getItem(KEY)||'null');
+    if(st) items.forEach(function(i,n){ i.checked=!!st[n] });
+  }catch(e){}
+  calc();
 })();
 </script>
