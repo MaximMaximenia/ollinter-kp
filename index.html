@@ -151,7 +151,7 @@ details p{margin-top:10px;color:var(--muted);font-size:15.5px}
 .config{display:grid;gap:16px;grid-template-columns:1fr 300px;align-items:start}
 @media (max-width:820px){.config{grid-template-columns:1fr}}
 .items{display:grid;gap:8px;min-width:0}
-.item{display:grid;grid-template-columns:auto 1fr auto;gap:13px;align-items:center;cursor:pointer;
+.item{display:grid;grid-template-columns:auto 1fr;gap:13px;align-items:center;cursor:pointer;
       padding:13px 16px;border:1px solid var(--line);border-radius:14px;background:var(--surface);transition:border-color .15s;min-width:0}
 .item:hover{border-color:var(--accent)}
 .item input{appearance:none;width:23px;height:23px;flex:none;border:2px solid var(--line);border-radius:7px;background:var(--bg);cursor:pointer;position:relative;transition:all .15s}
@@ -465,19 +465,16 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding-top:20px;font-si
       <p class="lead">Отмечайте то, что нужно. Чем больше работ в пакете, тем ниже общая цена — всё вместе выходит заметно дешевле, чем по отдельности.</p>
       <div class="config">
         <div class="items" id="items">
-          <label class="item"><input type="checkbox" data-price="450"><span class="nm"><b>Брендбук</b>Узнаваемый стиль, который выделит Ollinter на фоне остальных</span><span class="pr">$450</span></label>
-          <label class="item"><input type="checkbox" data-price="500"><span class="nm"><b>Макет сайта и посадочной страницы</b>Готовый дизайн под регистрацию</span><span class="pr">$500</span></label>
-          <label class="item"><input type="checkbox" data-price="100"><span class="nm"><b>Структура страницы</b>Что и в каком порядке видит человек</span><span class="pr">$100</span></label>
-          <label class="item"><input type="checkbox" data-price="200"><span class="nm"><b>Оформление инстаграма</b>В том же стиле, чтобы профиль не выглядел пустым</span><span class="pr">$200</span></label>
-          <label class="item"><input type="checkbox" data-price="450"><span class="nm"><b>Три рекламных ролика под ключ</b>Легко переозвучить на другие языки</span><span class="pr">$450</span></label>
-          <label class="item"><input type="checkbox" data-price="250"><span class="nm"><b>Настройка и запуск кампаний</b>Кабинеты, аудитории, объявления</span><span class="pr">$250</span></label>
-          <label class="item"><input type="checkbox" data-price="150"><span class="nm"><b>Стратегия первого сегмента</b>Предложение для преподавателей и для учеников</span><span class="pr">$150</span></label>
-          <label class="item"><input type="checkbox" data-price="50"><span class="nm"><b>План привлечения преподавателей</b>Как собрать стартовую группу</span><span class="pr">$50</span></label>
-          <label class="item"><input type="checkbox" data-price="100"><span class="nm"><b>Аналитика и дашборд</b>Регистрации и ключевые действия в одном окне</span><span class="pr">$100</span></label>
-          <label class="item"><input type="checkbox" data-price="50"><span class="nm"><b>Докрутка по ходу теста</b>Правки кампаний и страницы во время запуска</span><span class="pr">$50</span></label>
+          <label class="item"><input type="checkbox" data-price="650"><span class="nm"><b>Настройка и ведение рекламы</b>Кампании, аудитории, объявления и докрутка по ходу теста</span></label>
+          <label class="item"><input type="checkbox" data-price="450"><span class="nm"><b>Брендбук</b>Узнаваемый стиль, который выделит Ollinter на фоне остальных</span></label>
+          <label class="item"><input type="checkbox" data-price="450"><span class="nm"><b>Макет сайта и посадочной страницы</b>Готовый дизайн под регистрацию</span></label>
+          <label class="item"><input type="checkbox" data-price="450"><span class="nm"><b>Три рекламных ролика под ключ</b>Легко переозвучить на другие языки</span></label>
+          <label class="item"><input type="checkbox" data-price="100"><span class="nm"><b>Смыслы страницы</b>Что и в каком порядке читает человек, чтобы зарегистрироваться</span></label>
+          <label class="item"><input type="checkbox" data-price="100"><span class="nm"><b>Оформление инстаграма</b>В том же стиле, чтобы профиль не выглядел пустым</span></label>
+          <label class="item"><input type="checkbox" data-price="100"><span class="nm"><b>Аналитика и дашборд</b>Регистрации и ключевые действия в одном окне</span></label>
         </div>
         <div class="total">
-          <div class="total-row"><span>Выбрано работ</span><b id="t-count">0 из 10</b></div>
+          <div class="total-row"><span>Выбрано работ</span><b id="t-count">0 из 7</b></div>
           <div class="total-row"><span>Сумма по отдельности</span><b id="t-sum">$0</b></div>
           <div class="total-row disc"><span>Скидка за пакет</span><b id="t-disc">—</b></div>
           <div class="sum" id="t-final">$0</div>
@@ -511,8 +508,6 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding-top:20px;font-si
         <div class="card"><div class="k">Измеримо</div><h3>Работающая связка</h3><p>Стиль, страница, ролики и кампании запущены и крутятся, аналитика показывает действия.</p></div>
         <div class="card"><div class="k">Решение</div><h3>Что дальше</h3><p>На руках данные, по которым видно: усиливать этот сегмент или брать следующий.</p></div>
       </div>
-      <div class="ask"><b>Что зафиксировать как KPI</b> — обсуждаем отдельно: число регистраций зависит от бюджета и спроса, поэтому честно фиксировать не обещанное количество клиентов, а цену целевого действия и сроки работ.</div>
-
       <div class="final">
         <h2>Этот путь ведёт к глобальному продукту</h2>
         <p class="lead" style="color:var(--ink)">Цель — приложение, которым пользуются люди по всему миру: маркетплейс услуг, где находят любого специалиста. Туда приходят не одним прыжком, а сегмент за сегментом, оставляя сильные направления и закрывая слабые.</p>
@@ -528,7 +523,7 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding-top:20px;font-si
 
 <script>
 (function(){
-  var KEY='ollinter-kp-v3';
+  var KEY='ollinter-kp-v4';
   var stages=[].slice.call(document.querySelectorAll('.stage'));
   var bar=document.getElementById('bar'), cnt=document.getElementById('cnt');
 
@@ -578,7 +573,8 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding-top:20px;font-si
     if(e.target.matches('.check input, .scale input')){ render(true); save(); }
   });
   document.getElementById('reset').addEventListener('click',function(){
-    document.querySelectorAll('.check input, .scale input').forEach(function(i){i.checked=false});
+    document.querySelectorAll('.check input, .scale input, .item input').forEach(function(i){i.checked=false});
+    if(window.ollinterResetConfig) window.ollinterResetConfig();
     document.querySelectorAll('.stage').forEach(function(s){s.classList.remove('fresh')});
     render(false); save();
     window.scrollTo({top:0,behavior:'smooth'});
@@ -589,7 +585,7 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding-top:20px;font-si
 
 /* калькулятор пакета */
 (function(){
-  var KEY='ollinter-cfg-v1';
+  var KEY='ollinter-cfg-v2';
   var box=document.getElementById('items');
   if(!box) return;
   var items=[].slice.call(box.querySelectorAll('input'));
@@ -600,8 +596,7 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding-top:20px;font-si
 
   function money(n){ return '$' + n.toLocaleString('ru-RU').replace(/ /g,' '); }
   function rate(n){
-    if(n>=9) return .15;
-    if(n>=7) return .12;
+    if(n>=6) return .12;
     if(n>=5) return .08;
     if(n>=3) return .04;
     return 0;
@@ -628,6 +623,7 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding-top:20px;font-si
     try{ localStorage.setItem(KEY,JSON.stringify(items.map(function(i){return i.checked?1:0}))); }catch(e){}
   }
 
+  window.ollinterResetConfig=function(){ items.forEach(function(i){i.checked=false}); calc(); };
   box.addEventListener('change',calc);
   btnAll.addEventListener('click',function(){
     var on=items.every(function(i){return i.checked});
