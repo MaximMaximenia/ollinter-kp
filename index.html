@@ -148,6 +148,16 @@ details p{margin-top:10px;color:var(--muted);font-size:15.5px}
 .check input:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .check span{font-size:16px;font-weight:500}
 .check input:checked+span{color:var(--muted)}
+.scale{display:grid;grid-template-columns:repeat(11,1fr);gap:7px}
+.scale label{display:block}
+.scale input{position:absolute;opacity:0;width:0;height:0}
+.scale span{display:grid;place-items:center;height:54px;border:1px solid var(--line);border-radius:12px;background:var(--surface);
+            font-family:var(--display);font-weight:700;font-size:17px;cursor:pointer;transition:all .15s}
+.scale label:hover span{border-color:var(--accent)}
+.scale input:checked+span{background:var(--accent);border-color:var(--accent);color:#fff}
+.scale input:focus-visible+span{outline:2px solid var(--accent);outline-offset:3px}
+.scale-ends{display:flex;justify-content:space-between;font-size:14px;color:var(--muted);margin-top:-14px}
+@media (max-width:620px){.scale{grid-template-columns:repeat(6,1fr)}.scale span{height:46px;font-size:15px}}
 .ask{border-left:3px solid var(--warm);padding:6px 0 6px 16px;max-width:66ch}
 .ask b{font-family:var(--display)}
 
@@ -159,7 +169,7 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding-top:20px;font-si
   <div class="topbar-in">
     <div class="brand">Oll<span>inter</span></div>
     <div class="track"><i id="bar"></i></div>
-    <div class="counter"><span id="cnt">1</span> / 11</div>
+    <div class="counter"><span id="cnt">1</span> / 12</div>
     <button class="reset" id="reset" type="button">Сбросить</button>
   </div>
 </div>
@@ -407,40 +417,79 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding-top:20px;font-si
 
   <!-- 11 -->
   <section class="stage" data-stage="11" hidden>
-    <div class="stage-head"><div class="num">11</div><div><p class="eyebrow">Стоимость</p><h2>Запуск первого сегмента</h2></div></div>
+    <div class="stage-head"><div class="num">11</div><div><p class="eyebrow">Обратная связь</p><h2>Насколько вам заходит такой план?</h2></div></div>
+    <div class="stage-body">
+      <p class="lead">Оцените от 0 до 10, прежде чем перейдём к тому, как это реализовать.</p>
+      <div class="scale">
+        <label><input type="radio" name="score" value="0"><span>0</span></label>
+        <label><input type="radio" name="score" value="1"><span>1</span></label>
+        <label><input type="radio" name="score" value="2"><span>2</span></label>
+        <label><input type="radio" name="score" value="3"><span>3</span></label>
+        <label><input type="radio" name="score" value="4"><span>4</span></label>
+        <label><input type="radio" name="score" value="5"><span>5</span></label>
+        <label><input type="radio" name="score" value="6"><span>6</span></label>
+        <label><input type="radio" name="score" value="7"><span>7</span></label>
+        <label><input type="radio" name="score" value="8"><span>8</span></label>
+        <label><input type="radio" name="score" value="9"><span>9</span></label>
+        <label><input type="radio" name="score" value="10"><span>10</span></label>
+      </div>
+      <div class="scale-ends"><span>Не моё</span><span>Делаем</span></div>
+    </div>
+  </section>
+
+  <!-- 12 -->
+  <section class="stage" data-stage="12" hidden>
+    <div class="stage-head"><div class="num">12</div><div><p class="eyebrow">Реализация</p><h2>Запуск первого сегмента под ключ</h2></div></div>
     <div class="stage-body">
       <div class="price">
-        <div><div class="sum">$1 800</div><p class="muted">Полная подготовка и запуск направления «преподаватели английского» — от макета страницы до работающей рекламы.</p></div>
+        <div><div class="sum">$1 900</div><p class="muted">Полный запуск направления «преподаватели английского»: фирменный стиль, макет, ролики, реклама, аналитика.</p></div>
         <div style="display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
           <div><h4 style="margin-bottom:10px">Входит</h4>
             <ul class="inc">
-              <li>Готовый макет посадочной страницы под регистрацию</li>
+              <li>Брендбук: узнаваемый стиль, который выделит Ollinter на фоне остальных</li>
+              <li>Готовый макет сайта и посадочной страницы под регистрацию</li>
               <li>Структура страницы: что и в каком порядке видит человек</li>
-              <li>Рекомендации по дизайну сайта</li>
-              <li>Три рекламных ролика — полностью под ключ</li>
-              <li>Рекламные креативы и тексты объявлений</li>
+              <li>Оформление инстаграма в этом же стиле, чтобы он не выглядел пустым</li>
+              <li>Три рекламных ролика под ключ — их легко переозвучить на другие языки</li>
               <li>Настройка и запуск рекламных кампаний</li>
               <li>Стратегия первого сегмента и предложение для обеих сторон</li>
               <li>План привлечения стартовой группы преподавателей</li>
-              <li>Настройка аналитики: регистрации и ключевые действия</li>
-              <li>Докрутка кампаний по ходу первого теста</li>
+              <li>Аналитика: регистрации и ключевые действия на понятном дашборде</li>
+              <li>Докрутка кампаний и объявлений по ходу первого теста</li>
             </ul>
           </div>
           <div><h4 style="margin-bottom:10px">Отдельно</h4>
             <ul class="inc exc">
               <li>Рекламный бюджет — ориентир на первый тест $200–300</li>
-              <li>Перенос макета на сайт: у вас тяжёлый функционал, это задача вашего разработчика</li>
+              <li>Перенос макета на сайт: функционал тяжёлый, это задача вашего разработчика</li>
               <li>Доработка функционала платформы</li>
               <li>Платные сторонние сервисы</li>
-              <li>Дальнейшее ведение рекламы после запуска</li>
+              <li>Ведение рекламы после первого запуска</li>
             </ul>
           </div>
         </div>
       </div>
+
+      <h3>Сроки</h3>
+      <div class="road">
+        <div class="month"><div class="m">Дни 1–3</div><div><b>Стратегия и предложение.</b> Сегмент, аудитория, смыслы для преподавателей и учеников.</div></div>
+        <div class="month"><div class="m">Дни 3–10</div><div><b>Брендбук и макет.</b> Фирменный стиль, макет сайта и посадочной страницы, оформление инстаграма.</div></div>
+        <div class="month"><div class="m">Дни 8–14</div><div><b>Ролики и кампании.</b> Три ролика под ключ, тексты объявлений, настройка аналитики и запуск.</div></div>
+        <div class="month"><div class="m">Дни 14–25</div><div><b>Тест и докрутка.</b> Крутим рекламу, правим объявления и страницу, собираем данные и обратную связь.</div></div>
+      </div>
+      <p class="lead">Итого около месяца от старта до понятного результата по первому сегменту.</p>
+
+      <h3>Что считаем результатом</h3>
+      <div class="cards">
+        <div class="card"><div class="k">Измеримо</div><h3>Цифры по сегменту</h3><p>Известна цена перехода и цена регистрации, видно, сколько людей доходит до преподавателя.</p></div>
+        <div class="card"><div class="k">Измеримо</div><h3>Работающая связка</h3><p>Стиль, страница, ролики и кампании запущены и крутятся, аналитика показывает действия.</p></div>
+        <div class="card"><div class="k">Решение</div><h3>Что дальше</h3><p>На руках данные, по которым видно: усиливать этот сегмент или брать следующий.</p></div>
+      </div>
+      <div class="ask"><b>Что зафиксировать как KPI</b> — обсуждаем отдельно: число регистраций зависит от бюджета и спроса, поэтому честно фиксировать не обещанное количество клиентов, а цену целевого действия и сроки работ.</div>
+
       <div class="final">
         <h2>Этот путь ведёт к глобальному продукту</h2>
         <p class="lead" style="color:var(--ink)">Цель — приложение, которым пользуются люди по всему миру: маркетплейс услуг, где находят любого специалиста. Туда приходят не одним прыжком, а сегмент за сегментом, оставляя сильные направления и закрывая слабые.</p>
-        <p><b>Начать можно с первого сегмента — $1 800.</b> Рекламный бюджет считается отдельно.</p>
       </div>
       <div class="gate">
         <label class="check"><input type="checkbox"><span>Запускаем первый сегмент</span></label>
@@ -460,7 +509,7 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding-top:20px;font-si
   function save(){
     try{
       localStorage.setItem(KEY,JSON.stringify(stages.map(function(s){
-        return [].slice.call(s.querySelectorAll('.check input')).map(function(i){return i.checked?1:0});
+        return [].slice.call(s.querySelectorAll('.check input, .scale input')).map(function(i){return i.checked?1:0});
       })));
     }catch(e){}
   }
@@ -469,13 +518,17 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding-top:20px;font-si
       var st=JSON.parse(localStorage.getItem(KEY)||'null');
       if(!st) return;
       stages.forEach(function(s,si){
-        [].slice.call(s.querySelectorAll('.check input')).forEach(function(b,bi){ b.checked=!!(st[si]&&st[si][bi]); });
+        [].slice.call(s.querySelectorAll('.check input, .scale input')).forEach(function(b,bi){ b.checked=!!(st[si]&&st[si][bi]); });
       });
     }catch(e){}
   }
   function complete(s){
     var boxes=[].slice.call(s.querySelectorAll('.check input'));
-    return boxes.length>0 && boxes.every(function(b){return b.checked});
+    var radios=[].slice.call(s.querySelectorAll('.scale input'));
+    if(!boxes.length && !radios.length) return false;
+    var boxesOk=boxes.every(function(b){return b.checked});
+    var radiosOk=!radios.length || radios.some(function(r){return r.checked});
+    return boxesOk && radiosOk;
   }
   function render(animate){
     var open=0, prev=true, opened=null;
@@ -496,10 +549,10 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding-top:20px;font-si
   }
 
   document.addEventListener('change',function(e){
-    if(e.target.matches('.check input')){ render(true); save(); }
+    if(e.target.matches('.check input, .scale input')){ render(true); save(); }
   });
   document.getElementById('reset').addEventListener('click',function(){
-    document.querySelectorAll('.check input').forEach(function(i){i.checked=false});
+    document.querySelectorAll('.check input, .scale input').forEach(function(i){i.checked=false});
     document.querySelectorAll('.stage').forEach(function(s){s.classList.remove('fresh')});
     render(false); save();
     window.scrollTo({top:0,behavior:'smooth'});
