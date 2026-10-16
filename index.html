@@ -1,0 +1,510 @@
+<title>Ollinter: система роста</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@500;600;700;900&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: лента разделов; следующий раздел появляется, когда отмечены все пункты предыдущего */
+:root{
+  --bg:#f5f6f4;
+  --surface:#ffffff;
+  --ink:#121a26;
+  --muted:#5b6675;
+  --line:#dfe3e0;
+  --accent:#1659ff;
+  --accent-soft:#e7eeff;
+  --warm:#f0803c;
+  --ok:#1d8a5e;
+  --display:'Golos Text','Segoe UI',Tahoma,sans-serif;
+  --body:'Manrope','Segoe UI',Tahoma,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0c1118;--surface:#141b25;--ink:#eef2f6;--muted:#9aa7b6;--line:#26303d;
+  --accent:#5b8cff;--accent-soft:#17243f;--warm:#f0914f;--ok:#4cc08c;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0c1118;--surface:#141b25;--ink:#eef2f6;--muted:#9aa7b6;--line:#26303d;
+  --accent:#5b8cff;--accent-soft:#17243f;--warm:#f0914f;--ok:#4cc08c;color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1040px;margin:0 auto;padding-inline:20px;padding-block:0 110px}
+h1,h2,h3,h4{font-family:var(--display);text-wrap:balance;margin:0}
+h1{font-size:clamp(34px,6vw,64px);line-height:1.04;font-weight:900;letter-spacing:-.02em}
+h2{font-size:clamp(26px,3.6vw,40px);line-height:1.12;font-weight:700;letter-spacing:-.015em}
+h3{font-size:clamp(19px,2.2vw,23px);font-weight:700;line-height:1.25}
+h4{font-size:16px;font-weight:700}
+p{margin:0}
+ul{margin:0;padding-left:0;list-style:none}
+.eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700}
+.lead{font-size:clamp(17px,2vw,21px);color:var(--muted);max-width:62ch}
+.muted{color:var(--muted)}
+img{display:block;max-width:100%}
+
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.topbar-in{max-width:1040px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:900;letter-spacing:-.02em;font-size:17px}
+.brand span{color:var(--accent)}
+.track{flex:1;min-width:110px;height:6px;border-radius:99px;background:var(--line);overflow:hidden}
+.track i{display:block;height:100%;width:8%;background:var(--accent);border-radius:99px;transition:width .5s cubic-bezier(.2,.7,.3,1)}
+.counter{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.reset{font-family:var(--display);font-weight:700;font-size:13px;padding:6px 12px;border-radius:10px;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer}
+
+.hero{padding-block:clamp(40px,7vw,86px) clamp(30px,5vw,52px);display:grid;gap:26px}
+.hero-img{border-radius:20px;overflow:hidden;border:1px solid var(--line);aspect-ratio:16/7}
+.hero-img img{width:100%;height:100%;object-fit:cover}
+
+.stage{border-top:1px solid var(--line);padding-block:clamp(34px,5vw,56px)}
+.stage[hidden]{display:none}
+.stage-head{display:flex;gap:16px;align-items:flex-start}
+.num{font-family:var(--display);font-weight:900;font-size:14px;letter-spacing:.04em;color:var(--muted);
+     border:1px solid var(--line);border-radius:10px;padding:5px 10px;background:var(--surface);white-space:nowrap;margin-top:6px}
+.stage.done .num{color:var(--ok);border-color:color-mix(in srgb,var(--ok) 40%,var(--line))}
+.stage-body{display:grid;gap:22px;margin-top:22px}
+.stage.fresh{animation:rise .5s cubic-bezier(.2,.7,.3,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.stage.fresh{animation:none}.track i{transition:none}}
+
+.cards{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px;display:grid;gap:8px;min-width:0}
+.card p{font-size:15.5px;color:var(--muted)}
+.card .k{font-family:var(--display);font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.term{background:var(--accent-soft);border-radius:14px;padding:16px 18px;font-size:15.5px}
+.term b{font-family:var(--display)}
+
+.bullets{display:grid;gap:10px}
+.bullets li{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;font-size:16.5px}
+.bullets li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent);margin-top:10px}
+.steps{display:grid;gap:12px;counter-reset:s}
+.steps li{counter-increment:s;display:grid;grid-template-columns:auto 1fr;gap:14px;background:var(--surface);
+          border:1px solid var(--line);border-radius:14px;padding:16px 18px;min-width:0}
+.steps li::before{content:counter(s);font-family:var(--display);font-weight:900;color:var(--accent);font-size:15px;
+                  width:28px;height:28px;display:grid;place-items:center;border-radius:8px;background:var(--accent-soft)}
+.steps b{display:block;font-family:var(--display);font-size:16.5px}
+.steps span{color:var(--muted);font-size:15px}
+
+.matrix{overflow-x:auto;border:1px solid var(--line);border-radius:16px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:620px;font-size:14.5px}
+th,td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.03em;color:var(--muted)}
+tbody th{color:var(--ink);font-size:14.5px;white-space:nowrap}
+td{color:var(--muted)}
+tr:last-child th,tr:last-child td{border-bottom:none}
+.cell-start{background:var(--accent);color:#fff;font-weight:700;border-radius:8px;padding:6px 10px;display:inline-block}
+
+.flow{display:grid;gap:10px}
+.flow-row{display:flex;gap:10px;flex-wrap:wrap}
+.node{flex:1;min-width:150px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;font-size:15px}
+.node b{display:block;font-family:var(--display);font-size:15.5px;margin-bottom:2px}
+.node.weak{border-style:dashed;color:var(--muted)}
+
+.levels{display:grid;gap:10px}
+.level{display:grid;grid-template-columns:150px 1fr;gap:16px;align-items:start;background:var(--surface);
+       border:1px solid var(--line);border-radius:14px;padding:16px 18px;min-width:0}
+.level .tag{font-family:var(--display);font-weight:700;font-size:13.5px;color:var(--accent)}
+@media (max-width:560px){.level{grid-template-columns:1fr;gap:6px}}
+
+.road{display:grid;gap:12px}
+.month{display:grid;grid-template-columns:92px 1fr;gap:16px;border-left:2px solid var(--line);padding:4px 0 14px 18px;min-width:0}
+.month .m{font-family:var(--display);font-weight:900;font-size:14px;color:var(--accent)}
+@media (max-width:560px){.month{grid-template-columns:1fr;gap:4px}}
+
+.price{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:clamp(20px,3vw,30px);display:grid;gap:18px}
+.price .sum{font-family:var(--display);font-size:clamp(40px,8vw,68px);font-weight:900;letter-spacing:-.03em;line-height:1}
+.inc{display:grid;gap:9px}
+.inc li{display:grid;grid-template-columns:auto 1fr;gap:11px;font-size:15.5px}
+.inc li::before{content:"✓";color:var(--ok);font-weight:700}
+.exc li::before{content:"—";color:var(--warm)}
+.tiers{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.tier{border:1px solid var(--line);border-radius:16px;padding:18px;background:var(--bg);display:grid;gap:7px;min-width:0}
+.tier.reco{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.tier .t{font-family:var(--display);font-weight:700;font-size:16.5px}
+.tier .p{font-size:14.5px;color:var(--muted)}
+.badge{justify-self:start;font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+
+details{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 18px}
+details+details{margin-top:9px}
+summary{cursor:pointer;font-family:var(--display);font-weight:700;font-size:16.5px;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";float:right;color:var(--accent);font-weight:900}
+details[open] summary::after{content:"–"}
+details p{margin-top:10px;color:var(--muted);font-size:15.5px}
+
+.gate{margin-top:8px;display:grid;gap:4px}
+.check{display:flex;gap:13px;align-items:flex-start;cursor:pointer;padding:11px 14px;border-radius:13px;border:1px solid var(--line);background:var(--surface);transition:border-color .15s,background .15s}
+.check:hover{border-color:var(--accent)}
+.check input{appearance:none;width:23px;height:23px;flex:none;margin-top:1px;border:2px solid var(--line);border-radius:7px;background:var(--bg);cursor:pointer;position:relative;transition:all .15s}
+.check input:checked{background:var(--accent);border-color:var(--accent)}
+.check input:checked::after{content:"";position:absolute;left:6px;top:2px;width:5px;height:10px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(42deg)}
+.check input:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.check span{font-size:16px;font-weight:500}
+.check input:checked+span{color:var(--muted)}
+
+.final{border:1px solid var(--accent);border-radius:20px;padding:clamp(20px,3vw,30px);background:var(--accent-soft);display:grid;gap:14px}
+footer{border-top:1px solid var(--line);margin-top:40px;padding-top:20px;font-size:14px;color:var(--muted)}
+</style>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <div class="brand">Oll<span>inter</span></div>
+    <div class="track"><i id="bar"></i></div>
+    <div class="counter"><span id="cnt">1</span> / 12</div>
+    <button class="reset" id="reset" type="button">Сбросить</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div style="display:grid;gap:18px">
+      <p class="eyebrow">Маркетинг · план развития</p>
+      <h1>Ollinter: система роста международной платформы экспертов</h1>
+      <p class="lead">От первого работающего сегмента — к повторяемой модели привлечения экспертов и клиентов на разных рынках.</p>
+    </div>
+    <div class="hero-img"><img alt="Сеть связей, расходящаяся из одной точки" src="img/ollinter-hero.jpg"></div>
+  </header>
+
+  <!-- 1 -->
+  <section class="stage" data-stage="1">
+    <div class="stage-head"><div class="num">01</div><div><p class="eyebrow">Масштаб</p><h2>Ollinter — платформа, где человек находит нужного специалиста</h2></div></div>
+    <div class="stage-body">
+      <p class="lead">Преподаватель языка, маркетолог, дизайнер, разработчик, бизнес-консультант. Платформа такого размера строится не запуском всего сразу, а схемой, которую сначала проверяют на одном сегменте и затем переносят дальше.</p>
+      <div class="cards">
+        <div class="card"><div class="k">Ось 1</div><h3>Категории экспертов</h3><p>Преподаватели языков, маркетологи, дизайнеры, разработчики, консультанты.</p></div>
+        <div class="card"><div class="k">Ось 2</div><h3>Языки и рынки</h3><p>Английский, затем другие языки и страны по мере проверки спроса.</p></div>
+        <div class="card"><div class="k">Точка входа</div><h3>Один сегмент</h3><p>Первый эксперимент — на пересечении одной категории и одного рынка.</p></div>
+      </div>
+      <div class="gate">
+        <label class="check"><input type="checkbox"><span>Цель — международная платформа поиска экспертов</span></label>
+        <label class="check"><input type="checkbox"><span>Рост идёт по двум осям: категории экспертов и языки с рынками</span></label>
+        <label class="check"><input type="checkbox"><span>Сначала один сегмент, затем перенос схемы на остальные</span></label>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section class="stage" data-stage="2" hidden>
+    <div class="stage-head"><div class="num">02</div><div><p class="eyebrow">Карта роста</p><h2>Категории × рынки: каждая ячейка — отдельное направление</h2></div></div>
+    <div class="stage-body">
+      <div class="matrix">
+        <table>
+          <thead><tr><th>Рынок / язык</th><th>Преподаватели языков</th><th>Маркетологи</th><th>Дизайнеры</th><th>Разработчики</th><th>Консультанты</th></tr></thead>
+          <tbody>
+            <tr><th>Английский</th><td><span class="cell-start">Старт</span></td><td>Следующее направление</td><td>Следующее направление</td><td>Следующее направление</td><td>Следующее направление</td></tr>
+            <tr><th>Второй язык</th><td>После первого теста</td><td>Дальше по карте</td><td>Дальше по карте</td><td>Дальше по карте</td><td>Дальше по карте</td></tr>
+            <tr><th>Новые страны</th><td>Дальше по карте</td><td>Дальше по карте</td><td>Дальше по карте</td><td>Дальше по карте</td><td>Дальше по карте</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>Что нужно каждому направлению</h3>
+      <div class="cards">
+        <div class="card"><div class="k">1</div><h3>Эксперты</h3><p>Стартовая группа специалистов, чтобы каталог не выглядел пустым.</p></div>
+        <div class="card"><div class="k">2</div><h3>Предложение</h3><p>Отдельное для экспертов и отдельное для клиентов: у них разные причины прийти.</p></div>
+        <div class="card"><div class="k">3</div><h3>Страница</h3><p>Минимальная адаптация под сегмент; отдельная страница — там, где это даёт конверсию.</p></div>
+        <div class="card"><div class="k">4</div><h3>Реклама</h3><p>Свои объявления под мотивы этой аудитории, а не переписанные чужие.</p></div>
+        <div class="card"><div class="k">5</div><h3>Цифры</h3><p>Свои показатели: цена перехода, действия на сайте, контакты со специалистом.</p></div>
+        <div class="card"><div class="k">6</div><h3>Решение</h3><p>Масштабировать, доработать или приостановить — по результатам теста.</p></div>
+      </div>
+      <img alt="Сетка одинаковых блоков, один подсвечен" style="border-radius:18px;border:1px solid var(--line)" src="img/ollinter-matrix.jpg">
+      <div class="gate">
+        <label class="check"><input type="checkbox"><span>Каждая ячейка карты — самостоятельное направление со своими экспертами, страницей и рекламой</span></label>
+        <label class="check"><input type="checkbox"><span>Направления открываются по очереди, по результатам предыдущего</span></label>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section class="stage" data-stage="3" hidden>
+    <div class="stage-head"><div class="num">03</div><div><p class="eyebrow">Первый сегмент</p><h2>Начинаем с преподавателей английского</h2></div></div>
+    <div class="stage-body">
+      <img alt="Преподаватель ведёт онлайн-урок за ноутбуком" style="border-radius:18px;border:1px solid var(--line);max-height:340px;object-fit:cover;width:100%" src="img/ollinter-teacher.jpg">
+      <ul class="bullets">
+        <li>У вас уже зарегистрированы первые преподаватели — сегмент не нужно собирать с нуля.</li>
+        <li>У вас есть внутренняя экспертиза в этой сфере: понятно, чего хотят специалисты.</li>
+        <li>Вы можете сами привлечь преподавателей и поговорить с ними и с учениками.</li>
+        <li>Не нужно параллельно разбираться в незнакомой отрасли.</li>
+        <li>Быстро станет видно, что мешает ученику дойти до преподавателя.</li>
+        <li>Всё, что узнаем здесь, переносится на следующий сегмент.</li>
+      </ul>
+      <div class="gate">
+        <label class="check"><input type="checkbox"><span>Стартовый сегмент — преподаватели английского</span></label>
+        <label class="check"><input type="checkbox"><span>Привлечение первых преподавателей и интервью — на вашей стороне, с моим сценарием</span></label>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section class="stage" data-stage="4" hidden>
+    <div class="stage-head"><div class="num">04</div><div><p class="eyebrow">Запуск</p><h2>Восемь шагов запуска сегмента. Реклама — шестая</h2></div></div>
+    <div class="stage-body">
+      <ol class="steps">
+        <li><b>Предложение</b><span>Почему преподавателю стоит зарегистрироваться, чем платформа полезна ученику, как они связываются и как платформа узнаёт, что контакт состоялся.</span></li>
+        <li><b>Стартовая группа экспертов</b><span>5–10 преподавателей: описание, специализация, формат занятий, цена или способ её узнать, фото, понятный следующий шаг.</span></li>
+        <li><b>Путь клиента</b><span>Пройти целиком: от объявления до первого шага к занятию. Где человек не понимает, куда нажимать, — чиним до оплаты трафика.</span></li>
+        <li><b>Посадочная страница</b><span>Не весь сайт, а страница для учеников. Отдельно решаем, нужна ли страница для преподавателей.</span></li>
+        <li><b>Аналитика</b><span>Заранее выбираем, какие действия считаем: визит, поиск, просмотр профиля, нажатие на контакт.</span></li>
+        <li><b>Первая реклама</b><span>Основная гипотеза — Meta Ads. Google Ads проверяем по поисковому спросу, цене клика и конкуренции.</span></li>
+        <li><b>Интервью</b><span>С зарегистрировавшимися преподавателями и с людьми, которые искали, но не связались.</span></li>
+        <li><b>Доработка и повтор</b><span>Исправляем найденное, меняем тексты и объявления, повторяем тест.</span></li>
+      </ol>
+      <div class="gate">
+        <label class="check"><input type="checkbox"><span>Реклама запускается после предложения, каталога и аналитики</span></label>
+        <label class="check"><input type="checkbox"><span>Собираем стартовую группу из 5–10 преподавателей до платного трафика</span></label>
+        <label class="check"><input type="checkbox"><span>Результат первого запуска — данные и понимание, а не гарантированные сделки</span></label>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section class="stage" data-stage="5" hidden>
+    <div class="stage-head"><div class="num">05</div><div><p class="eyebrow">Путь ученика</p><h2>От объявления до контакта с преподавателем</h2></div></div>
+    <div class="stage-body">
+      <div class="flow">
+        <div class="flow-row">
+          <div class="node"><b>1. Объявление</b>Увидел рекламу</div>
+          <div class="node"><b>2. Переход</b>Попал на страницу</div>
+          <div class="node"><b>3. Понимание</b>Понял, что здесь ищут преподавателя</div>
+        </div>
+        <div class="flow-row">
+          <div class="node weak"><b>4. Подбор</b>Анкета или фильтры — функцию нужно уточнить</div>
+          <div class="node"><b>5. Варианты</b>Увидел подходящих преподавателей</div>
+        </div>
+        <div class="flow-row">
+          <div class="node"><b>6. Контакт</b>Понял, как связаться</div>
+          <div class="node"><b>7. Первый шаг</b>Написал или записался</div>
+        </div>
+      </div>
+      <div class="term"><b>Термины, которые дальше встречаются.</b> Посадочная страница — страница, куда человек попадает после рекламы. Конверсия — доля посетителей, которые сделали нужное действие. Интервью с пользователями — разговоры, чтобы понять, что мешает. Масштабирование — рост направления, которое уже работает.</div>
+      <div class="gate">
+        <label class="check"><input type="checkbox"><span>Каждый шаг пути проверяем до запуска рекламы</span></label>
+        <label class="check"><input type="checkbox"><span>Уточняем, как платформа фиксирует контакт — без этого комиссия не считается</span></label>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section class="stage" data-stage="6" hidden>
+    <div class="stage-head"><div class="num">06</div><div><p class="eyebrow">Метрики</p><h2>Четыре уровня: от клика до ценности для бизнеса</h2></div></div>
+    <div class="stage-body">
+      <div class="levels">
+        <div class="level"><div class="tag">1 · Привлечение</div><div>Цена перехода, количество посетителей, какие объявления вызывают интерес.</div></div>
+        <div class="level"><div class="tag">2 · Интерес</div><div>Сколько человек начинает поиск, смотрит профили, работает с каталогом.</div></div>
+        <div class="level"><div class="tag">3 · Полезное действие</div><div>Сколько нажимает на контакт, отправляет форму, доходит до переписки с преподавателем.</div></div>
+        <div class="level"><div class="tag">4 · Ценность</div><div>Повторные взаимодействия, возвраты, подтверждённые сделки — основа комиссионной модели.</div></div>
+      </div>
+      <div class="gate">
+        <label class="check"><input type="checkbox"><span>Считаем все четыре уровня, а не только клики</span></label>
+        <label class="check"><input type="checkbox"><span>Целевые значения ставим после первых собственных цифр</span></label>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 -->
+  <section class="stage" data-stage="7" hidden>
+    <div class="stage-head"><div class="num">07</div><div><p class="eyebrow">Повторяемая система</p><h2>Следующий сегмент проходит тот же цикл</h2></div></div>
+    <div class="stage-body">
+      <div class="flow">
+        <div class="flow-row">
+          <div class="node"><b>Исследование</b>Спрос, эксперты, альтернативы</div>
+          <div class="node"><b>Эксперты</b>Стартовая группа</div>
+          <div class="node"><b>Предложение и страница</b>Своё для каждой стороны</div>
+        </div>
+        <div class="flow-row">
+          <div class="node"><b>Реклама</b>Небольшой тест</div>
+          <div class="node"><b>Аналитика и интервью</b>Цифры и причины за ними</div>
+          <div class="node"><b>Решение</b>Масштабировать, доработать, приостановить</div>
+        </div>
+      </div>
+      <div class="cards">
+        <div class="card"><div class="k">Решение 1</div><h3>Масштабировать</h3><p>Есть признаки работающей модели.</p></div>
+        <div class="card"><div class="k">Решение 2</div><h3>Доработать</h3><p>Интерес виден, мешают конкретные препятствия.</p></div>
+        <div class="card"><div class="k">Решение 3</div><h3>Приостановить</h3><p>Гипотеза не подтверждается или проверка слишком дорога.</p></div>
+      </div>
+      <div class="gate">
+        <label class="check"><input type="checkbox"><span>Новый сегмент выбираем по спросу и доступности экспертов</span></label>
+        <label class="check"><input type="checkbox"><span>У каждого теста одно из трёх решений по итогам</span></label>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 -->
+  <section class="stage" data-stage="8" hidden>
+    <div class="stage-head"><div class="num">08</div><div><p class="eyebrow">Языки и страны</p><h2>Новый рынок — тот же цикл плюс адаптация</h2></div></div>
+    <div class="stage-body">
+      <img alt="Глобус из светящихся точек с дугами связей" style="border-radius:18px;border:1px solid var(--line)" src="img/ollinter-globe.jpg">
+      <ol class="steps">
+        <li><b>Берём проверенное</b><span>То, что сработало в первом сегменте: предложение, объявления, структуру страницы.</span></li>
+        <li><b>Выбираем рынок</b><span>По спросу, цене рекламы и наличию подходящих экспертов на этом языке.</span></li>
+        <li><b>Адаптируем</b><span>Страницу, профили и рекламные сообщения под язык и контекст. Перевод и озвучку ускоряют ИИ-инструменты, ElevenLabs в том числе.</span></li>
+        <li><b>Тестируем ограниченным бюджетом</b><span>Сравниваем с первым рынком и только потом увеличиваем вложения.</span></li>
+      </ol>
+      <div class="gate">
+        <label class="check"><input type="checkbox"><span>В новую страну выходим после проверки первого сегмента</span></label>
+        <label class="check"><input type="checkbox"><span>Переведённые материалы — только часть работы: спрос и конкуренцию проверяем отдельно</span></label>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 -->
+  <section class="stage" data-stage="9" hidden>
+    <div class="stage-head"><div class="num">09</div><div><p class="eyebrow">Дорожная карта</p><h2>Пять месяцев</h2></div></div>
+    <div class="stage-body">
+      <div class="road">
+        <div class="month"><div class="m">Месяц 1</div><div><b>Основа.</b> Сегмент и предложение, готовность сайта и каталога, стартовая группа преподавателей, путь ученика, страница, аналитика, первые тесты.</div></div>
+        <div class="month"><div class="m">Месяц 2</div><div><b>Конверсия.</b> Поведение посетителей, интервью, доработка страницы и профилей, новые рекламные гипотезы.</div></div>
+        <div class="month"><div class="m">Месяц 3</div><div><b>Устойчивость.</b> Повтор тестов на улучшенной версии, сравнение подходов, проверка: получаются ли реальные контакты, а не визиты.</div></div>
+        <div class="month"><div class="m">Месяц 4</div><div><b>Расширение.</b> Следующая категория или язык: спрос, интервью, минимальная страница, тест. Если первый сегмент не работает — чиним его.</div></div>
+        <div class="month"><div class="m">Месяц 5</div><div><b>Приоритеты.</b> Сравнение направлений, распределение ресурсов по данным, следующая дорожная карта.</div></div>
+      </div>
+      <div class="gate">
+        <label class="check"><input type="checkbox"><span>Порядок работ на пять месяцев понятен</span></label>
+        <label class="check"><input type="checkbox"><span>Расширение начинается только при подтверждённых результатах</span></label>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 -->
+  <section class="stage" data-stage="10" hidden>
+    <div class="stage-head"><div class="num">10</div><div><p class="eyebrow">Первый этап</p><h2>Стратегия, подготовка и тест сегмента преподавателей английского</h2></div></div>
+    <div class="stage-body">
+      <div class="price">
+        <div><div class="sum">$1 600</div><p class="muted">Стартовый спринт: подготовка и запуск в первую рабочую неделю, ориентир 5–7 рабочих дней. Дальше — наблюдение за результатами и оптимизация.</p></div>
+        <div style="display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+          <div><h4 style="margin-bottom:10px">Входит</h4>
+            <ul class="inc">
+              <li>Стратегическая проработка первого сегмента</li>
+              <li>Предложение для преподавателей и для учеников</li>
+              <li>Проверка готовности продукта к запуску</li>
+              <li>План привлечения стартовой группы экспертов</li>
+              <li>Структура рекламного теста</li>
+              <li>Рекламные гипотезы и тексты</li>
+              <li>Требования к посадочной странице</li>
+              <li>План аналитики и отслеживания событий</li>
+              <li>Запуск первой согласованной кампании</li>
+              <li>Рекомендации по первой оптимизации</li>
+            </ul>
+          </div>
+          <div><h4 style="margin-bottom:10px">Оплачивается отдельно</h4>
+            <ul class="inc exc">
+              <li>Рекламный бюджет</li>
+              <li>Разработка, редизайн, программирование</li>
+              <li>Платные сторонние инструменты</li>
+              <li>Перевод и локализация</li>
+              <li>Неограниченные креативы</li>
+              <li>Многомесячное ведение рекламы</li>
+              <li>Привлечение экспертов «под ключ» и серия интервью</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <h3>Дальнейшее сотрудничество</h3>
+      <div class="tiers">
+        <div class="tier"><div class="t">Этап 1. Запуск</div><div class="p">$1 600 — стратегия, подготовка и запуск первого сегмента.</div></div>
+        <div class="tier reco"><span class="badge">Рекомендую</span><div class="t">Этап 2. Тест и оптимизация</div><div class="p">Согласованный ежемесячный объём: оптимизация рекламы, интервью, улучшение страницы и продукта. Сумма и часы фиксируются до старта.</div></div>
+        <div class="tier"><div class="t">Этап 3. Масштабирование</div><div class="p">Новые категории и рынки по отдельному плану, на базе проверенного.</div></div>
+      </div>
+      <div class="gate">
+        <label class="check"><input type="checkbox"><span>Понятно, что входит в первый этап и что оплачивается отдельно</span></label>
+        <label class="check"><input type="checkbox"><span>Рекламный бюджет считаем отдельно от гонорара</span></label>
+        <label class="check"><input type="checkbox"><span>Второй и третий этапы согласуем отдельно</span></label>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 -->
+  <section class="stage" data-stage="11" hidden>
+    <div class="stage-head"><div class="num">11</div><div><p class="eyebrow">Вопросы</p><h2>То, что обычно спрашивают до старта</h2></div></div>
+    <div class="stage-body">
+      <div>
+        <details open><summary>Почему нельзя запустить рекламу во всех категориях сразу?</summary><p>Без предложения, достаточного числа специалистов и аналитики бюджет распыляется, и потом не видно, что сработало. Сначала один сегмент, затем перенос.</p></details>
+        <details><summary>Почему преподаватели английского?</summary><p>У проекта уже есть первые специалисты и внутренняя экспертиза. Это самая быстрая проверка самой модели платформы.</p></details>
+        <details><summary>Почему нужна страница, а не только реклама?</summary><p>Реклама приводит человека на сайт, но не убеждает им пользоваться. Если каталог не вызывает доверия, деньги уходят на посетителей без действий.</p></details>
+        <details><summary>Почему не выйти сразу на несколько стран?</summary><p>Изучать несколько рынков параллельно можно. Крупные расходы идут туда, где видны спрос, доступные специалисты и путь к результату.</p></details>
+        <details><summary>Можно ли гарантировать количество клиентов?</summary><p>Нет. Гарантируются объём работ, настроенные измерения, проверка гипотез и решения по результатам.</p></details>
+        <details><summary>Что будет, если первый тест не сработает?</summary><p>Разберём, где проблема: спрос, предложение, реклама, страница, выбор специалистов или путь пользователя. Решим, что менять и проверять повторно.</p></details>
+      </div>
+      <div class="gate">
+        <label class="check"><input type="checkbox"><span>Открытых вопросов по подходу нет</span></label>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 -->
+  <section class="stage" data-stage="12" hidden>
+    <div class="stage-head"><div class="num">12</div><div><p class="eyebrow">Решение</p><h2>Что делаем сейчас</h2></div></div>
+    <div class="stage-body">
+      <ol class="steps">
+        <li><b>Согласовать стартовый сегмент</b><span>Преподаватели английского.</span></li>
+        <li><b>Проверить профили и путь пользователя</b><span>Глазами ученика, по шагам.</span></li>
+        <li><b>Определить предложение</b><span>Отдельно для преподавателей, отдельно для учеников.</span></li>
+        <li><b>Подготовить страницу и измерение действий</b><span>Минимум, достаточный для запуска.</span></li>
+        <li><b>Запустить первый контролируемый тест</b><span>Бюджет согласуем после оценки аудитории и цены трафика.</span></li>
+        <li><b>Собрать данные и обратную связь</b><span>Цифры и интервью.</span></li>
+        <li><b>Решить, что улучшать и когда расширяться</b><span>По результатам.</span></li>
+      </ol>
+      <div class="final">
+        <h2>Начинаем с одного сегмента, чтобы собрать работающую модель</h2>
+        <p class="lead" style="color:var(--ink)">Её можно последовательно переносить на новые категории и рынки — это и есть система роста, а не разовая рекламная кампания.</p>
+      </div>
+      <div class="gate">
+        <label class="check"><input type="checkbox"><span>Запускаем первый этап</span></label>
+      </div>
+    </div>
+  </section>
+
+  <footer>Ollinter · план развития и первый этап работ</footer>
+</div>
+
+<script>
+(function(){
+  var KEY='ollinter-kp-v2';
+  var stages=[].slice.call(document.querySelectorAll('.stage'));
+  var bar=document.getElementById('bar'), cnt=document.getElementById('cnt');
+
+  function save(){
+    try{
+      localStorage.setItem(KEY,JSON.stringify(stages.map(function(s){
+        return [].slice.call(s.querySelectorAll('.check input')).map(function(i){return i.checked?1:0});
+      })));
+    }catch(e){}
+  }
+  function load(){
+    try{
+      var st=JSON.parse(localStorage.getItem(KEY)||'null');
+      if(!st) return;
+      stages.forEach(function(s,si){
+        [].slice.call(s.querySelectorAll('.check input')).forEach(function(b,bi){ b.checked=!!(st[si]&&st[si][bi]); });
+      });
+    }catch(e){}
+  }
+  function complete(s){
+    var boxes=[].slice.call(s.querySelectorAll('.check input'));
+    return boxes.length>0 && boxes.every(function(b){return b.checked});
+  }
+  function render(animate){
+    var open=0, prev=true, opened=null;
+    stages.forEach(function(s){
+      var show=prev;
+      if(show && s.hidden && animate){ opened=s; }
+      s.hidden=!show;
+      if(show) open++;
+      s.classList.toggle('done',complete(s));
+      prev=prev&&complete(s);
+    });
+    cnt.textContent=open;
+    bar.style.width=Math.round(open/stages.length*100)+'%';
+    if(opened){
+      opened.classList.add('fresh');
+      opened.scrollIntoView({behavior:'smooth',block:'start'});
+    }
+  }
+
+  document.addEventListener('change',function(e){
+    if(e.target.matches('.check input')){ render(true); save(); }
+  });
+  document.getElementById('reset').addEventListener('click',function(){
+    document.querySelectorAll('.check input').forEach(function(i){i.checked=false});
+    document.querySelectorAll('.stage').forEach(function(s){s.classList.remove('fresh')});
+    render(false); save();
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+
+  load(); render(false);
+})();
+</script>
