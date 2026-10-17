@@ -1,0 +1,250 @@
+<title>Ollinter: первый месяц</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@500;600;700;900&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: состав работ с галочками → цена → соцсети → сроки → горизонт → почему проект */
+:root{
+  --bg:#f5f6f4;--surface:#ffffff;--ink:#121a26;--muted:#5b6675;--line:#dfe3e0;
+  --accent:#1659ff;--accent-soft:#e7eeff;--warm:#f0803c;--ok:#1d8a5e;
+  --display:'Golos Text','Segoe UI',Tahoma,sans-serif;
+  --body:'Manrope','Segoe UI',Tahoma,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0c1118;--surface:#141b25;--ink:#eef2f6;--muted:#9aa7b6;--line:#26303d;
+  --accent:#5b8cff;--accent-soft:#17243f;--warm:#f0914f;--ok:#4cc08c;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0c1118;--surface:#141b25;--ink:#eef2f6;--muted:#9aa7b6;--line:#26303d;
+  --accent:#5b8cff;--accent-soft:#17243f;--warm:#f0914f;--ok:#4cc08c;color-scheme:dark}
+
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1000px;margin:0 auto;padding-inline:20px;padding-block:0 110px}
+h1,h2,h3,h4{font-family:var(--display);text-wrap:balance;margin:0}
+h1{font-size:clamp(32px,5.4vw,56px);line-height:1.05;font-weight:900;letter-spacing:-.02em}
+h2{font-size:clamp(24px,3.2vw,36px);line-height:1.14;font-weight:700;letter-spacing:-.015em}
+h3{font-size:clamp(18px,2.1vw,22px);font-weight:700;line-height:1.25}
+h4{font-size:16px;font-weight:700}
+p{margin:0}
+ul,ol{margin:0;padding-left:0;list-style:none}
+.eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700}
+.lead{font-size:clamp(17px,2vw,20px);color:var(--muted);max-width:62ch}
+.muted{color:var(--muted)}
+
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.topbar-in{max-width:1000px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:900;letter-spacing:-.02em;font-size:17px}
+.brand span{color:var(--accent)}
+.track{flex:1;min-width:110px;height:6px;border-radius:99px;background:var(--line);overflow:hidden}
+.track i{display:block;height:100%;width:0;background:var(--accent);border-radius:99px;transition:width .45s cubic-bezier(.2,.7,.3,1)}
+.counter{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.reset{font-family:var(--display);font-weight:700;font-size:13px;padding:6px 12px;border-radius:10px;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer}
+
+.hero{padding-block:clamp(36px,6vw,72px) clamp(20px,3vw,32px);display:grid;gap:16px}
+section{border-top:1px solid var(--line);padding-block:clamp(30px,4.5vw,50px);display:grid;gap:20px}
+section[hidden]{display:none}
+.fresh{animation:rise .5s cubic-bezier(.2,.7,.3,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.fresh{animation:none}.track i{transition:none}}
+
+.items{display:grid;gap:8px}
+.item{display:grid;grid-template-columns:auto 1fr;gap:13px;align-items:center;cursor:pointer;
+      padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:var(--surface);transition:border-color .15s;min-width:0}
+.item:hover{border-color:var(--accent)}
+.item input{appearance:none;width:23px;height:23px;border:2px solid var(--line);border-radius:7px;background:var(--bg);cursor:pointer;position:relative;transition:all .15s}
+.item input:checked{background:var(--accent);border-color:var(--accent)}
+.item input:checked::after{content:"";position:absolute;left:6px;top:2px;width:5px;height:10px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(42deg)}
+.item input:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.nm{display:grid;gap:1px;font-size:14.5px;color:var(--muted);min-width:0}
+.nm b{font-family:var(--display);font-size:16.5px;color:var(--ink);font-weight:700}
+
+.price{border:2px solid var(--accent);border-radius:22px;padding:clamp(22px,3.5vw,34px);background:var(--surface);display:grid;gap:14px}
+.price .sum{font-family:var(--display);font-size:clamp(56px,13vw,116px);font-weight:900;letter-spacing:-.04em;line-height:.95;color:var(--accent)}
+.price .cap{font-family:var(--display);font-weight:700;font-size:17px}
+.inc{display:grid;gap:9px}
+.inc li{display:grid;grid-template-columns:auto 1fr;gap:11px;font-size:15.5px}
+.inc li::before{content:"✓";color:var(--ok);font-weight:700}
+.exc li::before{content:"—";color:var(--warm)}
+
+.cards{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px;display:grid;gap:10px;align-content:start;min-width:0}
+.card .k{font-family:var(--display);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.card ul{display:grid;gap:6px}
+.card li{font-size:15px;color:var(--muted);display:grid;grid-template-columns:auto 1fr;gap:9px}
+.card li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent);margin-top:9px}
+
+.road{display:grid;gap:12px}
+.day{display:grid;grid-template-columns:116px 1fr;gap:16px;border-left:2px solid var(--line);padding:4px 0 14px 18px;min-width:0}
+.day .m{font-family:var(--display);font-weight:900;font-size:14px;color:var(--accent)}
+.day b{font-family:var(--display)}
+@media (max-width:560px){.day{grid-template-columns:1fr;gap:4px}}
+
+.hz{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(215px,1fr))}
+.hz div{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px;display:grid;gap:8px;align-content:start}
+.hz .t{font-family:var(--display);font-weight:900;font-size:14px;color:var(--accent)}
+.hz p{font-size:15px;color:var(--muted)}
+.hz h3{font-size:18px}
+
+.why{display:grid;gap:16px;background:var(--accent-soft);border-radius:20px;padding:clamp(22px,3.5vw,32px)}
+.why p{font-size:17px;max-width:68ch}
+.ph{color:var(--warm);font-weight:700}
+footer{border-top:1px solid var(--line);margin-top:40px;padding-top:20px;font-size:14px;color:var(--muted);display:flex;gap:14px;flex-wrap:wrap;justify-content:space-between}
+a{color:var(--accent)}
+</style>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <div class="brand">Oll<span>inter</span></div>
+    <div class="track"><i id="bar"></i></div>
+    <div class="counter"><span id="cnt">0</span> / 7 работ</div>
+    <button class="reset" id="reset" type="button">Сбросить</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <header class="hero">
+    <p class="eyebrow">Первый месяц работы · старт с английского</p>
+    <h1>Что входит в запуск</h1>
+    <p class="lead">Отмечайте пункты по порядку — ниже соберётся полный состав работ и стоимость первого месяца.</p>
+  </header>
+
+  <section>
+    <div class="items" id="items">
+      <label class="item"><input type="checkbox" autocomplete="off"><span class="nm"><b>Маркетинговый анализ</b>Аудитория, конкуренты, спрос на преподавателей английского, цена привлечения</span></label>
+      <label class="item"><input type="checkbox" autocomplete="off"><span class="nm"><b>Стратегия первого сегмента</b>С чего стартуем, кому и что говорим, в каком порядке запускаем</span></label>
+      <label class="item"><input type="checkbox" autocomplete="off"><span class="nm"><b>Брендбук</b>Узнаваемый стиль: логотип, цвета, шрифты, правила оформления</span></label>
+      <label class="item"><input type="checkbox" autocomplete="off"><span class="nm"><b>Оформление сайта</b>Макет главной и посадочной страницы, смыслы и структура под регистрацию</span></label>
+      <label class="item"><input type="checkbox" autocomplete="off"><span class="nm"><b>Оформление соцсетей</b>YouTube, Instagram, Facebook, TikTok в едином стиле</span></label>
+      <label class="item"><input type="checkbox" autocomplete="off"><span class="nm"><b>Три рекламных ролика</b>Полностью под ключ, легко переозвучить на другие языки</span></label>
+      <label class="item"><input type="checkbox" autocomplete="off"><span class="nm"><b>Настройка и ведение рекламы</b>Кампании, креативы, аналитика и докрутка в течение месяца</span></label>
+    </div>
+  </section>
+
+  <section id="s-price" hidden>
+    <div class="price">
+      <p class="eyebrow">Первый месяц целиком</p>
+      <div class="sum">$2 100</div>
+      <p class="cap">Весь состав работ выше: от анализа и фирменного стиля до работающей рекламы.</p>
+      <div style="display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))">
+        <div><h4 style="margin-bottom:10px">Включено</h4>
+          <ul class="inc">
+            <li>Весь дизайн: сайт и четыре соцсети</li>
+            <li>Три рекламных ролика</li>
+            <li>Настройка и ведение рекламы весь месяц</li>
+            <li>Аналитика: регистрации и ключевые действия</li>
+          </ul>
+        </div>
+        <div><h4 style="margin-bottom:10px">Отдельно</h4>
+          <ul class="inc exc">
+            <li>Рекламный бюджет — на первый тест ориентир $200–300</li>
+            <li>Перенос макета на сайт: это задача вашего разработчика</li>
+            <li>Доработка функционала платформы</li>
+            <li>Платные сторонние сервисы</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="s-social" hidden>
+    <p class="eyebrow">Детали</p>
+    <h2>Что конкретно входит в соцсети</h2>
+    <p class="lead">В первый месяц это оформление: каналы выглядят как один бренд и готовы принимать трафик. Регулярное ведение — следующий этап.</p>
+    <div class="cards">
+      <div class="card"><div class="k">Instagram</div><ul>
+        <li>Аватар и шапка профиля</li><li>Обложки актуальных</li><li>Шаблоны постов и сторис в стиле бренда</li><li>Оформление описания и ссылок</li></ul></div>
+      <div class="card"><div class="k">YouTube</div><ul>
+        <li>Баннер канала и аватар</li><li>Шаблоны обложек для роликов</li><li>Оформление описания и разделов</li><li>Размещение рекламных роликов</li></ul></div>
+      <div class="card"><div class="k">Facebook</div><ul>
+        <li>Обложка и аватар страницы</li><li>Оформление информации о платформе</li><li>Подготовка страницы под рекламный кабинет</li></ul></div>
+      <div class="card"><div class="k">TikTok</div><ul>
+        <li>Аватар и описание профиля</li><li>Обложки видео в едином стиле</li><li>Адаптация рекламных роликов под формат</li></ul></div>
+    </div>
+    <h3>Ведение соцсетей со второго месяца</h3>
+    <p class="lead">Контент-план, регулярные публикации и ролики, работа с комментариями, отчёт по охватам. Объём и стоимость — <span class="ph">[обсуждаем отдельно]</span> в месяц, зависит от количества публикаций и роликов.</p>
+  </section>
+
+  <section id="s-days" hidden>
+    <p class="eyebrow">Сроки</p>
+    <h2>Первый месяц по дням</h2>
+    <div class="road">
+      <div class="day"><div class="m">Дни 1–4</div><div><b>Анализ и стратегия.</b> Аудитория, конкуренты, спрос, цена привлечения. Решаем, с какими смыслами выходим к преподавателям и к ученикам.</div></div>
+      <div class="day"><div class="m">Дни 4–10</div><div><b>Брендбук и сайт.</b> Фирменный стиль, макет главной и посадочной страницы, структура и тексты под регистрацию.</div></div>
+      <div class="day"><div class="m">Дни 8–14</div><div><b>Соцсети.</b> Оформление YouTube, Instagram, Facebook и TikTok в едином стиле, шаблоны для публикаций.</div></div>
+      <div class="day"><div class="m">Дни 10–18</div><div><b>Ролики.</b> Сценарии, съёмка и монтаж трёх рекламных роликов под ключ.</div></div>
+      <div class="day"><div class="m">Дни 16–22</div><div><b>Запуск рекламы.</b> Кабинеты, аудитории, объявления, аналитика. Реклама идёт в работу.</div></div>
+      <div class="day"><div class="m">Дни 22–30</div><div><b>Ведение и докрутка.</b> Правим объявления и страницу по первым данным, собираем цифры по сегменту.</div></div>
+    </div>
+    <p class="lead">К концу месяца у вас есть фирменный стиль, оформленные каналы, три ролика и работающая реклама с понятными цифрами по первому сегменту.</p>
+  </section>
+
+  <section id="s-horizon" hidden>
+    <p class="eyebrow">Горизонт</p>
+    <h2>Как выглядит сотрудничество дальше</h2>
+    <div class="hz">
+      <div><div class="t">Месяц 1</div><h3>Запуск</h3><p>Анализ, стиль, сайт, соцсети, ролики, первая реклама. Получаем первые цифры по английскому.</p></div>
+      <div><div class="t">Месяцы 2–3</div><h3>Отладка</h3><p>Улучшаем связку страница — реклама, снижаем цену регистрации, подключаем регулярное ведение соцсетей.</p></div>
+      <div><div class="t">Месяцы 4–12</div><h3>Новые сегменты</h3><p>Тем же циклом запускаем следующие категории и языки. Сильные направления усиливаем, слабые закрываем.</p></div>
+      <div><div class="t">Год 2–3</div><h3>Международный рост</h3><p>Перенос проверенных смыслов на новые страны, работа с несколькими рынками одновременно.</p></div>
+    </div>
+    <p class="lead">Проект такого типа раскрывается именно на дистанции: за месяц делается запуск, за год — система, за три года — международный продукт.</p>
+  </section>
+
+  <section id="s-why" hidden>
+    <div class="why">
+      <p class="eyebrow">Почему мне интересен ваш проект</p>
+      <h2>Это проект, с которым можно работать годами</h2>
+      <p>Мне нравится, что Ollinter — большой международный проект, который можно развивать очень долго. Здесь не одна задача на месяц, а целая система: сегменты, языки, страны, каждый следующий шаг опирается на предыдущий.</p>
+      <p>Я целенаправленно работаю вдолгую. У меня есть проекты, где я начинал с настройки рекламы, а дальше вёл инстаграм, снимал ролики и отвечал за продвижение целиком. Мне интереснее растить один проект несколько лет, чем делать разовые запуски.</p>
+      <p>Ваш проект — как раз такой случай: здесь есть куда расти, и я хочу пройти этот путь вместе с вами.</p>
+    </div>
+  </section>
+
+  <footer>
+    <span>Ollinter · первый месяц работы</span>
+    <span><a href="./">Открыть стратегию развития</a></span>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var KEY='ollinter-offer-v1';
+  var items=[].slice.call(document.querySelectorAll('#items input'));
+  var reveal=['s-price','s-social','s-days','s-horizon','s-why'].map(function(id){return document.getElementById(id)});
+  var bar=document.getElementById('bar'), cnt=document.getElementById('cnt');
+
+  function render(animate){
+    var on=items.filter(function(i){return i.checked}).length;
+    cnt.textContent=on;
+    bar.style.width=Math.round(on/items.length*100)+'%';
+    var full=on===items.length;
+    reveal.forEach(function(s,n){
+      var was=s.hidden;
+      s.hidden=!full;
+      if(full && was && animate && n===0){
+        s.classList.add('fresh');
+        s.scrollIntoView({behavior:'smooth',block:'start'});
+      }
+    });
+    try{ localStorage.setItem(KEY,JSON.stringify(items.map(function(i){return i.checked?1:0}))); }catch(e){}
+  }
+
+  document.getElementById('items').addEventListener('change',function(){ render(true) });
+  document.getElementById('reset').addEventListener('click',function(){
+    items.forEach(function(i){i.checked=false});
+    reveal.forEach(function(s){s.classList.remove('fresh')});
+    render(false);
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+
+  items.forEach(function(i){ i.checked=false });
+  try{
+    var st=JSON.parse(localStorage.getItem(KEY)||'null');
+    if(st) items.forEach(function(i,n){ i.checked=!!st[n] });
+  }catch(e){}
+  render(false);
+})();
+</script>
