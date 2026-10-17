@@ -320,11 +320,12 @@ a{color:var(--accent)}
     if(el._raf) cancelAnimationFrame(el._raf);
     if(slow || !dur){ el.textContent=money(to); return; }
     var t0=null;
+    el.textContent=money(0);
     (function step(ts){
       if(t0===null) t0=ts;
       var p=Math.min(1,(ts-t0)/dur);
       var e=1-Math.pow(1-p,3);
-      el.textContent=money(Math.round(to*e/10)*10);
+      el.textContent=money(Math.round(to*e/25)*25);
       if(p<1) el._raf=requestAnimationFrame(step); else el.textContent=money(to);
     })(performance.now());
   }
@@ -357,7 +358,6 @@ a{color:var(--accent)}
       }
     });
     if(!full && sum) sum.textContent=money(total);
-    try{ localStorage.setItem(KEY,JSON.stringify(items.map(function(i){return i.checked?1:0}))); }catch(e){}
   }
 
   document.getElementById('blocks').addEventListener('change',function(){ render(true) });
@@ -368,11 +368,9 @@ a{color:var(--accent)}
     window.scrollTo({top:0,behavior:'smooth'});
   });
 
+  // страница всегда открывается чистой: цены появляются только по клику
+  try{ localStorage.removeItem(KEY); }catch(e){}
   items.forEach(function(i){ i.checked=false });
-  try{
-    var st=JSON.parse(localStorage.getItem(KEY)||'null');
-    if(st) items.forEach(function(i,n){ i.checked=!!st[n] });
-  }catch(e){}
   render(false);
 })();
 </script>
