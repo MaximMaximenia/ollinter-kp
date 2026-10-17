@@ -61,8 +61,11 @@ section[hidden]{display:none}
 .blk-ttl{display:grid;gap:2px;min-width:0}
 .blk-ttl b{font-family:var(--display);font-size:clamp(17px,2.2vw,21px);font-weight:700}
 .blk-ttl span{font-size:14.5px;color:var(--muted)}
-.blk-pr{font-family:var(--display);font-weight:900;font-size:clamp(18px,2.4vw,24px);color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap;transition:color .2s}
-.blk.on .blk-pr{color:var(--accent)}
+.blk-pr{font-family:var(--display);font-weight:900;font-size:clamp(18px,2.4vw,24px);color:var(--accent);font-variant-numeric:tabular-nums;white-space:nowrap;
+        min-width:3.2em;text-align:right;opacity:0;transition:opacity .25s}
+.blk.on .blk-pr{opacity:1}
+.running{opacity:0;transition:opacity .25s}
+.running.on{opacity:1}
 .blk-body{padding:0 20px 18px 58px;display:grid;gap:7px}
 .blk-body li{display:grid;grid-template-columns:auto 1fr;gap:10px;font-size:15.5px;color:var(--muted)}
 .blk-body li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent);margin-top:10px}
@@ -143,7 +146,7 @@ a{color:var(--accent)}
         <label class="blk-head">
           <input type="checkbox" autocomplete="off" data-price="700">
           <span class="blk-ttl"><b>Оформление</b><span>Делается один раз: проект получает вид, которому доверяют</span></span>
-          <span class="blk-pr">$700</span>
+          <span class="blk-pr"></span>
         </label>
         <ul class="blk-body">
           <li>Фирменный стиль: логотип, цвета, шрифты, правила оформления</li>
@@ -158,7 +161,7 @@ a{color:var(--accent)}
         <label class="blk-head">
           <input type="checkbox" autocomplete="off" data-price="1600">
           <span class="blk-ttl"><b>Запуск сегмента</b><span>Английский язык: от анализа до работающей рекламы</span></span>
-          <span class="blk-pr">$1 600</span>
+          <span class="blk-pr"></span>
         </label>
         <div class="subs">
           <details><summary>Анализ и смыслы</summary><ul>
@@ -195,7 +198,7 @@ a{color:var(--accent)}
       <div class="split">
         <div><span>Оформление</span><b>$700</b></div>
         <div><span>Запуск сегмента</span><b>$1 600</b></div>
-        <div style="border:none"><span><b>Итого за первый месяц</b></span><b>$2 300</b></div>
+        <div style="border:none"><span><b>Итого за первый месяц</b></span><b id="split-total">$2 300</b></div>
       </div>
       <div style="display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))">
         <div><h4 style="margin-bottom:10px">Включено</h4>
@@ -307,37 +310,54 @@ a{color:var(--accent)}
   var items=[].slice.call(document.querySelectorAll('#blocks input'));
   var reveal=['s-price','s-social','s-days','s-horizon','s-why'].map(function(id){return document.getElementById(id)});
   var bar=document.getElementById('bar'), run=document.getElementById('run'), sum=document.getElementById('sum');
-  var shown=0, timer=null;
+  var slow=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var DUR=2000;
 
   function money(n){ return '$'+n.toLocaleString('ru-RU').replace(/ /g,' '); }
 
-  function countTo(target){
-    clearInterval(timer);
-    var step=Math.max(10,Math.round(Math.abs(target-shown)/28/10)*10);
-    timer=setInterval(function(){
-      if(shown===target){ clearInterval(timer); return; }
-      shown += (target>shown)? Math.min(step,target-shown) : -Math.min(step,shown-target);
-      run.textContent=money(shown);
-      if(sum) sum.textContent=money(shown);
-    },16);
+  // плавный набег числа от нуля
+  function countUp(el,to,dur){
+    if(!el) return;
+    if(el._raf) cancelAnimationFrame(el._raf);
+    if(slow || !dur){ el.textContent=money(to); return; }
+    var t0=null;
+    (function step(ts){
+      if(t0===null) t0=ts;
+      var p=Math.min(1,(ts-t0)/dur);
+      var e=1-Math.pow(1-p,3);
+      el.textContent=money(Math.round(to*e/10)*10);
+      if(p<1) el._raf=requestAnimationFrame(step); else el.textContent=money(to);
+    })(performance.now());
   }
 
   function render(animate){
     var total=items.reduce(function(a,i){ return a + (i.checked?parseInt(i.dataset.price,10):0) },0);
     var on=items.filter(function(i){return i.checked}).length;
-    items.forEach(function(i){ i.closest('.blk').classList.toggle('on',i.checked) });
+
+    items.forEach(function(i){
+      var blk=i.closest('.blk'), pr=blk.querySelector('.blk-pr'), was=blk.classList.contains('on');
+      blk.classList.toggle('on',i.checked);
+      if(i.checked){ if(!was||!animate) countUp(pr,parseInt(i.dataset.price,10),animate?DUR:0); }
+      else pr.textContent='';
+    });
+
     bar.style.width=Math.round(on/items.length*100)+'%';
-    if(animate) countTo(total); else { shown=total; run.textContent=money(total); if(sum) sum.textContent=money(total); }
+    run.classList.toggle('on',on>0);
+    if(on>0) countUp(run,total,animate?DUR:0); else run.textContent='';
 
     var full=on===items.length;
     reveal.forEach(function(s,n){
       var was=s.hidden;
       s.hidden=!full;
-      if(full && was && animate && n===0){
-        s.classList.add('fresh');
-        setTimeout(function(){ s.scrollIntoView({behavior:'smooth',block:'start'}) },220);
+      if(full && was && n===0){
+        if(animate){
+          s.classList.add('fresh');
+          setTimeout(function(){ s.scrollIntoView({behavior:'smooth',block:'start'}) },220);
+        }
+        countUp(sum,total,animate?DUR:0);
       }
     });
+    if(!full && sum) sum.textContent=money(total);
     try{ localStorage.setItem(KEY,JSON.stringify(items.map(function(i){return i.checked?1:0}))); }catch(e){}
   }
 
