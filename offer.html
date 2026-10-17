@@ -66,7 +66,16 @@ section[hidden]{display:none}
 .blk-body{padding:0 20px 18px 58px;display:grid;gap:7px}
 .blk-body li{display:grid;grid-template-columns:auto 1fr;gap:10px;font-size:15.5px;color:var(--muted)}
 .blk-body li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent);margin-top:10px}
-@media (max-width:560px){.blk-body{padding-left:20px}}
+@media (max-width:560px){.blk-body,.subs{padding-left:20px}}
+.subs{padding:0 20px 18px 58px;display:grid;gap:8px}
+.subs details{border:1px solid var(--line);border-radius:12px;background:var(--bg);padding:12px 16px}
+.subs summary{cursor:pointer;list-style:none;font-family:var(--display);font-weight:700;font-size:16px}
+.subs summary::-webkit-details-marker{display:none}
+.subs summary::after{content:"+";float:right;color:var(--accent);font-weight:900}
+.subs details[open] summary::after{content:"–"}
+.subs ul{display:grid;gap:7px;margin-top:10px}
+.subs li{display:grid;grid-template-columns:auto 1fr;gap:10px;font-size:15.5px;color:var(--muted)}
+.subs li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent);margin-top:10px}
 
 .price{border:2px solid var(--accent);border-radius:22px;padding:clamp(22px,3.5vw,34px);background:var(--surface);display:grid;gap:14px}
 .price .sum{font-family:var(--display);font-size:clamp(56px,13vw,116px);font-weight:900;letter-spacing:-.04em;line-height:.95;color:var(--accent);font-variant-numeric:tabular-nums}
@@ -132,61 +141,47 @@ a{color:var(--accent)}
 
       <div class="blk">
         <label class="blk-head">
-          <input type="checkbox" autocomplete="off" data-price="1100">
-          <span class="blk-ttl"><b>1. Оформление</b><span>Сайт и площадки приобретают вид, которому доверяют</span></span>
-          <span class="blk-pr">$1 100</span>
+          <input type="checkbox" autocomplete="off" data-price="700">
+          <span class="blk-ttl"><b>Оформление</b><span>Делается один раз: проект получает вид, которому доверяют</span></span>
+          <span class="blk-pr">$700</span>
         </label>
         <ul class="blk-body">
           <li>Фирменный стиль: логотип, цвета, шрифты, правила оформления</li>
           <li>Дизайн сайта: макеты главной и внутренних страниц</li>
-          <li>Персонаж проекта: герой, от лица которого потом идут ролики</li>
+          <li>Персонаж проекта: герой, от лица которого дальше идут ролики</li>
           <li>Оформление Instagram, TikTok, Facebook и YouTube в одном стиле</li>
-          <li>8 постов о компании на старт: что за платформа, кому и чем полезна</li>
-          <li>Все тексты к этим постам — пишу я</li>
+          <li>8 постов о компании на старт, все тексты на мне</li>
         </ul>
       </div>
 
       <div class="blk">
         <label class="blk-head">
-          <input type="checkbox" autocomplete="off" data-price="400">
-          <span class="blk-ttl"><b>2. Анализ и смыслы</b><span>На чём строится всё, что говорим людям</span></span>
-          <span class="blk-pr">$400</span>
+          <input type="checkbox" autocomplete="off" data-price="1600">
+          <span class="blk-ttl"><b>Запуск сегмента</b><span>Английский язык: от анализа до работающей рекламы</span></span>
+          <span class="blk-pr">$1 600</span>
         </label>
-        <ul class="blk-body">
-          <li>Анализ конкурентов: кто борется за тех же людей и чем берёт</li>
-          <li>Анализ клиентов: кто ищет преподавателя английского и по каким причинам</li>
-          <li>Продающие смыслы: что говорим ученикам и что преподавателям</li>
-          <li>Путь клиента от объявления до регистрации, по шагам</li>
-        </ul>
-      </div>
-
-      <div class="blk">
-        <label class="blk-head">
-          <input type="checkbox" autocomplete="off" data-price="300">
-          <span class="blk-ttl"><b>3. Посадочная страница</b><span>Страница, на которую идёт реклама</span></span>
-          <span class="blk-pr">$300</span>
-        </label>
-        <ul class="blk-body">
-          <li>Структура страницы: что человек читает по порядку, чтобы зарегистрироваться</li>
-          <li>Тексты под английский сегмент</li>
-          <li>Экран с преподавателями: как показать их, чтобы вызывали доверие</li>
-          <li>Понятное целевое действие на каждом экране</li>
-        </ul>
-      </div>
-
-      <div class="blk">
-        <label class="blk-head">
-          <input type="checkbox" autocomplete="off" data-price="500">
-          <span class="blk-ttl"><b>4. Реклама и аналитика</b><span>То, ради чего делается всё остальное</span></span>
-          <span class="blk-pr">$500</span>
-        </label>
-        <ul class="blk-body">
-          <li>Три рекламных ролика под сегмент, под ключ</li>
-          <li>Настройка кампаний: кабинеты, аудитории, объявления</li>
-          <li>Запуск рекламы и ведение до конца месяца</li>
-          <li>Докрутка объявлений и страницы по ходу теста</li>
-          <li>Аналитика: регистрации и ключевые действия в одном окне</li>
-        </ul>
+        <div class="subs">
+          <details><summary>Анализ и смыслы</summary><ul>
+            <li>Анализ конкурентов: кто борется за тех же людей и чем берёт</li>
+            <li>Анализ клиентов: кто ищет преподавателя английского и по каким причинам</li>
+            <li>Продающие смыслы: что говорим ученикам и что преподавателям</li>
+            <li>Путь клиента от объявления до регистрации, по шагам</li></ul></details>
+          <details><summary>Страница под сегмент</summary><ul>
+            <li>Структура: что человек читает по порядку, чтобы зарегистрироваться</li>
+            <li>Тексты под английский</li>
+            <li>Экран с преподавателями: как показать их, чтобы вызывали доверие</li>
+            <li>Понятное целевое действие на каждом экране</li></ul></details>
+          <details><summary>Три рекламных ролика</summary><ul>
+            <li>Сценарии под разные причины искать преподавателя</li>
+            <li>Производство под ключ: герой проекта, озвучка, монтаж</li>
+            <li>Нарезка под форматы площадок</li>
+            <li>Ролики легко переозвучить на другие языки</li></ul></details>
+          <details><summary>Реклама и аналитика</summary><ul>
+            <li>Настройка кампаний: кабинеты, аудитории, объявления</li>
+            <li>Запуск рекламы и ведение до конца месяца</li>
+            <li>Докрутка объявлений и страницы по ходу теста</li>
+            <li>Аналитика: регистрации и ключевые действия в одном окне</li></ul></details>
+        </div>
       </div>
 
     </div>
@@ -198,10 +193,8 @@ a{color:var(--accent)}
       <div class="sum" id="sum">$2 300</div>
       <p class="cap">Оформление проекта и запуск рекламы на английский сегмент.</p>
       <div class="split">
-        <div><span>Оформление</span><b>$1 100</b></div>
-        <div><span>Анализ и смыслы</span><b>$400</b></div>
-        <div><span>Посадочная страница</span><b>$300</b></div>
-        <div><span>Реклама и аналитика</span><b>$500</b></div>
+        <div><span>Оформление</span><b>$700</b></div>
+        <div><span>Запуск сегмента</span><b>$1 600</b></div>
         <div style="border:none"><span><b>Итого за первый месяц</b></span><b>$2 300</b></div>
       </div>
       <div style="display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))">
@@ -233,9 +226,9 @@ a{color:var(--accent)}
     <h2>Ведение соцсетей со второго месяца</h2>
     <div class="hi">
       <p class="eyebrow" style="color:#cfe0ff">Instagram · TikTok · Facebook</p>
-      <div class="big">$1 200 / мес</div>
-      <p>Начинается со второго месяца, когда реклама уже приводит людей: сначала запуск, потом раскачиваем площадки. Один и тот же контент расходится по трём площадкам, поэтому вместе выходит дешевле, чем вести каждую отдельно.</p>
-      <div class="row"><span class="chip">Одна площадка — $400 / мес</span><span class="chip">Три вместе — $1 200 / мес</span></div>
+      <div class="big">$1 300 / мес</div>
+      <p>Начинается со второго месяца, когда реклама уже приводит людей: сначала запуск, потом раскачиваем площадки. Оформление и дизайн делаются один раз в первый месяц — дальше это работа с контентом.</p>
+      <div class="row"><span class="chip">Одна площадка — $400 / мес</span><span class="chip">Ведение рекламы — $100 / мес</span><span class="chip">Рекламный бюджет — отдельно</span></div>
     </div>
     <div class="cards">
       <div class="card"><div class="k">Короткие ролики</div><ul>
@@ -254,21 +247,28 @@ a{color:var(--accent)}
         <li>Публикация по графику</li>
         <li>Адаптация контента под каждую площадку</li>
         <li>Отчёт о проделанной работе в конце месяца</li></ul></div>
+      <div class="card"><div class="k">Реклама · $100 / мес</div><ul>
+        <li>Ведение уже настроенных кампаний</li>
+        <li>Контроль ставок и пополнений</li>
+        <li>Рекламный бюджет оплачивается отдельно</li>
+        <li>Запуск новых кампаний и сегментов считается отдельно</li></ul></div>
     </div>
   </section>
 
   <section id="s-days" hidden>
     <p class="eyebrow">Сроки</p>
-    <h2>Первый месяц по дням</h2>
-    <p class="lead">Порядок простой: сначала приводим проект в вид, которому доверяют, потом приводим людей. Реклама на пустой сайт сжигает деньги, поэтому она идёт третьей.</p>
+    <h2>Что будет сделано за первый месяц</h2>
+    <p class="lead">Порядок простой: сначала приводим проект в вид, которому доверяют, потом приводим людей. Реклама на пустой сайт сжигает деньги, поэтому она идёт после оформления.</p>
     <div class="road">
-      <div class="day"><div class="m">Дни 1–2</div><div><b>Анализ.</b> Конкуренты: кто борется за тех же людей и чем берёт. Клиенты: кто ищет преподавателя английского и по каким причинам.</div></div>
-      <div class="day"><div class="m">Дни 2–4</div><div><b>Смыслы и структура сайта.</b> Что человек читает по порядку: зачем ему платформа, чем она удобнее поиска в чатах, почему стоит зарегистрироваться.</div></div>
-      <div class="day"><div class="m">Дни 4–9</div><div><b>Фирменный стиль и дизайн сайта.</b> Логотип, цвета, шрифты, макеты главной и внутренних страниц, посадочная страница под английский.</div></div>
-      <div class="day"><div class="m">Дни 9–11</div><div><b>Оформление площадок.</b> Instagram, TikTok, Facebook и YouTube в одном стиле, плюс персонаж проекта.</div></div>
-      <div class="day"><div class="m">Дни 10–14</div><div><b>Контент и ролики.</b> Три рекламных ролика под сегмент и 8 постов о компании, чтобы профили не были пустыми.</div></div>
-      <div class="day key"><div class="m">Дни 14–16</div><div><b>Реклама в эфире.</b> Кабинеты, аудитории, объявления, аналитика. Деньги идут в трафик и сразу дают цифры.</div></div>
-      <div class="day"><div class="m">Дни 16–30</div><div><b>Поиск рабочих связок.</b> Сравниваем объявления и аудитории, правим страницу, отключаем то, что не даёт регистраций, и усиливаем то, что даёт.</div></div>
+      <div class="day"><div class="m">Анализ</div><div>Конкуренты: кто борется за тех же людей и чем берёт. Клиенты: кто ищет преподавателя английского и по каким причинам.</div></div>
+      <div class="day"><div class="m">Смыслы</div><div>Что говорим ученикам и что преподавателям, в каком порядке человек это читает и почему регистрируется.</div></div>
+      <div class="day"><div class="m">Структура сайта</div><div>Из каких экранов состоит сайт и страница под английский, какое действие ведёт к регистрации.</div></div>
+      <div class="day"><div class="m">Фирменный стиль</div><div>Логотип, цвета, шрифты, правила оформления, персонаж проекта.</div></div>
+      <div class="day"><div class="m">Дизайн</div><div>Макеты главной и внутренних страниц, готовые к переносу на сайт.</div></div>
+      <div class="day"><div class="m">Оформление площадок</div><div>Instagram, TikTok, Facebook и YouTube в одном стиле.</div></div>
+      <div class="day"><div class="m">Контент</div><div>8 постов о компании с текстами, чтобы профили не выглядели пустыми.</div></div>
+      <div class="day"><div class="m">Ролики</div><div>Три рекламных ролика под сегмент, под ключ.</div></div>
+      <div class="day key"><div class="m">Реклама</div><div>Настройка кампаний, запуск, аналитика. Дальше — поиск рабочих связок: что даёт регистрации, то усиливаем, остальное отключаем.</div></div>
     </div>
     <p class="lead">К концу месяца известно, сколько стоит регистрация, какие объявления работают и что усиливать дальше.</p>
   </section>
@@ -278,8 +278,8 @@ a{color:var(--accent)}
     <h2>Как выглядит работа дальше</h2>
     <div class="hz">
       <div><div class="t">Месяц 1 · $2 300</div><h3>Оформить и привести людей</h3><p>Стиль, сайт, площадки, ролики — и реклама в эфире. Получаем первые цифры по английскому.</p></div>
-      <div><div class="t">Со 2-го месяца · $1 200 / мес</div><h3>Соцсети и усиление</h3><p>Ведём Instagram, TikTok и Facebook, добавляем бюджет в объявления, которые приводят людей, снижаем цену регистрации.</p></div>
-      <div><div class="t">Дальше</div><h3>Развилка по данным</h3><p>Либо идём вглубь английского — больше преподавателей и трафика, либо открываем следующий сегмент. Решаем по цифрам, а не заранее.</p></div>
+      <div><div class="t">Со 2-го месяца · $1 300 / мес</div><h3>Соцсети и усиление</h3><p>Ведём Instagram, TikTok и Facebook. Ведение уже настроенных кампаний — $100 в месяц, рекламный бюджет отдельно.</p></div>
+      <div><div class="t">Дальше</div><h3>Развилка по данным</h3><p>Либо идём вглубь английского — больше преподавателей и трафика, либо открываем следующий сегмент. Запуск нового сегмента считается отдельно.</p></div>
       <div><div class="t">Год 2–3</div><h3>Другие страны</h3><p>Проверенные смыслы и ролики переносим на новые языки и рынки.</p></div>
     </div>
     <p class="lead">Главные деньги проекта — в рекламе, которая приводит платящих людей. Поэтому первый месяц целиком заточен под то, чтобы она заработала, а всё остальное её поддерживает.</p>
