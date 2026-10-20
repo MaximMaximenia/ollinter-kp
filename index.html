@@ -190,7 +190,7 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding-top:20px;font-si
   <div class="topbar-in">
     <div class="brand">Oll<span>inter</span></div>
     <div class="track"><i id="bar"></i></div>
-    <div class="counter"><span id="cnt">1</span> / 12</div>
+    <div class="counter"><span id="cnt">1</span> / 10</div>
     <button class="reset" id="reset" type="button">Сбросить</button>
   </div>
 </div>
@@ -432,88 +432,6 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding-top:20px;font-si
         <label class="check"><input type="checkbox" autocomplete="off"><span><b>8.</b> Докрутить объявления и страницу прямо по ходу теста</span></label>
         <label class="check"><input type="checkbox" autocomplete="off"><span><b>9.</b> Собрать данные и обратную связь</span></label>
         <label class="check"><input type="checkbox" autocomplete="off"><span><b>10.</b> Решить, что улучшаем и какой сегмент берём следующим</span></label>
-      </div>
-    </div>
-  </section>
-
-  <!-- 11 -->
-  <section class="stage" data-stage="11" hidden>
-    <div class="stage-head"><div class="num">11</div><div><p class="eyebrow">Обратная связь</p><h2>Насколько вам заходит такой план?</h2></div></div>
-    <div class="stage-body">
-      <p class="lead">Оцените от 0 до 10, прежде чем перейдём к тому, как это реализовать.</p>
-      <div class="scale">
-        <label><input type="radio" autocomplete="off" name="score" value="0"><span>0</span></label>
-        <label><input type="radio" autocomplete="off" name="score" value="1"><span>1</span></label>
-        <label><input type="radio" autocomplete="off" name="score" value="2"><span>2</span></label>
-        <label><input type="radio" autocomplete="off" name="score" value="3"><span>3</span></label>
-        <label><input type="radio" autocomplete="off" name="score" value="4"><span>4</span></label>
-        <label><input type="radio" autocomplete="off" name="score" value="5"><span>5</span></label>
-        <label><input type="radio" autocomplete="off" name="score" value="6"><span>6</span></label>
-        <label><input type="radio" autocomplete="off" name="score" value="7"><span>7</span></label>
-        <label><input type="radio" autocomplete="off" name="score" value="8"><span>8</span></label>
-        <label><input type="radio" autocomplete="off" name="score" value="9"><span>9</span></label>
-        <label><input type="radio" autocomplete="off" name="score" value="10"><span>10</span></label>
-      </div>
-      <div class="scale-ends"><span>Не моё</span><span>Делаем</span></div>
-    </div>
-  </section>
-
-  <!-- 12 -->
-  <section class="stage" data-stage="12" hidden>
-    <div class="stage-head"><div class="num">12</div><div><p class="eyebrow">Реализация</p><h2>Запуск первого сегмента под ключ</h2></div></div>
-    <div class="stage-body">
-      <p class="lead">Отмечайте то, что нужно. Чем больше работ в пакете, тем ниже общая цена — всё вместе выходит заметно дешевле, чем по отдельности.</p>
-      <div class="config">
-        <div class="items" id="items">
-          <label class="item"><input type="checkbox" autocomplete="off" data-price="650"><span class="nm"><b>Настройка и ведение рекламы</b>Кампании, аудитории, объявления и докрутка по ходу теста</span></label>
-          <label class="item"><input type="checkbox" autocomplete="off" data-price="450"><span class="nm"><b>Брендбук</b>Узнаваемый стиль, который выделит Ollinter на фоне остальных</span></label>
-          <label class="item"><input type="checkbox" autocomplete="off" data-price="450"><span class="nm"><b>Макет сайта и посадочной страницы</b>Готовый дизайн под регистрацию</span></label>
-          <label class="item"><input type="checkbox" autocomplete="off" data-price="450"><span class="nm"><b>Три рекламных ролика под ключ</b>Легко переозвучить на другие языки</span></label>
-          <label class="item"><input type="checkbox" autocomplete="off" data-price="100"><span class="nm"><b>Смыслы страницы</b>Что и в каком порядке читает человек, чтобы зарегистрироваться</span></label>
-          <label class="item"><input type="checkbox" autocomplete="off" data-price="100"><span class="nm"><b>Оформление инстаграма</b>В том же стиле, чтобы профиль не выглядел пустым</span></label>
-          <label class="item"><input type="checkbox" autocomplete="off" data-price="100"><span class="nm"><b>Аналитика и дашборд</b>Регистрации и ключевые действия в одном окне</span></label>
-        </div>
-        <div class="total">
-          <div class="total-row"><span>Выбрано работ</span><b id="t-count">0 из 7</b></div>
-          <div class="total-row"><span>Сумма по отдельности</span><b id="t-sum">$0</b></div>
-          <div class="total-row disc"><span>Скидка за пакет</span><b id="t-disc">—</b></div>
-          <div class="sum" id="t-final">$0</div>
-          <p class="muted" id="t-note">Отметьте работы — цена посчитается сама.</p>
-          <button class="reset" type="button" id="t-all" style="justify-self:start">Выбрать всё</button>
-        </div>
-      </div>
-      <div style="display:grid;gap:10px">
-        <h4>Оплачивается отдельно</h4>
-        <ul class="inc exc">
-          <li>Рекламный бюджет — ориентир на первый тест $200–300</li>
-          <li>Перенос макета на сайт: функционал тяжёлый, это задача вашего разработчика</li>
-          <li>Доработка функционала платформы</li>
-          <li>Платные сторонние сервисы</li>
-          <li>Ведение рекламы после первого запуска</li>
-        </ul>
-      </div>
-
-      <h3>Сроки</h3>
-      <div class="road">
-        <div class="month"><div class="m">Дни 1–3</div><div><b>Стратегия и предложение.</b> Сегмент, аудитория, смыслы для преподавателей и учеников.</div></div>
-        <div class="month"><div class="m">Дни 3–10</div><div><b>Брендбук и макет.</b> Фирменный стиль, макет сайта и посадочной страницы, оформление инстаграма.</div></div>
-        <div class="month"><div class="m">Дни 8–14</div><div><b>Ролики и кампании.</b> Три ролика под ключ, тексты объявлений, настройка аналитики и запуск.</div></div>
-        <div class="month"><div class="m">Дни 14–25</div><div><b>Тест и докрутка.</b> Крутим рекламу, правим объявления и страницу, собираем данные и обратную связь.</div></div>
-      </div>
-      <p class="lead">Итого около месяца от старта до понятного результата по первому сегменту.</p>
-
-      <h3>Что считаем результатом</h3>
-      <div class="cards">
-        <div class="card"><div class="k">Измеримо</div><h3>Цифры по сегменту</h3><p>Известна цена перехода и цена регистрации, видно, сколько людей доходит до преподавателя.</p></div>
-        <div class="card"><div class="k">Измеримо</div><h3>Работающая связка</h3><p>Стиль, страница, ролики и кампании запущены и крутятся, аналитика показывает действия.</p></div>
-        <div class="card"><div class="k">Решение</div><h3>Что дальше</h3><p>На руках данные, по которым видно: усиливать этот сегмент или брать следующий.</p></div>
-      </div>
-      <div class="final">
-        <h2>Этот путь ведёт к глобальному продукту</h2>
-        <p class="lead" style="color:var(--ink)">Цель — приложение, которым пользуются люди по всему миру: маркетплейс услуг, где находят любого специалиста. Туда приходят не одним прыжком, а сегмент за сегментом, оставляя сильные направления и закрывая слабые.</p>
-      </div>
-      <div class="gate">
-        <label class="check"><input type="checkbox" autocomplete="off"><span>Запускаем первый сегмент</span></label>
       </div>
     </div>
   </section>
