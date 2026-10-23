@@ -1,9 +1,9 @@
-<title>Ollinter: план работ</title>
+<title>Ollinter: карта работ</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@500;600;700;900&family=Manrope:wght@400;500;600;700&display=swap">
 <style>
-/* Layout: этапы сверху вниз, в каждом две колонки — от вас и от меня, внизу чекпоинт */
+/* Layout: вертикальная нить этапов, каждый узел раскрывается в подзадачи */
 :root{
   --bg:#f5f6f4;--surface:#ffffff;--ink:#121a26;--muted:#5b6675;--line:#dfe3e0;
   --accent:#1659ff;--accent-soft:#e7eeff;--warm:#f0803c;--warm-soft:#fdf0e7;--ok:#1d8a5e;--ok-soft:#e4f3ec;
@@ -21,20 +21,17 @@
 *{box-sizing:border-box}
 html,body{margin:0}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
-.wrap{max-width:1060px;margin:0 auto;padding-inline:20px;padding-block:0 110px}
-h1,h2,h3,h4{font-family:var(--display);text-wrap:balance;margin:0}
-h1{font-size:clamp(32px,5.4vw,56px);line-height:1.05;font-weight:900;letter-spacing:-.02em}
-h2{font-size:clamp(22px,3vw,32px);line-height:1.15;font-weight:700;letter-spacing:-.015em}
-h3{font-size:16px;font-weight:700}
+.wrap{max-width:900px;margin:0 auto;padding-inline:20px;padding-block:0 110px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0}
+h1{font-size:clamp(32px,5.4vw,54px);line-height:1.05;font-weight:900;letter-spacing:-.02em}
 p{margin:0}
 ul{margin:0;padding-left:0;list-style:none}
 .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700}
-.lead{font-size:clamp(17px,2vw,20px);color:var(--muted);max-width:64ch}
-.muted{color:var(--muted)}
+.lead{font-size:clamp(17px,2vw,20px);color:var(--muted);max-width:62ch}
 a{color:var(--accent)}
 
 .topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.topbar-in{max-width:1060px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.topbar-in{max-width:900px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 .brand{font-family:var(--display);font-weight:900;letter-spacing:-.02em;font-size:17px}
 .brand span{color:var(--accent)}
 .track{flex:1;min-width:110px;height:6px;border-radius:99px;background:var(--line);overflow:hidden}
@@ -42,49 +39,59 @@ a{color:var(--accent)}
 .counter{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
 .reset{font-family:var(--display);font-weight:700;font-size:13px;padding:6px 12px;border-radius:10px;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer}
 
-.hero{padding-block:clamp(34px,5.5vw,66px) clamp(18px,3vw,28px);display:grid;gap:14px}
-.legend{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}
-.tag{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;padding:7px 14px;border-radius:99px;border:1px solid var(--line);background:var(--surface)}
-.dot{width:9px;height:9px;border-radius:50%}
+.hero{padding-block:clamp(34px,5.5vw,62px) clamp(16px,3vw,26px);display:grid;gap:14px}
+.legend{display:flex;gap:10px;flex-wrap:wrap;margin-top:2px}
+.tag{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;padding:6px 13px;border-radius:99px;border:1px solid var(--line);background:var(--surface)}
+.dot{width:9px;height:9px;border-radius:50%;flex:none}
 .dot.you{background:var(--warm)}
 .dot.me{background:var(--accent)}
 
-.stage{border-top:1px solid var(--line);padding-block:clamp(26px,4vw,42px);display:grid;gap:18px}
-.stage-head{display:grid;gap:6px}
-.stage-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.num{font-family:var(--display);font-weight:900;font-size:13px;letter-spacing:.04em;color:var(--muted);
-     border:1px solid var(--line);border-radius:9px;padding:4px 10px;background:var(--surface);white-space:nowrap}
-.stage.done .num{color:var(--ok);border-color:color-mix(in srgb,var(--ok) 45%,var(--line));background:var(--ok-soft)}
-.when{font-size:13.5px;color:var(--muted);font-weight:600}
+/* нить */
+.map{position:relative;display:grid;gap:12px;padding-left:46px}
+.map::before{content:"";position:absolute;left:17px;top:14px;bottom:28px;width:2px;background:var(--line);border-radius:2px}
+.node{position:relative}
+.node::before{content:"";position:absolute;left:-37px;top:20px;width:16px;height:16px;border-radius:50%;
+              background:var(--bg);border:2px solid var(--line);transition:all .25s}
+.node.part::before{border-color:var(--accent)}
+.node.done::before{background:var(--ok);border-color:var(--ok);box-shadow:0 0 0 4px var(--ok-soft)}
+@media (max-width:560px){.map{padding-left:34px}.map::before{left:11px}.node::before{left:-29px;width:14px;height:14px}}
 
-.cols{display:grid;gap:14px;grid-template-columns:1fr 1fr;align-items:start}
-@media (max-width:760px){.cols{grid-template-columns:1fr}}
-.col{border:1px solid var(--line);border-radius:18px;background:var(--surface);padding:18px;display:grid;gap:10px;min-width:0}
-.col.you{border-color:color-mix(in srgb,var(--warm) 45%,var(--line));background:var(--warm-soft)}
-.col h3{display:flex;align-items:center;gap:9px;font-size:14px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
-.checks{display:grid;gap:6px}
-.check{display:flex;gap:12px;align-items:flex-start;cursor:pointer;padding:9px 11px;border-radius:12px;border:1px solid transparent;transition:background .15s}
+details.node>summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;
+        border:1px solid var(--line);border-radius:16px;background:var(--surface);padding:15px 18px;transition:border-color .2s}
+details.node>summary::-webkit-details-marker{display:none}
+details.node>summary:hover{border-color:var(--accent)}
+.node.done>summary{border-color:color-mix(in srgb,var(--ok) 45%,var(--line));background:var(--ok-soft)}
+.ttl{display:grid;gap:2px;min-width:0}
+.ttl b{font-family:var(--display);font-size:clamp(17px,2.2vw,20px);font-weight:700}
+.ttl span{font-size:14px;color:var(--muted)}
+.meta{display:flex;align-items:center;gap:10px;white-space:nowrap}
+.cnt{font-family:var(--display);font-weight:700;font-size:13.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.node.done .cnt{color:var(--ok)}
+.chev{color:var(--accent);font-family:var(--display);font-weight:900;font-size:18px;line-height:1}
+details[open]>summary .chev{transform:rotate(45deg)}
+.chev{display:inline-block;transition:transform .2s}
+
+.body{padding:12px 6px 6px 6px;display:grid;gap:5px}
+.check{display:flex;gap:12px;align-items:flex-start;cursor:pointer;padding:9px 12px;border-radius:12px;border:1px solid transparent;transition:background .15s}
 .check:hover{background:color-mix(in srgb,var(--accent) 7%,transparent)}
 .check input{appearance:none;width:21px;height:21px;flex:none;margin-top:2px;border:2px solid var(--line);border-radius:6px;background:var(--bg);cursor:pointer;position:relative;transition:all .15s}
 .check input:checked{background:var(--accent);border-color:var(--accent)}
-.col.you .check input:checked{background:var(--warm);border-color:var(--warm)}
+.check.you input:checked{background:var(--warm);border-color:var(--warm)}
+.check.you input{border-color:color-mix(in srgb,var(--warm) 50%,var(--line))}
 .check input:checked::after{content:"";position:absolute;left:5.5px;top:2px;width:5px;height:9px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(42deg)}
 .check input:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-.check span{font-size:15.5px}
-.check input:checked+span{color:var(--muted);text-decoration:line-through;text-decoration-color:color-mix(in srgb,var(--muted) 45%,transparent)}
+.check .txt{font-size:15.5px;min-width:0}
+.check input:checked+.txt{color:var(--muted);text-decoration:line-through;text-decoration-color:color-mix(in srgb,var(--muted) 45%,transparent)}
+.who{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--warm);
+     border:1px solid color-mix(in srgb,var(--warm) 45%,var(--line));background:var(--warm-soft);border-radius:99px;padding:1px 9px;margin-left:8px;vertical-align:1px}
 
-.cp{display:flex;gap:13px;align-items:flex-start;border:1px dashed var(--line);border-radius:16px;padding:15px 17px;background:var(--surface);transition:all .2s}
-.stage.done .cp{border-style:solid;border-color:var(--ok);background:var(--ok-soft)}
-.cp .mark{font-family:var(--display);font-weight:900;font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);white-space:nowrap;padding-top:2px}
-.stage.done .cp .mark{color:var(--ok)}
-.cp p{font-size:15.5px}
-.cp b{font-family:var(--display)}
+.cp{margin:10px 6px 2px;display:flex;gap:12px;align-items:flex-start;border:1px dashed var(--line);border-radius:14px;padding:13px 16px;background:var(--bg)}
+.node.done .cp{border-style:solid;border-color:var(--ok)}
+.cp .mark{font-family:var(--display);font-weight:900;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);white-space:nowrap;padding-top:3px}
+.node.done .cp .mark{color:var(--ok)}
+.cp p{font-size:15px;color:var(--muted)}
+.cp b{font-family:var(--display);color:var(--ink)}
 
-.note{border-left:3px solid var(--warm);padding:6px 0 6px 16px;max-width:66ch;font-size:15.5px;color:var(--muted)}
-.rules{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
-.rules div{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;display:grid;gap:6px;align-content:start}
-.rules .t{font-family:var(--display);font-weight:700;font-size:16.5px}
-.rules p{font-size:15px;color:var(--muted)}
 footer{border-top:1px solid var(--line);margin-top:40px;padding-top:20px;font-size:14px;color:var(--muted);display:flex;gap:14px;flex-wrap:wrap;justify-content:space-between}
 </style>
 
@@ -92,7 +99,7 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding-top:20px;font-si
   <div class="topbar-in">
     <div class="brand">Oll<span>inter</span></div>
     <div class="track"><i id="bar"></i></div>
-    <div class="counter"><span id="cnt">0</span> из <span id="total">0</span> задач</div>
+    <div class="counter"><span id="cnt">0</span> / <span id="total">0</span></div>
     <button class="reset" id="reset" type="button">Сбросить</button>
   </div>
 </div>
@@ -100,294 +107,155 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding-top:20px;font-si
 <div class="wrap">
 
   <header class="hero">
-    <p class="eyebrow">План работ первого месяца</p>
-    <h1>Кто что делает на каждом этапе</h1>
-    <p class="lead">Восемь этапов от доступов до работающей рекламы. В каждом видно, что делаю я и что нужно от вас, а этап считается закрытым, когда выполнен его чекпоинт.</p>
+    <p class="eyebrow">Карта работ первого месяца</p>
+    <h1>Как устроен запуск</h1>
+    <p class="lead">Девять узлов, каждый раскрывается в конкретные задачи. Узел загорается зелёным, когда закрыт целиком.</p>
     <div class="legend">
-      <span class="tag"><i class="dot you"></i> От Ollinter</span>
-      <span class="tag"><i class="dot me"></i> От меня</span>
+      <span class="tag"><i class="dot me"></i> Делаю я</span>
+      <span class="tag"><i class="dot you"></i> Нужно от Ollinter</span>
     </div>
   </header>
 
-  <!-- 0 -->
-  <section class="stage">
-    <div class="stage-head">
-      <div class="stage-top"><span class="num">ЭТАП 0</span><span class="when">До старта работ</span></div>
-      <h2>Договорились и получили доступы</h2>
-    </div>
-    <div class="cols">
-      <div class="col you">
-        <h3><i class="dot you"></i> От Ollinter</h3>
-        <div class="checks">
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Показать функционал платформы: пройти вместе весь путь ученика и преподавателя в живом интерфейсе</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Рассказать, что сейчас работает, а что в планах: анкета, подбор, переписка, оплата</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Выбрать сегмент №1 — категория специалистов</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Выбрать язык и страну, с которых стартуем</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Объяснить, как платформа зарабатывает и как фиксируется контакт ученика с преподавателем</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Дать контакт разработчика, который переносит макеты и ставит коды аналитики</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Доступы: сайт или контакт того, кто вносит правки</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Доступы: Instagram, TikTok, Facebook, YouTube</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Доступы: рекламный кабинет Meta (Business Manager) и привязанная карта</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Логотип и любые имеющиеся материалы, если они есть</span></label>
-        </div>
-      </div>
-      <div class="col">
-        <h3><i class="dot me"></i> От меня</h3>
-        <div class="checks">
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Прислать чек-лист доступов одним списком</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Зафиксировать состав работ, сроки и стоимость письменно</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Завести общий чат и таблицу, где видно статус каждой задачи</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Провести встречу-разбор функционала и записать её</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Собрать список вопросов по продукту и получить на них ответы</span></label>
-        </div>
-      </div>
-    </div>
-    <div class="cp"><span class="mark">Чекпоинт</span><p><b>Сегмент и язык выбраны, доступы у меня на руках, состав работ подписан.</b> Без этого этап 1 не начинается.</p></div>
-  </section>
+  <div class="map">
 
-  <!-- 1 -->
-  <section class="stage">
-    <div class="stage-head">
-      <div class="stage-top"><span class="num">ЭТАП 1</span><span class="when">Первая неделя</span></div>
-      <h2>Анализ и смыслы</h2>
-    </div>
-    <div class="cols">
-      <div class="col you">
-        <h3><i class="dot you"></i> От Ollinter</h3>
-        <div class="checks">
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Назвать конкурентов, которых вы сами считаете главными</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Дать контакты 3–5 преподавателей для коротких разговоров</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Рассказать, откуда приходили первые зарегистрированные специалисты</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Ответить на вопросы по продукту в течение 1–2 дней</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Согласовать смыслы: что обещаем ученику и что преподавателю</span></label>
-        </div>
+    <details class="node" open>
+      <summary><span class="ttl"><b>1. Старт</b><span>Встреча, сегмент, доступы</span></span><span class="meta"><span class="cnt"></span><span class="chev">+</span></span></summary>
+      <div class="body">
+        <label class="check you"><input type="checkbox" autocomplete="off"><span class="txt">Встреча-разбор функционала: проходим путь ученика и преподавателя в живом интерфейсе<span class="who">Ollinter</span></span></label>
+        <label class="check you"><input type="checkbox" autocomplete="off"><span class="txt">Выбрать сегмент, на котором фокусируемся<span class="who">Ollinter</span></span></label>
+        <label class="check you"><input type="checkbox" autocomplete="off"><span class="txt">Доступы к Instagram, TikTok, Facebook, YouTube<span class="who">Ollinter</span></span></label>
+        <label class="check you"><input type="checkbox" autocomplete="off"><span class="txt">Доступ в Meta Business Manager — рекламный кабинет создаю сам<span class="who">Ollinter</span></span></label>
+        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Общий чат по проекту</span></label>
+        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Таблица задач со статусами</span></label>
       </div>
-      <div class="col">
-        <h3><i class="dot me"></i> От меня</h3>
-        <div class="checks">
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Анализ конкурентов: чем берут, что обещают, как выглядят их страницы и реклама</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Анализ клиентов: кто ищет преподавателя и по каким причинам</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Разговоры с преподавателями: почему зарегистрировались, чего ждут</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Продающие смыслы отдельно для учеников и отдельно для преподавателей</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Путь клиента по шагам: от объявления до регистрации</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Документ со смыслами на согласование</span></label>
-        </div>
-      </div>
-    </div>
-    <div class="cp"><span class="mark">Чекпоинт</span><p><b>Смыслы утверждены.</b> Дальше по ним делаются и страница, и ролики, и объявления — переписывать их задним числом дорого.</p></div>
-  </section>
+      <div class="cp"><span class="mark">Чекпоинт</span><p><b>Сегмент выбран, доступы на руках.</b></p></div>
+    </details>
 
-  <!-- 2 -->
-  <section class="stage">
-    <div class="stage-head">
-      <div class="stage-top"><span class="num">ЭТАП 2</span><span class="when">Первая–вторая неделя</span></div>
-      <h2>Фирменный стиль и персонаж</h2>
-    </div>
-    <div class="cols">
-      <div class="col you">
-        <h3><i class="dot you"></i> От Ollinter</h3>
-        <div class="checks">
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Показать примеры оформления, которые нравятся и которые не нравятся</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Сказать, есть ли обязательные элементы: название, цвет, существующий логотип</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Согласовать стиль одним кругом правок</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Утвердить персонажа, от лица которого пойдут ролики</span></label>
-        </div>
+    <details class="node">
+      <summary><span class="ttl"><b>2. Анализ и смыслы</b><span>На чём строится всё остальное</span></span><span class="meta"><span class="cnt"></span><span class="chev">+</span></span></summary>
+      <div class="body">
+        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Анализ конкурентов: чем берут, что обещают, как выглядят их страницы и реклама</span></label>
+        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Анализ аудитории: кто ищет преподавателя и по каким причинам</span></label>
+        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Проработка пути клиента: от объявления до регистрации, по шагам</span></label>
+        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Позиционирование и продающие смыслы под сегмент</span></label>
       </div>
-      <div class="col">
-        <h3><i class="dot me"></i> От меня</h3>
-        <div class="checks">
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Логотип и варианты его размещения</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Палитра, шрифты, правила оформления</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Персонаж проекта: внешность, характер, как он появляется в кадре</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Шаблоны для постов и обложек</span></label>
-        </div>
-      </div>
-    </div>
-    <div class="cp"><span class="mark">Чекпоинт</span><p><b>Стиль и персонаж утверждены.</b> С этого момента всё оформление и ролики делаются в одном виде.</p></div>
-  </section>
+      <div class="cp"><span class="mark">Чекпоинт</span><p><b>Смыслы готовы — по ним делается страница, ролики и объявления.</b></p></div>
+    </details>
 
-  <!-- 3 -->
-  <section class="stage">
-    <div class="stage-head">
-      <div class="stage-top"><span class="num">ЭТАП 3</span><span class="when">Вторая неделя</span></div>
-      <h2>Сайт и страница под сегмент</h2>
-    </div>
-    <div class="cols">
-      <div class="col you">
-        <h3><i class="dot you"></i> От Ollinter</h3>
-        <div class="checks">
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Проверить факты в текстах: что обещаем и что платформа реально делает</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Подготовить профили преподавателей: фото, описание, специализация, цена</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Согласовать макеты одним кругом правок</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Передать макеты разработчику и назначить срок переноса</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Проверить на живом сайте, что регистрация проходит и данные доходят</span></label>
-        </div>
+    <details class="node">
+      <summary><span class="ttl"><b>3. Фирменный стиль</b><span>Основа для сайта, площадок и роликов</span></span><span class="meta"><span class="cnt"></span><span class="chev">+</span></span></summary>
+      <div class="body">
+        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Логотип и варианты его размещения</span></label>
+        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Палитра и шрифты</span></label>
+        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Персонаж проекта: внешность и подача</span></label>
+        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Шаблоны постов и обложек</span></label>
+        <label class="check you"><input type="checkbox" autocomplete="off"><span class="txt">Утвердить персонажа<span class="who">Ollinter</span></span></label>
       </div>
-      <div class="col">
-        <h3><i class="dot me"></i> От меня</h3>
-        <div class="checks">
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Структура страницы: какие экраны и в каком порядке</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Тексты под английский сегмент</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Экран с преподавателями: как показать их, чтобы вызывали доверие</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Макеты главной и внутренних страниц</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Задание разработчику: что и как переносится, что нельзя менять</span></label>
-        </div>
-      </div>
-    </div>
-    <div class="cp"><span class="mark">Чекпоинт</span><p><b>Страница живёт на сайте, форма регистрации работает, данные доходят.</b> Пускать рекламу раньше этого нельзя.</p></div>
-  </section>
+      <div class="cp"><span class="mark">Чекпоинт</span><p><b>Стиль и персонаж утверждены.</b></p></div>
+    </details>
 
-  <!-- 4 -->
-  <section class="stage">
-    <div class="stage-head">
-      <div class="stage-top"><span class="num">ЭТАП 4</span><span class="when">Вторая неделя</span></div>
-      <h2>Площадки и базовый контент</h2>
-    </div>
-    <div class="cols">
-      <div class="col you">
-        <h3><i class="dot you"></i> От Ollinter</h3>
-        <div class="checks">
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Выдать права администратора на все четыре площадки</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Проверить тексты постов на достоверность</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Согласовать публикацию: что выходит сразу, что позже</span></label>
-        </div>
+    <details class="node">
+      <summary><span class="ttl"><b>4. Дизайн сайта</b><span>Структура, тексты, макеты</span></span><span class="meta"><span class="cnt"></span><span class="chev">+</span></span></summary>
+      <div class="body">
+        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Разбор текущего сайта: что есть сейчас и каких страниц не хватает</span></label>
+        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Структура: список страниц и порядок экранов на каждой</span></label>
+        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Тексты страниц под выбранный сегмент</span></label>
+        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Макет главной страницы</span></label>
+        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Макеты внутренних страниц</span></label>
+        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Экран с преподавателями: как показать их, чтобы вызывали доверие</span></label>
+        <label class="check you"><input type="checkbox" autocomplete="off"><span class="txt">Согласовать тексты по сайту<span class="who">Ollinter</span></span></label>
+        <label class="check you"><input type="checkbox" autocomplete="off"><span class="txt">Согласовать фото преподавателей<span class="who">Ollinter</span></span></label>
       </div>
-      <div class="col">
-        <h3><i class="dot me"></i> От меня</h3>
-        <div class="checks">
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Оформление Instagram: шапка, аватар, обложки, шаблоны</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Оформление TikTok</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Оформление Facebook и привязка страницы к рекламному кабинету</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Оформление YouTube</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>8 постов о компании с текстами</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Размещение постов на площадках</span></label>
-        </div>
-      </div>
-    </div>
-    <div class="cp"><span class="mark">Чекпоинт</span><p><b>Профили оформлены и не выглядят пустыми.</b> Человек, пришедший из рекламы, видит живой проект, а не заготовку.</p></div>
-  </section>
+      <div class="cp"><span class="mark">Чекпоинт</span><p><b>Макеты и тексты готовы к переносу на сайт.</b></p></div>
+    </details>
 
-  <!-- 5 -->
-  <section class="stage">
-    <div class="stage-head">
-      <div class="stage-top"><span class="num">ЭТАП 5</span><span class="when">Вторая–третья неделя</span></div>
-      <h2>Рекламные ролики</h2>
-    </div>
-    <div class="cols">
-      <div class="col you">
-        <h3><i class="dot you"></i> От Ollinter</h3>
-        <div class="checks">
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Согласовать три сценария до производства</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Проверить, что в роликах нет обещаний, которых продукт не выполняет</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Принять готовые ролики одним кругом правок</span></label>
-        </div>
+    <details class="node">
+      <summary><span class="ttl"><b>5. Оформление площадок</b><span>Ветка от фирменного стиля</span></span><span class="meta"><span class="cnt"></span><span class="chev">+</span></span></summary>
+      <div class="body">
+        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Instagram: шапка, аватар, обложки актуальных, шаблоны</span></label>
+        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">TikTok: аватар, описание, обложки видео</span></label>
+        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Facebook: обложка, аватар, привязка страницы к рекламному кабинету</span></label>
+        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">YouTube: баннер, аватар, шаблоны обложек</span></label>
       </div>
-      <div class="col">
-        <h3><i class="dot me"></i> От меня</h3>
-        <div class="checks">
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Три сценария под разные причины искать преподавателя</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Производство роликов с персонажем проекта: озвучка, монтаж</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Нарезка под форматы площадок</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Исходники, из которых ролики переозвучиваются на другие языки</span></label>
-        </div>
-      </div>
-    </div>
-    <div class="cp"><span class="mark">Чекпоинт</span><p><b>Три ролика приняты и готовы к открутке.</b></p></div>
-  </section>
+      <div class="cp"><span class="mark">Чекпоинт</span><p><b>Все площадки в одном стиле.</b></p></div>
+    </details>
 
-  <!-- 6 -->
-  <section class="stage">
-    <div class="stage-head">
-      <div class="stage-top"><span class="num">ЭТАП 6</span><span class="when">Третья неделя</span></div>
-      <h2>Запуск рекламы</h2>
-    </div>
-    <div class="cols">
-      <div class="col you">
-        <h3><i class="dot you"></i> От Ollinter</h3>
-        <div class="checks">
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Привязать карту и пополнить рекламный кабинет</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Согласовать рекламный бюджет первого теста: ориентир $200–300</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Поставить задачу разработчику: установить код аналитики и пиксель</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Подтвердить, что готовы обрабатывать входящие регистрации</span></label>
-        </div>
+    <details class="node">
+      <summary><span class="ttl"><b>6. Базовый контент</b><span>Чтобы профили не были пустыми</span></span><span class="meta"><span class="cnt"></span><span class="chev">+</span></span></summary>
+      <div class="body">
+        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Темы восьми постов о платформе</span></label>
+        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Тексты и визуал постов</span></label>
+        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Размещение на площадках</span></label>
       </div>
-      <div class="col">
-        <h3><i class="dot me"></i> От меня</h3>
-        <div class="checks">
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Настройка кабинета, аудиторий и структуры кампаний</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Объявления на основе роликов и смыслов</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Настройка целей: регистрация и ключевые действия</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Проверка, что события доходят до аналитики</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Запуск рекламы</span></label>
-        </div>
-      </div>
-    </div>
-    <div class="cp"><span class="mark">Чекпоинт</span><p><b>Реклама крутится, регистрации видны в аналитике.</b> С этого дня у проекта появляются собственные цифры.</p></div>
-  </section>
+      <div class="cp"><span class="mark">Чекпоинт</span><p><b>Профили выглядят живыми к моменту запуска рекламы.</b></p></div>
+    </details>
 
-  <!-- 7 -->
-  <section class="stage">
-    <div class="stage-head">
-      <div class="stage-top"><span class="num">ЭТАП 7</span><span class="when">До конца месяца</span></div>
-      <h2>Ведение, докрутка и выводы</h2>
-    </div>
-    <div class="cols">
-      <div class="col you">
-        <h3><i class="dot you"></i> От Ollinter</h3>
-        <div class="checks">
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Быстро обрабатывать регистрации: человек не должен ждать</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Говорить, какие заявки оказались живыми, а какие пустыми</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Держать каталог преподавателей наполненным под спрос</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Принять решение по итогам месяца: усиливаем сегмент или идём в следующий</span></label>
-        </div>
+    <details class="node">
+      <summary><span class="ttl"><b>7. Рекламные ролики</b><span>Три штуки под ключ</span></span><span class="meta"><span class="cnt"></span><span class="chev">+</span></span></summary>
+      <div class="body">
+        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Три сценария под разные причины искать преподавателя</span></label>
+        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Производство: персонаж, озвучка, монтаж</span></label>
+        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Нарезка под форматы площадок</span></label>
+        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Исходники под переозвучку на другие языки</span></label>
       </div>
-      <div class="col">
-        <h3><i class="dot me"></i> От меня</h3>
-        <div class="checks">
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Ежедневный контроль кампаний и расхода</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Отключение того, что не даёт регистраций, усиление того, что даёт</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Правки страницы и объявлений по поведению людей</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Цифры по сегменту: цена перехода, цена регистрации, путь до преподавателя</span></label>
-          <label class="check"><input type="checkbox" autocomplete="off"><span>Отчёт о проделанной работе и план следующего месяца</span></label>
-        </div>
-      </div>
-    </div>
-    <div class="cp"><span class="mark">Чекпоинт</span><p><b>Известна цена регистрации и принято решение по следующему шагу.</b> Первый месяц закрыт.</p></div>
-  </section>
+      <div class="cp"><span class="mark">Чекпоинт</span><p><b>Ролики готовы к открутке.</b></p></div>
+    </details>
 
-  <section class="stage">
-    <div class="stage-head"><h2>Как работаем, чтобы не сдвигались сроки</h2></div>
-    <div class="rules">
-      <div><div class="t">Один круг правок</div><p>На каждый результат — стиль, макеты, тексты, ролики — один круг правок, собранных в одном сообщении.</p></div>
-      <div><div class="t">Ответ за 1–2 дня</div><p>Согласования дольше двух дней сдвигают весь месяц: следующий этап опирается на предыдущий.</p></div>
-      <div><div class="t">Разработчик на связи</div><p>Перенос макетов и установка кодов аналитики — на вашей стороне. Это два места, где обычно встаёт запуск.</p></div>
-      <div><div class="t">Решения по цифрам</div><p>Что усиливать и что закрывать, решаем по данным аналитики, а не по ощущениям.</p></div>
-    </div>
-    <p class="note">Этапы 2, 4 и 5 идут параллельно с остальными — пока согласуется одно, я делаю другое. Последовательность важна только там, где следующий шаг физически опирается на предыдущий: смыслы → страница → реклама.</p>
-  </section>
+    <details class="node">
+      <summary><span class="ttl"><b>8. Аналитика</b><span>Ставится до первого клика</span></span><span class="meta"><span class="cnt"></span><span class="chev">+</span></span></summary>
+      <div class="body">
+        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Код аналитики и пиксель Meta на сайте</span></label>
+        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Событие регистрации и ключевые действия</span></label>
+        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Проверка: события доходят и считаются верно</span></label>
+        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Дашборд, где видно трафик и регистрации в одном окне</span></label>
+        <label class="check you"><input type="checkbox" autocomplete="off"><span class="txt">Разработчик ставит коды на сайт<span class="who">Ollinter</span></span></label>
+      </div>
+      <div class="cp"><span class="mark">Чекпоинт</span><p><b>Регистрации видны в отчётах.</b></p></div>
+    </details>
+
+    <details class="node">
+      <summary><span class="ttl"><b>9. Запуск и ведение</b><span>То, ради чего делалось всё остальное</span></span><span class="meta"><span class="cnt"></span><span class="chev">+</span></span></summary>
+      <div class="body">
+        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Рекламный кабинет и структура кампаний</span></label>
+        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Аудитории под сегмент</span></label>
+        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Объявления на основе роликов и смыслов</span></label>
+        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Проверка пути целиком: от объявления до регистрации на живом сайте</span></label>
+        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Запуск рекламы</span></label>
+        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Контроль кампаний и расхода</span></label>
+        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Отключение того, что не даёт регистраций, усиление того, что даёт</span></label>
+        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Правки объявлений и страницы по поведению людей</span></label>
+        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Отчёт: цена перехода, цена регистрации, план следующего месяца</span></label>
+        <label class="check you"><input type="checkbox" autocomplete="off"><span class="txt">Пополнить рекламный бюджет<span class="who">Ollinter</span></span></label>
+      </div>
+      <div class="cp"><span class="mark">Чекпоинт</span><p><b>Реклама работает, цифры по сегменту известны.</b></p></div>
+    </details>
+
+  </div>
 
   <footer>
-    <span>Ollinter · план работ первого месяца</span>
+    <span>Ollinter · карта работ первого месяца</span>
     <span><a href="./">Стратегия</a> · <a href="offer.html">Состав работ и цены</a></span>
   </footer>
 </div>
 
 <script>
 (function(){
-  var KEY='ollinter-roadmap-v1';
+  var KEY='ollinter-map-v1';
   var boxes=[].slice.call(document.querySelectorAll('.check input'));
-  var stages=[].slice.call(document.querySelectorAll('.stage'));
+  var nodes=[].slice.call(document.querySelectorAll('.node'));
   var bar=document.getElementById('bar'), cnt=document.getElementById('cnt'), total=document.getElementById('total');
-
   total.textContent=boxes.length;
 
   function render(){
     var on=boxes.filter(function(b){return b.checked}).length;
     cnt.textContent=on;
     bar.style.width=Math.round(on/boxes.length*100)+'%';
-    stages.forEach(function(s){
-      var inner=[].slice.call(s.querySelectorAll('.check input'));
-      s.classList.toggle('done', inner.length>0 && inner.every(function(b){return b.checked}));
+    nodes.forEach(function(n){
+      var inner=[].slice.call(n.querySelectorAll('.check input'));
+      var k=inner.filter(function(b){return b.checked}).length;
+      n.querySelector('.cnt').textContent=k+' / '+inner.length;
+      n.classList.toggle('done', inner.length>0 && k===inner.length);
+      n.classList.toggle('part', k>0 && k<inner.length);
     });
     try{ localStorage.setItem(KEY,JSON.stringify(boxes.map(function(b){return b.checked?1:0}))); }catch(e){}
   }
