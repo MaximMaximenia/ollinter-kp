@@ -3,104 +3,145 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@500;600;700;900&family=Manrope:wght@400;500;600;700&display=swap">
 <style>
-/* Layout: вертикальная нить этапов, каждый узел раскрывается в подзадачи */
+/* Layout: старт → анализ → три параллельные ветки → запуск → ведение.
+   Токены: primitive → semantic → component */
 :root{
-  --bg:#f5f6f4;--surface:#ffffff;--ink:#121a26;--muted:#5b6675;--line:#dfe3e0;
-  --accent:#1659ff;--accent-soft:#e7eeff;--warm:#f0803c;--warm-soft:#fdf0e7;--ok:#1d8a5e;--ok-soft:#e4f3ec;
-  --display:'Golos Text','Segoe UI',Tahoma,sans-serif;
-  --body:'Manrope','Segoe UI',Tahoma,sans-serif;
+  /* primitive */
+  --blue-600:#1659ff; --blue-50:#e7eeff; --blue-300:#5b8cff;
+  --green-600:#1d8a5e; --green-50:#e4f3ec; --green-300:#4cc08c;
+  --amber-600:#c97a16; --amber-50:#fdf3e4; --amber-300:#e5a44a;
+  --ink-900:#121a26; --ink-500:#5b6675; --paper-0:#ffffff; --paper-50:#f5f6f4; --paper-200:#e3e6e2;
+
+  /* semantic */
+  --bg:var(--paper-50); --surface:var(--paper-0); --fg:var(--ink-900); --fg-muted:var(--ink-500); --border:var(--paper-200);
+  --primary:var(--blue-600); --primary-soft:var(--blue-50);
+  --success:var(--green-600); --success-soft:var(--green-50);
+  --progress:var(--amber-600); --progress-soft:var(--amber-50);
+
+  /* component */
+  --node-radius:18px; --card-shadow:0 1px 2px rgba(18,26,38,.05);
+  --font-display:'Golos Text','Segoe UI',Tahoma,sans-serif;
+  --font-body:'Manrope','Segoe UI',Tahoma,sans-serif;
   color-scheme:light;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#0c1118;--surface:#141b25;--ink:#eef2f6;--muted:#9aa7b6;--line:#26303d;
-  --accent:#5b8cff;--accent-soft:#17243f;--warm:#f0914f;--warm-soft:#2a1d14;--ok:#4cc08c;--ok-soft:#14261f;color-scheme:dark}}
+  --bg:#0c1118; --surface:#141b25; --fg:#eef2f6; --fg-muted:#9aa7b6; --border:#26303d;
+  --primary:var(--blue-300); --primary-soft:#17243f;
+  --success:var(--green-300); --success-soft:#14261f;
+  --progress:var(--amber-300); --progress-soft:#2a2113;
+  --card-shadow:none; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#0c1118;--surface:#141b25;--ink:#eef2f6;--muted:#9aa7b6;--line:#26303d;
-  --accent:#5b8cff;--accent-soft:#17243f;--warm:#f0914f;--warm-soft:#2a1d14;--ok:#4cc08c;--ok-soft:#14261f;color-scheme:dark}
+  --bg:#0c1118; --surface:#141b25; --fg:#eef2f6; --fg-muted:#9aa7b6; --border:#26303d;
+  --primary:var(--blue-300); --primary-soft:#17243f;
+  --success:var(--green-300); --success-soft:#14261f;
+  --progress:var(--amber-300); --progress-soft:#2a2113;
+  --card-shadow:none; color-scheme:dark}
 
 *{box-sizing:border-box}
 html,body{margin:0}
-body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
-.wrap{max-width:900px;margin:0 auto;padding-inline:20px;padding-block:0 110px}
-h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0}
-h1{font-size:clamp(32px,5.4vw,54px);line-height:1.05;font-weight:900;letter-spacing:-.02em}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:16.5px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding-inline:20px;padding-block:0 100px}
+h1,h2,h3{font-family:var(--font-display);text-wrap:balance;margin:0}
+h1{font-size:clamp(30px,5vw,50px);line-height:1.05;font-weight:900;letter-spacing:-.025em}
 p{margin:0}
 ul{margin:0;padding-left:0;list-style:none}
-.eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700}
-.lead{font-size:clamp(17px,2vw,20px);color:var(--muted);max-width:62ch}
-a{color:var(--accent)}
+a{color:var(--primary)}
+.eyebrow{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--primary);font-weight:700}
+.lead{font-size:clamp(16.5px,1.9vw,19px);color:var(--fg-muted);max-width:60ch}
 
-.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.topbar-in{max-width:900px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.brand{font-family:var(--display);font-weight:900;letter-spacing:-.02em;font-size:17px}
-.brand span{color:var(--accent)}
-.track{flex:1;min-width:110px;height:6px;border-radius:99px;background:var(--line);overflow:hidden}
-.track i{display:block;height:100%;width:0;background:var(--accent);border-radius:99px;transition:width .4s cubic-bezier(.2,.7,.3,1)}
-.counter{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
-.reset{font-family:var(--display);font-weight:700;font-size:13px;padding:6px 12px;border-radius:10px;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer}
+/* шапка */
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.topbar-in{max-width:1080px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{font-family:var(--font-display);font-weight:900;letter-spacing:-.02em;font-size:16px}
+.brand span{color:var(--primary)}
+.track{flex:1;min-width:100px;height:6px;border-radius:99px;background:var(--border);overflow:hidden;display:flex}
+.track i{display:block;height:100%;width:0;transition:width .45s cubic-bezier(.2,.7,.3,1)}
+.track .fill-done{background:var(--success)}
+.track .fill-prog{background:var(--progress)}
+.stat{font-size:12.5px;color:var(--fg-muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.ghost{font-family:var(--font-display);font-weight:700;font-size:12.5px;padding:6px 12px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--fg-muted);cursor:pointer}
+.ghost:hover{border-color:var(--primary);color:var(--primary)}
 
-.hero{padding-block:clamp(34px,5.5vw,62px) clamp(16px,3vw,26px);display:grid;gap:14px}
-.legend{display:flex;gap:10px;flex-wrap:wrap;margin-top:2px}
-.tag{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;padding:6px 13px;border-radius:99px;border:1px solid var(--line);background:var(--surface)}
-.dot{width:9px;height:9px;border-radius:50%;flex:none}
-.dot.you{background:var(--warm)}
-.dot.me{background:var(--accent)}
+.hero{padding-block:clamp(30px,5vw,56px) clamp(14px,2.5vw,22px);display:grid;gap:13px}
+.legend{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px;font-size:13.5px;color:var(--fg-muted)}
+.legend span{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--border);background:var(--surface);border-radius:99px;padding:5px 12px}
+.pipdot{width:8px;height:8px;border-radius:50%;flex:none}
+.pipdot.d{background:var(--success)} .pipdot.p{background:var(--progress)} .pipdot.n{background:var(--border)}
 
-/* нить */
-.map{position:relative;display:grid;gap:12px;padding-left:46px}
-.map::before{content:"";position:absolute;left:17px;top:14px;bottom:28px;width:2px;background:var(--line);border-radius:2px}
-.node{position:relative}
-.node::before{content:"";position:absolute;left:-37px;top:20px;width:16px;height:16px;border-radius:50%;
-              background:var(--bg);border:2px solid var(--line);transition:all .25s}
-.node.part::before{border-color:var(--accent)}
-.node.done::before{background:var(--ok);border-color:var(--ok);box-shadow:0 0 0 4px var(--ok-soft)}
-@media (max-width:560px){.map{padding-left:34px}.map::before{left:11px}.node::before{left:-29px;width:14px;height:14px}}
+/* карта */
+.map{display:grid;gap:0;margin-top:10px}
+.rail{display:grid;justify-items:center;gap:0}
+.line{width:2px;height:26px;background:var(--border);border-radius:2px}
+.line.wide{height:18px}
+.split{width:min(100%,760px);height:26px;position:relative}
+.split::before{content:"";position:absolute;left:12.5%;right:12.5%;top:0;height:2px;background:var(--border)}
+.split i{position:absolute;top:0;width:2px;height:26px;background:var(--border)}
+.split i:nth-child(1){left:12.5%} .split i:nth-child(2){left:50%} .split i:nth-child(3){left:87.5%}
+@media (max-width:860px){.split{display:none}}
 
-details.node>summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;
-        border:1px solid var(--line);border-radius:16px;background:var(--surface);padding:15px 18px;transition:border-color .2s}
-details.node>summary::-webkit-details-marker{display:none}
-details.node>summary:hover{border-color:var(--accent)}
-.node.done>summary{border-color:color-mix(in srgb,var(--ok) 45%,var(--line));background:var(--ok-soft)}
-.ttl{display:grid;gap:2px;min-width:0}
-.ttl b{font-family:var(--display);font-size:clamp(17px,2.2vw,20px);font-weight:700}
-.ttl span{font-size:14px;color:var(--muted)}
-.meta{display:flex;align-items:center;gap:10px;white-space:nowrap}
-.cnt{font-family:var(--display);font-weight:700;font-size:13.5px;color:var(--muted);font-variant-numeric:tabular-nums}
-.node.done .cnt{color:var(--ok)}
-.chev{color:var(--accent);font-family:var(--display);font-weight:900;font-size:18px;line-height:1}
-details[open]>summary .chev{transform:rotate(45deg)}
-.chev{display:inline-block;transition:transform .2s}
+.branches{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:start}
+@media (max-width:860px){.branches{grid-template-columns:1fr;gap:12px}}
+.branch{display:grid;gap:10px;min-width:0}
+.branch-ttl{display:flex;align-items:center;gap:9px;font-family:var(--font-display);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-muted);padding-left:4px}
+.branch-ttl i{width:22px;height:2px;background:var(--primary);border-radius:2px;flex:none}
 
-.body{padding:12px 6px 6px 6px;display:grid;gap:5px}
-.check{display:flex;gap:12px;align-items:flex-start;cursor:pointer;padding:9px 12px;border-radius:12px;border:1px solid transparent;transition:background .15s}
-.check:hover{background:color-mix(in srgb,var(--accent) 7%,transparent)}
-.check input{appearance:none;width:21px;height:21px;flex:none;margin-top:2px;border:2px solid var(--line);border-radius:6px;background:var(--bg);cursor:pointer;position:relative;transition:all .15s}
-.check input:checked{background:var(--accent);border-color:var(--accent)}
-.check.you input:checked{background:var(--warm);border-color:var(--warm)}
-.check.you input{border-color:color-mix(in srgb,var(--warm) 50%,var(--line))}
-.check input:checked::after{content:"";position:absolute;left:5.5px;top:2px;width:5px;height:9px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(42deg)}
-.check input:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-.check .txt{font-size:15.5px;min-width:0}
-.check input:checked+.txt{color:var(--muted);text-decoration:line-through;text-decoration-color:color-mix(in srgb,var(--muted) 45%,transparent)}
-.who{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--warm);
-     border:1px solid color-mix(in srgb,var(--warm) 45%,var(--line));background:var(--warm-soft);border-radius:99px;padding:1px 9px;margin-left:8px;vertical-align:1px}
+/* узел */
+.node{border:1px solid var(--border);border-radius:var(--node-radius);background:var(--surface);box-shadow:var(--card-shadow);overflow:hidden;transition:border-color .2s,background .2s}
+.node[data-state="prog"]{border-color:color-mix(in srgb,var(--progress) 55%,var(--border))}
+.node[data-state="done"]{border-color:color-mix(in srgb,var(--success) 55%,var(--border));background:var(--success-soft)}
+.node>summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:15px 17px}
+.node>summary::-webkit-details-marker{display:none}
+.pip{width:13px;height:13px;border-radius:50%;border:2px solid var(--border);background:var(--bg);flex:none;transition:all .2s}
+.node[data-state="prog"] .pip{border-color:var(--progress);background:var(--progress-soft)}
+.node[data-state="done"] .pip{background:var(--success);border-color:var(--success)}
+.ttl{display:grid;gap:1px;min-width:0}
+.ttl b{font-family:var(--font-display);font-size:17.5px;font-weight:700;letter-spacing:-.01em}
+.ttl span{font-size:13.5px;color:var(--fg-muted)}
+.meta{display:flex;align-items:center;gap:9px}
+.cnt{font-family:var(--font-display);font-weight:700;font-size:12.5px;color:var(--fg-muted);font-variant-numeric:tabular-nums}
+.node[data-state="done"] .cnt{color:var(--success)}
+.chev{color:var(--primary);font-weight:900;font-size:17px;line-height:1;transition:transform .2s}
+.node[open] .chev{transform:rotate(45deg)}
+.node .body{padding:0 12px 12px;display:grid;gap:4px}
 
-.cp{margin:10px 6px 2px;display:flex;gap:12px;align-items:flex-start;border:1px dashed var(--line);border-radius:14px;padding:13px 16px;background:var(--bg)}
-.node.done .cp{border-style:solid;border-color:var(--ok)}
-.cp .mark{font-family:var(--display);font-weight:900;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);white-space:nowrap;padding-top:3px}
-.node.done .cp .mark{color:var(--ok)}
-.cp p{font-size:15px;color:var(--muted)}
-.cp b{font-family:var(--display);color:var(--ink)}
+/* задача со статусом */
+.task{display:grid;grid-template-columns:auto 1fr;gap:11px;align-items:start;padding:9px 11px;border-radius:12px;transition:background .15s}
+.task:hover{background:color-mix(in srgb,var(--primary) 6%,transparent)}
+.sbtn{width:22px;height:22px;flex:none;margin-top:1px;border-radius:7px;border:2px solid var(--border);background:var(--bg);cursor:pointer;padding:0;position:relative;transition:all .18s}
+.sbtn:hover{border-color:var(--primary)}
+.sbtn[data-s="prog"]{border-color:var(--progress);background:var(--progress-soft)}
+.sbtn[data-s="prog"]::after{content:"";position:absolute;left:4px;top:4px;width:10px;height:10px;border-radius:3px;background:var(--progress)}
+.sbtn[data-s="done"]{border-color:var(--success);background:var(--success)}
+.sbtn[data-s="done"]::after{content:"";position:absolute;left:5.5px;top:2px;width:5px;height:10px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(42deg)}
+.sbtn:focus-visible{outline:2px solid var(--primary);outline-offset:3px}
+.task .txt{font-size:15px;min-width:0}
+.task[data-s="done"] .txt{color:var(--fg-muted);text-decoration:line-through;text-decoration-color:color-mix(in srgb,var(--fg-muted) 40%,transparent)}
+.cp{margin:8px 11px 4px;font-size:13.5px;color:var(--fg-muted);border-top:1px dashed var(--border);padding-top:9px}
+.cp b{font-family:var(--font-display);color:var(--fg)}
 
-footer{border-top:1px solid var(--line);margin-top:40px;padding-top:20px;font-size:14px;color:var(--muted);display:flex;gap:14px;flex-wrap:wrap;justify-content:space-between}
+/* таблица */
+.tablewrap{display:none;margin-top:22px;border:1px solid var(--border);border-radius:var(--node-radius);background:var(--surface);overflow-x:auto}
+.tablewrap.on{display:block}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:14.5px}
+th,td{padding:11px 16px;text-align:left;border-bottom:1px solid var(--border);vertical-align:middle}
+th{font-family:var(--font-display);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-muted);font-weight:700}
+tr:last-child td{border-bottom:none}
+td.stage{color:var(--fg-muted);white-space:nowrap}
+.chip{display:inline-block;font-size:12px;font-weight:700;padding:3px 11px;border-radius:99px;white-space:nowrap}
+.chip.none{background:var(--border);color:var(--fg-muted)}
+.chip.prog{background:var(--progress-soft);color:var(--progress)}
+.chip.done{background:var(--success-soft);color:var(--success)}
+.hint{font-size:13.5px;color:var(--fg-muted);margin-top:14px}
+footer{border-top:1px solid var(--border);margin-top:36px;padding-top:18px;font-size:13.5px;color:var(--fg-muted);display:flex;gap:14px;flex-wrap:wrap;justify-content:space-between}
 </style>
 
 <div class="topbar">
   <div class="topbar-in">
     <div class="brand">Oll<span>inter</span></div>
-    <div class="track"><i id="bar"></i></div>
-    <div class="counter"><span id="cnt">0</span> / <span id="total">0</span></div>
-    <button class="reset" id="reset" type="button">Сбросить</button>
+    <div class="track"><i class="fill-done" id="fdone"></i><i class="fill-prog" id="fprog"></i></div>
+    <div class="stat"><span id="s-done">0</span> готово · <span id="s-prog">0</span> в работе · <span id="s-left">0</span> осталось</div>
+    <button class="ghost" id="view" type="button">Таблицей</button>
+    <button class="ghost" id="reset" type="button">Сбросить</button>
   </div>
 </div>
 
@@ -109,168 +150,256 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding-top:20px;font-si
   <header class="hero">
     <p class="eyebrow">Карта работ первого месяца</p>
     <h1>Как устроен запуск</h1>
-    <p class="lead">Девять узлов, каждый раскрывается в конкретные задачи. Узел загорается зелёным, когда закрыт целиком.</p>
+    <p class="lead">После анализа работа идёт тремя ветками одновременно — дизайн, ролики и аналитика — и сходится на запуске рекламы. Клик по квадрату меняет статус задачи.</p>
     <div class="legend">
-      <span class="tag"><i class="dot me"></i> Делаю я</span>
-      <span class="tag"><i class="dot you"></i> Нужно от Ollinter</span>
+      <span><i class="pipdot n"></i> не начато</span>
+      <span><i class="pipdot p"></i> в работе</span>
+      <span><i class="pipdot d"></i> готово</span>
     </div>
   </header>
 
-  <div class="map">
+  <div class="map" id="map">
 
-    <details class="node" open>
-      <summary><span class="ttl"><b>1. Старт</b><span>Встреча, сегмент, доступы</span></span><span class="meta"><span class="cnt"></span><span class="chev">+</span></span></summary>
+    <details class="node" data-stage="Старт" open>
+      <summary><i class="pip"></i><span class="ttl"><b>Старт</b><span>Встреча, сегмент, доступы</span></span><span class="meta"><span class="cnt"></span><span class="chev">+</span></span></summary>
       <div class="body">
-        <label class="check you"><input type="checkbox" autocomplete="off"><span class="txt">Встреча-разбор функционала: проходим путь ученика и преподавателя в живом интерфейсе<span class="who">Ollinter</span></span></label>
-        <label class="check you"><input type="checkbox" autocomplete="off"><span class="txt">Выбрать сегмент, на котором фокусируемся<span class="who">Ollinter</span></span></label>
-        <label class="check you"><input type="checkbox" autocomplete="off"><span class="txt">Доступы к Instagram, TikTok, Facebook, YouTube<span class="who">Ollinter</span></span></label>
-        <label class="check you"><input type="checkbox" autocomplete="off"><span class="txt">Доступ в Meta Business Manager — рекламный кабинет создаю сам<span class="who">Ollinter</span></span></label>
-        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Общий чат по проекту</span></label>
-        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Таблица задач со статусами</span></label>
+        <div class="task"><button class="sbtn" type="button"></button><span class="txt">Встреча-разбор функционала: проходим путь ученика и преподавателя в живом интерфейсе</span></div>
+        <div class="task"><button class="sbtn" type="button"></button><span class="txt">Выбрать сегмент, на котором фокусируемся</span></div>
+        <div class="task"><button class="sbtn" type="button"></button><span class="txt">Доступы к Instagram, TikTok, Facebook, YouTube</span></div>
+        <div class="task"><button class="sbtn" type="button"></button><span class="txt">Доступ в Meta Business Manager, рекламный кабинет создаю сам</span></div>
+        <div class="task"><button class="sbtn" type="button"></button><span class="txt">Общий чат и таблица задач со статусами</span></div>
       </div>
-      <div class="cp"><span class="mark">Чекпоинт</span><p><b>Сегмент выбран, доступы на руках.</b></p></div>
+      <p class="cp"><b>Закрыт, когда:</b> сегмент выбран, доступы на руках.</p>
     </details>
 
-    <details class="node">
-      <summary><span class="ttl"><b>2. Анализ и смыслы</b><span>На чём строится всё остальное</span></span><span class="meta"><span class="cnt"></span><span class="chev">+</span></span></summary>
+    <div class="rail"><div class="line"></div></div>
+
+    <details class="node" data-stage="Анализ">
+      <summary><i class="pip"></i><span class="ttl"><b>Анализ и смыслы</b><span>На чём строится всё остальное</span></span><span class="meta"><span class="cnt"></span><span class="chev">+</span></span></summary>
       <div class="body">
-        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Анализ конкурентов: чем берут, что обещают, как выглядят их страницы и реклама</span></label>
-        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Анализ аудитории: кто ищет преподавателя и по каким причинам</span></label>
-        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Проработка пути клиента: от объявления до регистрации, по шагам</span></label>
-        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Позиционирование и продающие смыслы под сегмент</span></label>
+        <div class="task"><button class="sbtn" type="button"></button><span class="txt">Анализ конкурентов: чем берут, что обещают, как выглядят их страницы и реклама</span></div>
+        <div class="task"><button class="sbtn" type="button"></button><span class="txt">Анализ аудитории: кто ищет преподавателя и по каким причинам</span></div>
+        <div class="task"><button class="sbtn" type="button"></button><span class="txt">Проработка пути клиента: от объявления до регистрации</span></div>
+        <div class="task"><button class="sbtn" type="button"></button><span class="txt">Позиционирование и продающие смыслы под сегмент</span></div>
       </div>
-      <div class="cp"><span class="mark">Чекпоинт</span><p><b>Смыслы готовы — по ним делается страница, ролики и объявления.</b></p></div>
+      <p class="cp"><b>Закрыт, когда:</b> смыслы готовы — по ним делаются страница, ролики и объявления.</p>
     </details>
 
-    <details class="node">
-      <summary><span class="ttl"><b>3. Фирменный стиль</b><span>Основа для сайта, площадок и роликов</span></span><span class="meta"><span class="cnt"></span><span class="chev">+</span></span></summary>
-      <div class="body">
-        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Логотип и варианты его размещения</span></label>
-        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Палитра и шрифты</span></label>
-        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Персонаж проекта: внешность и подача</span></label>
-        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Шаблоны постов и обложек</span></label>
-        <label class="check you"><input type="checkbox" autocomplete="off"><span class="txt">Утвердить персонажа<span class="who">Ollinter</span></span></label>
+    <div class="rail"><div class="line wide"></div><div class="split"><i></i><i></i><i></i></div></div>
+
+    <div class="branches">
+
+      <div class="branch">
+        <div class="branch-ttl"><i></i> Ветка 1 · Дизайн</div>
+
+        <details class="node" data-stage="Дизайн">
+          <summary><i class="pip"></i><span class="ttl"><b>Фирменный стиль</b><span>Основа для всего визуала</span></span><span class="meta"><span class="cnt"></span><span class="chev">+</span></span></summary>
+          <div class="body">
+            <div class="task"><button class="sbtn" type="button"></button><span class="txt">Логотип и варианты размещения</span></div>
+            <div class="task"><button class="sbtn" type="button"></button><span class="txt">Палитра и шрифты</span></div>
+            <div class="task"><button class="sbtn" type="button"></button><span class="txt">Персонаж проекта</span></div>
+            <div class="task"><button class="sbtn" type="button"></button><span class="txt">Шаблоны постов и обложек</span></div>
+          </div>
+        </details>
+
+        <details class="node" data-stage="Дизайн">
+          <summary><i class="pip"></i><span class="ttl"><b>Сайт</b><span>Структура, тексты, макеты</span></span><span class="meta"><span class="cnt"></span><span class="chev">+</span></span></summary>
+          <div class="body">
+            <div class="task"><button class="sbtn" type="button"></button><span class="txt">Разбор текущего сайта: что есть и каких страниц не хватает</span></div>
+            <div class="task"><button class="sbtn" type="button"></button><span class="txt">Структура: список страниц и порядок экранов</span></div>
+            <div class="task"><button class="sbtn" type="button"></button><span class="txt">Тексты страниц под сегмент</span></div>
+            <div class="task"><button class="sbtn" type="button"></button><span class="txt">Макет главной страницы</span></div>
+            <div class="task"><button class="sbtn" type="button"></button><span class="txt">Макеты внутренних страниц</span></div>
+            <div class="task"><button class="sbtn" type="button"></button><span class="txt">Экран с преподавателями</span></div>
+            <div class="task"><button class="sbtn" type="button"></button><span class="txt">Согласование текстов и фото</span></div>
+          </div>
+        </details>
+
+        <details class="node" data-stage="Дизайн">
+          <summary><i class="pip"></i><span class="ttl"><b>Площадки</b><span>Все в одном стиле</span></span><span class="meta"><span class="cnt"></span><span class="chev">+</span></span></summary>
+          <div class="body">
+            <div class="task"><button class="sbtn" type="button"></button><span class="txt">Instagram: шапка, обложки, шаблоны</span></div>
+            <div class="task"><button class="sbtn" type="button"></button><span class="txt">TikTok: профиль и обложки видео</span></div>
+            <div class="task"><button class="sbtn" type="button"></button><span class="txt">Facebook: страница и привязка к кабинету</span></div>
+            <div class="task"><button class="sbtn" type="button"></button><span class="txt">YouTube: баннер и шаблоны обложек</span></div>
+          </div>
+        </details>
+
+        <details class="node" data-stage="Дизайн">
+          <summary><i class="pip"></i><span class="ttl"><b>Базовый контент</b><span>8 постов о платформе</span></span><span class="meta"><span class="cnt"></span><span class="chev">+</span></span></summary>
+          <div class="body">
+            <div class="task"><button class="sbtn" type="button"></button><span class="txt">Темы восьми постов</span></div>
+            <div class="task"><button class="sbtn" type="button"></button><span class="txt">Тексты и визуал</span></div>
+            <div class="task"><button class="sbtn" type="button"></button><span class="txt">Размещение на площадках</span></div>
+          </div>
+        </details>
       </div>
-      <div class="cp"><span class="mark">Чекпоинт</span><p><b>Стиль и персонаж утверждены.</b></p></div>
+
+      <div class="branch">
+        <div class="branch-ttl"><i></i> Ветка 2 · Ролики</div>
+
+        <details class="node" data-stage="Ролики">
+          <summary><i class="pip"></i><span class="ttl"><b>Сценарии</b><span>Три разных причины искать преподавателя</span></span><span class="meta"><span class="cnt"></span><span class="chev">+</span></span></summary>
+          <div class="body">
+            <div class="task"><button class="sbtn" type="button"></button><span class="txt">Сценарий 1</span></div>
+            <div class="task"><button class="sbtn" type="button"></button><span class="txt">Сценарий 2</span></div>
+            <div class="task"><button class="sbtn" type="button"></button><span class="txt">Сценарий 3</span></div>
+          </div>
+        </details>
+
+        <details class="node" data-stage="Ролики">
+          <summary><i class="pip"></i><span class="ttl"><b>Производство</b><span>Персонаж, озвучка, монтаж</span></span><span class="meta"><span class="cnt"></span><span class="chev">+</span></span></summary>
+          <div class="body">
+            <div class="task"><button class="sbtn" type="button"></button><span class="txt">Сборка персонажа в кадре</span></div>
+            <div class="task"><button class="sbtn" type="button"></button><span class="txt">Озвучка</span></div>
+            <div class="task"><button class="sbtn" type="button"></button><span class="txt">Монтаж трёх роликов</span></div>
+          </div>
+        </details>
+
+        <details class="node" data-stage="Ролики">
+          <summary><i class="pip"></i><span class="ttl"><b>Форматы</b><span>Под площадки и другие языки</span></span><span class="meta"><span class="cnt"></span><span class="chev">+</span></span></summary>
+          <div class="body">
+            <div class="task"><button class="sbtn" type="button"></button><span class="txt">Нарезка под форматы площадок</span></div>
+            <div class="task"><button class="sbtn" type="button"></button><span class="txt">Исходники под переозвучку</span></div>
+          </div>
+        </details>
+      </div>
+
+      <div class="branch">
+        <div class="branch-ttl"><i></i> Ветка 3 · Аналитика</div>
+
+        <details class="node" data-stage="Аналитика">
+          <summary><i class="pip"></i><span class="ttl"><b>Установка</b><span>Ставится до первого клика</span></span><span class="meta"><span class="cnt"></span><span class="chev">+</span></span></summary>
+          <div class="body">
+            <div class="task"><button class="sbtn" type="button"></button><span class="txt">Код аналитики и пиксель Meta на сайте</span></div>
+            <div class="task"><button class="sbtn" type="button"></button><span class="txt">Событие регистрации и ключевые действия</span></div>
+            <div class="task"><button class="sbtn" type="button"></button><span class="txt">Проверка: события доходят и считаются верно</span></div>
+          </div>
+        </details>
+
+        <details class="node" data-stage="Аналитика">
+          <summary><i class="pip"></i><span class="ttl"><b>Отчётность</b><span>Цифры в одном окне</span></span><span class="meta"><span class="cnt"></span><span class="chev">+</span></span></summary>
+          <div class="body">
+            <div class="task"><button class="sbtn" type="button"></button><span class="txt">Дашборд: трафик, регистрации, стоимость действия</span></div>
+            <div class="task"><button class="sbtn" type="button"></button><span class="txt">Доступ к дашборду для команды</span></div>
+          </div>
+        </details>
+      </div>
+
+    </div>
+
+    <div class="rail"><div class="split"><i></i><i></i><i></i></div><div class="line wide"></div></div>
+
+    <details class="node" data-stage="Запуск">
+      <summary><i class="pip"></i><span class="ttl"><b>Запуск рекламы</b><span>Три ветки сходятся здесь</span></span><span class="meta"><span class="cnt"></span><span class="chev">+</span></span></summary>
+      <div class="body">
+        <div class="task"><button class="sbtn" type="button"></button><span class="txt">Рекламный кабинет и структура кампаний</span></div>
+        <div class="task"><button class="sbtn" type="button"></button><span class="txt">Аудитории под сегмент</span></div>
+        <div class="task"><button class="sbtn" type="button"></button><span class="txt">Объявления на основе роликов и смыслов</span></div>
+        <div class="task"><button class="sbtn" type="button"></button><span class="txt">Проверка пути целиком на живом сайте</span></div>
+        <div class="task"><button class="sbtn" type="button"></button><span class="txt">Пополнение рекламного бюджета</span></div>
+        <div class="task"><button class="sbtn" type="button"></button><span class="txt">Запуск</span></div>
+      </div>
+      <p class="cp"><b>Закрыт, когда:</b> реклама крутится, регистрации видны в отчётах.</p>
     </details>
 
-    <details class="node">
-      <summary><span class="ttl"><b>4. Дизайн сайта</b><span>Структура, тексты, макеты</span></span><span class="meta"><span class="cnt"></span><span class="chev">+</span></span></summary>
-      <div class="body">
-        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Разбор текущего сайта: что есть сейчас и каких страниц не хватает</span></label>
-        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Структура: список страниц и порядок экранов на каждой</span></label>
-        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Тексты страниц под выбранный сегмент</span></label>
-        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Макет главной страницы</span></label>
-        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Макеты внутренних страниц</span></label>
-        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Экран с преподавателями: как показать их, чтобы вызывали доверие</span></label>
-        <label class="check you"><input type="checkbox" autocomplete="off"><span class="txt">Согласовать тексты по сайту<span class="who">Ollinter</span></span></label>
-        <label class="check you"><input type="checkbox" autocomplete="off"><span class="txt">Согласовать фото преподавателей<span class="who">Ollinter</span></span></label>
-      </div>
-      <div class="cp"><span class="mark">Чекпоинт</span><p><b>Макеты и тексты готовы к переносу на сайт.</b></p></div>
-    </details>
+    <div class="rail"><div class="line"></div></div>
 
-    <details class="node">
-      <summary><span class="ttl"><b>5. Оформление площадок</b><span>Ветка от фирменного стиля</span></span><span class="meta"><span class="cnt"></span><span class="chev">+</span></span></summary>
+    <details class="node" data-stage="Ведение">
+      <summary><i class="pip"></i><span class="ttl"><b>Ведение и выводы</b><span>До конца месяца</span></span><span class="meta"><span class="cnt"></span><span class="chev">+</span></span></summary>
       <div class="body">
-        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Instagram: шапка, аватар, обложки актуальных, шаблоны</span></label>
-        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">TikTok: аватар, описание, обложки видео</span></label>
-        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Facebook: обложка, аватар, привязка страницы к рекламному кабинету</span></label>
-        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">YouTube: баннер, аватар, шаблоны обложек</span></label>
+        <div class="task"><button class="sbtn" type="button"></button><span class="txt">Контроль кампаний и расхода</span></div>
+        <div class="task"><button class="sbtn" type="button"></button><span class="txt">Отключение того, что не даёт регистраций</span></div>
+        <div class="task"><button class="sbtn" type="button"></button><span class="txt">Усиление того, что работает</span></div>
+        <div class="task"><button class="sbtn" type="button"></button><span class="txt">Правки объявлений и страницы по поведению людей</span></div>
+        <div class="task"><button class="sbtn" type="button"></button><span class="txt">Отчёт: цена перехода, цена регистрации, план следующего месяца</span></div>
       </div>
-      <div class="cp"><span class="mark">Чекпоинт</span><p><b>Все площадки в одном стиле.</b></p></div>
-    </details>
-
-    <details class="node">
-      <summary><span class="ttl"><b>6. Базовый контент</b><span>Чтобы профили не были пустыми</span></span><span class="meta"><span class="cnt"></span><span class="chev">+</span></span></summary>
-      <div class="body">
-        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Темы восьми постов о платформе</span></label>
-        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Тексты и визуал постов</span></label>
-        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Размещение на площадках</span></label>
-      </div>
-      <div class="cp"><span class="mark">Чекпоинт</span><p><b>Профили выглядят живыми к моменту запуска рекламы.</b></p></div>
-    </details>
-
-    <details class="node">
-      <summary><span class="ttl"><b>7. Рекламные ролики</b><span>Три штуки под ключ</span></span><span class="meta"><span class="cnt"></span><span class="chev">+</span></span></summary>
-      <div class="body">
-        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Три сценария под разные причины искать преподавателя</span></label>
-        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Производство: персонаж, озвучка, монтаж</span></label>
-        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Нарезка под форматы площадок</span></label>
-        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Исходники под переозвучку на другие языки</span></label>
-      </div>
-      <div class="cp"><span class="mark">Чекпоинт</span><p><b>Ролики готовы к открутке.</b></p></div>
-    </details>
-
-    <details class="node">
-      <summary><span class="ttl"><b>8. Аналитика</b><span>Ставится до первого клика</span></span><span class="meta"><span class="cnt"></span><span class="chev">+</span></span></summary>
-      <div class="body">
-        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Код аналитики и пиксель Meta на сайте</span></label>
-        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Событие регистрации и ключевые действия</span></label>
-        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Проверка: события доходят и считаются верно</span></label>
-        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Дашборд, где видно трафик и регистрации в одном окне</span></label>
-        <label class="check you"><input type="checkbox" autocomplete="off"><span class="txt">Разработчик ставит коды на сайт<span class="who">Ollinter</span></span></label>
-      </div>
-      <div class="cp"><span class="mark">Чекпоинт</span><p><b>Регистрации видны в отчётах.</b></p></div>
-    </details>
-
-    <details class="node">
-      <summary><span class="ttl"><b>9. Запуск и ведение</b><span>То, ради чего делалось всё остальное</span></span><span class="meta"><span class="cnt"></span><span class="chev">+</span></span></summary>
-      <div class="body">
-        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Рекламный кабинет и структура кампаний</span></label>
-        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Аудитории под сегмент</span></label>
-        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Объявления на основе роликов и смыслов</span></label>
-        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Проверка пути целиком: от объявления до регистрации на живом сайте</span></label>
-        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Запуск рекламы</span></label>
-        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Контроль кампаний и расхода</span></label>
-        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Отключение того, что не даёт регистраций, усиление того, что даёт</span></label>
-        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Правки объявлений и страницы по поведению людей</span></label>
-        <label class="check"><input type="checkbox" autocomplete="off"><span class="txt">Отчёт: цена перехода, цена регистрации, план следующего месяца</span></label>
-        <label class="check you"><input type="checkbox" autocomplete="off"><span class="txt">Пополнить рекламный бюджет<span class="who">Ollinter</span></span></label>
-      </div>
-      <div class="cp"><span class="mark">Чекпоинт</span><p><b>Реклама работает, цифры по сегменту известны.</b></p></div>
+      <p class="cp"><b>Закрыт, когда:</b> цифры по сегменту известны и ясен следующий шаг.</p>
     </details>
 
   </div>
 
+  <div class="tablewrap" id="tablewrap">
+    <table><thead><tr><th>Задача</th><th>Блок</th><th>Статус</th></tr></thead><tbody id="tbody"></tbody></table>
+  </div>
+  <p class="hint" id="hint">Статусы сохраняются в этом браузере. «Сбросить» очищает всё.</p>
+
   <footer>
     <span>Ollinter · карта работ первого месяца</span>
-    <span><a href="./">Стратегия</a> · <a href="offer.html">Состав работ и цены</a></span>
+    <span><a href="./">Стратегия</a> · <a href="offer.html">Состав работ и цены</a> · <a href="contract.html">Договор</a></span>
   </footer>
 </div>
 
 <script>
 (function(){
-  var KEY='ollinter-map-v1';
-  var boxes=[].slice.call(document.querySelectorAll('.check input'));
+  var KEY='ollinter-map-v2', ORDER=['none','prog','done'];
+  var tasks=[].slice.call(document.querySelectorAll('.task'));
   var nodes=[].slice.call(document.querySelectorAll('.node'));
-  var bar=document.getElementById('bar'), cnt=document.getElementById('cnt'), total=document.getElementById('total');
-  total.textContent=boxes.length;
+  var fdone=document.getElementById('fdone'), fprog=document.getElementById('fprog');
+  var sDone=document.getElementById('s-done'), sProg=document.getElementById('s-prog'), sLeft=document.getElementById('s-left');
+  var tbody=document.getElementById('tbody'), tablewrap=document.getElementById('tablewrap'), map=document.getElementById('map');
 
-  function render(){
-    var on=boxes.filter(function(b){return b.checked}).length;
-    cnt.textContent=on;
-    bar.style.width=Math.round(on/boxes.length*100)+'%';
-    nodes.forEach(function(n){
-      var inner=[].slice.call(n.querySelectorAll('.check input'));
-      var k=inner.filter(function(b){return b.checked}).length;
-      n.querySelector('.cnt').textContent=k+' / '+inner.length;
-      n.classList.toggle('done', inner.length>0 && k===inner.length);
-      n.classList.toggle('part', k>0 && k<inner.length);
+  function stateOf(t){ return t.dataset.s||'none' }
+  function setState(t,s){ t.dataset.s=s; t.querySelector('.sbtn').dataset.s=s; }
+
+  function buildTable(){
+    tbody.innerHTML='';
+    tasks.forEach(function(t){
+      var s=stateOf(t);
+      var tr=document.createElement('tr');
+      var a=document.createElement('td'); a.textContent=t.querySelector('.txt').textContent;
+      var b=document.createElement('td'); b.className='stage'; b.textContent=t.closest('.node').dataset.stage;
+      var c=document.createElement('td');
+      var chip=document.createElement('span');
+      chip.className='chip '+s;
+      chip.textContent=s==='done'?'Готово':s==='prog'?'В работе':'Не начато';
+      c.appendChild(chip);
+      tr.append(a,b,c); tbody.appendChild(tr);
     });
-    try{ localStorage.setItem(KEY,JSON.stringify(boxes.map(function(b){return b.checked?1:0}))); }catch(e){}
   }
 
-  document.addEventListener('change',function(e){ if(e.target.matches('.check input')) render(); });
+  function render(){
+    var done=0,prog=0;
+    tasks.forEach(function(t){ var s=stateOf(t); if(s==='done')done++; else if(s==='prog')prog++; });
+    sDone.textContent=done; sProg.textContent=prog; sLeft.textContent=tasks.length-done-prog;
+    fdone.style.width=(done/tasks.length*100)+'%';
+    fprog.style.width=(prog/tasks.length*100)+'%';
+    nodes.forEach(function(n){
+      var inner=[].slice.call(n.querySelectorAll('.task'));
+      var d=inner.filter(function(t){return stateOf(t)==='done'}).length;
+      var p=inner.filter(function(t){return stateOf(t)==='prog'}).length;
+      n.querySelector('.cnt').textContent=d+' / '+inner.length;
+      n.dataset.state = d===inner.length ? 'done' : (d+p>0 ? 'prog' : 'none');
+    });
+    if(tablewrap.classList.contains('on')) buildTable();
+    try{ localStorage.setItem(KEY,JSON.stringify(tasks.map(stateOf))); }catch(e){}
+  }
+
+  document.addEventListener('click',function(e){
+    var btn=e.target.closest('.sbtn');
+    if(!btn) return;
+    var t=btn.closest('.task');
+    setState(t, ORDER[(ORDER.indexOf(stateOf(t))+1)%3]);
+    render();
+  });
+
+  document.getElementById('view').addEventListener('click',function(){
+    var on=tablewrap.classList.toggle('on');
+    map.style.display=on?'none':'grid';
+    this.textContent=on?'Картой':'Таблицей';
+    if(on) buildTable();
+  });
+
   document.getElementById('reset').addEventListener('click',function(){
-    boxes.forEach(function(b){b.checked=false});
+    tasks.forEach(function(t){ setState(t,'none') });
     render();
     window.scrollTo({top:0,behavior:'smooth'});
   });
 
-  boxes.forEach(function(b){ b.checked=false });
+  tasks.forEach(function(t){ setState(t,'none') });
   try{
     var st=JSON.parse(localStorage.getItem(KEY)||'null');
-    if(st) boxes.forEach(function(b,n){ b.checked=!!st[n] });
+    if(st) tasks.forEach(function(t,n){ if(ORDER.indexOf(st[n])>-1) setState(t,st[n]) });
   }catch(e){}
   render();
 })();
