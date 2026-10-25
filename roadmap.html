@@ -73,17 +73,24 @@ a{color:var(--primary)}
 .rail{display:grid;justify-items:center;gap:0}
 .line{width:2px;height:26px;background:var(--border);border-radius:2px}
 .line.wide{height:18px}
-.split{width:min(100%,760px);height:26px;position:relative}
-.split::before{content:"";position:absolute;left:12.5%;right:12.5%;top:0;height:2px;background:var(--border)}
-.split i{position:absolute;top:0;width:2px;height:26px;background:var(--border)}
-.split i:nth-child(1){left:12.5%} .split i:nth-child(2){left:50%} .split i:nth-child(3){left:87.5%}
-@media (max-width:860px){.split{display:none}}
+.split{width:100%;height:30px;position:relative}
+.split::before{content:"";position:absolute;left:16.6%;right:16.6%;top:0;height:2px;background:var(--border);border-radius:2px}
+.split i{position:absolute;top:0;width:2px;height:30px;background:var(--border);border-radius:2px}
+.split i:nth-child(1){left:calc(16.6% - 1px)} .split i:nth-child(2){left:calc(50% - 1px)} .split i:nth-child(3){left:calc(83.3% - 1px)}
+.split.up::before{top:auto;bottom:0}
+.split.up i{top:auto;bottom:0}
+@media (max-width:860px){.split{height:18px}.split::before{left:50%;right:50%}.split i:nth-child(1),.split i:nth-child(3){display:none}}
 
 .branches{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:start}
 @media (max-width:860px){.branches{grid-template-columns:1fr;gap:12px}}
 .branch{display:grid;gap:10px;min-width:0}
-.branch-ttl{display:flex;align-items:center;gap:9px;font-family:var(--font-display);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-muted);padding-left:4px}
-.branch-ttl i{width:22px;height:2px;background:var(--primary);border-radius:2px;flex:none}
+.branch-ttl{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-display);font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-muted);
+            justify-self:start;border:1px solid var(--border);background:var(--surface);border-radius:99px;padding:6px 14px 6px 11px}
+.branch-ttl i{width:8px;height:8px;border-radius:50%;background:var(--primary);flex:none}
+.branch:nth-child(1) .branch-ttl i{background:var(--primary)}
+.branch:nth-child(2) .branch-ttl i{background:#7b61ff}
+.branch:nth-child(3) .branch-ttl i{background:#0fa3a3}
+.node>summary:hover .ttl b{color:var(--primary)}
 
 /* узел */
 .node{border:1px solid var(--border);border-radius:var(--node-radius);background:var(--surface);box-shadow:var(--card-shadow);overflow:hidden;transition:border-color .2s,background .2s}
@@ -288,7 +295,7 @@ footer{border-top:1px solid var(--border);margin-top:36px;padding-top:18px;font-
 
     </div>
 
-    <div class="rail"><div class="split"><i></i><i></i><i></i></div><div class="line wide"></div></div>
+    <div class="rail"><div class="split up"><i></i><i></i><i></i></div><div class="line wide"></div></div>
 
     <details class="node" data-stage="Запуск">
       <summary><i class="pip"></i><span class="ttl"><b>Запуск рекламы</b><span>Три ветки сходятся здесь</span></span><span class="meta"><span class="cnt"></span><span class="chev">+</span></span></summary>
@@ -326,7 +333,7 @@ footer{border-top:1px solid var(--border);margin-top:36px;padding-top:18px;font-
 
   <footer>
     <span>Ollinter · карта работ первого месяца</span>
-    <span><a href="./">Стратегия</a> · <a href="offer.html">Состав работ и цены</a></span>
+    <span><a href="./">Стратегия</a> · <a href="offer.html">Состав работ и цены</a> · <a href="%D0%94%D0%BE%D0%B3%D0%BE%D0%B2%D0%BE%D1%80-Ollinter.docx">Договор (docx)</a></span>
   </footer>
 </div>
 
