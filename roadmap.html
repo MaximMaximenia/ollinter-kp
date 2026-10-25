@@ -104,13 +104,9 @@ a{color:var(--blue)}
 .cp b{font-family:var(--display);color:var(--ink-2)}
 
 /* карточка-ссылка на ТЗ разработчику */
-.devcard{width:100%;margin-top:14px;border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(180deg,#fff, #fbfcfe);
-         box-shadow:var(--shadow);padding:20px 22px;display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap}
-.devcard h3{font-size:18px}
-.devcard p{font-size:14.5px;color:var(--ink-2);max-width:56ch}
-.btn{font-family:var(--display);font-weight:700;font-size:14.5px;padding:11px 18px;border-radius:12px;background:var(--blue);color:#fff;text-decoration:none;white-space:nowrap}
-.btn:hover{background:#0f49da}
 
+.devhead{width:100%;margin:6px 0 12px;display:grid;gap:4px}
+.devhead h2{font-size:clamp(20px,2.6vw,26px);font-weight:800;letter-spacing:-.02em}
 /* таблица */
 .tablewrap{display:none;margin-top:22px;border:1px solid var(--line);border-radius:var(--radius);background:var(--paper);overflow-x:auto;box-shadow:var(--shadow)}
 .tablewrap.on{display:block}
@@ -140,9 +136,8 @@ footer{border-top:1px solid var(--line);margin-top:34px;padding-top:18px;font-si
 <div class="wrap">
 
   <header class="hero">
-    <p class="eyebrow">Карта работ первого месяца</p>
-    <h1>Как устроен запуск</h1>
-    <p class="lead">После анализа работа идёт тремя ветками одновременно — дизайн, ролики и аналитика — и сходится на запуске рекламы. Клик по квадрату меняет статус задачи.</p>
+    <p class="eyebrow">Ollinter</p>
+    <h1>Карта работ на месяц</h1>
     <div class="legend">
       <span><i class="pd"></i> не начато</span>
       <span><i class="pd p"></i> в работе</span>
@@ -171,7 +166,6 @@ footer{border-top:1px solid var(--line);margin-top:34px;padding-top:18px;font-si
       <summary><span class="ring"><svg viewBox="0 0 30 30"><circle class="bgc" cx="15" cy="15" r="12.5" fill="none" stroke-width="3"/><circle class="fgc" cx="15" cy="15" r="12.5" fill="none" stroke-width="3" stroke-linecap="round" stroke-dasharray="78.5" stroke-dashoffset="78.5"/></svg><b>2</b></span><span class="ttl"><b>Анализ и смыслы</b><span>На чём строится всё остальное</span></span><span class="chev">+</span></summary>
       <div class="body">
         <div class="task"><button class="sbtn" type="button"></button><span class="txt">Анализ конкурентов: чем берут, что обещают, как выглядят их страницы и реклама</span></div>
-        <div class="task"><button class="sbtn" type="button"></button><span class="txt">Анализ аудитории: кто ищет преподавателя и по каким причинам</span></div>
         <div class="task"><button class="sbtn" type="button"></button><span class="txt">Проработка пути клиента: от объявления до регистрации</span></div>
         <div class="task"><button class="sbtn" type="button"></button><span class="txt">Позиционирование и продающие смыслы под сегмент</span></div>
       </div>
@@ -203,8 +197,6 @@ footer{border-top:1px solid var(--line);margin-top:34px;padding-top:18px;font-si
             <div class="task"><button class="sbtn" type="button"></button><span class="txt">Структура: список страниц и порядок экранов</span></div>
             <div class="task"><button class="sbtn" type="button"></button><span class="txt">Тексты страниц под сегмент</span></div>
             <div class="task"><button class="sbtn" type="button"></button><span class="txt">Макет главной страницы</span></div>
-            <div class="task"><button class="sbtn" type="button"></button><span class="txt">Макеты внутренних страниц</span></div>
-            <div class="task"><button class="sbtn" type="button"></button><span class="txt">Экран с преподавателями</span></div>
             <div class="task"><button class="sbtn" type="button"></button><span class="txt">Согласование текстов и фото</span></div>
           </div>
         </details>
@@ -231,32 +223,6 @@ footer{border-top:1px solid var(--line);margin-top:34px;padding-top:18px;font-si
 
       <div class="branch b2">
         <div class="btag">Ветка 2 · Ролики</div>
-
-        <details class="node b2" data-stage="Ролики">
-          <summary><span class="ring"><svg viewBox="0 0 30 30"><circle class="bgc" cx="15" cy="15" r="12.5" fill="none" stroke-width="3"/><circle class="fgc" cx="15" cy="15" r="12.5" fill="none" stroke-width="3" stroke-linecap="round" stroke-dasharray="78.5" stroke-dashoffset="78.5"/></svg><b>7</b></span><span class="ttl"><b>Сценарии</b><span>Три причины искать преподавателя</span></span><span class="chev">+</span></summary>
-          <div class="body">
-            <div class="task"><button class="sbtn" type="button"></button><span class="txt">Сценарий 1</span></div>
-            <div class="task"><button class="sbtn" type="button"></button><span class="txt">Сценарий 2</span></div>
-            <div class="task"><button class="sbtn" type="button"></button><span class="txt">Сценарий 3</span></div>
-          </div>
-        </details>
-
-        <details class="node b2" data-stage="Ролики">
-          <summary><span class="ring"><svg viewBox="0 0 30 30"><circle class="bgc" cx="15" cy="15" r="12.5" fill="none" stroke-width="3"/><circle class="fgc" cx="15" cy="15" r="12.5" fill="none" stroke-width="3" stroke-linecap="round" stroke-dasharray="78.5" stroke-dashoffset="78.5"/></svg><b>8</b></span><span class="ttl"><b>Производство</b><span>Персонаж, озвучка, монтаж</span></span><span class="chev">+</span></summary>
-          <div class="body">
-            <div class="task"><button class="sbtn" type="button"></button><span class="txt">Сборка персонажа в кадре</span></div>
-            <div class="task"><button class="sbtn" type="button"></button><span class="txt">Озвучка</span></div>
-            <div class="task"><button class="sbtn" type="button"></button><span class="txt">Монтаж трёх роликов</span></div>
-          </div>
-        </details>
-
-        <details class="node b2" data-stage="Ролики">
-          <summary><span class="ring"><svg viewBox="0 0 30 30"><circle class="bgc" cx="15" cy="15" r="12.5" fill="none" stroke-width="3"/><circle class="fgc" cx="15" cy="15" r="12.5" fill="none" stroke-width="3" stroke-linecap="round" stroke-dasharray="78.5" stroke-dashoffset="78.5"/></svg><b>9</b></span><span class="ttl"><b>Форматы</b><span>Под площадки и языки</span></span><span class="chev">+</span></summary>
-          <div class="body">
-            <div class="task"><button class="sbtn" type="button"></button><span class="txt">Нарезка под форматы площадок</span></div>
-            <div class="task"><button class="sbtn" type="button"></button><span class="txt">Исходники под переозвучку</span></div>
-          </div>
-        </details>
       </div>
 
       <div class="branch b3">
@@ -313,16 +279,56 @@ footer{border-top:1px solid var(--line);margin-top:34px;padding-top:18px;font-si
       <p class="cp"><b>Закрыт, когда:</b> цифры по сегменту известны и ясен следующий шаг.</p>
     </details>
 
-    <div class="devcard">
-      <div>
-        <h3>Что нужно от разработчика</h3>
-        <p>Отдельный список задач по сайту, кодам аналитике и событиям — чтобы статистика была полной с первого дня рекламы. Можно переслать одной ссылкой.</p>
-      </div>
-      <a class="btn" href="dev.html">Открыть список</a>
+
+    <div class="row"><div class="stem"></div></div>
+
+    <div class="devhead">
+      <h2>Задачи для разработчика</h2>
     </div>
 
-  </div>
+    <details class="node b3" data-stage="Разработчик">
+      <summary><span class="ring"><svg viewBox="0 0 30 30"><circle class="bgc" cx="15" cy="15" r="12.5" fill="none" stroke-width="3"/><circle class="fgc" cx="15" cy="15" r="12.5" fill="none" stroke-width="3" stroke-linecap="round" stroke-dasharray="78.5" stroke-dashoffset="78.5"/></svg><b>14</b></span><span class="ttl"><b>Доступ и показ</b><span>Один раз в начале</span></span><span class="chev">+</span></summary>
+      <div class="body">
+        <div class="task"><button class="sbtn" type="button"></button><span class="txt">Демонстрация функционала: путь ученика и путь преподавателя</span></div>
+        <div class="task"><button class="sbtn" type="button"></button><span class="txt">Тестовые аккаунты ученика и преподавателя</span></div>
+        <div class="task"><button class="sbtn" type="button"></button><span class="txt">Список всех страниц с адресами</span></div>
+        <div class="task"><button class="sbtn" type="button"></button><span class="txt">Google-аккаунт проекта для счётчиков и рекламы</span></div>
+      </div>
+    </details>
 
+    <details class="node b3" data-stage="Разработчик">
+      <summary><span class="ring"><svg viewBox="0 0 30 30"><circle class="bgc" cx="15" cy="15" r="12.5" fill="none" stroke-width="3"/><circle class="fgc" cx="15" cy="15" r="12.5" fill="none" stroke-width="3" stroke-linecap="round" stroke-dasharray="78.5" stroke-dashoffset="78.5"/></svg><b>15</b></span><span class="ttl"><b>Счётчики</b><span>На всех страницах сайта</span></span><span class="chev">+</span></summary>
+      <div class="body">
+        <div class="task"><button class="sbtn" type="button"></button><span class="txt">Google Analytics 4</span></div>
+        <div class="task"><button class="sbtn" type="button"></button><span class="txt">Яндекс.Метрика</span></div>
+        <div class="task"><button class="sbtn" type="button"></button><span class="txt">Meta Pixel</span></div>
+        <div class="task"><button class="sbtn" type="button"></button><span class="txt">Google Tag Manager</span></div>
+        <div class="task"><button class="sbtn" type="button"></button><span class="txt">Подтверждение домена в Meta</span></div>
+        <div class="task"><button class="sbtn" type="button"></button><span class="txt">Проверка, что коды срабатывают</span></div>
+      </div>
+    </details>
+
+    <details class="node b3" data-stage="Разработчик">
+      <summary><span class="ring"><svg viewBox="0 0 30 30"><circle class="bgc" cx="15" cy="15" r="12.5" fill="none" stroke-width="3"/><circle class="fgc" cx="15" cy="15" r="12.5" fill="none" stroke-width="3" stroke-linecap="round" stroke-dasharray="78.5" stroke-dashoffset="78.5"/></svg><b>16</b></span><span class="ttl"><b>События</b><span>Раздельно по типам действий</span></span><span class="chev">+</span></summary>
+      <div class="body">
+        <div class="task"><button class="sbtn" type="button"></button><span class="txt">Регистрация ученика</span></div>
+        <div class="task"><button class="sbtn" type="button"></button><span class="txt">Регистрация преподавателя</span></div>
+        <div class="task"><button class="sbtn" type="button"></button><span class="txt">Начало поиска</span></div>
+        <div class="task"><button class="sbtn" type="button"></button><span class="txt">Просмотр профиля преподавателя</span></div>
+        <div class="task"><button class="sbtn" type="button"></button><span class="txt">Нажатие кнопки связи</span></div>
+        <div class="task"><button class="sbtn" type="button"></button><span class="txt">Отправка сообщения преподавателю</span></div>
+      </div>
+    </details>
+
+    <details class="node b3" data-stage="Разработчик">
+      <summary><span class="ring"><svg viewBox="0 0 30 30"><circle class="bgc" cx="15" cy="15" r="12.5" fill="none" stroke-width="3"/><circle class="fgc" cx="15" cy="15" r="12.5" fill="none" stroke-width="3" stroke-linecap="round" stroke-dasharray="78.5" stroke-dashoffset="78.5"/></svg><b>17</b></span><span class="ttl"><b>Метки источника</b><span>Чтобы видеть, что сработало</span></span><span class="chev">+</span></summary>
+      <div class="body">
+        <div class="task"><button class="sbtn" type="button"></button><span class="txt">Метки не теряются при переходах и редиректах</span></div>
+        <div class="task"><button class="sbtn" type="button"></button><span class="txt">Метки сохраняются в заявке</span></div>
+      </div>
+    </details>
+
+  </div>
   <div class="tablewrap" id="tablewrap">
     <table><thead><tr><th>Задача</th><th>Блок</th><th>Статус</th></tr></thead><tbody id="tbody"></tbody></table>
   </div>
@@ -330,7 +336,7 @@ footer{border-top:1px solid var(--line);margin-top:34px;padding-top:18px;font-si
 
   <footer>
     <span>Ollinter · карта работ первого месяца</span>
-    <span><a href="./">Стратегия</a> · <a href="offer.html">Состав работ и цены</a> · <a href="dev.html">Разработчику</a> · <a href="%D0%94%D0%BE%D0%B3%D0%BE%D0%B2%D0%BE%D1%80-Ollinter.docx">Договор (docx)</a></span>
+    <span><a href="./">Стратегия</a> · <a href="offer.html">Состав работ и цены</a> · <a href="%D0%94%D0%BE%D0%B3%D0%BE%D0%B2%D0%BE%D1%80-Ollinter.docx">Договор (docx)</a></span>
   </footer>
 </div>
 
