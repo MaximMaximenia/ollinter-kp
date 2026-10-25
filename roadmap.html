@@ -3,150 +3,135 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@500;600;700;900&family=Manrope:wght@400;500;600;700&display=swap">
 <style>
-/* Layout: старт → анализ → три параллельные ветки → запуск → ведение.
-   Токены: primitive → semantic → component */
+/* Схема: старт → анализ → три параллельные ветки → запуск → ведение. Светлая тема. */
 :root{
-  /* primitive */
-  --blue-600:#1659ff; --blue-50:#e7eeff; --blue-300:#5b8cff;
-  --green-600:#1d8a5e; --green-50:#e4f3ec; --green-300:#4cc08c;
-  --amber-600:#c97a16; --amber-50:#fdf3e4; --amber-300:#e5a44a;
-  --ink-900:#121a26; --ink-500:#5b6675; --paper-0:#ffffff; --paper-50:#f5f6f4; --paper-200:#e3e6e2;
-
-  /* semantic */
-  --bg:var(--paper-50); --surface:var(--paper-0); --fg:var(--ink-900); --fg-muted:var(--ink-500); --border:var(--paper-200);
-  --primary:var(--blue-600); --primary-soft:var(--blue-50);
-  --success:var(--green-600); --success-soft:var(--green-50);
-  --progress:var(--amber-600); --progress-soft:var(--amber-50);
-
-  /* component */
-  --node-radius:18px; --card-shadow:0 1px 2px rgba(18,26,38,.05);
-  --font-display:'Golos Text','Segoe UI',Tahoma,sans-serif;
-  --font-body:'Manrope','Segoe UI',Tahoma,sans-serif;
+  --blue:#1659ff; --blue-soft:#e9efff; --violet:#7b4dff; --violet-soft:#f0ebff; --teal:#0f9b9b; --teal-soft:#e3f5f5;
+  --green:#1d8a5e; --green-soft:#e4f3ec; --amber:#c97a16; --amber-soft:#fdf3e4;
+  --ink:#101722; --ink-2:#55606e; --ink-3:#8b95a3;
+  --paper:#ffffff; --page:#f4f6f8; --line:#e2e6eb;
+  --shadow:0 1px 2px rgba(16,23,34,.04), 0 8px 24px -16px rgba(16,23,34,.18);
+  --radius:20px;
+  --display:'Golos Text','Segoe UI',Tahoma,sans-serif;
+  --body:'Manrope','Segoe UI',Tahoma,sans-serif;
   color-scheme:light;
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#0c1118; --surface:#141b25; --fg:#eef2f6; --fg-muted:#9aa7b6; --border:#26303d;
-  --primary:var(--blue-300); --primary-soft:#17243f;
-  --success:var(--green-300); --success-soft:#14261f;
-  --progress:var(--amber-300); --progress-soft:#2a2113;
-  --card-shadow:none; color-scheme:dark}}
-:root[data-theme="dark"]{
-  --bg:#0c1118; --surface:#141b25; --fg:#eef2f6; --fg-muted:#9aa7b6; --border:#26303d;
-  --primary:var(--blue-300); --primary-soft:#17243f;
-  --success:var(--green-300); --success-soft:#14261f;
-  --progress:var(--amber-300); --progress-soft:#2a2113;
-  --card-shadow:none; color-scheme:dark}
-
 *{box-sizing:border-box}
 html,body{margin:0}
-body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:16.5px;line-height:1.55;-webkit-font-smoothing:antialiased}
-.wrap{max-width:1080px;margin:0 auto;padding-inline:20px;padding-block:0 100px}
-h1,h2,h3{font-family:var(--font-display);text-wrap:balance;margin:0}
-h1{font-size:clamp(30px,5vw,50px);line-height:1.05;font-weight:900;letter-spacing:-.025em}
+body{background:var(--page);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:20px;padding-block:0 90px}
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance}
+h1{font-size:clamp(30px,5vw,52px);line-height:1.03;font-weight:900;letter-spacing:-.025em}
 p{margin:0}
 ul{margin:0;padding-left:0;list-style:none}
-a{color:var(--primary)}
-.eyebrow{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--primary);font-weight:700}
-.lead{font-size:clamp(16.5px,1.9vw,19px);color:var(--fg-muted);max-width:60ch}
+a{color:var(--blue)}
+.eyebrow{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);font-weight:700}
+.lead{font-size:clamp(16px,1.9vw,19px);color:var(--ink-2);max-width:60ch}
 
-/* шапка */
-.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
-.topbar-in{max-width:1080px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.brand{font-family:var(--font-display);font-weight:900;letter-spacing:-.02em;font-size:16px}
-.brand span{color:var(--primary)}
-.track{flex:1;min-width:100px;height:6px;border-radius:99px;background:var(--border);overflow:hidden;display:flex}
-.track i{display:block;height:100%;width:0;transition:width .45s cubic-bezier(.2,.7,.3,1)}
-.track .fill-done{background:var(--success)}
-.track .fill-prog{background:var(--progress)}
-.stat{font-size:12.5px;color:var(--fg-muted);font-variant-numeric:tabular-nums;white-space:nowrap}
-.ghost{font-family:var(--font-display);font-weight:700;font-size:12.5px;padding:6px 12px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--fg-muted);cursor:pointer}
-.ghost:hover{border-color:var(--primary);color:var(--primary)}
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:rgba(244,246,248,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.topbar-in{max-width:1120px;margin:0 auto;padding:11px 20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:900;letter-spacing:-.02em;font-size:16px}
+.brand span{color:var(--blue)}
+.track{flex:1;min-width:100px;height:7px;border-radius:99px;background:#e6eaef;overflow:hidden;display:flex}
+.track i{display:block;height:100%;width:0;transition:width .5s cubic-bezier(.2,.7,.3,1)}
+.track .fd{background:var(--green)} .track .fp{background:var(--amber)}
+.stat{font-size:12.5px;color:var(--ink-2);font-variant-numeric:tabular-nums;white-space:nowrap}
+.stat b{color:var(--ink)}
+.ghost{font-family:var(--display);font-weight:700;font-size:12.5px;padding:7px 13px;border-radius:10px;border:1px solid var(--line);background:var(--paper);color:var(--ink-2);cursor:pointer;text-decoration:none}
+.ghost:hover{border-color:var(--blue);color:var(--blue)}
 
-.hero{padding-block:clamp(30px,5vw,56px) clamp(14px,2.5vw,22px);display:grid;gap:13px}
-.legend{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px;font-size:13.5px;color:var(--fg-muted)}
-.legend span{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--border);background:var(--surface);border-radius:99px;padding:5px 12px}
-.pipdot{width:8px;height:8px;border-radius:50%;flex:none}
-.pipdot.d{background:var(--success)} .pipdot.p{background:var(--progress)} .pipdot.n{background:var(--border)}
+.hero{padding-block:clamp(30px,5vw,58px) clamp(10px,2vw,18px);display:grid;gap:12px}
+.legend{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;font-size:13px;color:var(--ink-2)}
+.legend span{display:inline-flex;align-items:center;gap:7px;background:var(--paper);border:1px solid var(--line);border-radius:99px;padding:5px 13px}
+.pd{width:9px;height:9px;border-radius:50%;flex:none;background:#dfe4ea}
+.pd.p{background:var(--amber)} .pd.d{background:var(--green)}
 
-/* карта */
-.map{display:grid;gap:0;margin-top:10px}
-.rail{display:grid;justify-items:center;gap:0}
-.line{width:2px;height:26px;background:var(--border);border-radius:2px}
-.line.wide{height:18px}
-.split{width:100%;height:30px;position:relative}
-.split::before{content:"";position:absolute;left:16.6%;right:16.6%;top:0;height:2px;background:var(--border);border-radius:2px}
-.split i{position:absolute;top:0;width:2px;height:30px;background:var(--border);border-radius:2px}
-.split i:nth-child(1){left:calc(16.6% - 1px)} .split i:nth-child(2){left:calc(50% - 1px)} .split i:nth-child(3){left:calc(83.3% - 1px)}
-.split.up::before{top:auto;bottom:0}
-.split.up i{top:auto;bottom:0}
-@media (max-width:860px){.split{height:18px}.split::before{left:50%;right:50%}.split i:nth-child(1),.split i:nth-child(3){display:none}}
+/* ——— схема ——— */
+.flow{display:grid;justify-items:center;margin-top:18px}
+.row{width:100%;display:grid;justify-items:center}
+.stem{width:2px;height:28px;background:var(--line)}
+.bracket{width:100%;height:34px;display:grid;grid-template-columns:repeat(3,1fr)}
+.bracket .c{position:relative}
+.bracket .c::before{content:"";position:absolute;left:calc(50% - 1px);top:16px;width:2px;height:18px;background:var(--line)}
+.bracket .c:nth-child(1)::after{content:"";position:absolute;left:50%;right:0;top:16px;height:2px;background:var(--line);border-top-left-radius:8px}
+.bracket .c:nth-child(3)::after{content:"";position:absolute;left:0;right:50%;top:16px;height:2px;background:var(--line)}
+.bracket .c:nth-child(2)::after{content:"";position:absolute;left:0;right:0;top:16px;height:2px;background:var(--line)}
+.bracket.up .c::before{top:0}
+.bracket.up .c::after{top:32px}
+@media (max-width:880px){.bracket{display:none}}
 
-.branches{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:start}
-@media (max-width:860px){.branches{grid-template-columns:1fr;gap:12px}}
+.branches{width:100%;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:start}
+@media (max-width:880px){.branches{grid-template-columns:1fr;gap:12px}}
 .branch{display:grid;gap:10px;min-width:0}
-.branch-ttl{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-display);font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-muted);
-            justify-self:start;border:1px solid var(--border);background:var(--surface);border-radius:99px;padding:6px 14px 6px 11px}
-.branch-ttl i{width:8px;height:8px;border-radius:50%;background:var(--primary);flex:none}
-.branch:nth-child(1) .branch-ttl i{background:var(--primary)}
-.branch:nth-child(2) .branch-ttl i{background:#7b61ff}
-.branch:nth-child(3) .branch-ttl i{background:#0fa3a3}
-.node>summary:hover .ttl b{color:var(--primary)}
+.btag{justify-self:start;display:inline-flex;align-items:center;gap:8px;font-family:var(--display);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+      border-radius:99px;padding:6px 13px;border:1px solid transparent}
+.b1 .btag{background:var(--blue-soft);color:#1240b8;border-color:#d4e0ff}
+.b2 .btag{background:var(--violet-soft);color:#5a2ed6;border-color:#e0d6ff}
+.b3 .btag{background:var(--teal-soft);color:#0b7373;border-color:#cfe9e9}
+.b1{--bc:var(--blue)} .b2{--bc:var(--violet)} .b3{--bc:var(--teal)}
 
 /* узел */
-.node{border:1px solid var(--border);border-radius:var(--node-radius);background:var(--surface);box-shadow:var(--card-shadow);overflow:hidden;transition:border-color .2s,background .2s}
-.node[data-state="prog"]{border-color:color-mix(in srgb,var(--progress) 55%,var(--border))}
-.node[data-state="done"]{border-color:color-mix(in srgb,var(--success) 55%,var(--border));background:var(--success-soft)}
-.node>summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:15px 17px}
+.node{width:100%;border:1px solid var(--line);border-radius:var(--radius);background:var(--paper);box-shadow:var(--shadow);overflow:hidden;transition:box-shadow .2s,border-color .2s,transform .2s}
+.node:hover{box-shadow:0 2px 4px rgba(16,23,34,.05),0 14px 32px -18px rgba(16,23,34,.3)}
+.node[data-state="prog"]{border-color:#f0d8b4}
+.node[data-state="done"]{border-color:#bfe3d2;background:#fbfefc}
+.node>summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:auto 1fr auto;gap:13px;align-items:center;padding:16px 18px}
 .node>summary::-webkit-details-marker{display:none}
-.pip{width:13px;height:13px;border-radius:50%;border:2px solid var(--border);background:var(--bg);flex:none;transition:all .2s}
-.node[data-state="prog"] .pip{border-color:var(--progress);background:var(--progress-soft)}
-.node[data-state="done"] .pip{background:var(--success);border-color:var(--success)}
+.ring{width:30px;height:30px;flex:none;position:relative;display:grid;place-items:center}
+.ring svg{position:absolute;inset:0;transform:rotate(-90deg)}
+.ring .bgc{stroke:#e8ecf1} .ring .fgc{stroke:var(--bc,var(--blue));transition:stroke-dashoffset .45s cubic-bezier(.2,.7,.3,1)}
+.ring b{font-family:var(--display);font-size:11px;font-weight:800;color:var(--ink-3);position:relative}
+.node[data-state="done"] .ring .fgc{stroke:var(--green)}
+.node[data-state="done"] .ring b{color:var(--green)}
 .ttl{display:grid;gap:1px;min-width:0}
-.ttl b{font-family:var(--font-display);font-size:17.5px;font-weight:700;letter-spacing:-.01em}
-.ttl span{font-size:13.5px;color:var(--fg-muted)}
-.meta{display:flex;align-items:center;gap:9px}
-.cnt{font-family:var(--font-display);font-weight:700;font-size:12.5px;color:var(--fg-muted);font-variant-numeric:tabular-nums}
-.node[data-state="done"] .cnt{color:var(--success)}
-.chev{color:var(--primary);font-weight:900;font-size:17px;line-height:1;transition:transform .2s}
-.node[open] .chev{transform:rotate(45deg)}
-.node .body{padding:0 12px 12px;display:grid;gap:4px}
+.ttl b{font-family:var(--display);font-size:17px;font-weight:700;letter-spacing:-.01em}
+.ttl span{font-size:13px;color:var(--ink-3)}
+.chev{color:var(--ink-3);font-size:19px;line-height:1;transition:transform .2s;font-family:var(--display);font-weight:700}
+.node[open] .chev{transform:rotate(45deg);color:var(--blue)}
+.body{padding:2px 12px 12px;display:grid;gap:3px}
 
-/* задача со статусом */
 .task{display:grid;grid-template-columns:auto 1fr;gap:11px;align-items:start;padding:9px 11px;border-radius:12px;transition:background .15s}
-.task:hover{background:color-mix(in srgb,var(--primary) 6%,transparent)}
-.sbtn{width:22px;height:22px;flex:none;margin-top:1px;border-radius:7px;border:2px solid var(--border);background:var(--bg);cursor:pointer;padding:0;position:relative;transition:all .18s}
-.sbtn:hover{border-color:var(--primary)}
-.sbtn[data-s="prog"]{border-color:var(--progress);background:var(--progress-soft)}
-.sbtn[data-s="prog"]::after{content:"";position:absolute;left:4px;top:4px;width:10px;height:10px;border-radius:3px;background:var(--progress)}
-.sbtn[data-s="done"]{border-color:var(--success);background:var(--success)}
-.sbtn[data-s="done"]::after{content:"";position:absolute;left:5.5px;top:2px;width:5px;height:10px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(42deg)}
-.sbtn:focus-visible{outline:2px solid var(--primary);outline-offset:3px}
+.task:hover{background:#f6f8fb}
+.sbtn{width:21px;height:21px;flex:none;margin-top:2px;border-radius:7px;border:2px solid #d7dde5;background:#fff;cursor:pointer;padding:0;position:relative;transition:all .18s}
+.sbtn:hover{border-color:var(--blue)}
+.sbtn[data-s="prog"]{border-color:var(--amber);background:var(--amber-soft)}
+.sbtn[data-s="prog"]::after{content:"";position:absolute;left:3.5px;top:3.5px;width:10px;height:10px;border-radius:3px;background:var(--amber)}
+.sbtn[data-s="done"]{border-color:var(--green);background:var(--green)}
+.sbtn[data-s="done"]::after{content:"";position:absolute;left:5px;top:1.5px;width:5px;height:10px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(42deg)}
+.sbtn:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
 .task .txt{font-size:15px;min-width:0}
-.task[data-s="done"] .txt{color:var(--fg-muted);text-decoration:line-through;text-decoration-color:color-mix(in srgb,var(--fg-muted) 40%,transparent)}
-.cp{margin:8px 11px 4px;font-size:13.5px;color:var(--fg-muted);border-top:1px dashed var(--border);padding-top:9px}
-.cp b{font-family:var(--font-display);color:var(--fg)}
+.task[data-s="done"] .txt{color:var(--ink-3);text-decoration:line-through;text-decoration-color:#c3cad4}
+.cp{margin:6px 12px 10px;font-size:13px;color:var(--ink-3);border-top:1px dashed var(--line);padding-top:9px}
+.cp b{font-family:var(--display);color:var(--ink-2)}
+
+/* карточка-ссылка на ТЗ разработчику */
+.devcard{width:100%;margin-top:14px;border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(180deg,#fff, #fbfcfe);
+         box-shadow:var(--shadow);padding:20px 22px;display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.devcard h3{font-size:18px}
+.devcard p{font-size:14.5px;color:var(--ink-2);max-width:56ch}
+.btn{font-family:var(--display);font-weight:700;font-size:14.5px;padding:11px 18px;border-radius:12px;background:var(--blue);color:#fff;text-decoration:none;white-space:nowrap}
+.btn:hover{background:#0f49da}
 
 /* таблица */
-.tablewrap{display:none;margin-top:22px;border:1px solid var(--border);border-radius:var(--node-radius);background:var(--surface);overflow-x:auto}
+.tablewrap{display:none;margin-top:22px;border:1px solid var(--line);border-radius:var(--radius);background:var(--paper);overflow-x:auto;box-shadow:var(--shadow)}
 .tablewrap.on{display:block}
 table{border-collapse:collapse;width:100%;min-width:560px;font-size:14.5px}
-th,td{padding:11px 16px;text-align:left;border-bottom:1px solid var(--border);vertical-align:middle}
-th{font-family:var(--font-display);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-muted);font-weight:700}
+th,td{padding:11px 16px;text-align:left;border-bottom:1px solid var(--line)}
+th{font-family:var(--display);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);font-weight:700}
 tr:last-child td{border-bottom:none}
-td.stage{color:var(--fg-muted);white-space:nowrap}
+td.stg{color:var(--ink-3);white-space:nowrap}
 .chip{display:inline-block;font-size:12px;font-weight:700;padding:3px 11px;border-radius:99px;white-space:nowrap}
-.chip.none{background:var(--border);color:var(--fg-muted)}
-.chip.prog{background:var(--progress-soft);color:var(--progress)}
-.chip.done{background:var(--success-soft);color:var(--success)}
-.hint{font-size:13.5px;color:var(--fg-muted);margin-top:14px}
-footer{border-top:1px solid var(--border);margin-top:36px;padding-top:18px;font-size:13.5px;color:var(--fg-muted);display:flex;gap:14px;flex-wrap:wrap;justify-content:space-between}
+.chip.none{background:#eef1f5;color:var(--ink-3)}
+.chip.prog{background:var(--amber-soft);color:var(--amber)}
+.chip.done{background:var(--green-soft);color:var(--green)}
+.hint{font-size:13px;color:var(--ink-3);margin-top:14px}
+footer{border-top:1px solid var(--line);margin-top:34px;padding-top:18px;font-size:13.5px;color:var(--ink-3);display:flex;gap:14px;flex-wrap:wrap;justify-content:space-between}
 </style>
 
 <div class="topbar">
   <div class="topbar-in">
     <div class="brand">Oll<span>inter</span></div>
-    <div class="track"><i class="fill-done" id="fdone"></i><i class="fill-prog" id="fprog"></i></div>
-    <div class="stat"><span id="s-done">0</span> готово · <span id="s-prog">0</span> в работе · <span id="s-left">0</span> осталось</div>
+    <div class="track"><i class="fd" id="fd"></i><i class="fp" id="fp"></i></div>
+    <div class="stat"><b id="s-done">0</b> готово · <b id="s-prog">0</b> в работе · <b id="s-left">0</b> осталось</div>
     <button class="ghost" id="view" type="button">Таблицей</button>
     <button class="ghost" id="reset" type="button">Сбросить</button>
   </div>
@@ -159,30 +144,31 @@ footer{border-top:1px solid var(--border);margin-top:36px;padding-top:18px;font-
     <h1>Как устроен запуск</h1>
     <p class="lead">После анализа работа идёт тремя ветками одновременно — дизайн, ролики и аналитика — и сходится на запуске рекламы. Клик по квадрату меняет статус задачи.</p>
     <div class="legend">
-      <span><i class="pipdot n"></i> не начато</span>
-      <span><i class="pipdot p"></i> в работе</span>
-      <span><i class="pipdot d"></i> готово</span>
+      <span><i class="pd"></i> не начато</span>
+      <span><i class="pd p"></i> в работе</span>
+      <span><i class="pd d"></i> готово</span>
     </div>
   </header>
 
-  <div class="map" id="map">
+  <div class="flow" id="flow">
 
-    <details class="node" data-stage="Старт" open>
-      <summary><i class="pip"></i><span class="ttl"><b>Старт</b><span>Встреча, сегмент, доступы</span></span><span class="meta"><span class="cnt"></span><span class="chev">+</span></span></summary>
+    <details class="node b1" data-stage="Старт" open>
+      <summary><span class="ring"><svg viewBox="0 0 30 30"><circle class="bgc" cx="15" cy="15" r="12.5" fill="none" stroke-width="3"/><circle class="fgc" cx="15" cy="15" r="12.5" fill="none" stroke-width="3" stroke-linecap="round" stroke-dasharray="78.5" stroke-dashoffset="78.5"/></svg><b>1</b></span><span class="ttl"><b>Старт</b><span>Встреча, сегмент, доступы</span></span><span class="chev">+</span></summary>
       <div class="body">
         <div class="task"><button class="sbtn" type="button"></button><span class="txt">Встреча-разбор функционала: проходим путь ученика и преподавателя в живом интерфейсе</span></div>
         <div class="task"><button class="sbtn" type="button"></button><span class="txt">Выбрать сегмент, на котором фокусируемся</span></div>
         <div class="task"><button class="sbtn" type="button"></button><span class="txt">Доступы к Instagram, TikTok, Facebook, YouTube</span></div>
         <div class="task"><button class="sbtn" type="button"></button><span class="txt">Доступ в Meta Business Manager, рекламный кабинет создаю сам</span></div>
+        <div class="task"><button class="sbtn" type="button"></button><span class="txt">Передать разработчику список задач по аналитике и странице</span></div>
         <div class="task"><button class="sbtn" type="button"></button><span class="txt">Общий чат и таблица задач со статусами</span></div>
       </div>
-      <p class="cp"><b>Закрыт, когда:</b> сегмент выбран, доступы на руках.</p>
+      <p class="cp"><b>Закрыт, когда:</b> сегмент выбран, доступы на руках, разработчик получил задачи.</p>
     </details>
 
-    <div class="rail"><div class="line"></div></div>
+    <div class="row"><div class="stem"></div></div>
 
-    <details class="node" data-stage="Анализ">
-      <summary><i class="pip"></i><span class="ttl"><b>Анализ и смыслы</b><span>На чём строится всё остальное</span></span><span class="meta"><span class="cnt"></span><span class="chev">+</span></span></summary>
+    <details class="node b1" data-stage="Анализ">
+      <summary><span class="ring"><svg viewBox="0 0 30 30"><circle class="bgc" cx="15" cy="15" r="12.5" fill="none" stroke-width="3"/><circle class="fgc" cx="15" cy="15" r="12.5" fill="none" stroke-width="3" stroke-linecap="round" stroke-dasharray="78.5" stroke-dashoffset="78.5"/></svg><b>2</b></span><span class="ttl"><b>Анализ и смыслы</b><span>На чём строится всё остальное</span></span><span class="chev">+</span></summary>
       <div class="body">
         <div class="task"><button class="sbtn" type="button"></button><span class="txt">Анализ конкурентов: чем берут, что обещают, как выглядят их страницы и реклама</span></div>
         <div class="task"><button class="sbtn" type="button"></button><span class="txt">Анализ аудитории: кто ищет преподавателя и по каким причинам</span></div>
@@ -192,15 +178,16 @@ footer{border-top:1px solid var(--border);margin-top:36px;padding-top:18px;font-
       <p class="cp"><b>Закрыт, когда:</b> смыслы готовы — по ним делаются страница, ролики и объявления.</p>
     </details>
 
-    <div class="rail"><div class="line wide"></div><div class="split"><i></i><i></i><i></i></div></div>
+    <div class="row"><div class="stem"></div></div>
+    <div class="row"><div class="bracket"><div class="c"></div><div class="c"></div><div class="c"></div></div></div>
 
     <div class="branches">
 
-      <div class="branch">
-        <div class="branch-ttl"><i></i> Ветка 1 · Дизайн</div>
+      <div class="branch b1">
+        <div class="btag">Ветка 1 · Дизайн</div>
 
-        <details class="node" data-stage="Дизайн">
-          <summary><i class="pip"></i><span class="ttl"><b>Фирменный стиль</b><span>Основа для всего визуала</span></span><span class="meta"><span class="cnt"></span><span class="chev">+</span></span></summary>
+        <details class="node b1" data-stage="Дизайн">
+          <summary><span class="ring"><svg viewBox="0 0 30 30"><circle class="bgc" cx="15" cy="15" r="12.5" fill="none" stroke-width="3"/><circle class="fgc" cx="15" cy="15" r="12.5" fill="none" stroke-width="3" stroke-linecap="round" stroke-dasharray="78.5" stroke-dashoffset="78.5"/></svg><b>3</b></span><span class="ttl"><b>Фирменный стиль</b><span>Основа всего визуала</span></span><span class="chev">+</span></summary>
           <div class="body">
             <div class="task"><button class="sbtn" type="button"></button><span class="txt">Логотип и варианты размещения</span></div>
             <div class="task"><button class="sbtn" type="button"></button><span class="txt">Палитра и шрифты</span></div>
@@ -209,8 +196,8 @@ footer{border-top:1px solid var(--border);margin-top:36px;padding-top:18px;font-
           </div>
         </details>
 
-        <details class="node" data-stage="Дизайн">
-          <summary><i class="pip"></i><span class="ttl"><b>Сайт</b><span>Структура, тексты, макеты</span></span><span class="meta"><span class="cnt"></span><span class="chev">+</span></span></summary>
+        <details class="node b1" data-stage="Дизайн">
+          <summary><span class="ring"><svg viewBox="0 0 30 30"><circle class="bgc" cx="15" cy="15" r="12.5" fill="none" stroke-width="3"/><circle class="fgc" cx="15" cy="15" r="12.5" fill="none" stroke-width="3" stroke-linecap="round" stroke-dasharray="78.5" stroke-dashoffset="78.5"/></svg><b>4</b></span><span class="ttl"><b>Сайт</b><span>Структура, тексты, макеты</span></span><span class="chev">+</span></summary>
           <div class="body">
             <div class="task"><button class="sbtn" type="button"></button><span class="txt">Разбор текущего сайта: что есть и каких страниц не хватает</span></div>
             <div class="task"><button class="sbtn" type="button"></button><span class="txt">Структура: список страниц и порядок экранов</span></div>
@@ -222,8 +209,8 @@ footer{border-top:1px solid var(--border);margin-top:36px;padding-top:18px;font-
           </div>
         </details>
 
-        <details class="node" data-stage="Дизайн">
-          <summary><i class="pip"></i><span class="ttl"><b>Площадки</b><span>Все в одном стиле</span></span><span class="meta"><span class="cnt"></span><span class="chev">+</span></span></summary>
+        <details class="node b1" data-stage="Дизайн">
+          <summary><span class="ring"><svg viewBox="0 0 30 30"><circle class="bgc" cx="15" cy="15" r="12.5" fill="none" stroke-width="3"/><circle class="fgc" cx="15" cy="15" r="12.5" fill="none" stroke-width="3" stroke-linecap="round" stroke-dasharray="78.5" stroke-dashoffset="78.5"/></svg><b>5</b></span><span class="ttl"><b>Площадки</b><span>Все в одном стиле</span></span><span class="chev">+</span></summary>
           <div class="body">
             <div class="task"><button class="sbtn" type="button"></button><span class="txt">Instagram: шапка, обложки, шаблоны</span></div>
             <div class="task"><button class="sbtn" type="button"></button><span class="txt">TikTok: профиль и обложки видео</span></div>
@@ -232,8 +219,8 @@ footer{border-top:1px solid var(--border);margin-top:36px;padding-top:18px;font-
           </div>
         </details>
 
-        <details class="node" data-stage="Дизайн">
-          <summary><i class="pip"></i><span class="ttl"><b>Базовый контент</b><span>8 постов о платформе</span></span><span class="meta"><span class="cnt"></span><span class="chev">+</span></span></summary>
+        <details class="node b1" data-stage="Дизайн">
+          <summary><span class="ring"><svg viewBox="0 0 30 30"><circle class="bgc" cx="15" cy="15" r="12.5" fill="none" stroke-width="3"/><circle class="fgc" cx="15" cy="15" r="12.5" fill="none" stroke-width="3" stroke-linecap="round" stroke-dasharray="78.5" stroke-dashoffset="78.5"/></svg><b>6</b></span><span class="ttl"><b>Базовый контент</b><span>8 постов о платформе</span></span><span class="chev">+</span></summary>
           <div class="body">
             <div class="task"><button class="sbtn" type="button"></button><span class="txt">Темы восьми постов</span></div>
             <div class="task"><button class="sbtn" type="button"></button><span class="txt">Тексты и визуал</span></div>
@@ -242,11 +229,11 @@ footer{border-top:1px solid var(--border);margin-top:36px;padding-top:18px;font-
         </details>
       </div>
 
-      <div class="branch">
-        <div class="branch-ttl"><i></i> Ветка 2 · Ролики</div>
+      <div class="branch b2">
+        <div class="btag">Ветка 2 · Ролики</div>
 
-        <details class="node" data-stage="Ролики">
-          <summary><i class="pip"></i><span class="ttl"><b>Сценарии</b><span>Три разных причины искать преподавателя</span></span><span class="meta"><span class="cnt"></span><span class="chev">+</span></span></summary>
+        <details class="node b2" data-stage="Ролики">
+          <summary><span class="ring"><svg viewBox="0 0 30 30"><circle class="bgc" cx="15" cy="15" r="12.5" fill="none" stroke-width="3"/><circle class="fgc" cx="15" cy="15" r="12.5" fill="none" stroke-width="3" stroke-linecap="round" stroke-dasharray="78.5" stroke-dashoffset="78.5"/></svg><b>7</b></span><span class="ttl"><b>Сценарии</b><span>Три причины искать преподавателя</span></span><span class="chev">+</span></summary>
           <div class="body">
             <div class="task"><button class="sbtn" type="button"></button><span class="txt">Сценарий 1</span></div>
             <div class="task"><button class="sbtn" type="button"></button><span class="txt">Сценарий 2</span></div>
@@ -254,8 +241,8 @@ footer{border-top:1px solid var(--border);margin-top:36px;padding-top:18px;font-
           </div>
         </details>
 
-        <details class="node" data-stage="Ролики">
-          <summary><i class="pip"></i><span class="ttl"><b>Производство</b><span>Персонаж, озвучка, монтаж</span></span><span class="meta"><span class="cnt"></span><span class="chev">+</span></span></summary>
+        <details class="node b2" data-stage="Ролики">
+          <summary><span class="ring"><svg viewBox="0 0 30 30"><circle class="bgc" cx="15" cy="15" r="12.5" fill="none" stroke-width="3"/><circle class="fgc" cx="15" cy="15" r="12.5" fill="none" stroke-width="3" stroke-linecap="round" stroke-dasharray="78.5" stroke-dashoffset="78.5"/></svg><b>8</b></span><span class="ttl"><b>Производство</b><span>Персонаж, озвучка, монтаж</span></span><span class="chev">+</span></summary>
           <div class="body">
             <div class="task"><button class="sbtn" type="button"></button><span class="txt">Сборка персонажа в кадре</span></div>
             <div class="task"><button class="sbtn" type="button"></button><span class="txt">Озвучка</span></div>
@@ -263,8 +250,8 @@ footer{border-top:1px solid var(--border);margin-top:36px;padding-top:18px;font-
           </div>
         </details>
 
-        <details class="node" data-stage="Ролики">
-          <summary><i class="pip"></i><span class="ttl"><b>Форматы</b><span>Под площадки и другие языки</span></span><span class="meta"><span class="cnt"></span><span class="chev">+</span></span></summary>
+        <details class="node b2" data-stage="Ролики">
+          <summary><span class="ring"><svg viewBox="0 0 30 30"><circle class="bgc" cx="15" cy="15" r="12.5" fill="none" stroke-width="3"/><circle class="fgc" cx="15" cy="15" r="12.5" fill="none" stroke-width="3" stroke-linecap="round" stroke-dasharray="78.5" stroke-dashoffset="78.5"/></svg><b>9</b></span><span class="ttl"><b>Форматы</b><span>Под площадки и языки</span></span><span class="chev">+</span></summary>
           <div class="body">
             <div class="task"><button class="sbtn" type="button"></button><span class="txt">Нарезка под форматы площадок</span></div>
             <div class="task"><button class="sbtn" type="button"></button><span class="txt">Исходники под переозвучку</span></div>
@@ -272,20 +259,21 @@ footer{border-top:1px solid var(--border);margin-top:36px;padding-top:18px;font-
         </details>
       </div>
 
-      <div class="branch">
-        <div class="branch-ttl"><i></i> Ветка 3 · Аналитика</div>
+      <div class="branch b3">
+        <div class="btag">Ветка 3 · Аналитика</div>
 
-        <details class="node" data-stage="Аналитика">
-          <summary><i class="pip"></i><span class="ttl"><b>Установка</b><span>Ставится до первого клика</span></span><span class="meta"><span class="cnt"></span><span class="chev">+</span></span></summary>
+        <details class="node b3" data-stage="Аналитика">
+          <summary><span class="ring"><svg viewBox="0 0 30 30"><circle class="bgc" cx="15" cy="15" r="12.5" fill="none" stroke-width="3"/><circle class="fgc" cx="15" cy="15" r="12.5" fill="none" stroke-width="3" stroke-linecap="round" stroke-dasharray="78.5" stroke-dashoffset="78.5"/></svg><b>10</b></span><span class="ttl"><b>Установка</b><span>До первого клика</span></span><span class="chev">+</span></summary>
           <div class="body">
-            <div class="task"><button class="sbtn" type="button"></button><span class="txt">Код аналитики и пиксель Meta на сайте</span></div>
+            <div class="task"><button class="sbtn" type="button"></button><span class="txt">Задание разработчику по кодам и событиям</span></div>
+            <div class="task"><button class="sbtn" type="button"></button><span class="txt">Счётчик аналитики и пиксель Meta на сайте</span></div>
             <div class="task"><button class="sbtn" type="button"></button><span class="txt">Событие регистрации и ключевые действия</span></div>
             <div class="task"><button class="sbtn" type="button"></button><span class="txt">Проверка: события доходят и считаются верно</span></div>
           </div>
         </details>
 
-        <details class="node" data-stage="Аналитика">
-          <summary><i class="pip"></i><span class="ttl"><b>Отчётность</b><span>Цифры в одном окне</span></span><span class="meta"><span class="cnt"></span><span class="chev">+</span></span></summary>
+        <details class="node b3" data-stage="Аналитика">
+          <summary><span class="ring"><svg viewBox="0 0 30 30"><circle class="bgc" cx="15" cy="15" r="12.5" fill="none" stroke-width="3"/><circle class="fgc" cx="15" cy="15" r="12.5" fill="none" stroke-width="3" stroke-linecap="round" stroke-dasharray="78.5" stroke-dashoffset="78.5"/></svg><b>11</b></span><span class="ttl"><b>Отчётность</b><span>Цифры в одном окне</span></span><span class="chev">+</span></summary>
           <div class="body">
             <div class="task"><button class="sbtn" type="button"></button><span class="txt">Дашборд: трафик, регистрации, стоимость действия</span></div>
             <div class="task"><button class="sbtn" type="button"></button><span class="txt">Доступ к дашборду для команды</span></div>
@@ -295,10 +283,11 @@ footer{border-top:1px solid var(--border);margin-top:36px;padding-top:18px;font-
 
     </div>
 
-    <div class="rail"><div class="split up"><i></i><i></i><i></i></div><div class="line wide"></div></div>
+    <div class="row"><div class="bracket up"><div class="c"></div><div class="c"></div><div class="c"></div></div></div>
+    <div class="row"><div class="stem"></div></div>
 
-    <details class="node" data-stage="Запуск">
-      <summary><i class="pip"></i><span class="ttl"><b>Запуск рекламы</b><span>Три ветки сходятся здесь</span></span><span class="meta"><span class="cnt"></span><span class="chev">+</span></span></summary>
+    <details class="node b1" data-stage="Запуск">
+      <summary><span class="ring"><svg viewBox="0 0 30 30"><circle class="bgc" cx="15" cy="15" r="12.5" fill="none" stroke-width="3"/><circle class="fgc" cx="15" cy="15" r="12.5" fill="none" stroke-width="3" stroke-linecap="round" stroke-dasharray="78.5" stroke-dashoffset="78.5"/></svg><b>12</b></span><span class="ttl"><b>Запуск рекламы</b><span>Три ветки сходятся здесь</span></span><span class="chev">+</span></summary>
       <div class="body">
         <div class="task"><button class="sbtn" type="button"></button><span class="txt">Рекламный кабинет и структура кампаний</span></div>
         <div class="task"><button class="sbtn" type="button"></button><span class="txt">Аудитории под сегмент</span></div>
@@ -310,10 +299,10 @@ footer{border-top:1px solid var(--border);margin-top:36px;padding-top:18px;font-
       <p class="cp"><b>Закрыт, когда:</b> реклама крутится, регистрации видны в отчётах.</p>
     </details>
 
-    <div class="rail"><div class="line"></div></div>
+    <div class="row"><div class="stem"></div></div>
 
-    <details class="node" data-stage="Ведение">
-      <summary><i class="pip"></i><span class="ttl"><b>Ведение и выводы</b><span>До конца месяца</span></span><span class="meta"><span class="cnt"></span><span class="chev">+</span></span></summary>
+    <details class="node b1" data-stage="Ведение">
+      <summary><span class="ring"><svg viewBox="0 0 30 30"><circle class="bgc" cx="15" cy="15" r="12.5" fill="none" stroke-width="3"/><circle class="fgc" cx="15" cy="15" r="12.5" fill="none" stroke-width="3" stroke-linecap="round" stroke-dasharray="78.5" stroke-dashoffset="78.5"/></svg><b>13</b></span><span class="ttl"><b>Ведение и выводы</b><span>До конца месяца</span></span><span class="chev">+</span></summary>
       <div class="body">
         <div class="task"><button class="sbtn" type="button"></button><span class="txt">Контроль кампаний и расхода</span></div>
         <div class="task"><button class="sbtn" type="button"></button><span class="txt">Отключение того, что не даёт регистраций</span></div>
@@ -324,89 +313,95 @@ footer{border-top:1px solid var(--border);margin-top:36px;padding-top:18px;font-
       <p class="cp"><b>Закрыт, когда:</b> цифры по сегменту известны и ясен следующий шаг.</p>
     </details>
 
+    <div class="devcard">
+      <div>
+        <h3>Что нужно от разработчика</h3>
+        <p>Отдельный список задач по сайту, кодам аналитике и событиям — чтобы статистика была полной с первого дня рекламы. Можно переслать одной ссылкой.</p>
+      </div>
+      <a class="btn" href="dev.html">Открыть список</a>
+    </div>
+
   </div>
 
   <div class="tablewrap" id="tablewrap">
     <table><thead><tr><th>Задача</th><th>Блок</th><th>Статус</th></tr></thead><tbody id="tbody"></tbody></table>
   </div>
-  <p class="hint" id="hint">Статусы сохраняются в этом браузере. «Сбросить» очищает всё.</p>
+  <p class="hint">Статусы сохраняются в этом браузере. «Сбросить» очищает всё.</p>
 
   <footer>
     <span>Ollinter · карта работ первого месяца</span>
-    <span><a href="./">Стратегия</a> · <a href="offer.html">Состав работ и цены</a> · <a href="%D0%94%D0%BE%D0%B3%D0%BE%D0%B2%D0%BE%D1%80-Ollinter.docx">Договор (docx)</a></span>
+    <span><a href="./">Стратегия</a> · <a href="offer.html">Состав работ и цены</a> · <a href="dev.html">Разработчику</a> · <a href="%D0%94%D0%BE%D0%B3%D0%BE%D0%B2%D0%BE%D1%80-Ollinter.docx">Договор (docx)</a></span>
   </footer>
 </div>
 
 <script>
 (function(){
-  var KEY='ollinter-map-v2', ORDER=['none','prog','done'];
+  var KEY='ollinter-map-v3', ORDER=['none','prog','done'], CIRC=78.5;
   var tasks=[].slice.call(document.querySelectorAll('.task'));
   var nodes=[].slice.call(document.querySelectorAll('.node'));
-  var fdone=document.getElementById('fdone'), fprog=document.getElementById('fprog');
+  var fd=document.getElementById('fd'), fp=document.getElementById('fp');
   var sDone=document.getElementById('s-done'), sProg=document.getElementById('s-prog'), sLeft=document.getElementById('s-left');
-  var tbody=document.getElementById('tbody'), tablewrap=document.getElementById('tablewrap'), map=document.getElementById('map');
+  var tbody=document.getElementById('tbody'), tablewrap=document.getElementById('tablewrap'), flow=document.getElementById('flow');
 
-  function stateOf(t){ return t.dataset.s||'none' }
-  function setState(t,s){ t.dataset.s=s; t.querySelector('.sbtn').dataset.s=s; }
+  function st(t){ return t.dataset.s||'none' }
+  function set(t,s){ t.dataset.s=s; t.querySelector('.sbtn').dataset.s=s }
 
   function buildTable(){
     tbody.innerHTML='';
     tasks.forEach(function(t){
-      var s=stateOf(t);
-      var tr=document.createElement('tr');
+      var s=st(t), tr=document.createElement('tr');
       var a=document.createElement('td'); a.textContent=t.querySelector('.txt').textContent;
-      var b=document.createElement('td'); b.className='stage'; b.textContent=t.closest('.node').dataset.stage;
-      var c=document.createElement('td');
-      var chip=document.createElement('span');
+      var b=document.createElement('td'); b.className='stg'; b.textContent=t.closest('.node').dataset.stage;
+      var c=document.createElement('td'), chip=document.createElement('span');
       chip.className='chip '+s;
-      chip.textContent=s==='done'?'Готово':s==='prog'?'В работе':'Не начато';
-      c.appendChild(chip);
-      tr.append(a,b,c); tbody.appendChild(tr);
+      chip.textContent = s==='done'?'Готово':s==='prog'?'В работе':'Не начато';
+      c.appendChild(chip); tr.append(a,b,c); tbody.appendChild(tr);
     });
   }
 
   function render(){
     var done=0,prog=0;
-    tasks.forEach(function(t){ var s=stateOf(t); if(s==='done')done++; else if(s==='prog')prog++; });
+    tasks.forEach(function(t){ var s=st(t); if(s==='done')done++; else if(s==='prog')prog++ });
     sDone.textContent=done; sProg.textContent=prog; sLeft.textContent=tasks.length-done-prog;
-    fdone.style.width=(done/tasks.length*100)+'%';
-    fprog.style.width=(prog/tasks.length*100)+'%';
+    fd.style.width=(done/tasks.length*100)+'%';
+    fp.style.width=(prog/tasks.length*100)+'%';
     nodes.forEach(function(n){
       var inner=[].slice.call(n.querySelectorAll('.task'));
-      var d=inner.filter(function(t){return stateOf(t)==='done'}).length;
-      var p=inner.filter(function(t){return stateOf(t)==='prog'}).length;
-      n.querySelector('.cnt').textContent=d+' / '+inner.length;
+      var d=inner.filter(function(t){return st(t)==='done'}).length;
+      var p=inner.filter(function(t){return st(t)==='prog'}).length;
       n.dataset.state = d===inner.length ? 'done' : (d+p>0 ? 'prog' : 'none');
+      var ring=n.querySelector('.fgc');
+      if(ring) ring.style.strokeDashoffset = CIRC - CIRC*(d/inner.length);
     });
     if(tablewrap.classList.contains('on')) buildTable();
-    try{ localStorage.setItem(KEY,JSON.stringify(tasks.map(stateOf))); }catch(e){}
+    try{ localStorage.setItem(KEY,JSON.stringify(tasks.map(st))); }catch(e){}
   }
 
   document.addEventListener('click',function(e){
     var btn=e.target.closest('.sbtn');
     if(!btn) return;
     var t=btn.closest('.task');
-    setState(t, ORDER[(ORDER.indexOf(stateOf(t))+1)%3]);
+    set(t, ORDER[(ORDER.indexOf(st(t))+1)%3]);
     render();
   });
 
   document.getElementById('view').addEventListener('click',function(){
     var on=tablewrap.classList.toggle('on');
-    map.style.display=on?'none':'grid';
-    this.textContent=on?'Картой':'Таблицей';
+    flow.style.display=on?'none':'grid';
+    this.textContent=on?'Схемой':'Таблицей';
     if(on) buildTable();
   });
 
   document.getElementById('reset').addEventListener('click',function(){
-    tasks.forEach(function(t){ setState(t,'none') });
+    tasks.forEach(function(t){ set(t,'none') });
     render();
     window.scrollTo({top:0,behavior:'smooth'});
   });
 
-  tasks.forEach(function(t){ setState(t,'none') });
+  tasks.forEach(function(t){ set(t,'none') });
   try{
-    var st=JSON.parse(localStorage.getItem(KEY)||'null');
-    if(st) tasks.forEach(function(t,n){ if(ORDER.indexOf(st[n])>-1) setState(t,st[n]) });
+    var saved=JSON.parse(localStorage.getItem(KEY)||'null');
+    if(saved) tasks.forEach(function(t,i){ if(ORDER.indexOf(saved[i])>-1) set(t,saved[i]) });
   }catch(e){}
   render();
 })();

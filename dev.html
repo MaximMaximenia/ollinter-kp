@@ -1,0 +1,215 @@
+<title>Ollinter: задачи разработчику</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@500;600;700;900&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+/* Светлая тема, одна колонка: блоки задач с чекбоксами и пояснениями */
+:root{
+  --blue:#1659ff; --blue-soft:#e9efff; --green:#1d8a5e; --green-soft:#e4f3ec; --amber:#c97a16; --amber-soft:#fdf3e4;
+  --ink:#101722; --ink-2:#55606e; --ink-3:#8b95a3;
+  --paper:#ffffff; --page:#f4f6f8; --line:#e2e6eb;
+  --shadow:0 1px 2px rgba(16,23,34,.04), 0 8px 24px -16px rgba(16,23,34,.18);
+  --display:'Golos Text','Segoe UI',Tahoma,sans-serif;
+  --body:'Manrope','Segoe UI',Tahoma,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--page);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:880px;margin:0 auto;padding-inline:20px;padding-block:0 90px}
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance}
+h1{font-size:clamp(29px,4.8vw,48px);line-height:1.04;font-weight:900;letter-spacing:-.025em}
+h2{font-size:clamp(19px,2.5vw,23px);font-weight:700}
+p{margin:0}
+ul{margin:0;padding-left:0;list-style:none}
+a{color:var(--blue)}
+.eyebrow{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);font-weight:700}
+.lead{font-size:clamp(16px,1.9vw,19px);color:var(--ink-2);max-width:62ch}
+
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(244,246,248,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.topbar-in{max-width:880px;margin:0 auto;padding:11px 20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:900;letter-spacing:-.02em;font-size:16px}
+.brand span{color:var(--blue)}
+.track{flex:1;min-width:90px;height:7px;border-radius:99px;background:#e6eaef;overflow:hidden}
+.track i{display:block;height:100%;width:0;background:var(--green);border-radius:99px;transition:width .45s cubic-bezier(.2,.7,.3,1)}
+.stat{font-size:12.5px;color:var(--ink-2);font-variant-numeric:tabular-nums;white-space:nowrap}
+.ghost{font-family:var(--display);font-weight:700;font-size:12.5px;padding:7px 13px;border-radius:10px;border:1px solid var(--line);background:var(--paper);color:var(--ink-2);cursor:pointer}
+.ghost:hover{border-color:var(--blue);color:var(--blue)}
+
+.hero{padding-block:clamp(30px,5vw,56px) clamp(8px,2vw,16px);display:grid;gap:13px}
+.block{background:var(--paper);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);padding:22px;display:grid;gap:12px;margin-top:14px}
+.bhead{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
+.bnum{font-family:var(--display);font-weight:900;font-size:12px;letter-spacing:.1em;color:var(--blue);background:var(--blue-soft);border-radius:8px;padding:4px 10px;white-space:nowrap}
+.bsub{font-size:14px;color:var(--ink-3);width:100%}
+.items{display:grid;gap:3px}
+.it{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;padding:10px 11px;border-radius:12px;transition:background .15s}
+.it:hover{background:#f6f8fb}
+.it input{appearance:none;width:21px;height:21px;flex:none;margin-top:2px;border:2px solid #d7dde5;border-radius:6px;background:#fff;cursor:pointer;position:relative;transition:all .15s}
+.it input:checked{background:var(--green);border-color:var(--green)}
+.it input:checked::after{content:"";position:absolute;left:5px;top:1.5px;width:5px;height:10px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(42deg)}
+.it input:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.it .tx{min-width:0;display:grid;gap:2px}
+.it .tx b{font-family:var(--display);font-size:15.5px;font-weight:700}
+.it .tx span{font-size:14px;color:var(--ink-2)}
+.it input:checked~.tx b{color:var(--ink-3);text-decoration:line-through;text-decoration-color:#c3cad4}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13.5px;background:#eef1f5;border-radius:6px;padding:1px 6px;color:#2b3340}
+.ev{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.ev code{background:var(--blue-soft);color:#1240b8}
+.why{background:var(--amber-soft);border-radius:14px;padding:14px 16px;font-size:14.5px;color:#7a4e10}
+.why b{font-family:var(--display)}
+.copy{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:18px}
+.btn{font-family:var(--display);font-weight:700;font-size:14.5px;padding:11px 18px;border-radius:12px;background:var(--blue);color:#fff;border:none;cursor:pointer}
+.btn:hover{background:#0f49da}
+.said{font-size:13.5px;color:var(--green);display:none}
+.said.on{display:inline}
+footer{border-top:1px solid var(--line);margin-top:34px;padding-top:18px;font-size:13.5px;color:var(--ink-3);display:flex;gap:14px;flex-wrap:wrap;justify-content:space-between}
+</style>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <div class="brand">Oll<span>inter</span></div>
+    <div class="track"><i id="bar"></i></div>
+    <div class="stat"><span id="cnt">0</span> / <span id="total">0</span> закрыто</div>
+    <button class="ghost" id="reset" type="button">Сбросить</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <header class="hero">
+    <p class="eyebrow">Задачи для разработчика · Ollinter</p>
+    <h1>Что нужно сделать на сайте до запуска рекламы</h1>
+    <p class="lead">Список целиком, по блокам. Главная цель — чтобы после запуска рекламы было видно каждое действие человека: откуда пришёл, что нажал, дошёл ли до регистрации.</p>
+  </header>
+
+  <div class="block">
+    <div class="bhead"><span class="bnum">Блок 1</span><h2>Показать, как всё устроено</h2><p class="bsub">Нужно один раз, в начале работы</p></div>
+    <div class="items">
+      <label class="it"><input type="checkbox" autocomplete="off"><span class="tx"><b>Демонстрация функционала по экрану, 30–40 минут</b><span>Пройти путь ученика и путь преподавателя: регистрация, заполнение профиля, поиск, обращение к специалисту.</span></span></label>
+      <label class="it"><input type="checkbox" autocomplete="off"><span class="tx"><b>Тестовые аккаунты</b><span>Один ученика, один преподавателя — чтобы я смотрел путь сам, не дёргая вас.</span></span></label>
+      <label class="it"><input type="checkbox" autocomplete="off"><span class="tx"><b>На чём сделан сайт</b><span>Платформа или фреймворк, где хостинг, есть ли тестовая копия, как выкатываются изменения.</span></span></label>
+      <label class="it"><input type="checkbox" autocomplete="off"><span class="tx"><b>Список всех страниц с адресами</b><span>Главная, регистрация, профиль, поиск, служебные страницы.</span></span></label>
+      <label class="it"><input type="checkbox" autocomplete="off"><span class="tx"><b>Что уже стоит из аналитики</b><span>Какие счётчики подключены сейчас и кому принадлежат.</span></span></label>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="bhead"><span class="bnum">Блок 2</span><h2>Счётчики на сайте</h2><p class="bsub">Ставится до первого рубля в рекламе</p></div>
+    <div class="items">
+      <label class="it"><input type="checkbox" autocomplete="off"><span class="tx"><b>Google Analytics 4</b><span>Код на всех страницах сайта, включая страницы регистрации и благодарности.</span></span></label>
+      <label class="it"><input type="checkbox" autocomplete="off"><span class="tx"><b>Meta Pixel</b><span>Код на всех страницах. Идентификатор пришлю я.</span></span></label>
+      <label class="it"><input type="checkbox" autocomplete="off"><span class="tx"><b>Google Tag Manager (желательно)</b><span>Если поставить контейнер, дальше я смогу добавлять события сам, без вашего участия.</span></span></label>
+      <label class="it"><input type="checkbox" autocomplete="off"><span class="tx"><b>Подтверждение домена в Meta</b><span>Мета-тег в <code>&lt;head&gt;</code> или TXT-запись в DNS — пришлю значение.</span></span></label>
+      <label class="it"><input type="checkbox" autocomplete="off"><span class="tx"><b>Проверка, что коды срабатывают</b><span>На каждой странице, в мобильной версии тоже.</span></span></label>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="bhead"><span class="bnum">Блок 3</span><h2>События: что именно считаем</h2><p class="bsub">Каждое событие уходит и в Analytics, и в Meta Pixel</p></div>
+    <div class="items">
+      <label class="it"><input type="checkbox" autocomplete="off"><span class="tx"><b>Отправка формы регистрации</b><span>Событие в момент успешной регистрации, а не просто нажатия кнопки.</span></span></label>
+      <label class="it"><input type="checkbox" autocomplete="off"><span class="tx"><b>Регистрация преподавателя и регистрация ученика — раздельно</b><span>Это две разные цели, их нельзя смешивать в одну.</span></span></label>
+      <label class="it"><input type="checkbox" autocomplete="off"><span class="tx"><b>Начало поиска специалиста</b><span>Первое обращение к поиску или фильтрам.</span></span></label>
+      <label class="it"><input type="checkbox" autocomplete="off"><span class="tx"><b>Просмотр профиля преподавателя</b><span>С передачей того, чей профиль смотрели.</span></span></label>
+      <label class="it"><input type="checkbox" autocomplete="off"><span class="tx"><b>Нажатие кнопки связи с преподавателем</b><span>Ключевое действие: именно по нему видно, доходят ли люди до специалиста.</span></span></label>
+      <label class="it"><input type="checkbox" autocomplete="off"><span class="tx"><b>Отправка сообщения или заявки преподавателю</b><span>Если такая функция есть на платформе.</span></span></label>
+    </div>
+    <div class="ev"><code>sign_up</code><code>sign_up_teacher</code><code>search_start</code><code>profile_view</code><code>contact_click</code><code>message_sent</code></div>
+    <p class="why"><b>Зачем так подробно.</b> Реклама умеет обучаться только на тех действиях, которые ей видно. Если считать один заход на сайт, площадка будет приводить случайных людей. Если считать регистрацию и обращение к преподавателю — она начнёт искать тех, кто реально доходит до конца.</p>
+  </div>
+
+  <div class="block">
+    <div class="bhead"><span class="bnum">Блок 4</span><h2>Откуда пришёл человек</h2><p class="bsub">Без этого непонятно, какая реклама работает</p></div>
+    <div class="items">
+      <label class="it"><input type="checkbox" autocomplete="off"><span class="tx"><b>Метки в ссылках не должны теряться</b><span>Хвост вида <code>?utm_source=...</code> обязан сохраняться при переходах внутри сайта и при любых перенаправлениях.</span></span></label>
+      <label class="it"><input type="checkbox" autocomplete="off"><span class="tx"><b>Сохранять метки в заявке</b><span>Записывать источник, кампанию и объявление в скрытые поля формы, чтобы они приходили вместе с регистрацией.</span></span></label>
+      <label class="it"><input type="checkbox" autocomplete="off"><span class="tx"><b>Куда падают заявки</b><span>Почта, таблица или CRM — показать, где они видны, и дать мне доступ на чтение.</span></span></label>
+      <label class="it"><input type="checkbox" autocomplete="off"><span class="tx"><b>Не блокировать индексацию и рекламу</b><span>Проверить, что страницы открыты для роботов и нет запретов в настройках сайта.</span></span></label>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="bhead"><span class="bnum">Блок 5</span><h2>Посадочная страница под рекламу</h2><p class="bsub">Макет и тексты отдаю я, перенос — за вами</p></div>
+    <div class="items">
+      <label class="it"><input type="checkbox" autocomplete="off"><span class="tx"><b>Отдельная страница по макету</b><span>Свой адрес, например <code>/english</code>. Реклама ведёт именно на неё.</span></span></label>
+      <label class="it"><input type="checkbox" autocomplete="off"><span class="tx"><b>Форма регистрации на странице</b><span>С проверкой полей и понятным сообщением об успехе.</span></span></label>
+      <label class="it"><input type="checkbox" autocomplete="off"><span class="tx"><b>Страница благодарности</b><span>Отдельный адрес после успешной регистрации — по нему удобно считать результат.</span></span></label>
+      <label class="it"><input type="checkbox" autocomplete="off"><span class="tx"><b>Мобильная версия</b><span>Больше половины трафика придёт с телефонов, страница должна выглядеть по макету и там.</span></span></label>
+      <label class="it"><input type="checkbox" autocomplete="off"><span class="tx"><b>Скорость загрузки</b><span>Сжать изображения, подгружать их по мере прокрутки. Ориентир — до 3 секунд на телефоне.</span></span></label>
+      <label class="it"><input type="checkbox" autocomplete="off"><span class="tx"><b>Возможность быстро править тексты</b><span>Чтобы заголовки и кнопки можно было менять по ходу теста без долгой выкатки.</span></span></label>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="bhead"><span class="bnum">Блок 6</span><h2>Что прислать мне</h2><p class="bsub">Одним сообщением, чтобы не собирать по частям</p></div>
+    <div class="items">
+      <label class="it"><input type="checkbox" autocomplete="off"><span class="tx"><b>Доступ к Google Analytics</b><span>Права на просмотр и редактирование.</span></span></label>
+      <label class="it"><input type="checkbox" autocomplete="off"><span class="tx"><b>Доступ к Google Tag Manager</b><span>Если контейнер поставлен.</span></span></label>
+      <label class="it"><input type="checkbox" autocomplete="off"><span class="tx"><b>Доступ к Meta Business Manager</b><span>Права администратора на бизнес-аккаунт и страницу Facebook.</span></span></label>
+      <label class="it"><input type="checkbox" autocomplete="off"><span class="tx"><b>Тестовые аккаунты и адрес тестовой копии сайта</b><span>Если копия есть.</span></span></label>
+      <label class="it"><input type="checkbox" autocomplete="off"><span class="tx"><b>Контакт и удобное время связи</b><span>Чтобы на этапе запуска правки шли быстро.</span></span></label>
+    </div>
+    <div class="copy">
+      <button class="btn" id="copy" type="button">Скопировать список текстом</button>
+      <span class="said" id="said">Скопировано</span>
+    </div>
+  </div>
+
+  <footer>
+    <span>Ollinter · задачи для разработчика</span>
+    <span><a href="roadmap.html">Карта работ</a> · <a href="offer.html">Состав работ и цены</a> · <a href="./">Стратегия</a></span>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var KEY='ollinter-dev-v1';
+  var items=[].slice.call(document.querySelectorAll('.it input'));
+  var bar=document.getElementById('bar'), cnt=document.getElementById('cnt'), total=document.getElementById('total');
+  total.textContent=items.length;
+
+  function render(){
+    var on=items.filter(function(i){return i.checked}).length;
+    cnt.textContent=on;
+    bar.style.width=Math.round(on/items.length*100)+'%';
+    try{ localStorage.setItem(KEY,JSON.stringify(items.map(function(i){return i.checked?1:0}))); }catch(e){}
+  }
+
+  document.addEventListener('change',function(e){ if(e.target.matches('.it input')) render(); });
+  document.getElementById('reset').addEventListener('click',function(){
+    items.forEach(function(i){i.checked=false}); render(); window.scrollTo({top:0,behavior:'smooth'});
+  });
+
+  document.getElementById('copy').addEventListener('click',function(){
+    var out=['Ollinter — задачи для разработчика',''];
+    [].slice.call(document.querySelectorAll('.block')).forEach(function(b){
+      out.push(b.querySelector('h2').textContent.toUpperCase());
+      [].slice.call(b.querySelectorAll('.it')).forEach(function(it){
+        var t=it.querySelector('.tx b').textContent;
+        var s=it.querySelector('.tx span');
+        out.push('— '+t+(s? ': '+s.textContent : ''));
+      });
+      out.push('');
+    });
+    var text=out.join('\n');
+    var said=document.getElementById('said');
+    function ok(){ said.classList.add('on'); setTimeout(function(){said.classList.remove('on')},1800) }
+    try{
+      navigator.clipboard.writeText(text).then(ok,function(){ fallback() });
+    }catch(e){ fallback() }
+    function fallback(){
+      var ta=document.createElement('textarea');
+      ta.value=text; document.body.appendChild(ta); ta.select();
+      try{ document.execCommand('copy'); ok(); }catch(e){}
+      document.body.removeChild(ta);
+    }
+  });
+
+  items.forEach(function(i){ i.checked=false });
+  try{
+    var s=JSON.parse(localStorage.getItem(KEY)||'null');
+    if(s) items.forEach(function(i,n){ i.checked=!!s[n] });
+  }catch(e){}
+  render();
+})();
+</script>
