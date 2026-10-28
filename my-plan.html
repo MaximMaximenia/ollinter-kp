@@ -1,0 +1,313 @@
+<title>Ollinter: мой план</title>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@500;600;700;900&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+/* Личный рабочий план. Светлая тема. */
+:root{
+  --blue:#1659ff; --blue-soft:#e9efff; --violet:#6b4dff; --violet-soft:#efebff;
+  --teal:#0f9b9b; --teal-soft:#e3f5f5; --amber:#c97a16; --amber-soft:#fdf3e4;
+  --green:#1d8a5e; --green-soft:#e4f3ec; --pink:#c4367a; --pink-soft:#fdeaf2;
+  --ink:#101722; --ink-2:#55606e; --ink-3:#8b95a3;
+  --paper:#fff; --page:#f4f6f8; --line:#e2e6eb;
+  --shadow:0 1px 2px rgba(16,23,34,.04), 0 8px 24px -16px rgba(16,23,34,.18);
+  --display:'Golos Text','Segoe UI',Tahoma,sans-serif;
+  --body:'Manrope','Segoe UI',Tahoma,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--page);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1000px;margin:0 auto;padding-inline:20px;padding-block:0 100px}
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance}
+h1{font-size:clamp(28px,4.6vw,46px);line-height:1.05;font-weight:900;letter-spacing:-.025em}
+h2{font-size:clamp(20px,2.6vw,27px);font-weight:800;letter-spacing:-.02em}
+h3{font-size:16.5px;font-weight:700}
+p{margin:0}
+ul{margin:0;padding-left:0;list-style:none}
+.eyebrow{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);font-weight:700}
+.lead{font-size:17px;color:var(--ink-2);max-width:66ch}
+
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:rgba(244,246,248,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.topbar-in{max-width:1000px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:900;font-size:16px;letter-spacing:-.02em}
+.brand span{color:var(--blue)}
+.track{flex:1;min-width:90px;height:7px;border-radius:99px;background:#e6eaef;overflow:hidden}
+.track i{display:block;height:100%;width:0;background:var(--green);border-radius:99px;transition:width .4s cubic-bezier(.2,.7,.3,1)}
+.stat{font-size:12.5px;color:var(--ink-2);font-variant-numeric:tabular-nums;white-space:nowrap}
+.ghost{font-family:var(--display);font-weight:700;font-size:12.5px;padding:6px 12px;border-radius:10px;border:1px solid var(--line);background:var(--paper);color:var(--ink-2);cursor:pointer}
+.ghost:hover{border-color:var(--blue);color:var(--blue)}
+.ghost.on{background:var(--blue);border-color:var(--blue);color:#fff}
+
+.hero{padding-block:clamp(28px,5vw,52px) 6px;display:grid;gap:12px}
+.filters{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px;align-items:center}
+.filters b{font-size:12px;color:var(--ink-3);font-family:var(--display);letter-spacing:.1em;text-transform:uppercase;margin-right:4px}
+
+.stage{margin-top:22px;border:1px solid var(--line);border-radius:20px;background:var(--paper);box-shadow:var(--shadow);overflow:hidden}
+.stage>summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;padding:17px 20px}
+.stage>summary::-webkit-details-marker{display:none}
+.stage .num{font-family:var(--display);font-weight:900;font-size:12px;letter-spacing:.06em;color:var(--blue);background:var(--blue-soft);border-radius:9px;padding:5px 10px;white-space:nowrap}
+.stage.done .num{color:var(--green);background:var(--green-soft)}
+.sttl{display:grid;gap:1px;min-width:0}
+.sttl b{font-family:var(--display);font-size:19px;font-weight:800;letter-spacing:-.015em}
+.sttl span{font-size:13.5px;color:var(--ink-3)}
+.cnt{font-family:var(--display);font-weight:700;font-size:12.5px;color:var(--ink-3);font-variant-numeric:tabular-nums;white-space:nowrap}
+.stage.done .cnt{color:var(--green)}
+.body{padding:0 14px 14px;display:grid;gap:3px}
+
+.task{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;padding:10px 12px;border-radius:13px;transition:background .15s}
+.task:hover{background:#f6f8fb}
+.task[hidden]{display:none}
+.task input{appearance:none;width:21px;height:21px;flex:none;margin-top:3px;border:2px solid #d7dde5;border-radius:6px;background:#fff;cursor:pointer;position:relative;transition:all .15s}
+.task input:checked{background:var(--green);border-color:var(--green)}
+.task input:checked::after{content:"";position:absolute;left:5px;top:1.5px;width:5px;height:10px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(42deg)}
+.task input:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.tx{min-width:0;display:grid;gap:3px}
+.tx b{font-family:var(--display);font-size:15.5px;font-weight:700}
+.tx span{font-size:14.5px;color:var(--ink-2)}
+.task input:checked~.tx b{color:var(--ink-3);text-decoration:line-through;text-decoration-color:#c3cad4}
+.who{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;border-radius:99px;padding:2px 9px;margin-right:7px;vertical-align:1.5px}
+.w-me{background:var(--blue-soft);color:#1240b8}
+.w-ai{background:var(--violet-soft);color:#4b2bd6}
+.w-des{background:var(--pink-soft);color:#a62864}
+.w-tar{background:var(--teal-soft);color:#0b7373}
+.w-dev{background:var(--amber-soft);color:#9a5b0d}
+.msg{background:#f7f9fc;border:1px solid var(--line);border-left:3px solid var(--blue);border-radius:10px;padding:11px 13px;margin-top:6px;font-size:14.5px;color:var(--ink-2);white-space:pre-wrap}
+.msg b{font-family:var(--display);color:var(--ink);display:block;margin-bottom:4px;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+
+.split{display:grid;gap:14px;grid-template-columns:1fr 1fr;margin-top:26px}
+@media (max-width:760px){.split{grid-template-columns:1fr}}
+.card{border:1px solid var(--line);border-radius:20px;background:var(--paper);box-shadow:var(--shadow);padding:22px;display:grid;gap:10px;align-content:start}
+.card h3{font-size:18px}
+.card li{display:grid;grid-template-columns:auto 1fr;gap:10px;font-size:15px;color:var(--ink-2);margin-top:6px}
+.card li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--blue);margin-top:9px}
+.card.mine li::before{background:var(--violet)}
+.rhythm{margin-top:26px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(180deg,#fff,#fbfcfe);box-shadow:var(--shadow);padding:22px;display:grid;gap:12px}
+.rhythm .row{display:grid;grid-template-columns:120px 1fr;gap:14px;font-size:15px}
+.rhythm .row b{font-family:var(--display);color:var(--blue);font-size:13.5px;letter-spacing:.04em;text-transform:uppercase}
+@media (max-width:560px){.rhythm .row{grid-template-columns:1fr;gap:2px}}
+footer{border-top:1px solid var(--line);margin-top:34px;padding-top:18px;font-size:13.5px;color:var(--ink-3)}
+</style>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <div class="brand">Ollinter · <span>мой план</span></div>
+    <div class="track"><i id="bar"></i></div>
+    <div class="stat"><span id="done">0</span> / <span id="total">0</span></div>
+    <button class="ghost" id="reset" type="button">Сбросить</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <header class="hero">
+    <p class="eyebrow">Первый месяц · только для меня</p>
+    <h1>Что делать по шагам</h1>
+    <p class="lead">Каждый пункт — одно конкретное действие: написать, спросить, передать, проверить. Цветная метка показывает, кто делает. Там, где нужно кому-то написать, текст сообщения уже готов — копируй и отправляй.</p>
+    <div class="filters">
+      <b>Показать</b>
+      <button class="ghost on" data-f="all" type="button">Все</button>
+      <button class="ghost" data-f="me" type="button">Только моё</button>
+      <button class="ghost" data-f="ai" type="button">На мне у Клода</button>
+      <button class="ghost" data-f="other" type="button">Подрядчики и клиент</button>
+    </div>
+  </header>
+
+  <!-- 0 -->
+  <details class="stage" open>
+    <summary><span class="num">ШАГ 0</span><span class="sttl"><b>Сегодня и завтра</b><span>Деньги, доступы, точка входа</span></span><span class="cnt"></span></summary>
+    <div class="body">
+      <label class="task" data-w="me"><input type="checkbox"><span class="tx"><b><i class="who w-me">я</i>Проверить зачисление 2 200 USD на TBC</b><span>Если пришло меньше — пишем Ольге, в инвойсе прописано, что комиссии посредников на их стороне.</span></span></label>
+      <label class="task" data-w="me"><input type="checkbox"><span class="tx"><b><i class="who w-me">я</i>Отправить Ольге подписанный договор и инвойс PDF</b><span>Одним сообщением, чтобы у них закрылась бухгалтерия.</span>
+        <span class="msg"><b>Текст сообщения</b>Ольга, добрый день! Оплата получена, спасибо. Прикладываю подписанный договор № 1 и счёт № 1 от 26.10.2026 — для вашей бухгалтерии. Работы начинаю сегодня, план и сроки — по ссылке, которую присылал. Ниже список того, что мне понадобится от вашей стороны на старте.</span></span></label>
+      <label class="task" data-w="me"><input type="checkbox"><span class="tx"><b><i class="who w-me">я</i>Запросить доступы одним списком</b><span>Instagram, TikTok, Facebook (права администратора в Business Manager), YouTube. Без них не стартует оформление площадок.</span>
+        <span class="msg"><b>Текст сообщения</b>Для старта нужны доступы:
+1. Instagram — доступ или права редактора.
+2. TikTok — доступ к профилю.
+3. Facebook — права администратора страницы и Business Manager (рекламный кабинет я создам сам).
+4. YouTube — доступ к каналу.
+5. Контакт вашего разработчика и удобное время для короткого созвона с ним.</span></span></label>
+      <label class="task" data-w="me"><input type="checkbox"><span class="tx"><b><i class="who w-me">я</i>Назначить встречу-демо функционала на 30–40 минут</b><span>Ольга показывает платформу по экрану: путь ученика, путь преподавателя, админку. Запиши встречу.</span></span></label>
+      <label class="task" data-w="me"><input type="checkbox"><span class="tx"><b><i class="who w-me">я</i>Отправить разработчику список задач</b><span>Он уже собран в карте работ, блоки «Доступ и показ», «Счётчики», «События», «Метки источника». Ссылку даёшь целиком.</span></span></label>
+      <label class="task" data-w="me"><input type="checkbox"><span class="tx"><b><i class="who w-me">я</i>Создать два чата, а не один</b><span>Первый — с Ольгой и её разработчиком. Второй — внутренний: ты, дизайнер, таргетолог. Клиент не должен видеть внутреннюю кухню и ценники подрядчиков.</span></span></label>
+      <label class="task" data-w="ai"><input type="checkbox"><span class="tx"><b><i class="who w-ai">клод</i>Собрать таблицу задач со статусами</b><span>Скажи — сделаю таблицу на всех участников: задача, кто делает, срок, статус. Веду её я, ты только смотришь.</span></span></label>
+    </div>
+  </details>
+
+  <!-- 1 -->
+  <details class="stage">
+    <summary><span class="num">ШАГ 1</span><span class="sttl"><b>Дни 1–4 · Анализ и смыслы</b><span>До дизайна и рекламы</span></span><span class="cnt"></span></summary>
+    <div class="body">
+      <label class="task" data-w="ai"><input type="checkbox"><span class="tx"><b><i class="who w-ai">клод</i>Анализ конкурентов</b><span>Разберу площадки поиска преподавателей: чем берут, какие обещания на первом экране, как показывают преподавателей, какие форматы рекламы крутят. Отдам таблицей с выводами.</span></span></label>
+      <label class="task" data-w="ai"><input type="checkbox"><span class="tx"><b><i class="who w-ai">клод</i>Портреты аудитории и причины искать преподавателя</b><span>Сегменты учеников, их триггеры и возражения — основа для текстов, роликов и объявлений.</span></span></label>
+      <label class="task" data-w="me"><input type="checkbox"><span class="tx"><b><i class="who w-me">я</i>Задать Ольге вопросы по продукту</b><span>Без ответов тексты будут выдуманными.</span>
+        <span class="msg"><b>Вопросы Ольге</b>1. Сколько сейчас преподавателей английского на платформе и как их находили?
+2. Как ученик связывается с преподавателем: внутри платформы или уходит в мессенджер?
+3. Есть ли оплата занятий через платформу и как вы видите комиссию?
+4. Что отвечают преподаватели, когда отказываются регистрироваться?
+5. Какие цены за занятие у ваших преподавателей, какой диапазон?
+6. Есть ли отзывы учеников, которые можно показать на странице?
+7. Какие страны для вас приоритетны по ученикам?</span></span></label>
+      <label class="task" data-w="ai"><input type="checkbox"><span class="tx"><b><i class="who w-ai">клод</i>Продающие смыслы и офферы</b><span>Отдельно для учеников, отдельно для преподавателей: что обещаем, чем отличаемся, какой следующий шаг.</span></span></label>
+      <label class="task" data-w="me"><input type="checkbox"><span class="tx"><b><i class="who w-me">я</i>Утвердить смыслы с Ольгой одним сообщением</b><span>Не созвон, а документ: «вот что мы говорим аудитории, подтвердите фактическую часть».</span></span></label>
+    </div>
+  </details>
+
+  <!-- 2 -->
+  <details class="stage">
+    <summary><span class="num">ШАГ 2</span><span class="sttl"><b>Дни 3–10 · Дизайнер</b><span>Стиль, сайт, площадки</span></span><span class="cnt"></span></summary>
+    <div class="body">
+      <label class="task" data-w="me"><input type="checkbox"><span class="tx"><b><i class="who w-me">я</i>Договориться с дизайнером: объём, срок, цена</b><span>Фиксируешь письменно до начала: что входит, когда сдаёт, сколько кругов правок.</span></span></label>
+      <label class="task" data-w="ai"><input type="checkbox"><span class="tx"><b><i class="who w-ai">клод</i>Написать ТЗ дизайнеру</b><span>Брендбук, макет главной, посадочная под английский, оформление Instagram, TikTok, Facebook, YouTube, шаблоны постов. С размерами, форматами и примерами.</span></span></label>
+      <label class="task" data-w="ai"><input type="checkbox"><span class="tx"><b><i class="who w-ai">клод</i>Структура страницы и тексты</b><span>Поэкранно: что человек читает сверху вниз и где кнопка регистрации. Дизайнер верстает уже по готовым текстам, а не по «рыбе».</span></span></label>
+      <label class="task" data-w="des"><input type="checkbox"><span class="tx"><b><i class="who w-des">дизайнер</i>Фирменный стиль: логотип, цвета, шрифты</b><span>Первый круг — три варианта на выбор.</span></span></label>
+      <label class="task" data-w="me"><input type="checkbox"><span class="tx"><b><i class="who w-me">я</i>Показать стиль Ольге и собрать правки одним списком</b><span>Один круг. Правки принимаешь только списком в одном сообщении, иначе растянется на неделю.</span></span></label>
+      <label class="task" data-w="des"><input type="checkbox"><span class="tx"><b><i class="who w-des">дизайнер</i>Макет сайта и посадочной страницы</b><span>Десктоп и мобильная версия.</span></span></label>
+      <label class="task" data-w="des"><input type="checkbox"><span class="tx"><b><i class="who w-des">дизайнер</i>Оформление четырёх площадок и шаблоны постов</b></span></label>
+      <label class="task" data-w="me"><input type="checkbox"><span class="tx"><b><i class="who w-me">я</i>Передать макеты разработчику клиента</b><span>Вместе со сроком переноса. Это узкое место всего месяца — тормоши заранее.</span></span></label>
+    </div>
+  </details>
+
+  <!-- 3 -->
+  <details class="stage">
+    <summary><span class="num">ШАГ 3</span><span class="sttl"><b>Параллельно · Аналитика</b><span>Ставится до первого клика</span></span><span class="cnt"></span></summary>
+    <div class="body">
+      <label class="task" data-w="me"><input type="checkbox"><span class="tx"><b><i class="who w-me">я</i>Создать счётчики на свой Google-аккаунт проекта</b><span>Google Analytics 4, Яндекс.Метрика, Google Tag Manager. Доступы потом отдаёшь клиенту, но владелец — ты, чтобы не потерять данные.</span></span></label>
+      <label class="task" data-w="me"><input type="checkbox"><span class="tx"><b><i class="who w-me">я</i>Создать рекламный кабинет в их Business Manager</b><span>Привязать страницу Facebook и Instagram, создать пиксель.</span></span></label>
+      <label class="task" data-w="dev"><input type="checkbox"><span class="tx"><b><i class="who w-dev">разработчик</i>Поставить коды на все страницы</b><span>GA4, Метрика, пиксель, GTM, подтверждение домена в Meta.</span></span></label>
+      <label class="task" data-w="dev"><input type="checkbox"><span class="tx"><b><i class="who w-dev">разработчик</i>Настроить события</b><span>Регистрация ученика и преподавателя раздельно, начало поиска, просмотр профиля, нажатие связи.</span></span></label>
+      <label class="task" data-w="me"><input type="checkbox"><span class="tx"><b><i class="who w-me">я</i>Проверить события руками</b><span>Пройди путь сам и убедись, что регистрация долетает в отчёты. Пока не долетает — рекламу не включаем.</span></span></label>
+      <label class="task" data-w="ai"><input type="checkbox"><span class="tx"><b><i class="who w-ai">клод</i>Собрать дашборд</b><span>Looker Studio: трафик, регистрации, цена действия, воронка. Один экран, обновляется сам.</span></span></label>
+    </div>
+  </details>
+
+  <!-- 4 -->
+  <details class="stage">
+    <summary><span class="num">ШАГ 4</span><span class="sttl"><b>Дни 8–14 · Ролики</b><span>Три штуки под рекламу</span></span><span class="cnt"></span></summary>
+    <div class="body">
+      <label class="task" data-w="ai"><input type="checkbox"><span class="tx"><b><i class="who w-ai">клод</i>Написать три сценария</b><span>Под разные причины искать преподавателя: цель, график, цена, конкретная задача. С хуком в первые три секунды.</span></span></label>
+      <label class="task" data-w="me"><input type="checkbox"><span class="tx"><b><i class="who w-me">я</i>Утвердить сценарии с Ольгой</b><span>Проверка только на факты: не обещаем того, чего платформа не делает.</span></span></label>
+      <label class="task" data-w="ai"><input type="checkbox"><span class="tx"><b><i class="who w-ai">клод</i>Сгенерировать персонажа проекта</b><span>Промпты и картинки, чтобы герой был один и тот же во всех роликах.</span></span></label>
+      <label class="task" data-w="me"><input type="checkbox"><span class="tx"><b><i class="who w-me">я</i>Озвучка и монтаж</b><span>ElevenLabs плюс монтаж. Делаешь сам или отдаёшь — реши сразу, это 2–3 дня работы.</span></span></label>
+      <label class="task" data-w="me"><input type="checkbox"><span class="tx"><b><i class="who w-me">я</i>Нарезать форматы</b><span>9:16 для Reels, Shorts и TikTok, 1:1 для ленты.</span></span></label>
+    </div>
+  </details>
+
+  <!-- 5 -->
+  <details class="stage">
+    <summary><span class="num">ШАГ 5</span><span class="sttl"><b>Дни 14–16 · Запуск рекламы</b><span>Таргетолог</span></span><span class="cnt"></span></summary>
+    <div class="body">
+      <label class="task" data-w="me"><input type="checkbox"><span class="tx"><b><i class="who w-me">я</i>Договориться с таргетологом: объём, срок, цена</b><span>Письменно: сколько кампаний, кто пишет тексты объявлений, кто отвечает за отчёт.</span></span></label>
+      <label class="task" data-w="ai"><input type="checkbox"><span class="tx"><b><i class="who w-ai">клод</i>Написать ТЗ таргетологу</b><span>Структура кампаний, аудитории, цели, бюджеты, тексты объявлений, что считаем результатом.</span></span></label>
+      <label class="task" data-w="me"><input type="checkbox"><span class="tx"><b><i class="who w-me">я</i>Попросить Ольгу пополнить кабинет</b><span>На первый тест 200–300 долларов, это их расход сверх гонорара.</span>
+        <span class="msg"><b>Текст сообщения</b>Ольга, всё готово к запуску рекламы. Нужно пополнить рекламный кабинет: на первый тест закладываем 200–300 долларов. Это рекламный бюджет, он оплачивается напрямую площадке и в стоимость моих услуг не входит — мы это фиксировали в договоре.</span></span></label>
+      <label class="task" data-w="tar"><input type="checkbox"><span class="tx"><b><i class="who w-tar">таргетолог</i>Собрать кампании и аудитории</b></span></label>
+      <label class="task" data-w="me"><input type="checkbox"><span class="tx"><b><i class="who w-me">я</i>Пройти путь целиком перед включением</b><span>Клик по объявлению → страница → регистрация → данные в отчётах. Сам, с телефона.</span></span></label>
+      <label class="task" data-w="tar"><input type="checkbox"><span class="tx"><b><i class="who w-tar">таргетолог</i>Включить рекламу</b></span></label>
+    </div>
+  </details>
+
+  <!-- 6 -->
+  <details class="stage">
+    <summary><span class="num">ШАГ 6</span><span class="sttl"><b>Дни 16–30 · Ведение</b><span>Докрутка и отчёт</span></span><span class="cnt"></span></summary>
+    <div class="body">
+      <label class="task" data-w="me"><input type="checkbox"><span class="tx"><b><i class="who w-me">я</i>Ежедневно 15 минут на проверку</b><span>Расход, цена перехода, цена регистрации, что открутилось впустую. Утром, до всего остального.</span></span></label>
+      <label class="task" data-w="tar"><input type="checkbox"><span class="tx"><b><i class="who w-tar">таргетолог</i>Отключать то, что не даёт регистраций</b><span>И добавлять бюджет туда, где они есть.</span></span></label>
+      <label class="task" data-w="ai"><input type="checkbox"><span class="tx"><b><i class="who w-ai">клод</i>Разбирать цифры и предлагать правки</b><span>Раз в несколько дней: где теряются люди, что менять в объявлениях и на странице.</span></span></label>
+      <label class="task" data-w="me"><input type="checkbox"><span class="tx"><b><i class="who w-me">я</i>Еженедельный отчёт Ольге по пятницам</b><span>Короткий: что сделано, какие цифры, что делаем дальше. Регулярность важнее красоты.</span></span></label>
+      <label class="task" data-w="ai"><input type="checkbox"><span class="tx"><b><i class="who w-ai">клод</i>Шаблон отчёта и финальный отчёт месяца</b><span>Цена перехода, цена регистрации, выводы, план на следующий месяц с предложением по ведению соцсетей за 1 300.</span></span></label>
+      <label class="task" data-w="me"><input type="checkbox"><span class="tx"><b><i class="who w-me">я</i>Выставить акт и счёт за второй месяц</b><span>За неделю до конца месяца, чтобы не было паузы в работе и в деньгах.</span></span></label>
+    </div>
+  </details>
+
+  <div class="split">
+    <div class="card mine">
+      <h3>Что я беру на себя</h3>
+      <ul>
+        <li>Анализ конкурентов и аудитории, выводы таблицей</li>
+        <li>Смыслы и офферы для обеих сторон</li>
+        <li>Структура сайта и все тексты страниц</li>
+        <li>ТЗ дизайнеру и ТЗ таргетологу</li>
+        <li>Три сценария роликов и промпты под персонажа</li>
+        <li>Тексты объявлений и структура кампаний</li>
+        <li>Письма Ольге и разработчику — пишу готовыми</li>
+        <li>Таблица задач, дашборд, шаблоны отчётов</li>
+        <li>Разбор цифр по ходу теста и рекомендации</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Что только ты сам</h3>
+      <ul>
+        <li>Все разговоры и созвоны с Ольгой и подрядчиками</li>
+        <li>Доступы, кабинеты, счётчики — вход под твоими аккаунтами</li>
+        <li>Договорённости с дизайнером и таргетологом по деньгам</li>
+        <li>Проверка пути руками на живом сайте</li>
+        <li>Решения: что включаем, что отключаем, куда льём бюджет</li>
+        <li>Озвучка и монтаж роликов, если не отдаёшь подрядчику</li>
+        <li>Счета, акты, подписи</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="rhythm">
+    <h3>Ритм недели, чтобы не тонуть</h3>
+    <div class="row"><b>Каждое утро</b><span>15 минут: цифры по рекламе, сообщения от клиента и подрядчиков. Больше в рекламу не лезешь.</span></div>
+    <div class="row"><b>Понедельник</b><span>Ставишь задачи дизайнеру и таргетологу на неделю. Пишешь Ольге, что в работе.</span></div>
+    <div class="row"><b>Среда</b><span>Проверяешь, не встал ли разработчик. Он тормозит чаще всех.</span></div>
+    <div class="row"><b>Пятница</b><span>Отчёт Ольге и план на следующую неделю. Сам себе отмечаешь, что закрыто в этом файле.</span></div>
+    <div class="row"><b>Правило</b><span>Любая правка от клиента принимается одним списком в одном сообщении. Иначе работа растягивается бесконечно.</span></div>
+  </div>
+
+  <footer>Личный файл. Клиенту не отправляется — у него своя карта работ.</footer>
+</div>
+
+<script>
+(function(){
+  var KEY='ollinter-myplan-v1';
+  var tasks=[].slice.call(document.querySelectorAll('.task'));
+  var stages=[].slice.call(document.querySelectorAll('.stage'));
+  var bar=document.getElementById('bar'), done=document.getElementById('done'), total=document.getElementById('total');
+  total.textContent=tasks.length;
+
+  function render(){
+    var k=tasks.filter(function(t){return t.querySelector('input').checked}).length;
+    done.textContent=k;
+    bar.style.width=Math.round(k/tasks.length*100)+'%';
+    stages.forEach(function(s){
+      var inner=[].slice.call(s.querySelectorAll('.task input'));
+      var d=inner.filter(function(i){return i.checked}).length;
+      s.querySelector('.cnt').textContent=d+' / '+inner.length;
+      s.classList.toggle('done', d===inner.length && inner.length>0);
+    });
+    try{ localStorage.setItem(KEY,JSON.stringify(tasks.map(function(t){return t.querySelector('input').checked?1:0}))); }catch(e){}
+  }
+
+  document.addEventListener('change',function(e){ if(e.target.matches('.task input')) render(); });
+
+  document.querySelectorAll('[data-f]').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      document.querySelectorAll('[data-f]').forEach(function(b){ b.classList.toggle('on', b===btn) });
+      var f=btn.dataset.f;
+      tasks.forEach(function(t){
+        var w=t.dataset.w;
+        t.hidden = !(f==='all' || (f==='me'&&w==='me') || (f==='ai'&&w==='ai') ||
+                     (f==='other' && (w==='des'||w==='tar'||w==='dev')));
+      });
+      stages.forEach(function(s){ s.open = true });
+    });
+  });
+
+  document.getElementById('reset').addEventListener('click',function(){
+    tasks.forEach(function(t){ t.querySelector('input').checked=false });
+    render(); window.scrollTo({top:0,behavior:'smooth'});
+  });
+
+  tasks.forEach(function(t){ t.querySelector('input').checked=false });
+  try{
+    var st=JSON.parse(localStorage.getItem(KEY)||'null');
+    if(st) tasks.forEach(function(t,i){ t.querySelector('input').checked=!!st[i] });
+  }catch(e){}
+  render();
+})();
+</script>
