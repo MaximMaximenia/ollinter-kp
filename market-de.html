@@ -1,0 +1,291 @@
+<title>Германия: разбор конкурентов</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@500;600;700;900&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+/* Светлая тема. Две группы: маркетплейсы и школы, под каждым — карточка со скрином */
+:root{
+  --blue:#1659ff; --blue-soft:#e9efff; --violet:#6b4dff; --violet-soft:#efebff;
+  --teal:#0f9b9b; --teal-soft:#e3f5f5; --amber:#c97a16; --amber-soft:#fdf3e4;
+  --green:#1d8a5e; --green-soft:#e4f3ec; --red:#c0392b; --red-soft:#fdecea;
+  --ink:#101722; --ink-2:#55606e; --ink-3:#8b95a3;
+  --paper:#fff; --page:#f4f6f8; --line:#e2e6eb;
+  --shadow:0 1px 2px rgba(16,23,34,.04), 0 10px 28px -18px rgba(16,23,34,.22);
+  --display:'Golos Text','Segoe UI',Tahoma,sans-serif;
+  --body:'Manrope','Segoe UI',Tahoma,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--page);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding-inline:20px;padding-block:0 90px}
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance}
+h1{font-size:clamp(30px,5vw,50px);line-height:1.04;font-weight:900;letter-spacing:-.025em}
+h2{font-size:clamp(22px,3vw,32px);font-weight:800;letter-spacing:-.02em}
+h3{font-size:19px;font-weight:800;letter-spacing:-.01em}
+p{margin:0}
+ul{margin:0;padding-left:0;list-style:none}
+a{color:var(--blue)}
+img{display:block;max-width:100%}
+.eyebrow{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);font-weight:700}
+.lead{font-size:17.5px;color:var(--ink-2);max-width:68ch}
+
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(244,246,248,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.topbar-in{max-width:1080px;margin:0 auto;padding:11px 20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:900;font-size:16px;letter-spacing:-.02em}
+.brand span{color:var(--blue)}
+.navlinks{margin-left:auto;display:flex;gap:14px;font-size:13.5px}
+
+.hero{padding-block:clamp(30px,5vw,58px) 10px;display:grid;gap:14px}
+.kpis{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin-top:10px}
+.kpi{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:18px 20px;box-shadow:var(--shadow)}
+.kpi b{display:block;font-family:var(--display);font-size:28px;font-weight:900;letter-spacing:-.02em;color:var(--blue)}
+.kpi span{font-size:14px;color:var(--ink-2)}
+
+.sect{margin-top:34px;display:grid;gap:14px}
+.tag{justify-self:start;display:inline-flex;align-items:center;gap:8px;font-family:var(--display);font-size:11.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;border-radius:99px;padding:7px 14px}
+.t-market{background:var(--blue-soft);color:#1240b8}
+.t-school{background:var(--violet-soft);color:#4b2bd6}
+.t-local{background:var(--teal-soft);color:#0b7373}
+
+.card{background:var(--paper);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);overflow:hidden;display:grid;grid-template-columns:420px 1fr}
+@media (max-width:900px){.card{grid-template-columns:1fr}}
+.shot{background:#eef1f5;border-right:1px solid var(--line);display:grid;place-items:start center;padding:18px}
+@media (max-width:900px){.shot{border-right:none;border-bottom:1px solid var(--line)}}
+.shot img{border-radius:12px;border:1px solid var(--line);box-shadow:0 6px 18px -12px rgba(16,23,34,.4);width:100%}
+.shot .cap{font-size:12px;color:var(--ink-3);margin-top:8px;text-align:center}
+.info{padding:22px 24px;display:grid;gap:12px;align-content:start;min-width:0}
+.hrow{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.url{font-size:13.5px;color:var(--ink-3)}
+.facts{display:grid;gap:7px}
+.facts div{display:grid;grid-template-columns:150px 1fr;gap:12px;font-size:15px}
+.facts dt,.facts b{font-family:var(--display);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);font-weight:700;padding-top:2px}
+@media (max-width:560px){.facts div{grid-template-columns:1fr;gap:1px}}
+.pros,.cons{display:grid;gap:5px}
+.pros li,.cons li{display:grid;grid-template-columns:auto 1fr;gap:9px;font-size:15px;color:var(--ink-2)}
+.pros li::before{content:"+";color:var(--green);font-weight:800}
+.cons li::before{content:"−";color:var(--red);font-weight:800}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:4px}
+@media (max-width:700px){.two{grid-template-columns:1fr}}
+.two h4{font-family:var(--display);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin:0 0 6px}
+
+.takeaway{margin-top:36px;border:2px solid var(--blue);border-radius:22px;background:var(--paper);padding:clamp(22px,3.5vw,32px);display:grid;gap:14px}
+.takeaway ol{display:grid;gap:12px;counter-reset:t;margin:0;padding:0}
+.takeaway li{counter-increment:t;display:grid;grid-template-columns:auto 1fr;gap:14px;font-size:16px}
+.takeaway li::before{content:counter(t);font-family:var(--display);font-weight:900;color:#fff;background:var(--blue);width:26px;height:26px;border-radius:8px;display:grid;place-items:center;font-size:13px}
+.takeaway li b{font-family:var(--display)}
+.warn{background:var(--amber-soft);border-radius:14px;padding:14px 16px;font-size:14.5px;color:#7a4e10}
+.warn b{font-family:var(--display)}
+footer{border-top:1px solid var(--line);margin-top:34px;padding-top:18px;font-size:13.5px;color:var(--ink-3)}
+</style>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <div class="brand">Ollinter · <span>рынок Германии</span></div>
+    <div class="navlinks"><a href="my-plan.html">План</a><a href="roadmap.html">Карта работ</a></div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <header class="hero">
+    <p class="eyebrow">Анализ конкурентов · октябрь 2026</p>
+    <h1>С кем мы конкурируем в Германии</h1>
+    <p class="lead">Рынок разбит на три типа игроков: международные маркетплейсы репетиторов, немецкие школы-подписки с продажей через менеджера и локальные Nachhilfe-сервисы для школьников. Данные собраны прямо с их сайтов, скрины приложены.</p>
+    <div class="kpis">
+      <div class="kpi"><b>46 819</b><span>преподавателей английского у Preply в немецкой версии</span></div>
+      <div class="kpi"><b>4 247</b><span>преподавателей английского на italki</span></div>
+      <div class="kpi"><b>5–40 $</b><span>разброс цены за занятие на маркетплейсах</span></div>
+      <div class="kpi"><b>20–36 €</b><span>цена занятия в немецких школах-подписках</span></div>
+    </div>
+  </header>
+
+  <!-- МАРКЕТПЛЕЙСЫ -->
+  <div class="sect">
+    <span class="tag t-market">Группа 1 · Маркетплейсы репетиторов</span>
+    <h2>Прямые конкуренты по модели</h2>
+    <p class="lead">Те же, что и Ollinter: каталог специалистов, человек сам выбирает, платформа берёт комиссию. Это главный ориентир для дизайна, карточек и воронки.</p>
+
+    <div class="card">
+      <div class="shot"><img src="comp/preply-hero.jpg" alt="Главный экран Preply для Германии"><p class="cap">Preply: анкета вместо каталога на первом экране</p></div>
+      <div class="info">
+        <div class="hrow"><h3>Preply</h3><span class="url">preply.com/de</span></div>
+        <div class="facts">
+          <div><b>Позиционирование</b><span>«Учись с преподавателем, который превращает уроки в реальный прогресс». Упор на результат, а не на каталог.</span></div>
+          <div><b>Цены</b><span>33–40 $ за 50 минут у топовых преподавателей английского, фильтр начинается с 3–40+ $. Цену ставит сам преподаватель.</span></div>
+          <div><b>Вход в воронку</b><span>Не список, а подбор: выпадающий список языка и кнопка «Найти преподавателя», дальше 3–4 вопроса про цель и уровень.</span></div>
+          <div><b>Доверие</b><span>Бейджи «Super-Lehrkraft» и «Profi», количество учеников и проведённых занятий, 300 000+ отзывов, 4,8 в App Store.</span></div>
+          <div><b>Карточка</b><span>Фото, цена крупно справа, рейтинг, число учеников и занятий, теги характера («открытая и мотивирующая»), автоперевод описания на немецкий, две кнопки — пробное занятие и сообщение.</span></div>
+        </div>
+        <div class="two">
+          <div><h4>Чему учимся</h4><ul class="pros">
+            <li>Пробное занятие как главный первый шаг, а не «связаться»</li>
+            <li>Автоперевод анкет — преподаватель пишет на своём, ученик читает на немецком</li>
+            <li>Соцдоказательство прямо в карточке: занятий, учеников, отзывов</li>
+          </ul></div>
+          <div><h4>Где слабы</h4><ul class="cons">
+            <li>Огромный выбор парализует: 46 тысяч анкет без внятной иерархии</li>
+            <li>Цены в долларах на немецком сайте — чужеродно для местного рынка</li>
+            <li>Качество плавает: рядом стоят профи за 40 $ и новички за 5 $</li>
+          </ul></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="shot"><img src="comp/preply-cards.jpg" alt="Карточки преподавателей Preply"><p class="cap">Так выглядит лист выдачи с фильтрами</p></div>
+      <div class="info">
+        <div class="hrow"><h3>Preply · экран выдачи</h3><span class="url">детали реализации</span></div>
+        <div class="facts">
+          <div><b>Фильтры</b><span>Предмет, цель, фокус, цена, язык преподавателя, страна происхождения, категория, доступность, сортировка — девять штук в одну строку.</span></div>
+          <div><b>Приоритет цены</b><span>Цена и «50-мин. Einheit» вынесены в правый верхний угол карточки, крупнее имени.</span></div>
+          <div><b>Срочность</b><span>Подписи вида «Очень популярна. 24 недавно забронированных занятия» прямо в карточке.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="shot"><img src="comp/italki.jpg" alt="Каталог преподавателей italki"><p class="cap">italki: 4 247 преподавателей, цена от 5 $</p></div>
+      <div class="info">
+        <div class="hrow"><h3>italki</h3><span class="url">italki.com/de</span></div>
+        <div class="facts">
+          <div><b>Позиционирование</b><span>Площадка для языков целиком: профессиональные преподаватели и «community tutors» для разговорной практики.</span></div>
+          <div><b>Цены</b><span>От 5 $ за занятие у комьюнити-тьюторов, профессионалы дороже. Оплата через внутренний кошелёк.</span></div>
+          <div><b>Карточка</b><span>Рейтинг и часы проведённых занятий слева, бейджи «Профессиональная лекция» и «Подготовка к экзаменам», флаги языков, видео-визитка.</span></div>
+          <div><b>Сегментация</b><span>Два явных типа преподавателей: дипломированные и просто носители — разные цены и ожидания.</span></div>
+        </div>
+        <div class="two">
+          <div><h4>Чему учимся</h4><ul class="pros">
+            <li>Деление на «профи» и «носитель для разговора» снимает спор о цене</li>
+            <li>Видео-визитка в карточке повышает доверие сильнее текста</li>
+            <li>Фильтр «откуда преподаватель» — важен для акцента</li>
+          </ul></div>
+          <div><h4>Где слабы</h4><ul class="cons">
+            <li>Интерфейс перегружен, немецкая локализация местами машинная</li>
+            <li>Нет сильного бренда в Германии, почти не покупают рекламу локально</li>
+            <li>Фокус на языках: смежные эксперты отсутствуют</li>
+          </ul></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ШКОЛЫ -->
+  <div class="sect">
+    <span class="tag t-school">Группа 2 · Школы и подписки</span>
+    <h2>Забирают тех же клиентов, но продают иначе</h2>
+    <p class="lead">Не каталог, а пакет: бесплатный пробный урок, звонок менеджера, подписка на месяцы вперёд. Здесь крутятся основные рекламные бюджеты Германии.</p>
+
+    <div class="card">
+      <div class="shot"><img src="comp/gostudent.jpg" alt="Страница цен GoStudent"><p class="cap">GoStudent: цена падает с объёмом подписки</p></div>
+      <div class="info">
+        <div class="hrow"><h3>GoStudent</h3><span class="url">gostudent.org/de-de</span></div>
+        <div class="facts">
+          <div><b>Модель</b><span>Членство: покупаешь пакет занятий на 12 месяцев, цена за занятие падает с количеством.</span></div>
+          <div><b>Цены</b><span>От 20 € за 50 минут при 12 занятиях в месяц, до 36,01 € при четырёх. Калькулятор прямо на странице.</span></div>
+          <div><b>Цифры в рекламе</b><span>10 млн семей, 30+ предметов, 96 % оценок 4–5 звёзд, 93 % улучшают оценки, «победитель по цене-качеству 2022–2025».</span></div>
+          <div><b>Воронка</b><span>Единственная кнопка — бесплатное пробное занятие. Дальше звонок менеджера и продажа подписки.</span></div>
+        </div>
+        <div class="two">
+          <div><h4>Чему учимся</h4><ul class="pros">
+            <li>Калькулятор цены вместо прайса — человек сам приходит к сумме</li>
+            <li>Один-единственный CTA на всю страницу</li>
+            <li>Награды и проценты вместо абстрактных обещаний</li>
+          </ul></div>
+          <div><h4>Где слабы</h4><ul class="cons">
+            <li>Годовой контракт — главный источник негатива в отзывах</li>
+            <li>Давящий отдел продаж: без звонка цену не узнать до конца</li>
+            <li>Нет свободы выбора преподавателя, его назначают</li>
+          </ul></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="shot"><img src="comp/lingoda.jpg" alt="Главная Lingoda"><p class="cap">Lingoda: языковая школа с живыми уроками 24/7</p></div>
+      <div class="info">
+        <div class="hrow"><h3>Lingoda</h3><span class="url">lingoda.com/de</span></div>
+        <div class="facts">
+          <div><b>Позиционирование</b><span>«Онлайн-уроки английского с сертифицированными преподавателями»: своя программа по уровням, живые занятия и ИИ-инструменты.</span></div>
+          <div><b>Модель</b><span>Подписка на пакеты занятий, группы до пяти человек и индивидуальные. Расписание круглосуточное.</span></div>
+          <div><b>Отличие</b><span>Продаёт не преподавателя, а систему: учебный план, привязанный к уровням, отчёты по прогрессу, сертификаты.</span></div>
+          <div><b>Доверие</b><span>Trustpilot на первом экране, упор на сертификацию преподавателей.</span></div>
+        </div>
+        <div class="two">
+          <div><h4>Чему учимся</h4><ul class="pros">
+            <li>Обещание результата через структуру, а не через человека</li>
+            <li>Сертификат в конце — сильный мотив для взрослых</li>
+            <li>Круглосуточное расписание как аргумент для работающих</li>
+          </ul></div>
+          <div><h4>Где слабы</h4><ul class="cons">
+            <li>Нет выбора конкретного преподавателя — для многих это минус</li>
+            <li>Жёсткая программа не подходит под частную задачу вроде собеседования</li>
+            <li>Групповые занятия воспринимаются как компромисс</li>
+          </ul></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ЛОКАЛЬНЫЕ -->
+  <div class="sect">
+    <span class="tag t-local">Группа 3 · Немецкие Nachhilfe-сервисы</span>
+    <h2>Школьники и родители — другой рынок, но тот же поиск</h2>
+    <p class="lead">Эти игроки держат немецкую семантику: «Nachhilfe», «Notenverbesserung», «Probestunde». Именно по этим словам ищут в Германии, и здесь дорогой аукцион.</p>
+
+    <div class="card">
+      <div class="shot"><img src="comp/studienkreis.jpg" alt="Studienkreis онлайн-репетиторство"><p class="cap">Studienkreis: «91 % улучшения оценок» в заголовке</p></div>
+      <div class="info">
+        <div class="hrow"><h3>Studienkreis</h3><span class="url">studienkreis.de</span></div>
+        <div class="facts">
+          <div><b>Позиционирование</b><span>«Онлайн-репетиторство с 91 % улучшения оценок», более 50 лет на рынке, сеть офлайн-филиалов по стране.</span></div>
+          <div><b>Цены</b><span>От 8,40 € в группе офлайн, от 18,45 € за индивидуальное онлайн-занятие.</span></div>
+          <div><b>Воронка</b><span>«Бесплатная консультация и пробный урок» — тот же сценарий, что у GoStudent.</span></div>
+          <div><b>Важно знать</b><span>В подвале сайта стоят ссылки на GoStudent и Nachhilfeunterricht.de — это одна группа компаний. Рынок консолидирован сильнее, чем кажется.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="shot"><img src="comp/tutorspace.jpg" alt="TutorSpace"><p class="cap">TutorSpace: гарантия оценки и отбор 15 % преподавателей</p></div>
+      <div class="info">
+        <div class="hrow"><h3>TutorSpace</h3><span class="url">tutorspace.de</span></div>
+        <div class="facts">
+          <div><b>Позиционирование</b><span>«Высококвалифицированное онлайн-репетиторство, чтобы ребёнок раскрыл потенциал». Обращение к родителю, не к ученику.</span></div>
+          <div><b>Сильный ход</b><span>Гарантия оценки: «на балл лучше или деньги назад».</span></div>
+          <div><b>Отбор</b><span>Публично описан: тесты по предмету, симуляция урока, справка о несудимости, собеседование — проходит около 15 % кандидатов.</span></div>
+          <div><b>Доверие</b><span>545 отзывов, 4,8, блок «Bekannt aus» с логотипами СМИ.</span></div>
+        </div>
+        <div class="two">
+          <div><h4>Чему учимся</h4><ul class="pros">
+            <li>Описанный процесс отбора продаёт доверие лучше слова «проверенные»</li>
+            <li>Гарантия результата как оружие против маркетплейсов</li>
+            <li>Справка о несудимости — для немецкого родителя это весомо</li>
+          </ul></div>
+          <div><h4>Где слабы</h4><ul class="cons">
+            <li>Только школьники, взрослых с карьерными задачами не закрывают</li>
+            <li>Нет свободного каталога — всё через заявку</li>
+          </ul></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ВЫВОДЫ -->
+  <div class="takeaway">
+    <p class="eyebrow">Что с этим делать Ollinter</p>
+    <h2>Шесть выводов для запуска</h2>
+    <ol>
+      <li><b>Не воевать с Preply объёмом.</b> У них 46 тысяч анкет. Выигрывают не количеством, а подбором: короткая анкета на входе и 5–10 сильных преподавателей вместо бесконечного списка.</li>
+      <li><b>Первый шаг — пробное занятие, а не «связаться».</b> Так устроены все без исключения: Preply, GoStudent, Studienkreis, TutorSpace. Кнопка «написать преподавателю» проигрывает кнопке «бесплатный пробный урок».</li>
+      <li><b>Ниша, где никто не силён: взрослые с конкретной задачей.</b> Школы заточены на школьников и оценки, маркетплейсы — на «учить язык вообще». Собеседование, переезд, Business English, экзамен для визы — под это нет отдельного сильного игрока в Германии.</li>
+      <li><b>Цены показывать в евро и честно.</b> Доллары на немецкой странице Preply выглядят чужими, а у школ цену без звонка менеджера не узнать. Прозрачный прайс в евро — наше преимущество, заметное сразу.</li>
+      <li><b>Доверие строится процессом, а не словами.</b> Самый сильный приём рынка — у TutorSpace: публично описанный отбор преподавателей. Нам нужен свой короткий регламент проверки и фраза о нём на первом экране.</li>
+      <li><b>Семантика решает.</b> Немцы ищут «Nachhilfe», «Englisch lernen online», «Englischlehrer finden». Аукцион по Nachhilfe разогрет школами с большими бюджетами — заходить лучше через формулировки взрослой аудитории, они дешевле.</li>
+    </ol>
+    <div class="warn"><b>Чего в этом отчёте нет.</b> Объёмов трафика, бюджетов конкурентов и цен клика — это данные платных сервисов, и выдумывать их я не стал. Если нужно, подключим Semrush или similarweb и добавим цифры по посещаемости и рекламным ключам отдельным блоком.</div>
+  </div>
+
+  <footer>Собрано вручную по сайтам конкурентов, октябрь 2026. Скриншоты — их публичные страницы.</footer>
+</div>
