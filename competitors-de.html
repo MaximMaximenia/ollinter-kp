@@ -1,0 +1,281 @@
+<title>Германия: разбор конкурентов в Instagram и рекламе</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@500;600;700;800;900&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+/* Pinterest-подача: masonry-колонки, карточки со скринами. Углы острые, радиус максимум 5px. */
+:root{
+  --ink:#0d1117; --ink-2:#4a5560; --ink-3:#8a95a1;
+  --paper:#fff; --page:#f2f3f5; --line:#dfe3e8;
+  --accent:#1659ff; --accent-soft:#e8eeff;
+  --hot:#e8336d; --hot-soft:#ffe9f1;
+  --win:#117a52; --win-soft:#e2f3eb;
+  --warn:#b3690c; --warn-soft:#fdf1e0;
+  --r:5px;
+  --display:'Golos Text','Segoe UI',Tahoma,sans-serif;
+  --body:'Manrope','Segoe UI',Tahoma,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--page);color:var(--ink);font-family:var(--body);font-size:15.5px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1240px;margin:0 auto;padding-inline:18px;padding-block:0 90px}
+h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance}
+h1{font-size:clamp(32px,5.6vw,60px);line-height:1;font-weight:900;letter-spacing:-.03em}
+h2{font-size:clamp(22px,3vw,34px);font-weight:800;letter-spacing:-.025em}
+h3{font-size:19px;font-weight:800;letter-spacing:-.015em}
+h4{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+p{margin:0}
+ul{margin:0;padding-left:0;list-style:none}
+img{display:block;max-width:100%;border-radius:var(--r)}
+a{color:var(--accent)}
+
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:rgba(242,243,245,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.topbar-in{max-width:1240px;margin:0 auto;padding:10px 18px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:900;font-size:15.5px;letter-spacing:-.02em}
+.brand span{color:var(--accent)}
+.navl{margin-left:auto;display:flex;gap:14px;font-size:13px}
+
+.hero{padding-block:clamp(30px,5vw,60px) 14px;display:grid;gap:14px;max-width:900px}
+.kicker{display:inline-block;font-family:var(--display);font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+        background:var(--ink);color:#fff;padding:6px 11px;border-radius:var(--r);justify-self:start}
+.lead{font-size:18px;color:var(--ink-2);max-width:70ch}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-top:20px}
+.stat{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px}
+.stat b{display:block;font-family:var(--display);font-size:26px;font-weight:900;letter-spacing:-.025em;line-height:1.1}
+.stat span{font-size:12.5px;color:var(--ink-3);display:block;margin-top:4px}
+.stat.hot b{color:var(--hot)}
+.stat.win b{color:var(--win)}
+
+.secthead{margin-top:46px;display:grid;gap:8px;max-width:820px}
+.badge{display:inline-block;font-family:var(--display);font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+       padding:5px 10px;border-radius:var(--r);justify-self:start}
+.b-blue{background:var(--accent-soft);color:#1240b8}
+.b-hot{background:var(--hot-soft);color:var(--hot)}
+.b-win{background:var(--win-soft);color:var(--win)}
+
+/* masonry */
+.board{columns:3;column-gap:14px;margin-top:20px}
+@media (max-width:1000px){.board{columns:2}}
+@media (max-width:640px){.board{columns:1}}
+.pin{break-inside:avoid;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);margin-bottom:14px;overflow:hidden}
+.pin img{border-radius:0;width:100%;border-bottom:1px solid var(--line)}
+.pin .body{padding:16px 17px;display:grid;gap:9px}
+.pin .top{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.pin .handle{font-size:12.5px;color:var(--ink-3)}
+.num{display:inline-block;font-family:var(--display);font-weight:900;font-size:12px;letter-spacing:.04em;background:var(--ink);color:#fff;
+     padding:4px 8px;border-radius:var(--r)}
+.meta{display:grid;gap:6px;font-size:14px}
+.meta div{display:grid;grid-template-columns:96px 1fr;gap:10px}
+.meta dt,.meta b{font-size:11px;font-family:var(--display);font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);padding-top:2px}
+.quote{background:var(--page);border-left:3px solid var(--accent);padding:10px 12px;font-size:14px;color:var(--ink-2);border-radius:0 var(--r) var(--r) 0}
+.steal{background:var(--win-soft);border-left:3px solid var(--win);padding:10px 12px;font-size:14px;border-radius:0 var(--r) var(--r) 0}
+.steal b{display:block;font-family:var(--display);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--win);margin-bottom:3px}
+.weak{background:var(--hot-soft);border-left:3px solid var(--hot);padding:10px 12px;font-size:14px;border-radius:0 var(--r) var(--r) 0}
+.weak b{display:block;font-family:var(--display);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--hot);margin-bottom:3px}
+.tags{display:flex;gap:6px;flex-wrap:wrap}
+.tag{font-size:11.5px;font-weight:700;background:var(--page);border:1px solid var(--line);padding:3px 8px;border-radius:var(--r);color:var(--ink-2)}
+
+.wide{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:0;margin-top:14px;overflow:hidden}
+.wide img{border-radius:0;border-bottom:1px solid var(--line);width:100%}
+.wide .body{padding:20px 22px;display:grid;gap:10px}
+
+.plan{margin-top:46px;background:var(--ink);color:#fff;border-radius:var(--r);padding:clamp(24px,4vw,40px);display:grid;gap:18px}
+.plan h2{color:#fff}
+.plan ol{display:grid;gap:14px;counter-reset:p;margin:0;padding:0}
+.plan li{counter-increment:p;display:grid;grid-template-columns:auto 1fr;gap:14px;font-size:16px;color:#d7dde6}
+.plan li::before{content:counter(p);font-family:var(--display);font-weight:900;font-size:12px;background:#fff;color:var(--ink);
+                 width:24px;height:24px;border-radius:var(--r);display:grid;place-items:center}
+.plan li b{color:#fff;font-family:var(--display)}
+.disclaim{margin-top:26px;background:var(--warn-soft);border-left:3px solid var(--warn);padding:14px 16px;font-size:14px;color:#7a4a0a;border-radius:0 var(--r) var(--r) 0}
+footer{border-top:1px solid var(--line);margin-top:40px;padding-top:18px;font-size:13px;color:var(--ink-3)}
+</style>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <div class="brand">Ollinter · <span>конкуренты DE</span></div>
+    <div class="navl"><a href="market-de.html">Разбор сайтов</a><a href="my-plan.html">План</a><a href="roadmap.html">Карта работ</a></div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <header class="hero">
+    <span class="kicker">Instagram + Meta Ad Library · ноябрь 2026</span>
+    <h1>Кто реально качает рынок Германии</h1>
+    <p class="lead">Прогнал площадки поиска преподавателей, языковые школы и Nachhilfe-сервисы, отсеял мелочь и оставил пятерых, кто держит аудиторию и платный трафик. Данные — живые профили и активные рекламные объявления по Германии, скрины приложены.</p>
+    <div class="stats">
+      <div class="stat hot"><b>~750</b><span>активных объявлений Preply в Германии прямо сейчас</span></div>
+      <div class="stat"><b>~1 200</b><span>активных объявлений по слову Nachhilfe</span></div>
+      <div class="stat"><b>~880</b><span>активных объявлений по «Englisch lernen»</span></div>
+      <div class="stat win"><b>618K</b><span>подписчиков у лидера по соцсетям</span></div>
+    </div>
+  </header>
+
+  <div class="secthead">
+    <span class="badge b-blue">Пятёрка</span>
+    <h2>Главные игроки и что у них работает</h2>
+    <p class="lead">Сортировка по силе на немецком рынке: сочетание аудитории в Instagram и объёма платного трафика.</p>
+  </div>
+
+  <div class="board">
+
+    <article class="pin">
+      <img src="ig/preply-ig.jpg" alt="Профиль Preply в Instagram">
+      <div class="body">
+        <div class="top"><span class="num">01</span><h3>Preply</h3><span class="handle">@preply · 618 000</span></div>
+        <div class="meta">
+          <div><b>Модель</b><span>Маркетплейс репетиторов, цену ставит преподаватель</span></div>
+          <div><b>Слоган</b><span>Progress takes two</span></div>
+          <div><b>Реклама DE</b><span>~750 активных объявлений, абсолютный лидер по объёму</span></div>
+          <div><b>Контент</b><span>Вертикальные ролики с лицами, мемные подписи, карусели-квизы</span></div>
+        </div>
+        <div class="quote">Сетка почти целиком из Reels: говорящая голова крупным планом, крупный текст-хук поверх, лицо в кадре всегда.</div>
+        <div class="steal"><b>Что берём</b>Формат «один преподаватель — один ролик — одна боль». Снимается за час, масштабируется бесконечно.</div>
+        <div class="weak"><b>Где слабы</b>Контент англоязычный и общий на весь мир. Немецкого в ленте почти нет — локальная аудитория не чувствует «это про меня».</div>
+      </div>
+    </article>
+
+    <article class="pin">
+      <img src="ig/ads-preply-creatives.jpg" alt="Рекламные креативы Preply в Германии">
+      <div class="body">
+        <div class="top"><span class="num">01</span><h3>Preply · креативы</h3></div>
+        <p>Три рабочие схемы, которые крутятся прямо сейчас в Германии:</p>
+        <div class="tags"><span class="tag">UGC-видео</span><span class="tag">Текст на цвете</span><span class="tag">Инфографика 9x</span><span class="tag">Book Now</span></div>
+        <div class="meta">
+          <div><b>Схема 1</b><span>Лицо преподавателя на фоне комнаты, подпись «Get better at English», кнопка Book Now</span></div>
+          <div><b>Схема 2</b><span>Ярко-розовый фон и текст «I will start next month / next week / tomorrow / today»</span></div>
+          <div><b>Схема 3</b><span>Статистика в кадре: «9x быстрее с преподавателем»</span></div>
+        </div>
+        <div class="steal"><b>Что берём</b>Креатив без съёмки: чистый цветной фон плюс крупная фраза-укол про откладывание. Делается в Canva за 10 минут, а работает на холодную аудиторию.</div>
+      </div>
+    </article>
+
+    <article class="pin">
+      <img src="ig/babbel-ig.jpg" alt="Профиль Babbel в Instagram">
+      <div class="body">
+        <div class="top"><span class="num">02</span><h3>Babbel</h3><span class="handle">@babbel · 461 000</span></div>
+        <div class="meta">
+          <div><b>Модель</b><span>Приложение по подписке, Берлин</span></div>
+          <div><b>Слоган</b><span>Speak a new language in 3 weeks</span></div>
+          <div><b>Реклама DE</b><span>В Ad Library по бренду мало — основной бюджет уходит в ТВ, подкасты и ютуб</span></div>
+          <div><b>Контент</b><span>Один и тот же человек в кадре серией роликов, подписи-ситуации «my dog only knows spanish»</span></div>
+        </div>
+        <div class="quote">Обещание со сроком прямо в описании профиля: не «учи язык», а «заговоришь за три недели».</div>
+        <div class="steal"><b>Что берём</b>Срок в оффере. «Первое занятие за 24 часа» или «говоришь на собеседовании через месяц» бьёт абстрактное «найди преподавателя».</div>
+        <div class="weak"><b>Где слабы</b>Нет живого преподавателя — приложение. Любой, кому нужен человек и разбор его задачи, уходит к маркетплейсам.</div>
+      </div>
+    </article>
+
+    <article class="pin">
+      <img src="ig/lingoda-ig.jpg" alt="Профиль Lingoda в Instagram">
+      <div class="body">
+        <div class="top"><span class="num">03</span><h3>Lingoda</h3><span class="handle">@lingoda_official · 157 000</span></div>
+        <div class="meta">
+          <div><b>Модель</b><span>Онлайн-школа с живыми уроками по расписанию, Берлин</span></div>
+          <div><b>Слоган</b><span>Learn the language. Let your ambition speak</span></div>
+          <div><b>Реклама DE</b><span>Отдельные кампании под профессии, не под «язык вообще»</span></div>
+          <div><b>Контент</b><span>Брендовые заставки, гивы, тематические подборки слов к праздникам</span></div>
+        </div>
+        <div class="steal"><b>Что берём</b>Сегментация по профессии вместо уровня языка. Это самая сильная находка всего разбора — см. карточку ниже.</div>
+        <div class="weak"><b>Где слабы</b>Преподавателя не выбираешь, расписание фиксированное. Человек покупает систему, а не конкретного учителя.</div>
+      </div>
+    </article>
+
+    <article class="pin">
+      <img src="ig/ads-lingoda-healthcare.jpg" alt="Реклама Lingoda для акушерок в Германии">
+      <div class="body">
+        <div class="top"><span class="num">03</span><h3>Главная находка</h3></div>
+        <p>Lingoda крутит в Германии отдельный бренд-поток <b>Lingoda Healthcare für Hebamme</b> — язык для акушерок, которые готовятся к Kenntnisprüfung, экзамену на признание диплома.</p>
+        <div class="quote">«Wegen des akuten Hebammenmangels steigen Risiken bei Geburten täglich. Zögere deine Kenntnisprüfung nicht länger hinaus!»</div>
+        <div class="steal"><b>Что берём</b>В Германии сотни тысяч специалистов с иностранным дипломом: врачи, медсёстры, акушерки, инженеры. Им нужен не «английский», а конкретный экзамен и допуск к профессии. Это аудитория с деньгами, срочной болью и нулевой чувствительностью к цене. Под такой сегмент у Ollinter уже есть всё — каталог преподавателей.</div>
+      </div>
+    </article>
+
+    <article class="pin">
+      <img src="ig/gostudent-ig.jpg" alt="Профиль GoStudent Германия в Instagram">
+      <div class="body">
+        <div class="top"><span class="num">04</span><h3>GoStudent</h3><span class="handle">@gostudent_de · 27 000</span></div>
+        <div class="meta">
+          <div><b>Модель</b><span>Подписка на пакет занятий, продажа через менеджера</span></div>
+          <div><b>Цена</b><span>от 20 € за 50 минут при 12 занятиях в месяц, до 36 € при четырёх</span></div>
+          <div><b>Контент</b><span>Инфографика с цифрами, награды, закулисье компании, дети и родители в кадре</span></div>
+          <div><b>Группа</b><span>Вместе со Studienkreis и Nachhilfeunterricht.de — один холдинг</span></div>
+        </div>
+        <div class="quote">В шапке профиля три факта подряд: 93 % успеха, победитель по цене-качеству 2025/26, персональные занятия.</div>
+        <div class="steal"><b>Что берём</b>Приём «цифра вместо прилагательного». Не «качественные преподаватели», а «93 %», «1 место», «20 000 репетиторов».</div>
+        <div class="weak"><b>Где слабы</b>Годовой контракт и давление отдела продаж — главный источник негатива. Прозрачная цена без договора на год это наш контраргумент.</div>
+      </div>
+    </article>
+
+    <article class="pin">
+      <img src="ig/italki-ig.jpg" alt="Профиль italki в Instagram">
+      <div class="body">
+        <div class="top"><span class="num">05</span><h3>italki</h3><span class="handle">@italki · 110 000</span></div>
+        <div class="meta">
+          <div><b>Модель</b><span>Маркетплейс: профи-преподаватели и носители для разговора</span></div>
+          <div><b>Цена</b><span>от 5 $ за занятие у комьюнити-тьюторов</span></div>
+          <div><b>Фишка</b><span>«Pay as you go, no subscription» — прямо в шапке профиля</span></div>
+          <div><b>Контент</b><span>Коллаборации с языковыми блогерами, челленджи, лица преподавателей</span></div>
+        </div>
+        <div class="steal"><b>Что берём</b>Два типа преподавателей с разной ценой: дипломированный и просто носитель. Снимает спор «почему так дорого» и расширяет воронку вниз.</div>
+        <div class="weak"><b>Где слабы</b>Нет немецкой локализации в соцсетях и почти нет платного трафика в Германии — рынок свободен.</div>
+      </div>
+    </article>
+
+  </div>
+
+  <div class="secthead">
+    <span class="badge b-hot">Рекламное поле</span>
+    <h2>Сколько шума в аукционе</h2>
+    <p class="lead">Это то, с чем столкнётся наша реклама с первого дня. Цифры — активные объявления по Германии в Meta Ad Library.</p>
+  </div>
+
+  <div class="board">
+    <article class="pin">
+      <img src="ig/ads-nachhilfe.jpg" alt="Реклама по запросу Nachhilfe в Германии">
+      <div class="body">
+        <div class="top"><h3>«Nachhilfe» — ~1 200 объявлений</h3></div>
+        <p>Крутятся Schülerhilfe, TutorSpace, Bildungsfabrik и десятки школ. Заметная часть объявлений — не поиск учеников, а <b>найм преподавателей</b>: «до 1 050 € в месяц, если преподаёшь онлайн».</p>
+        <div class="steal"><b>Что берём</b>Отдельная кампания на привлечение преподавателей с заработком в заголовке. Рынок уже доказал, что это работает, и у нас это дешевле, чем биться за учеников.</div>
+      </div>
+    </article>
+
+    <article class="pin">
+      <img src="ig/ads-englisch-lernen.jpg" alt="Реклама по запросу Englisch lernen в Германии">
+      <div class="body">
+        <div class="top"><h3>«Englisch lernen» — ~880 объявлений</h3></div>
+        <p>StudyHelp, Avogo Verlag, Easypeasyfluent, Amazon с рабочими тетрадями. Много рекламы на родителей школьников, заметно меньше — на взрослых с карьерной задачей.</p>
+        <div class="steal"><b>Что берём</b>Заход «Wie gut ist dein Englisch? Buch dir 'nen kostenlosen Call» — бесплатный звонок-диагностика вместо продажи курса. Дешёвый первый шаг, который мы можем повторить завтра.</div>
+      </div>
+    </article>
+
+    <article class="pin">
+      <img src="ig/ads-preply-count.jpg" alt="Счётчик активных объявлений Preply">
+      <div class="body">
+        <div class="top"><h3>Один Preply = 750 объявлений</h3></div>
+        <p>Для сравнения: по бренду Babbel в библиотеке находится около 70 позиций. Preply заливает рынок количеством вариантов одного и того же оффера.</p>
+        <div class="weak"><b>Вывод</b>В лобовую по объёму мы не выиграем. Выигрыш — в сегменте, куда они не целятся: конкретная профессия, конкретный экзамен, конкретный город.</div>
+      </div>
+    </article>
+  </div>
+
+  <div class="plan">
+    <span class="badge b-win">План</span>
+    <h2>Что делаем с этим на запуске</h2>
+    <ol>
+      <li><b>Берём профессиональный сегмент, а не «английский вообще».</b> Lingoda доказала, что это работает: отдельные кампании под медиков и экзамен на допуск. У нас каталог преподавателей — мы можем закрыть такую задачу быстрее школы с фиксированной программой.</li>
+      <li><b>Строим креативы по трём проверенным схемам.</b> Говорящая голова преподавателя, текст-укол на ярком фоне, цифра-доказательство. Все три крутятся в Германии прямо сейчас у лидеров.</li>
+      <li><b>Ставим срок в оффер.</b> Babbel обещает три недели, GoStudent — 93 % результата. Нам нужно своё измеримое обещание, а не «найдите преподавателя».</li>
+      <li><b>Запускаем вторую кампанию на преподавателей.</b> В немецком аукционе ею уже пользуются: заработок в заголовке, регистрация в один шаг. Это наполняет каталог и стоит дешевле.</li>
+      <li><b>Бьём в слабое место подписок.</b> У GoStudent годовой контракт и продажа через звонок. Наш экран: прозрачная цена от 20 €, выбор преподавателя, без договора на год.</li>
+      <li><b>Говорим по-немецки.</b> У Preply и italki контент глобальный и английский. Немецкая лента, немецкие субтитры и немецкие сценарии — то, чем мы отличаемся с первого касания.</li>
+    </ol>
+  </div>
+
+  <div class="disclaim">Чего здесь нет: охватов, бюджетов и цены клика конкурентов — это данные платных сервисов, и выдумывать я их не стал. Счётчики объявлений — то, что Meta показывает публично, и они меняются день ото дня.</div>
+
+  <footer>Собрано вручную: живые профили Instagram и Meta Ad Library по Германии, 1 ноября 2026.</footer>
+</div>
