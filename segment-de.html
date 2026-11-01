@@ -1,0 +1,296 @@
+<title>Германия: профессиональный сегмент</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@500;600;700;800;900&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+/* Pinterest-подача, острые углы, радиус максимум 5px */
+:root{
+  --ink:#0d1117; --ink-2:#4a5560; --ink-3:#8a95a1;
+  --paper:#fff; --page:#f2f3f5; --line:#dfe3e8;
+  --accent:#1659ff; --accent-soft:#e8eeff;
+  --hot:#e8336d; --hot-soft:#ffe9f1;
+  --win:#117a52; --win-soft:#e2f3eb;
+  --warn:#b3690c; --warn-soft:#fdf1e0;
+  --r:5px;
+  --display:'Golos Text','Segoe UI',Tahoma,sans-serif;
+  --body:'Manrope','Segoe UI',Tahoma,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--page);color:var(--ink);font-family:var(--body);font-size:15.5px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1240px;margin:0 auto;padding-inline:18px;padding-block:0 90px}
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance}
+h1{font-size:clamp(32px,5.6vw,58px);line-height:1;font-weight:900;letter-spacing:-.03em}
+h2{font-size:clamp(22px,3vw,34px);font-weight:800;letter-spacing:-.025em}
+h3{font-size:19px;font-weight:800;letter-spacing:-.015em}
+p{margin:0}
+ul{margin:0;padding-left:0;list-style:none}
+img{display:block;max-width:100%;border-radius:var(--r)}
+a{color:var(--accent)}
+
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:rgba(242,243,245,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.topbar-in{max-width:1240px;margin:0 auto;padding:10px 18px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:900;font-size:15.5px;letter-spacing:-.02em}
+.brand span{color:var(--accent)}
+.navl{margin-left:auto;display:flex;gap:14px;font-size:13px}
+
+.hero{padding-block:clamp(30px,5vw,58px) 14px;display:grid;gap:14px;max-width:900px}
+.kicker{display:inline-block;font-family:var(--display);font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+        background:var(--ink);color:#fff;padding:6px 11px;border-radius:var(--r);justify-self:start}
+.lead{font-size:18px;color:var(--ink-2);max-width:70ch}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:10px;margin-top:20px}
+.stat{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px}
+.stat b{display:block;font-family:var(--display);font-size:26px;font-weight:900;letter-spacing:-.025em;line-height:1.1}
+.stat span{font-size:12.5px;color:var(--ink-3);display:block;margin-top:4px}
+.stat.win b{color:var(--win)} .stat.hot b{color:var(--hot)}
+
+.secthead{margin-top:46px;display:grid;gap:8px;max-width:840px}
+.badge{display:inline-block;font-family:var(--display);font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+       padding:5px 10px;border-radius:var(--r);justify-self:start}
+.b-blue{background:var(--accent-soft);color:#1240b8}
+.b-hot{background:var(--hot-soft);color:var(--hot)}
+.b-win{background:var(--win-soft);color:var(--win)}
+.b-warn{background:var(--warn-soft);color:var(--warn)}
+
+.board{columns:3;column-gap:14px;margin-top:20px}
+@media (max-width:1000px){.board{columns:2}}
+@media (max-width:640px){.board{columns:1}}
+.pin{break-inside:avoid;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);margin-bottom:14px;overflow:hidden}
+.pin img{border-radius:0;width:100%;border-bottom:1px solid var(--line)}
+.pin .body{padding:16px 17px;display:grid;gap:9px}
+.pin .top{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.num{display:inline-block;font-family:var(--display);font-weight:900;font-size:12px;background:var(--ink);color:#fff;padding:4px 8px;border-radius:var(--r)}
+.meta{display:grid;gap:6px;font-size:14px}
+.meta div{display:grid;grid-template-columns:104px 1fr;gap:10px}
+.meta b{font-size:11px;font-family:var(--display);font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);padding-top:2px}
+.quote{background:var(--page);border-left:3px solid var(--accent);padding:10px 12px;font-size:14px;color:var(--ink-2);border-radius:0 var(--r) var(--r) 0}
+.steal{background:var(--win-soft);border-left:3px solid var(--win);padding:10px 12px;font-size:14px;border-radius:0 var(--r) var(--r) 0}
+.steal b{display:block;font-family:var(--display);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--win);margin-bottom:3px}
+.weak{background:var(--hot-soft);border-left:3px solid var(--hot);padding:10px 12px;font-size:14px;border-radius:0 var(--r) var(--r) 0}
+.weak b{display:block;font-family:var(--display);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--hot);margin-bottom:3px}
+.tags{display:flex;gap:6px;flex-wrap:wrap}
+.tag{font-size:11.5px;font-weight:700;background:var(--page);border:1px solid var(--line);padding:3px 8px;border-radius:var(--r);color:var(--ink-2)}
+
+table{border-collapse:collapse;width:100%;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;font-size:14.5px;margin-top:16px}
+th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line)}
+th{font-family:var(--display);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);font-weight:800;background:#fafbfc}
+tr:last-child td{border-bottom:none}
+td b{font-family:var(--display)}
+.tbl-wrap{overflow-x:auto}
+
+.fork{margin-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:820px){.fork{grid-template-columns:1fr}}
+.opt{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:22px;display:grid;gap:10px;align-content:start}
+.opt.pick{border:2px solid var(--win)}
+.opt .lbl{font-family:var(--display);font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.opt.pick .lbl{color:var(--win)}
+.opt li{display:grid;grid-template-columns:auto 1fr;gap:9px;font-size:14.5px;color:var(--ink-2);margin-top:6px}
+.opt li::before{content:"";width:5px;height:5px;background:var(--ink-3);margin-top:9px;border-radius:var(--r)}
+
+.plan{margin-top:46px;background:var(--ink);color:#fff;border-radius:var(--r);padding:clamp(24px,4vw,40px);display:grid;gap:18px}
+.plan h2{color:#fff}
+.plan ol{display:grid;gap:14px;counter-reset:p;margin:0;padding:0}
+.plan li{counter-increment:p;display:grid;grid-template-columns:auto 1fr;gap:14px;font-size:16px;color:#d7dde6}
+.plan li::before{content:counter(p);font-family:var(--display);font-weight:900;font-size:12px;background:#fff;color:var(--ink);
+                 width:24px;height:24px;border-radius:var(--r);display:grid;place-items:center}
+.plan li b{color:#fff;font-family:var(--display)}
+.disclaim{margin-top:26px;background:var(--warn-soft);border-left:3px solid var(--warn);padding:14px 16px;font-size:14px;color:#7a4a0a;border-radius:0 var(--r) var(--r) 0}
+footer{border-top:1px solid var(--line);margin-top:40px;padding-top:18px;font-size:13px;color:var(--ink-3)}
+</style>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <div class="brand">Ollinter · <span>сегмент DE</span></div>
+    <div class="navl"><a href="competitors-de.html">Конкуренты</a><a href="market-de.html">Сайты</a><a href="my-plan.html">План</a></div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <header class="hero">
+    <span class="kicker">Профессиональный сегмент · ноябрь 2026</span>
+    <h1>Язык ради допуска к профессии</h1>
+    <p class="lead">Самая интересная ниша Германии: специалисты с иностранным дипломом, которым язык нужен не «для себя», а чтобы получить право работать. Срок горит, работодатель ждёт, часть счёта оплачивает государство. При этом в рекламе там почти пусто.</p>
+    <div class="stats">
+      <div class="stat"><b>86 619</b><span>положительных решений о признании дипломов за 2025 год, +10 % к прошлому</span></div>
+      <div class="stat"><b>67 %</b><span>всех процедур — медицинские профессии</span></div>
+      <div class="stat win"><b>32 000</b><span>признаний у медсестёр и медбратьев — первое место</span></div>
+      <div class="stat hot"><b>~37</b><span>активных объявлений по «Fachsprachprüfung» во всей Германии</span></div>
+    </div>
+  </header>
+
+  <div class="secthead">
+    <span class="badge b-blue">Кто эти люди</span>
+    <h2>Размер и состав аудитории</h2>
+    <p class="lead">Данные Статистического ведомства Германии за 2025 год. Это люди, которые уже подали документы — то есть деньги и мотивация у них есть по определению.</p>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Профессия</th><th>Признаний за 2025</th><th>Что им нужно от языка</th></tr></thead>
+      <tbody>
+        <tr><td><b>Медсёстры и медбратья</b></td><td>32 000</td><td>telc B2 Pflege — без него не допускают к работе</td></tr>
+        <tr><td><b>Врачи</b></td><td>13 900</td><td>Fachsprachprüfung и Kenntnisprüfung для допуска к практике</td></tr>
+        <tr><td><b>Инженеры</b></td><td>4 600</td><td>Немецкий B2–C1 плюс терминология</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Откуда приезжают</th><th>Признаний за 2025</th><th>Что это значит для рекламы</th></tr></thead>
+      <tbody>
+        <tr><td><b>Турция</b></td><td>9 099</td><td>Турецкий язык в креативах, таргет на турецкую диаспору</td></tr>
+        <tr><td><b>Украина</b></td><td>8 505</td><td>Русский и украинский — мы на этом языке говорим сами</td></tr>
+        <tr><td><b>Сирия</b></td><td>5 589</td><td>Арабские креативы уже крутят конкуренты</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="secthead">
+    <span class="badge b-hot">Аукцион</span>
+    <h2>Насколько пусто в рекламе</h2>
+    <p class="lead">Сравните сами: по школьному репетиторству в Германии бьются больше тысячи объявлений, а тут — десятки.</p>
+  </div>
+
+  <div class="board">
+    <article class="pin">
+      <img src="ig/seg-fsp-count.jpg" alt="Активные объявления по Fachsprachprüfung">
+      <div class="body">
+        <div class="top"><span class="num">37</span><h3>«Fachsprachprüfung»</h3></div>
+        <p>Весь рынок подготовки врачей к языковому экзамену — меньше четырёх десятков активных объявлений на страну.</p>
+        <div class="tags"><span class="tag">Nachhilfe: ~1200</span><span class="tag">Englisch lernen: ~880</span><span class="tag">Preply один: ~750</span></div>
+        <div class="steal"><b>Что это значит</b>Клик здесь будет в разы дешевле, чем в школьном репетиторстве, где рубятся сети с бюджетами. Мы можем войти с тестовыми 200–300 долларами и реально получить объём.</div>
+      </div>
+    </article>
+
+    <article class="pin">
+      <img src="ig/seg-fsp-creatives.jpg" alt="Креативы по подготовке к FSP">
+      <div class="body">
+        <div class="top"><h3>Кто уже крутит</h3></div>
+        <div class="meta">
+          <div><b>FIA Academy</b><span>«Approbation & Anerkennung — FSP, KP & ÖSD», афиша курса с датой и пометкой «BAMF-Förderung möglich»</span></div>
+          <div><b>Integra</b><span>Образовательный провайдер, работает с ваучерами от биржи труда</span></div>
+          <div><b>MEDDEOnline</b><span>«FSP ohne langen Gruppenkurs» — онлайн-формат против долгих групп</span></div>
+        </div>
+        <div class="quote">Часть объявлений — на арабском языке. Конкуренты уже сегментируют по стране происхождения, а не только по профессии.</div>
+        <div class="steal"><b>Что берём</b>Афиша-объявление: дата старта, название экзамена, пометка про государственное финансирование. Делается в Canva, выглядит как «официальная программа», а не как реклама.</div>
+      </div>
+    </article>
+
+    <article class="pin">
+      <img src="ig/seg-pflege.jpg" alt="Объявления Deutsch für Pflegekräfte">
+      <div class="body">
+        <div class="top"><span class="num">15</span><h3>«Deutsch für Pflegekräfte»</h3></div>
+        <p>Полтора десятка объявлений на 32 тысячи признаний в год. Крутят агентства по найму медперсонала и мелкие школы, крупных платформ нет вообще.</p>
+        <div class="weak"><b>Почему так</b>Маркетплейсам неудобно: нужна тематика, терминология и понимание экзамена. Это барьер для них — и вход для нас, потому что у нас живые преподаватели, а не фиксированная программа.</div>
+      </div>
+    </article>
+
+    <article class="pin">
+      <img src="ig/ads-lingoda-healthcare.jpg" alt="Lingoda Healthcare для акушерок">
+      <div class="body">
+        <div class="top"><h3>Единственный крупный игрок</h3></div>
+        <p>Lingoda запустила отдельное направление <b>Lingoda Healthcare</b> и бьёт точечно: отдельные кампании под акушерок, отдельные — под остальной медперсонал.</p>
+        <div class="quote">«Из-за острой нехватки акушерок риски при родах растут каждый день. Не откладывай свой Kenntnisprüfung дольше».</div>
+        <div class="steal"><b>Что берём</b>Структура сообщения: общественная проблема → твоя личная задержка → конкретный экзамен. Это не «учи язык», это «ты застрял на пороге профессии».</div>
+      </div>
+    </article>
+  </div>
+
+  <div class="secthead">
+    <span class="badge b-win">Деньги</span>
+    <h2>Сколько стоит такая подготовка</h2>
+    <p class="lead">Цены с сайтов провайдеров подготовки к Fachsprachprüfung, ноябрь 2026. Для сравнения: занятие на Preply стоит 33–40 долларов, в GoStudent 20–36 евро.</p>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Провайдер</th><th>Формат</th><th>Цена</th></tr></thead>
+      <tbody>
+        <tr><td>MEDDEOnline</td><td>Онлайн-курс подготовки к FSP</td><td><b>490 €</b> разово, либо 0 € по образовательному ваучеру</td></tr>
+        <tr><td>Sprachinstitut Berlin</td><td>Два модуля подготовки</td><td><b>410 €</b> за часть, <b>798 €</b> за обе</td></tr>
+        <tr><td>Deutsch-Raum</td><td>Онлайн-группа, 2 недели</td><td><b>499 €</b></td></tr>
+        <tr><td>Horizonte, Регенсбург</td><td>Очно, 4 недели</td><td><b>880 €</b></td></tr>
+        <tr><td>RBI, Дюссельдорф</td><td>Очно, 4 и 8 недель</td><td><b>900 €</b> и <b>1 500 €</b>, стоматологам 1 800 €</td></tr>
+        <tr><td>BRMI Akademie</td><td>Компакт-курс, три дня</td><td><b>1 480 €</b></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="board" style="margin-top:14px">
+    <article class="pin">
+      <div class="body">
+        <div class="top"><h3>Государство платит</h3></div>
+        <p>Несколько провайдеров прямо пишут: курс можно оплатить образовательным ваучером от биржи труда или джобцентра, встречается пометка про финансирование BAMF.</p>
+        <div class="steal"><b>Что это даёт</b>Человек сравнивает не «дорого или дёшево», а «успею ли я к экзамену». Чувствительность к цене низкая, средний чек в разы выше школьного репетиторства.</div>
+      </div>
+    </article>
+    <article class="pin">
+      <div class="body">
+        <div class="top"><h3>Почему это выгоднее школьников</h3></div>
+        <div class="meta">
+          <div><b>Чек</b><span>500–1 500 € против 20–36 € за занятие</span></div>
+          <div><b>Срочность</b><span>Экзамен стоит в календаре, откладывать нельзя</span></div>
+          <div><b>Конкуренция</b><span>Десятки объявлений вместо тысячи</span></div>
+          <div><b>Удержание</b><span>Подготовка идёт неделями, это не одно занятие</span></div>
+        </div>
+      </div>
+    </article>
+    <article class="pin">
+      <div class="body">
+        <div class="top"><h3>Чего мы пока не знаем</h3></div>
+        <p>Сколько именно стоит клик в этой нише и какая конверсия в заявку. Это видно только после запуска — ни один открытый источник таких цифр не даёт, и выдумывать их я не буду.</p>
+      </div>
+    </article>
+  </div>
+
+  <div class="secthead">
+    <span class="badge b-warn">Развилка</span>
+    <h2>Важная поправка, которую надо проговорить</h2>
+    <p class="lead">Весь этот сегмент — про <b>немецкий язык</b>, а не про английский. Отсюда два пути, и выбрать нужно до того, как дизайнер нарисует страницу.</p>
+  </div>
+
+  <div class="fork">
+    <div class="opt pick">
+      <span class="lbl">Вариант А · рекомендую</span>
+      <h3>Запускаем немецкий для специалистов</h3>
+      <ul>
+        <li>Огромный спрос, понятная боль, срочность и высокий чек</li>
+        <li>Почти пустой аукцион — тест на малом бюджете реально покажет результат</li>
+        <li>Нужно: преподаватели немецкого с медицинской терминологией в каталоге</li>
+        <li>Проверить у Ольги: есть ли такие сейчас и сколько</li>
+      </ul>
+    </div>
+    <div class="opt">
+      <span class="lbl">Вариант Б</span>
+      <h3>Остаёмся на английском для взрослых</h3>
+      <ul>
+        <li>Преподаватели уже есть, стартуем без дособора каталога</li>
+        <li>Спрос ровный, но конкуренция выше: 880 объявлений и Preply сверху</li>
+        <li>Чек ниже, срочности почти нет, решение откладывают</li>
+        <li>Имеет смысл как второй сегмент, а не как первый</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="plan">
+    <span class="badge b-win">План</span>
+    <h2>Что делаем, если берём вариант А</h2>
+    <ol>
+      <li><b>Спросить Ольгу про преподавателей немецкого.</b> Сколько их на платформе, есть ли кто-то с опытом подготовки к telc B2 Pflege или FSP. Это единственный блокер всей идеи.</li>
+      <li><b>Сузить до одной профессии на старте.</b> Медсёстры — крупнейшая группа и самый простой экзамен. Врачи дороже, но путь у них длиннее и решение дольше.</li>
+      <li><b>Собрать страницу под экзамен, а не под язык.</b> Заголовок про telc B2 Pflege и допуск к работе, а не «изучайте немецкий с преподавателем».</li>
+      <li><b>Сделать креативы на трёх языках.</b> Немецкий, турецкий, арабский — по странам происхождения из статистики. Русский и украинский мы закрываем сами.</li>
+      <li><b>Использовать приём Lingoda.</b> Общественная проблема, личная задержка, конкретный экзамен — и кнопка на бесплатную диагностику уровня.</li>
+      <li><b>Проверить тему ваучеров.</b> Если занятия на платформе можно оплатить образовательным ваучером, это отдельный мощный аргумент на первом экране.</li>
+    </ol>
+  </div>
+
+  <div class="disclaim">Цифры по признанию дипломов — данные Статистического ведомства Германии за 2025 год, цены — с сайтов провайдеров на ноябрь 2026, счётчики объявлений — публичная библиотека Meta на день сбора. Стоимости клика и конверсий в этой нише в открытых источниках нет, поэтому их здесь тоже нет.</div>
+
+  <footer>Ollinter · разбор профессионального сегмента Германии, 1 ноября 2026</footer>
+</div>
