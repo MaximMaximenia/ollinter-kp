@@ -1,0 +1,102 @@
+<title>Ollinter: отчёт о работе</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@500;600;700;800;900&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+/* Светлая тема, острые углы (радиус 5px) */
+:root{
+  --ink:#0d1117; --ink-2:#4a5560; --ink-3:#8a95a1;
+  --paper:#fff; --page:#f2f3f5; --line:#dfe3e8;
+  --accent:#1659ff; --accent-soft:#e8eeff;
+  --win:#117a52; --win-soft:#e2f3eb;
+  --warn:#b3690c; --warn-soft:#fdf1e0;
+  --r:5px;
+  --display:'Golos Text','Segoe UI',Tahoma,sans-serif;
+  --body:'Manrope','Segoe UI',Tahoma,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--page);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
+.wrap{max-width:900px;margin:0 auto;padding-inline:18px;padding-block:0 80px}
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance}
+h1{font-size:clamp(30px,5vw,48px);line-height:1.02;font-weight:900;letter-spacing:-.03em}
+h2{font-size:clamp(20px,2.8vw,28px);font-weight:800;letter-spacing:-.02em}
+p{margin:0}
+ul{margin:0;padding-left:0;list-style:none}
+a{color:var(--accent)}
+.topbar{border-bottom:1px solid var(--line);background:var(--page)}
+.topbar-in{max-width:900px;margin:0 auto;padding:12px 18px;display:flex;gap:12px;align-items:center}
+.brand{font-family:var(--display);font-weight:900;font-size:15.5px}
+.brand span{color:var(--accent)}
+.when{margin-left:auto;font-size:13px;color:var(--ink-3)}
+.hero{padding-block:clamp(28px,5vw,52px) 10px;display:grid;gap:12px}
+.kicker{display:inline-block;font-family:var(--display);font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;background:var(--ink);color:#fff;padding:6px 11px;border-radius:var(--r);justify-self:start}
+.lead{font-size:17px;color:var(--ink-2);max-width:66ch}
+.block{margin-top:22px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;display:grid;gap:12px}
+.block h2{font-size:21px}
+.done li,.next li{display:grid;grid-template-columns:auto 1fr;gap:11px;font-size:15.5px;margin-top:7px}
+.done li::before{content:"✓";color:var(--win);font-weight:800}
+.next li::before{content:"→";color:var(--accent);font-weight:800}
+.note{background:var(--warn-soft);border-left:3px solid var(--warn);padding:13px 15px;font-size:15px;color:#7a4a0a;border-radius:0 var(--r) var(--r) 0}
+.links{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+.links a{background:var(--accent-soft);color:#1240b8;font-weight:700;font-size:14px;padding:8px 13px;border-radius:var(--r);text-decoration:none}
+footer{border-top:1px solid var(--line);margin-top:30px;padding-top:16px;font-size:13px;color:var(--ink-3)}
+</style>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <div class="brand">Oll<span>inter</span></div>
+    <div class="when">Отчёт на 6 ноября 2026</div>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="hero">
+    <span class="kicker">Отчёт о проделанной работе</span>
+    <h1>Что сделано и что дальше</h1>
+    <p class="lead">Первый месяц работы: аналитика рынка, фирменный стиль, рекламная страница и подготовка к запуску кампаний в Германии.</p>
+  </header>
+
+  <div class="block">
+    <h2>Сделано</h2>
+    <ul class="done">
+      <li><b>Анализ рынка Германии.</b> Разобраны пять крупнейших игроков: модели, цены, позиционирование, их реальные рекламные креативы и объёмы аукциона.</li>
+      <li><b>Найдены ниши с низкой конкуренцией.</b> Отдельно разобран сегмент специалистов с иностранным дипломом: 86 619 признаний за 2025 год при почти пустом рекламном аукционе.</li>
+      <li><b>Определена стратегия запуска.</b> Германия, обучение языкам, отдельные кампании под каждый язык вместо одной общей.</li>
+      <li><b>Фирменный стиль согласован.</b> Визуальное направление утверждено, работа идёт в едином оформлении.</li>
+      <li><b>Рекламная страница готова.</b> Структура, смыслы и тексты собраны, страница на финальной проверке.</li>
+      <li><b>Рекламные кабинеты настроены.</b> Доступы получены, кабинеты готовы к запуску кампаний.</li>
+      <li><b>Идеи роликов и креативов готовы.</b> Сценарии написаны, осталось производство.</li>
+    </ul>
+  </div>
+
+  <div class="block">
+    <h2>В работе на этой неделе</h2>
+    <ul class="next">
+      <li>Производство рекламных роликов и креативов</li>
+      <li>Проверка аналитики: события регистрации и ключевые действия должны фиксироваться до первого платного клика</li>
+      <li>Ревизия сайта: убрать лишние страницы, вычитать тексты</li>
+      <li>Оформление и первое наполнение соцсетей</li>
+      <li>Сборка кампаний и запуск теста</li>
+    </ul>
+  </div>
+
+  <div class="block">
+    <h2>Где сдвинулись сроки</h2>
+    <p>Согласование фирменного стиля заняло больше времени, чем планировалось. На запуск это не влияет: аналитика, страница и кабинеты готовились параллельно, поэтому к старту рекламы подходим без потерь.</p>
+    <div class="note">Перед запуском нужно подтвердить одно: корректно ли фиксируются регистрации в аналитике. Пока события не доходят до отчётов, запускать платный трафик нельзя — иначе деньги потратятся, а данных не останется.</div>
+  </div>
+
+  <div class="block">
+    <h2>Материалы</h2>
+    <div class="links">
+      <a href="competitors-de.html">Конкуренты в Германии</a>
+      <a href="segment-de.html">Профессиональный сегмент</a>
+      <a href="market-de.html">Разбор сайтов</a>
+      <a href="roadmap.html">Карта работ</a>
+    </div>
+  </div>
+
+  <footer>Ollinter · отчёт о проделанной работе, 6 ноября 2026</footer>
+</div>
