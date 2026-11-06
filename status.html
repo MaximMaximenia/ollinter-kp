@@ -1,0 +1,172 @@
+<title>Ollinter: статус проекта</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@500;600;700;800;900&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --ink:#0d1117; --ink-2:#4a5560; --ink-3:#8a95a1;
+  --paper:#fff; --page:#f2f3f5; --line:#dfe3e8;
+  --accent:#1659ff; --accent-soft:#e8eeff;
+  --win:#117a52; --win-soft:#e2f3eb;
+  --warn:#b3690c; --warn-soft:#fdf1e0;
+  --hot:#e8336d; --hot-soft:#ffe9f1;
+  --r:5px;
+  --display:'Golos Text','Segoe UI',Tahoma,sans-serif;
+  --body:'Manrope','Segoe UI',Tahoma,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--page);color:var(--ink);font-family:var(--body);font-size:15.5px;line-height:1.5}
+.wrap{max-width:1000px;margin:0 auto;padding-inline:18px;padding-block:0 90px}
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance}
+h1{font-size:clamp(30px,5vw,48px);line-height:1.02;font-weight:900;letter-spacing:-.03em}
+h2{font-size:clamp(20px,2.7vw,28px);font-weight:800;letter-spacing:-.022em}
+h3{font-size:17px;font-weight:800}
+p{margin:0}
+ul{margin:0;padding-left:0;list-style:none}
+a{color:var(--accent)}
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(242,243,245,.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.topbar-in{max-width:1000px;margin:0 auto;padding:10px 18px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:900;font-size:15.5px}
+.brand span{color:var(--accent)}
+.track{flex:1;min-width:90px;height:6px;background:#e4e8ed;border-radius:var(--r);overflow:hidden}
+.track i{display:block;height:100%;width:0;background:var(--win);transition:width .4s}
+.cnt{font-size:12.5px;color:var(--ink-3);font-variant-numeric:tabular-nums;white-space:nowrap}
+.reset{font-family:var(--display);font-weight:700;font-size:12.5px;padding:6px 11px;border:1px solid var(--line);background:var(--paper);color:var(--ink-2);border-radius:var(--r);cursor:pointer}
+.hero{padding-block:clamp(26px,5vw,46px) 6px;display:grid;gap:12px}
+.kicker{display:inline-block;font-family:var(--display);font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;background:var(--ink);color:#fff;padding:6px 11px;border-radius:var(--r);justify-self:start}
+.lead{font-size:17px;color:var(--ink-2);max-width:68ch}
+.who{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px;font-size:12.5px}
+.who span{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:5px 10px;font-weight:700;color:var(--ink-2)}
+
+.sec{margin-top:30px;display:grid;gap:10px}
+.sh{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.pill{font-size:11px;font-weight:800;padding:4px 10px;border-radius:var(--r);letter-spacing:.07em;text-transform:uppercase}
+.p-done{background:var(--win-soft);color:var(--win)}
+.p-work{background:var(--warn-soft);color:var(--warn)}
+.p-left{background:var(--hot-soft);color:var(--hot)}
+.p-later{background:var(--accent-soft);color:#1240b8}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;display:grid;gap:3px}
+.row{display:flex;gap:11px;align-items:flex-start;padding:8px 9px;border-radius:var(--r)}
+.row:hover{background:#f7f9fb}
+.row .tx{min-width:0;font-size:15px}
+.row .tag{font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:var(--r);white-space:nowrap;margin-right:8px}
+.t-me{background:var(--accent-soft);color:#1240b8}
+.t-dev{background:#fdf1e0;color:#b3690c}
+.t-des{background:#fdeaf2;color:#c4367a}
+.t-cre{background:#efebff;color:#5a2ed6}
+.t-cl{background:#e3f5f5;color:#0b7373}
+.done-mark{color:var(--win);font-weight:800;flex:none}
+label.row{cursor:pointer}
+label.row input{appearance:none;width:19px;height:19px;flex:none;margin-top:2px;border:2px solid #cfd6de;border-radius:var(--r);background:#fff;cursor:pointer;position:relative}
+label.row input:checked{background:var(--win);border-color:var(--win)}
+label.row input:checked::after{content:"";position:absolute;left:4.5px;top:1px;width:5px;height:9px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(42deg)}
+label.row input:checked~.tx{color:var(--ink-3);text-decoration:line-through;text-decoration-color:#c7cfd8}
+.note{background:var(--warn-soft);border-left:3px solid var(--warn);padding:12px 14px;font-size:14.5px;color:#7a4a0a;border-radius:0 var(--r) var(--r) 0;margin-top:12px}
+.links{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.links a{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:7px 12px;font-size:13.5px;font-weight:700;text-decoration:none;color:var(--ink-2)}
+footer{border-top:1px solid var(--line);margin-top:32px;padding-top:16px;font-size:13px;color:var(--ink-3)}
+</style>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <div class="brand">Oll<span>inter</span></div>
+    <div class="track"><i id="bar"></i></div>
+    <div class="cnt"><span id="done">0</span>/<span id="total">0</span> осталось закрыть</div>
+    <button class="reset" id="reset" type="button">Сбросить</button>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="hero">
+    <span class="kicker">Статус проекта · 6 ноября</span>
+    <h1>Где мы сейчас</h1>
+    <p class="lead">Дизайн закрыт, Антон наполняет сайт. Остаётся контент, аналитика и сборка кампаний. Отметки ставятся только в разделах «в работе» и «до запуска» — то, что уже готово, просто зафиксировано.</p>
+    <div class="who"><span>Я — стратегия, тексты, кампании</span><span>Антон — сайт</span><span>Дизайнер — визуал</span><span>Подрядчик — ролики</span><span>Ollinter — доступы и решения</span></div>
+  </header>
+
+  <div class="sec">
+    <div class="sh"><span class="pill p-done">Готово</span><h2>Что уже сделано</h2></div>
+    <div class="card">
+      <div class="row"><span class="done-mark">✓</span><span class="tx"><b>Анализ рынка Германии.</b> Пять крупнейших игроков: модели, цены, контент, живые рекламные креативы, объёмы аукциона.</span></div>
+      <div class="row"><span class="done-mark">✓</span><span class="tx"><b>Найден сегмент с пустой конкуренцией.</b> Специалисты с иностранным дипломом: 86 619 признаний за год против 37 объявлений на всю страну.</span></div>
+      <div class="row"><span class="done-mark">✓</span><span class="tx"><b>Собрана база креативов конкурентов.</b> Прямые ссылки на их объявления — референсы для подрядчика.</span></div>
+      <div class="row"><span class="done-mark">✓</span><span class="tx"><b>Стратегия запуска.</b> Германия, все языки, отдельная кампания под каждый язык вместо одной общей.</span></div>
+      <div class="row"><span class="done-mark">✓</span><span class="tx"><b>Дизайн утверждён.</b> Фирменный стиль и макеты закрыты.</span></div>
+      <div class="row"><span class="done-mark">✓</span><span class="tx"><b>Рекламные кабинеты настроены.</b> Доступы есть, кабинеты готовы.</span></div>
+      <div class="row"><span class="done-mark">✓</span><span class="tx"><b>Сценарии роликов написаны.</b> Передаются подрядчику в производство.</span></div>
+      <div class="row"><span class="done-mark">✓</span><span class="tx"><b>Разобран сайт.</b> Все страницы просмотрены, собран список правок по каждой.</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sh"><span class="pill p-work">В работе</span><h2>Делается прямо сейчас</h2></div>
+    <div class="card">
+      <label class="row"><input type="checkbox"><span class="tx"><i class="tag t-dev">Антон</i>Наполняет сайт по утверждённому дизайну</span></label>
+      <label class="row"><input type="checkbox"><span class="tx"><i class="tag t-me">я</i>Правки по наполнению после того, как Антон выложит</span></label>
+      <label class="row"><input type="checkbox"><span class="tx"><i class="tag t-cre">подрядчик</i>Производство рекламных роликов</span></label>
+      <label class="row"><input type="checkbox"><span class="tx"><i class="tag t-me">я</i>Посты для соцсетей на немецком</span></label>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sh"><span class="pill p-left">До запуска</span><h2>Что обязательно закрыть перед рекламой</h2></div>
+    <div class="card">
+      <label class="row"><input type="checkbox"><span class="tx"><i class="tag t-me">я</i>Проверить, что регистрация долетает в аналитику</span></label>
+      <label class="row"><input type="checkbox"><span class="tx"><i class="tag t-me">я</i>Проверить, что бронирование и оплата считаются отдельными событиями</span></label>
+      <label class="row"><input type="checkbox"><span class="tx"><i class="tag t-me">я</i>Проверить, что метки источника не теряются между страницами</span></label>
+      <label class="row"><input type="checkbox"><span class="tx"><i class="tag t-dev">Антон</i>Экран выбора языка сразу после регистрации</span></label>
+      <label class="row"><input type="checkbox"><span class="tx"><i class="tag t-dev">Антон</i>Ссылка из рекламы ведёт в отфильтрованный список преподавателей по языку</span></label>
+      <label class="row"><input type="checkbox"><span class="tx"><i class="tag t-des">дизайнер</i>Схемы вместо текста: проверка эксперта, оплата, как проходит занятие</span></label>
+      <label class="row"><input type="checkbox"><span class="tx"><i class="tag t-me">я</i>Создать аккаунты Instagram, TikTok, YouTube и оформить по брендбуку</span></label>
+      <label class="row"><input type="checkbox"><span class="tx"><i class="tag t-me">я</i>Опубликовать первые посты, чтобы профили не были пустыми</span></label>
+      <label class="row"><input type="checkbox"><span class="tx"><i class="tag t-cl">Ollinter</i>Проверить, что в каталоге есть живые эксперты по каждому языку из рекламы</span></label>
+      <label class="row"><input type="checkbox"><span class="tx"><i class="tag t-cl">Ollinter</i>Пополнить рекламный бюджет</span></label>
+      <label class="row"><input type="checkbox"><span class="tx"><i class="tag t-me">я</i>Собрать кампании: отдельная группа на каждый язык, тексты объявлений</span></label>
+      <label class="row"><input type="checkbox"><span class="tx"><i class="tag t-me">я</i>Пройти путь целиком перед включением: клик, страница, регистрация, отчёт</span></label>
+    </div>
+    <div class="note">Жёсткое правило: пока события не видны в отчётах, рекламу не включаем. Иначе деньги уйдут, а данных не останется — и весь тест придётся повторять.</div>
+  </div>
+
+  <div class="sec">
+    <div class="sh"><span class="pill p-later">После запуска</span><h2>Первые две недели открутки</h2></div>
+    <div class="card">
+      <label class="row"><input type="checkbox"><span class="tx"><i class="tag t-me">я</i>Ежедневный контроль: расход, цена перехода, цена регистрации</span></label>
+      <label class="row"><input type="checkbox"><span class="tx"><i class="tag t-me">я</i>Отключать то, что не даёт регистраций, усиливать то, что даёт</span></label>
+      <label class="row"><input type="checkbox"><span class="tx"><i class="tag t-me">я</i>Правки страницы по реальному поведению людей</span></label>
+      <label class="row"><input type="checkbox"><span class="tx"><i class="tag t-cre">подрядчик</i>Новые креативы на замену выгоревшим</span></label>
+      <label class="row"><input type="checkbox"><span class="tx"><i class="tag t-me">я</i>Отчёт с цифрами и план следующего месяца</span></label>
+    </div>
+  </div>
+
+  <div class="links">
+    <a href="site-map.html">Сайт и правки</a>
+    <a href="creatives-de.html">Креативы конкурентов</a>
+    <a href="competitors-de.html">Разбор конкурентов</a>
+    <a href="segment-de.html">Сегмент</a>
+    <a href="report-1.html">Отчёт клиенту</a>
+  </div>
+
+  <footer>Ollinter · статус проекта, 6 ноября 2026</footer>
+</div>
+
+<script>
+(function(){
+  var KEY='ollinter-status-v1';
+  var boxes=[].slice.call(document.querySelectorAll('label.row input'));
+  var bar=document.getElementById('bar'), done=document.getElementById('done'), total=document.getElementById('total');
+  total.textContent=boxes.length;
+  function render(){
+    var k=boxes.filter(function(b){return b.checked}).length;
+    done.textContent=k; bar.style.width=Math.round(k/boxes.length*100)+'%';
+    try{ localStorage.setItem(KEY,JSON.stringify(boxes.map(function(b){return b.checked?1:0}))); }catch(e){}
+  }
+  document.addEventListener('change',function(e){ if(e.target.matches('label.row input')) render() });
+  document.getElementById('reset').addEventListener('click',function(){ boxes.forEach(function(b){b.checked=false}); render(); window.scrollTo({top:0,behavior:'smooth'}) });
+  boxes.forEach(function(b){ b.checked=false });
+  try{ var s=JSON.parse(localStorage.getItem(KEY)||'null'); if(s) boxes.forEach(function(b,i){ b.checked=!!s[i] }); }catch(e){}
+  render();
+})();
+</script>
