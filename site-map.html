@@ -1,4 +1,4 @@
-<title>Ollinter: карта сайта и задачи</title>
+<title>Ollinter: сайт, правки и задачи</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
@@ -19,131 +19,270 @@
 *{box-sizing:border-box}
 html,body{margin:0}
 body{background:var(--page);color:var(--ink);font-family:var(--body);font-size:15.5px;line-height:1.5}
-.wrap{max-width:1040px;margin:0 auto;padding-inline:18px;padding-block:0 80px}
+.wrap{max-width:1040px;margin:0 auto;padding-inline:18px;padding-block:0 90px}
 h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance}
 h1{font-size:clamp(30px,5vw,48px);line-height:1.02;font-weight:900;letter-spacing:-.03em}
-h2{font-size:clamp(20px,2.8vw,28px);font-weight:800;letter-spacing:-.02em}
+h2{font-size:clamp(21px,2.8vw,30px);font-weight:800;letter-spacing:-.022em}
+h3{font-size:17.5px;font-weight:800}
 p{margin:0}
 ul{margin:0;padding-left:0;list-style:none}
 a{color:var(--accent)}
-.topbar{border-bottom:1px solid var(--line);background:var(--page)}
-.topbar-in{max-width:1040px;margin:0 auto;padding:12px 18px;display:flex;gap:12px;align-items:center}
+
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(242,243,245,.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.topbar-in{max-width:1040px;margin:0 auto;padding:10px 18px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
 .brand{font-family:var(--display);font-weight:900;font-size:15.5px}
 .brand span{color:var(--accent)}
-.when{margin-left:auto;font-size:13px;color:var(--ink-3)}
-.hero{padding-block:clamp(26px,5vw,48px) 8px;display:grid;gap:12px}
+.track{flex:1;min-width:90px;height:6px;background:#e4e8ed;border-radius:var(--r);overflow:hidden}
+.track i{display:block;height:100%;width:0;background:var(--win);transition:width .4s ease}
+.cnt{font-size:12.5px;color:var(--ink-3);font-variant-numeric:tabular-nums;white-space:nowrap}
+.reset{font-family:var(--display);font-weight:700;font-size:12.5px;padding:6px 11px;border:1px solid var(--line);background:var(--paper);color:var(--ink-2);border-radius:var(--r);cursor:pointer}
+
+.hero{padding-block:clamp(26px,5vw,46px) 8px;display:grid;gap:12px}
 .kicker{display:inline-block;font-family:var(--display);font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;background:var(--ink);color:#fff;padding:6px 11px;border-radius:var(--r);justify-self:start}
 .lead{font-size:17px;color:var(--ink-2);max-width:68ch}
 
-.tbl{overflow-x:auto;margin-top:18px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r)}
-table{border-collapse:collapse;width:100%;min-width:620px;font-size:14.5px}
-th,td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
-th{font-family:var(--display);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);font-weight:800;background:#fafbfc}
-tr:last-child td{border-bottom:none}
-td a{font-weight:600;text-decoration:none}
-.pill{display:inline-block;font-size:11px;font-weight:800;padding:2px 8px;border-radius:var(--r);white-space:nowrap}
-.p-keep{background:var(--win-soft);color:var(--win)}
-.p-check{background:var(--warn-soft);color:var(--warn)}
-.p-cut{background:var(--hot-soft);color:var(--hot)}
+.nav{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.nav a{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:7px 12px;font-size:13.5px;font-weight:700;text-decoration:none;color:var(--ink-2)}
+.nav a:hover{border-color:var(--accent);color:var(--accent)}
 
-.tasks{margin-top:34px;display:grid;gap:12px}
-.task{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;display:grid;gap:8px}
-.task .h{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
-.task .n{font-family:var(--display);font-weight:900;font-size:11px;background:var(--ink);color:#fff;padding:4px 8px;border-radius:var(--r)}
-.task h3{font-size:17.5px}
-.task .time{margin-left:auto;font-size:12.5px;color:var(--ink-3);font-weight:700}
-.task li{display:flex;gap:10px;align-items:flex-start;font-size:15px;color:var(--ink-2);margin-top:6px}
-.task li::before{content:"□";color:var(--ink-3);flex:none}
+/* задачи */
+.tasks{display:grid;gap:12px;margin-top:18px}
+.group{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;display:grid;gap:4px}
+.group .gh{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;margin-bottom:6px}
+.group .n{font-family:var(--display);font-weight:900;font-size:11px;background:var(--ink);color:#fff;padding:4px 8px;border-radius:var(--r)}
+.group .time{margin-left:auto;font-size:12.5px;color:var(--ink-3);font-weight:700}
+.chk{display:flex;gap:11px;align-items:flex-start;padding:8px 9px;border-radius:var(--r);cursor:pointer;transition:background .15s}
+.chk:hover{background:#f7f9fb}
+.chk input{appearance:none;width:20px;height:20px;flex:none;margin-top:1px;border:2px solid #cfd6de;border-radius:var(--r);background:#fff;cursor:pointer;position:relative}
+.chk input:checked{background:var(--win);border-color:var(--win)}
+.chk input:checked::after{content:"";position:absolute;left:5px;top:1px;width:5px;height:10px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(42deg)}
+.chk span{font-size:15px;min-width:0}
+.chk input:checked+span{color:var(--ink-3);text-decoration:line-through;text-decoration-color:#c7cfd8}
+
+/* страницы */
+.page{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;display:grid;gap:9px;margin-top:12px}
+.page .ph{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.page .url{font-size:13px;color:var(--ink-3)}
+.page .verdict{margin-left:auto;font-size:11px;font-weight:800;padding:3px 9px;border-radius:var(--r);white-space:nowrap}
+.v-fix{background:var(--warn-soft);color:var(--warn)}
+.v-ok{background:var(--win-soft);color:var(--win)}
+.v-key{background:var(--hot-soft);color:var(--hot)}
+.says{background:var(--page);border-left:3px solid var(--ink-3);padding:9px 12px;font-size:14.5px;color:var(--ink-2);border-radius:0 var(--r) var(--r) 0}
+.says b{font-family:var(--display);color:var(--ink);display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:3px}
+.fixlist li{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;color:var(--ink-2);margin-top:6px}
+.fixlist li::before{content:"→";color:var(--accent);font-weight:800;flex:none}
+
+.tbl{overflow-x:auto;margin-top:16px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r)}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:14px}
+th,td{padding:9px 13px;text-align:left;border-bottom:1px solid var(--line)}
+th{font-family:var(--display);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);font-weight:800;background:#fafbfc}
+tr:last-child td{border-bottom:none}
 footer{border-top:1px solid var(--line);margin-top:34px;padding-top:16px;font-size:13px;color:var(--ink-3)}
 </style>
 
 <div class="topbar">
   <div class="topbar-in">
     <div class="brand">Oll<span>inter</span></div>
-    <div class="when">Карта сайта · 6 ноября</div>
+    <div class="track"><i id="bar"></i></div>
+    <div class="cnt"><span id="done">0</span>/<span id="total">0</span></div>
+    <button class="reset" id="reset" type="button">Сбросить</button>
   </div>
 </div>
 
 <div class="wrap">
   <header class="hero">
-    <span class="kicker">Сайт и задачи на сегодня</span>
-    <h1>Все страницы сайта</h1>
-    <p class="lead">Сайт живёт на языковых префиксах: <b>/de/</b>, <b>/en/</b>, <b>/ru/</b>. Без префикса все адреса редиректят. Для рекламы на Германию работаем с немецкой версией.</p>
+    <span class="kicker">Сайт, правки и задачи · 6 ноября</span>
+    <h1>Что делаем по сайту</h1>
+    <p class="lead">Сверху — чек-лист на сегодня и выходные, отмечай по ходу. Ниже — разбор каждой страницы: что ты заметил, что думаю я, что конкретно правим.</p>
+    <div class="nav">
+      <a href="#tasks">Чек-лист</a><a href="#pages">Страницы</a><a href="#reg">Путь после регистрации</a><a href="competitors-de.html">Конкуренты</a><a href="report-1.html">Отчёт</a>
+    </div>
   </header>
 
+  <h2 id="tasks" style="margin-top:34px">Чек-лист</h2>
+  <div class="tasks">
+
+    <div class="group">
+      <div class="gh"><span class="n">1</span><h3>Тексты и смыслы по сайту</h3><span class="time">сегодня, 90 мин</span></div>
+      <label class="chk"><input type="checkbox"><span>Пройти /de как клиент: поиск → карточка эксперта → экран оплаты, записать места, где спотыкаешься</span></label>
+      <label class="chk"><input type="checkbox"><span>Главная: проверить заголовок первого экрана — он должен говорить, что человек получит, а не что это за платформа</span></label>
+      <label class="chk"><input type="checkbox"><span>How it works: придумать нормальный заголовок вместо служебного</span></label>
+      <label class="chk"><input type="checkbox"><span>Выписать все абзацы, которые можно заменить схемой или картинкой</span></label>
+      <label class="chk"><input type="checkbox"><span>Проверить, что в каталоге есть живые эксперты по немецкому и английскому</span></label>
+    </div>
+
+    <div class="group">
+      <div class="gh"><span class="n">2</span><h3>Аналитика</h3><span class="time">сегодня, 45 мин</span></div>
+      <label class="chk"><input type="checkbox"><span>Пройти путь самому и убедиться, что регистрация долетает в отчёт</span></label>
+      <label class="chk"><input type="checkbox"><span>Проверить, что бронирование и оплата считаются отдельными событиями</span></label>
+      <label class="chk"><input type="checkbox"><span>Проверить, что метки источника не теряются между страницами</span></label>
+    </div>
+
+    <div class="group">
+      <div class="gh"><span class="n">3</span><h3>Аккаунты соцсетей</h3><span class="time">сегодня, 45 мин</span></div>
+      <label class="chk"><input type="checkbox"><span>Создать Instagram на почту проекта, включить двухфакторку</span></label>
+      <label class="chk"><input type="checkbox"><span>Создать TikTok с тем же ником</span></label>
+      <label class="chk"><input type="checkbox"><span>Создать канал YouTube</span></label>
+      <label class="chk"><input type="checkbox"><span>Поставить аватар и шапку из брендбука, ссылку на /de в профиль</span></label>
+      <label class="chk"><input type="checkbox"><span>Связать Instagram и Facebook с рекламным кабинетом</span></label>
+    </div>
+
+    <div class="group">
+      <div class="gh"><span class="n">4</span><h3>Креативы подрядчику</h3><span class="time">сегодня, 30 мин</span></div>
+      <label class="chk"><input type="checkbox"><span>Передать сценарии и ссылку на разбор конкурентов как референс</span></label>
+      <label class="chk"><input type="checkbox"><span>Зафиксировать форматы: 9:16 для Reels и TikTok, 1:1 для ленты</span></label>
+      <label class="chk"><input type="checkbox"><span>Зафиксировать количество и срок письменно</span></label>
+    </div>
+
+    <div class="group">
+      <div class="gh"><span class="n">5</span><h3>Задачи дизайнеру по сайту</h3><span class="time">выходные</span></div>
+      <label class="chk"><input type="checkbox"><span>Схема «как проходит проверка эксперта» — четыре шага с иконками</span></label>
+      <label class="chk"><input type="checkbox"><span>Схема «как эксперт получает оплату» — от брони до выплаты</span></label>
+      <label class="chk"><input type="checkbox"><span>Схема «как проходит занятие» — комната, доска, файлы, страница после занятия</span></label>
+      <label class="chk"><input type="checkbox"><span>Иллюстрации в общей стилистике для /about и /sessions</span></label>
+      <label class="chk"><input type="checkbox"><span>Экран выбора языка после регистрации</span></label>
+    </div>
+
+    <div class="group">
+      <div class="gh"><span class="n">6</span><h3>Соцсети: контент</h3><span class="time">выходные</span></div>
+      <label class="chk"><input type="checkbox"><span>Получить от меня 8 постов и опубликовать первые три</span></label>
+      <label class="chk"><input type="checkbox"><span>Оформить шапку профиля: кто мы и что человек получит</span></label>
+      <label class="chk"><input type="checkbox"><span>Закрепить пост «как это работает»</span></label>
+    </div>
+
+  </div>
+
+  <h2 id="pages" style="margin-top:40px">Разбор страниц</h2>
+  <p class="lead" style="margin-top:6px">Общая проблема всех внутренних страниц одна: смысл хороший, подача — сплошной текст. Человек не читает полотна, он сканирует схемы.</p>
+
+  <div class="page">
+    <div class="ph"><h3>Как это работает</h3><span class="url">/de/how-it-works</span><span class="verdict v-fix">Переупаковать</span></div>
+    <div class="says"><b>Твоя пометка</b>Расписано очень хорошо и много, но всё текстом, без иллюстраций. Выглядит как тонна текста. Заголовок нужен нормальный.</div>
+    <ul class="fixlist">
+      <li>Заголовок переписать с пользы: человек получает занятие с проверенным экспертом и деньги под защитой, пока оно не прошло</li>
+      <li>Три главных обещания вынести в три блока с иконками: проверка эксперта, деньги после занятия, перевод и субтитры</li>
+      <li>Процесс показать схемой из четырёх шагов, а не абзацами</li>
+      <li>Частые вопросы свернуть в аккордеон — разворачиваются по клику</li>
+    </ul>
+  </div>
+
+  <div class="page">
+    <div class="ph"><h3>Доверие и безопасность</h3><span class="url">/de/trust-and-safety</span><span class="verdict v-fix">Переупаковать</span></div>
+    <div class="says"><b>Твоя пометка</b>То же самое: очень много текста, непонятно, как тут и что.</div>
+    <ul class="fixlist">
+      <li>Главное вынести наверх одной схемой: как проверяется эксперт, четыре шага от документа до одобрения профиля</li>
+      <li>Отдельный блок про деньги: оплата держится до конца занятия, эксперт не пришёл — возврат автоматом</li>
+      <li>Записи и ИИ: три отдельных согласия, всё выключено по умолчанию — показать переключателями, а не текстом</li>
+      <li>Это наш главный аргумент против конкурентов, он должен читаться за десять секунд</li>
+    </ul>
+  </div>
+
+  <div class="page">
+    <div class="ph"><h3>Стать экспертом</h3><span class="url">/de/teach</span><span class="verdict v-key">Вторая кампания</span></div>
+    <div class="says"><b>Твоя пометка</b>Схематично непонятно. Надо проработать иллюстрации: как проходит верификация, как получаешь оплату.</div>
+    <ul class="fixlist">
+      <li>Схема верификации: подал документ → проверил человек → профиль открыт</li>
+      <li>Схема выплат: ученик оплатил → деньги удерживаются → занятие прошло → выплата на счёт</li>
+      <li>Снять главный страх эксперта: клиентов искать не нужно, поиск показывает профиль сам</li>
+      <li>Блок про новых экспертов: особые места в выдаче на старте</li>
+    </ul>
+  </div>
+
+  <div class="page">
+    <div class="ph"><h3>Групповые занятия</h3><span class="url">/de/sessions</span><span class="verdict v-fix">Наполнить</span></div>
+    <div class="says"><b>Твоя пометка</b>Пока недоступна — никто ничего не создавал. Сама страница окей.</div>
+    <ul class="fixlist">
+      <li>Пустая страница в рекламе хуже отсутствующей — либо наполняем группами, либо убираем из меню до запуска</li>
+      <li>Если наполняем: нужны 3–5 групп по языкам с датами и свободными местами</li>
+      <li>Иллюстрации в общей стилистике</li>
+    </ul>
+  </div>
+
+  <div class="page">
+    <div class="ph"><h3>О проекте</h3><span class="url">/de/about</span><span class="verdict v-ok">Почти ок</span></div>
+    <div class="says"><b>Твоя пометка</b>В принципе нормально, иллюстрацию только в общей стилистике.</div>
+    <ul class="fixlist">
+      <li>Одна иллюстрация в стиле бренда вместо текста на первом экране</li>
+      <li>Пять форматов занятий показать карточками: урок, менторство, консультация, коучинг, услуга</li>
+    </ul>
+  </div>
+
+  <div class="page">
+    <div class="ph"><h3>Служебные страницы</h3><span class="url">/booking-rules · /reviews-policy · /session-check · /payout-countries · /provider-agreement · /help/lesson</span><span class="verdict v-ok">Не трогаем</span></div>
+    <div class="says"><b>Твоя пометка</b>Технические страницы, никто там копаться не будет.</div>
+    <ul class="fixlist">
+      <li>Оставляем как есть, из главного меню убираем в подвал</li>
+      <li>Правило бронирования и возврат вынести коротким блоком на страницу «Как это работает» — там оно продаёт</li>
+    </ul>
+  </div>
+
+  <div class="page">
+    <div class="ph"><h3>Главная</h3><span class="url">/de</span><span class="verdict v-key">Главный приоритет</span></div>
+    <div class="says"><b>Твоя пометка</b>Работаем по главной, смотрим, как заиграет с новым дизайном, правки делаем после запуска рекламы по реальному поведению.</div>
+    <ul class="fixlist">
+      <li>Первый экран: заголовок про результат, поиск своими словами, три значка доверия под строкой поиска</li>
+      <li>Карточки экспертов с ценой, ближайшим временем и отметкой проверки — это уже есть, усилить визуально</li>
+      <li>Ниже: как это работает в три шага и блок про защиту оплаты</li>
+      <li>Дальше правим по данным, а не по ощущениям: после запуска смотрим, где люди уходят</li>
+    </ul>
+  </div>
+
+  <div class="page" id="reg">
+    <div class="ph"><h3>Путь после регистрации</h3><span class="url">задача разработчику</span><span class="verdict v-key">Ключевое</span></div>
+    <div class="says"><b>Твоя пометка</b>После регистрации человек должен попадать на страницу, где преподаватели показаны по языкам: выбираешь язык — выбираешь преподавателя.</div>
+    <ul class="fixlist">
+      <li>Шаг 1: сразу после регистрации экран выбора языка — плитки с флагами и количеством экспертов</li>
+      <li>Шаг 2: выбрал язык — попадаешь в отфильтрованный список преподавателей этого языка</li>
+      <li>Шаг 3: в карточке цена, ближайшее время и кнопка пробного занятия</li>
+      <li>Выбор языка запоминается: при следующем входе человек видит своих преподавателей</li>
+      <li>Реклама по каждому языку ведёт сразу на отфильтрованный список, минуя общий поиск</li>
+    </ul>
+  </div>
+
+  <h2 style="margin-top:40px">Все страницы сайта</h2>
   <div class="tbl">
     <table>
-      <thead><tr><th>Страница</th><th>Немецкая версия</th><th>Зачем она</th><th>Решение</th></tr></thead>
+      <thead><tr><th>Страница</th><th>Ссылка</th><th>Роль в рекламе</th></tr></thead>
       <tbody>
-        <tr><td><b>Главная</b></td><td><a href="https://ollinter.com/de" target="_blank">/de</a></td><td>Вход из рекламы, поиск, карточки экспертов</td><td><span class="pill p-keep">Основная</span></td></tr>
-        <tr><td><b>Поиск</b></td><td><a href="https://ollinter.com/de/search" target="_blank">/de/search</a></td><td>Поиск своими словами, фильтры</td><td><span class="pill p-keep">Основная</span></td></tr>
-        <tr><td><b>Предметы</b></td><td><a href="https://ollinter.com/de/subjects" target="_blank">/de/subjects</a></td><td>Разделы знаний, вход под каждый язык</td><td><span class="pill p-keep">Под рекламу</span></td></tr>
-        <tr><td><b>Как это работает</b></td><td><a href="https://ollinter.com/de/how-it-works" target="_blank">/de/how-it-works</a></td><td>Оплата через Stripe, перевод, комната занятия</td><td><span class="pill p-keep">Основная</span></td></tr>
-        <tr><td><b>Доверие и безопасность</b></td><td><a href="https://ollinter.com/de/trust-and-safety" target="_blank">/de/trust-and-safety</a></td><td>Ручная проверка экспертов, жалобы, записи</td><td><span class="pill p-keep">Главный аргумент</span></td></tr>
-        <tr><td><b>Групповые занятия</b></td><td><a href="https://ollinter.com/de/sessions" target="_blank">/de/sessions</a></td><td>Расписание групп, свободные места</td><td><span class="pill p-check">Проверить наполнение</span></td></tr>
-        <tr><td><b>Стать экспертом</b></td><td><a href="https://ollinter.com/de/teach" target="_blank">/de/teach</a></td><td>Посадочная для набора преподавателей</td><td><span class="pill p-keep">Вторая кампания</span></td></tr>
-        <tr><td><b>Правила бронирования</b></td><td><a href="https://ollinter.com/de/booking-rules" target="_blank">/de/booking-rules</a></td><td>Отмена, перенос, возврат</td><td><span class="pill p-check">Служебная</span></td></tr>
-        <tr><td><b>Политика отзывов</b></td><td><a href="https://ollinter.com/de/reviews-policy" target="_blank">/de/reviews-policy</a></td><td>Отзыв только после оплаченного занятия</td><td><span class="pill p-check">Служебная</span></td></tr>
-        <tr><td><b>Ранжирование</b></td><td><a href="https://ollinter.com/de/ranking" target="_blank">/de/ranking</a></td><td>Как сортируется выдача, бонус новым экспертам</td><td><span class="pill p-check">Для экспертов</span></td></tr>
-        <tr><td><b>Проверка связи</b></td><td><a href="https://ollinter.com/de/session-check" target="_blank">/de/session-check</a></td><td>Тест камеры и микрофона перед занятием</td><td><span class="pill p-check">Служебная</span></td></tr>
-        <tr><td><b>Страны выплат</b></td><td><a href="https://ollinter.com/de/payout-countries" target="_blank">/de/payout-countries</a></td><td>Где эксперт может получать деньги</td><td><span class="pill p-check">Для экспертов</span></td></tr>
-        <tr><td><b>Договор с экспертом</b></td><td><a href="https://ollinter.com/de/provider-agreement" target="_blank">/de/provider-agreement</a></td><td>Юридические условия</td><td><span class="pill p-check">Служебная</span></td></tr>
-        <tr><td><b>О проекте</b></td><td><a href="https://ollinter.com/de/about" target="_blank">/de/about</a></td><td>Что за платформа, какие форматы занятий</td><td><span class="pill p-check">Второстепенная</span></td></tr>
-        <tr><td><b>Помощь: занятие</b></td><td><a href="https://ollinter.com/de/help/lesson" target="_blank">/de/help/lesson</a></td><td>Как проходит занятие в браузере</td><td><span class="pill p-check">Служебная</span></td></tr>
+        <tr><td>Главная</td><td><a href="https://ollinter.com/de" target="_blank">/de</a></td><td>Вход из рекламы</td></tr>
+        <tr><td>Поиск</td><td><a href="https://ollinter.com/de/search" target="_blank">/de/search</a></td><td>Основной экран выбора</td></tr>
+        <tr><td>Предметы</td><td><a href="https://ollinter.com/de/subjects" target="_blank">/de/subjects</a></td><td>Посадочные под языки</td></tr>
+        <tr><td>Как это работает</td><td><a href="https://ollinter.com/de/how-it-works" target="_blank">/de/how-it-works</a></td><td>Снимает страх оплаты</td></tr>
+        <tr><td>Доверие и безопасность</td><td><a href="https://ollinter.com/de/trust-and-safety" target="_blank">/de/trust-and-safety</a></td><td>Главный аргумент</td></tr>
+        <tr><td>Групповые занятия</td><td><a href="https://ollinter.com/de/sessions" target="_blank">/de/sessions</a></td><td>Наполнить или скрыть</td></tr>
+        <tr><td>Стать экспертом</td><td><a href="https://ollinter.com/de/teach" target="_blank">/de/teach</a></td><td>Кампания на преподавателей</td></tr>
+        <tr><td>О проекте</td><td><a href="https://ollinter.com/de/about" target="_blank">/de/about</a></td><td>Второстепенная</td></tr>
+        <tr><td>Правила бронирования</td><td><a href="https://ollinter.com/de/booking-rules" target="_blank">/de/booking-rules</a></td><td>Служебная</td></tr>
+        <tr><td>Политика отзывов</td><td><a href="https://ollinter.com/de/reviews-policy" target="_blank">/de/reviews-policy</a></td><td>Служебная</td></tr>
+        <tr><td>Ранжирование</td><td><a href="https://ollinter.com/de/ranking" target="_blank">/de/ranking</a></td><td>Для экспертов</td></tr>
+        <tr><td>Проверка связи</td><td><a href="https://ollinter.com/de/session-check" target="_blank">/de/session-check</a></td><td>Служебная</td></tr>
+        <tr><td>Страны выплат</td><td><a href="https://ollinter.com/de/payout-countries" target="_blank">/de/payout-countries</a></td><td>Для экспертов</td></tr>
+        <tr><td>Договор с экспертом</td><td><a href="https://ollinter.com/de/provider-agreement" target="_blank">/de/provider-agreement</a></td><td>Служебная</td></tr>
+        <tr><td>Помощь: занятие</td><td><a href="https://ollinter.com/de/help/lesson" target="_blank">/de/help/lesson</a></td><td>Служебная</td></tr>
       </tbody>
     </table>
   </div>
 
-  <h2 style="margin-top:34px">Задачи на сегодня</h2>
-  <div class="tasks">
-
-    <div class="task">
-      <div class="h"><span class="n">1</span><h3>Пройти сайт глазами клиента</h3><span class="time">60 мин</span></div>
-      <ul>
-        <li>Открыть /de, вбить запрос в поиск, дойти до карточки эксперта и до экрана оплаты — записать, где застрял</li>
-        <li>Проверить немецкие тексты на главной: нет ли машинного перевода и пустых блоков</li>
-        <li>Выписать страницы, которые не нужны в рекламе, — их скрываем из меню, а не удаляем</li>
-        <li>Проверить, что в каталоге есть живые эксперты по немецкому и английскому, иначе реклама ведёт в пустоту</li>
-      </ul>
-    </div>
-
-    <div class="task">
-      <div class="h"><span class="n">2</span><h3>Проверить аналитику</h3><span class="time">45 мин</span></div>
-      <ul>
-        <li>Пройти путь самому и убедиться, что событие регистрации долетает в отчёт</li>
-        <li>Проверить, что бронирование и оплата считаются отдельными событиями</li>
-        <li>Убедиться, что метки источника не теряются при переходе между страницами</li>
-      </ul>
-    </div>
-
-    <div class="task">
-      <div class="h"><span class="n">3</span><h3>Создать аккаунты соцсетей</h3><span class="time">45 мин</span></div>
-      <ul>
-        <li>Instagram, TikTok, YouTube на почту проекта, единый ник, двухфакторка включена</li>
-        <li>Аватар и шапка из брендбука, ссылка на /de в профиле</li>
-        <li>Instagram и Facebook связать с рекламным кабинетом</li>
-      </ul>
-    </div>
-
-    <div class="task">
-      <div class="h"><span class="n">4</span><h3>Отдать креативы в работу</h3><span class="time">30 мин</span></div>
-      <ul>
-        <li>Передать подрядчику сценарии и референсы конкурентов со страницы разбора</li>
-        <li>Форматы: 9:16 для Reels и TikTok, 1:1 для ленты</li>
-        <li>Срок и количество зафиксировать письменно</li>
-      </ul>
-    </div>
-
-    <div class="task">
-      <div class="h"><span class="n">5</span><h3>Посты для соцсетей</h3><span class="time">я подготовлю</span></div>
-      <ul>
-        <li>8 постов на немецком: что за платформа, как проверяются эксперты, оплата после занятия, форматы занятий</li>
-        <li>Под каждый — короткий текст и идея картинки из брендбука</li>
-        <li>Пришлю отдельной ссылкой, тебе останется опубликовать</li>
-      </ul>
-    </div>
-
-  </div>
-
-  <footer>Ollinter · карта сайта и задачи, 6 ноября 2026</footer>
+  <footer>Ollinter · сайт, правки и задачи, 6 ноября 2026. Сайт работает на префиксах /de/, /en/, /ru/.</footer>
 </div>
+
+<script>
+(function(){
+  var KEY='ollinter-sitetasks-v1';
+  var boxes=[].slice.call(document.querySelectorAll('.chk input'));
+  var bar=document.getElementById('bar'), done=document.getElementById('done'), total=document.getElementById('total');
+  total.textContent=boxes.length;
+  function render(){
+    var k=boxes.filter(function(b){return b.checked}).length;
+    done.textContent=k; bar.style.width=Math.round(k/boxes.length*100)+'%';
+    try{ localStorage.setItem(KEY,JSON.stringify(boxes.map(function(b){return b.checked?1:0}))); }catch(e){}
+  }
+  document.addEventListener('change',function(e){ if(e.target.matches('.chk input')) render() });
+  document.getElementById('reset').addEventListener('click',function(){
+    boxes.forEach(function(b){b.checked=false}); render(); window.scrollTo({top:0,behavior:'smooth'});
+  });
+  boxes.forEach(function(b){ b.checked=false });
+  try{ var s=JSON.parse(localStorage.getItem(KEY)||'null'); if(s) boxes.forEach(function(b,i){ b.checked=!!s[i] }); }catch(e){}
+  render();
+})();
+</script>
