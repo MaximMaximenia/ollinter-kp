@@ -1,0 +1,149 @@
+<title>Ollinter: карта сайта и задачи</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@500;600;700;800;900&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --ink:#0d1117; --ink-2:#4a5560; --ink-3:#8a95a1;
+  --paper:#fff; --page:#f2f3f5; --line:#dfe3e8;
+  --accent:#1659ff; --accent-soft:#e8eeff;
+  --win:#117a52; --win-soft:#e2f3eb;
+  --hot:#e8336d; --hot-soft:#ffe9f1;
+  --warn:#b3690c; --warn-soft:#fdf1e0;
+  --r:5px;
+  --display:'Golos Text','Segoe UI',Tahoma,sans-serif;
+  --body:'Manrope','Segoe UI',Tahoma,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--page);color:var(--ink);font-family:var(--body);font-size:15.5px;line-height:1.5}
+.wrap{max-width:1040px;margin:0 auto;padding-inline:18px;padding-block:0 80px}
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance}
+h1{font-size:clamp(30px,5vw,48px);line-height:1.02;font-weight:900;letter-spacing:-.03em}
+h2{font-size:clamp(20px,2.8vw,28px);font-weight:800;letter-spacing:-.02em}
+p{margin:0}
+ul{margin:0;padding-left:0;list-style:none}
+a{color:var(--accent)}
+.topbar{border-bottom:1px solid var(--line);background:var(--page)}
+.topbar-in{max-width:1040px;margin:0 auto;padding:12px 18px;display:flex;gap:12px;align-items:center}
+.brand{font-family:var(--display);font-weight:900;font-size:15.5px}
+.brand span{color:var(--accent)}
+.when{margin-left:auto;font-size:13px;color:var(--ink-3)}
+.hero{padding-block:clamp(26px,5vw,48px) 8px;display:grid;gap:12px}
+.kicker{display:inline-block;font-family:var(--display);font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;background:var(--ink);color:#fff;padding:6px 11px;border-radius:var(--r);justify-self:start}
+.lead{font-size:17px;color:var(--ink-2);max-width:68ch}
+
+.tbl{overflow-x:auto;margin-top:18px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r)}
+table{border-collapse:collapse;width:100%;min-width:620px;font-size:14.5px}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--display);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);font-weight:800;background:#fafbfc}
+tr:last-child td{border-bottom:none}
+td a{font-weight:600;text-decoration:none}
+.pill{display:inline-block;font-size:11px;font-weight:800;padding:2px 8px;border-radius:var(--r);white-space:nowrap}
+.p-keep{background:var(--win-soft);color:var(--win)}
+.p-check{background:var(--warn-soft);color:var(--warn)}
+.p-cut{background:var(--hot-soft);color:var(--hot)}
+
+.tasks{margin-top:34px;display:grid;gap:12px}
+.task{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;display:grid;gap:8px}
+.task .h{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.task .n{font-family:var(--display);font-weight:900;font-size:11px;background:var(--ink);color:#fff;padding:4px 8px;border-radius:var(--r)}
+.task h3{font-size:17.5px}
+.task .time{margin-left:auto;font-size:12.5px;color:var(--ink-3);font-weight:700}
+.task li{display:flex;gap:10px;align-items:flex-start;font-size:15px;color:var(--ink-2);margin-top:6px}
+.task li::before{content:"□";color:var(--ink-3);flex:none}
+footer{border-top:1px solid var(--line);margin-top:34px;padding-top:16px;font-size:13px;color:var(--ink-3)}
+</style>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <div class="brand">Oll<span>inter</span></div>
+    <div class="when">Карта сайта · 6 ноября</div>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="hero">
+    <span class="kicker">Сайт и задачи на сегодня</span>
+    <h1>Все страницы сайта</h1>
+    <p class="lead">Сайт живёт на языковых префиксах: <b>/de/</b>, <b>/en/</b>, <b>/ru/</b>. Без префикса все адреса редиректят. Для рекламы на Германию работаем с немецкой версией.</p>
+  </header>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Страница</th><th>Немецкая версия</th><th>Зачем она</th><th>Решение</th></tr></thead>
+      <tbody>
+        <tr><td><b>Главная</b></td><td><a href="https://ollinter.com/de" target="_blank">/de</a></td><td>Вход из рекламы, поиск, карточки экспертов</td><td><span class="pill p-keep">Основная</span></td></tr>
+        <tr><td><b>Поиск</b></td><td><a href="https://ollinter.com/de/search" target="_blank">/de/search</a></td><td>Поиск своими словами, фильтры</td><td><span class="pill p-keep">Основная</span></td></tr>
+        <tr><td><b>Предметы</b></td><td><a href="https://ollinter.com/de/subjects" target="_blank">/de/subjects</a></td><td>Разделы знаний, вход под каждый язык</td><td><span class="pill p-keep">Под рекламу</span></td></tr>
+        <tr><td><b>Как это работает</b></td><td><a href="https://ollinter.com/de/how-it-works" target="_blank">/de/how-it-works</a></td><td>Оплата через Stripe, перевод, комната занятия</td><td><span class="pill p-keep">Основная</span></td></tr>
+        <tr><td><b>Доверие и безопасность</b></td><td><a href="https://ollinter.com/de/trust-and-safety" target="_blank">/de/trust-and-safety</a></td><td>Ручная проверка экспертов, жалобы, записи</td><td><span class="pill p-keep">Главный аргумент</span></td></tr>
+        <tr><td><b>Групповые занятия</b></td><td><a href="https://ollinter.com/de/sessions" target="_blank">/de/sessions</a></td><td>Расписание групп, свободные места</td><td><span class="pill p-check">Проверить наполнение</span></td></tr>
+        <tr><td><b>Стать экспертом</b></td><td><a href="https://ollinter.com/de/teach" target="_blank">/de/teach</a></td><td>Посадочная для набора преподавателей</td><td><span class="pill p-keep">Вторая кампания</span></td></tr>
+        <tr><td><b>Правила бронирования</b></td><td><a href="https://ollinter.com/de/booking-rules" target="_blank">/de/booking-rules</a></td><td>Отмена, перенос, возврат</td><td><span class="pill p-check">Служебная</span></td></tr>
+        <tr><td><b>Политика отзывов</b></td><td><a href="https://ollinter.com/de/reviews-policy" target="_blank">/de/reviews-policy</a></td><td>Отзыв только после оплаченного занятия</td><td><span class="pill p-check">Служебная</span></td></tr>
+        <tr><td><b>Ранжирование</b></td><td><a href="https://ollinter.com/de/ranking" target="_blank">/de/ranking</a></td><td>Как сортируется выдача, бонус новым экспертам</td><td><span class="pill p-check">Для экспертов</span></td></tr>
+        <tr><td><b>Проверка связи</b></td><td><a href="https://ollinter.com/de/session-check" target="_blank">/de/session-check</a></td><td>Тест камеры и микрофона перед занятием</td><td><span class="pill p-check">Служебная</span></td></tr>
+        <tr><td><b>Страны выплат</b></td><td><a href="https://ollinter.com/de/payout-countries" target="_blank">/de/payout-countries</a></td><td>Где эксперт может получать деньги</td><td><span class="pill p-check">Для экспертов</span></td></tr>
+        <tr><td><b>Договор с экспертом</b></td><td><a href="https://ollinter.com/de/provider-agreement" target="_blank">/de/provider-agreement</a></td><td>Юридические условия</td><td><span class="pill p-check">Служебная</span></td></tr>
+        <tr><td><b>О проекте</b></td><td><a href="https://ollinter.com/de/about" target="_blank">/de/about</a></td><td>Что за платформа, какие форматы занятий</td><td><span class="pill p-check">Второстепенная</span></td></tr>
+        <tr><td><b>Помощь: занятие</b></td><td><a href="https://ollinter.com/de/help/lesson" target="_blank">/de/help/lesson</a></td><td>Как проходит занятие в браузере</td><td><span class="pill p-check">Служебная</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 style="margin-top:34px">Задачи на сегодня</h2>
+  <div class="tasks">
+
+    <div class="task">
+      <div class="h"><span class="n">1</span><h3>Пройти сайт глазами клиента</h3><span class="time">60 мин</span></div>
+      <ul>
+        <li>Открыть /de, вбить запрос в поиск, дойти до карточки эксперта и до экрана оплаты — записать, где застрял</li>
+        <li>Проверить немецкие тексты на главной: нет ли машинного перевода и пустых блоков</li>
+        <li>Выписать страницы, которые не нужны в рекламе, — их скрываем из меню, а не удаляем</li>
+        <li>Проверить, что в каталоге есть живые эксперты по немецкому и английскому, иначе реклама ведёт в пустоту</li>
+      </ul>
+    </div>
+
+    <div class="task">
+      <div class="h"><span class="n">2</span><h3>Проверить аналитику</h3><span class="time">45 мин</span></div>
+      <ul>
+        <li>Пройти путь самому и убедиться, что событие регистрации долетает в отчёт</li>
+        <li>Проверить, что бронирование и оплата считаются отдельными событиями</li>
+        <li>Убедиться, что метки источника не теряются при переходе между страницами</li>
+      </ul>
+    </div>
+
+    <div class="task">
+      <div class="h"><span class="n">3</span><h3>Создать аккаунты соцсетей</h3><span class="time">45 мин</span></div>
+      <ul>
+        <li>Instagram, TikTok, YouTube на почту проекта, единый ник, двухфакторка включена</li>
+        <li>Аватар и шапка из брендбука, ссылка на /de в профиле</li>
+        <li>Instagram и Facebook связать с рекламным кабинетом</li>
+      </ul>
+    </div>
+
+    <div class="task">
+      <div class="h"><span class="n">4</span><h3>Отдать креативы в работу</h3><span class="time">30 мин</span></div>
+      <ul>
+        <li>Передать подрядчику сценарии и референсы конкурентов со страницы разбора</li>
+        <li>Форматы: 9:16 для Reels и TikTok, 1:1 для ленты</li>
+        <li>Срок и количество зафиксировать письменно</li>
+      </ul>
+    </div>
+
+    <div class="task">
+      <div class="h"><span class="n">5</span><h3>Посты для соцсетей</h3><span class="time">я подготовлю</span></div>
+      <ul>
+        <li>8 постов на немецком: что за платформа, как проверяются эксперты, оплата после занятия, форматы занятий</li>
+        <li>Под каждый — короткий текст и идея картинки из брендбука</li>
+        <li>Пришлю отдельной ссылкой, тебе останется опубликовать</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <footer>Ollinter · карта сайта и задачи, 6 ноября 2026</footer>
+</div>
