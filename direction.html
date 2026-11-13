@@ -5,40 +5,40 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@500;600;700;800;900&family=Manrope:wght@400;500;600;700&display=swap">
 <style>
 :root{--ink:#0d1117;--ink-2:#4a5560;--ink-3:#8a95a1;--paper:#fff;--page:#f2f3f5;--line:#dfe3e8;
---accent:#1659ff;--win:#117a52;--win-soft:#e2f3eb;--warn:#b3690c;--warn-soft:#fdf1e0;
+--accent:#1659ff;--warn:#b3690c;--warn-soft:#fdf1e0;
 --r:5px;--display:'Golos Text','Segoe UI',Tahoma,sans-serif;--body:'Manrope','Segoe UI',Tahoma,sans-serif;color-scheme:light}
 *{box-sizing:border-box}html,body{margin:0}
-body{background:var(--page);color:var(--ink);font-family:var(--body);font-size:15.5px;line-height:1.5}
-.wrap{max-width:860px;margin:0 auto;padding-inline:18px;padding-block:0 80px}
-h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance}
-h1{font-size:clamp(29px,5vw,46px);line-height:1.03;font-weight:900;letter-spacing:-.03em}
-h2{font-size:clamp(20px,2.7vw,27px);font-weight:800;letter-spacing:-.022em;margin-top:32px}
-h3{font-size:16.5px;font-weight:800}
+body{background:var(--page);color:var(--ink);font-family:var(--body);font-size:15.5px;line-height:1.55}
+.wrap{max-width:760px;margin:0 auto;padding-inline:20px;padding-block:0 90px}
+h1,h2{font-family:var(--display);margin:0;text-wrap:balance}
+h1{font-size:clamp(30px,5.4vw,48px);line-height:1.02;font-weight:900;letter-spacing:-.032em}
+h2{font-size:clamp(19px,2.5vw,24px);font-weight:800;letter-spacing:-.02em;margin-top:44px}
 p{margin:0}ul{margin:0;padding-left:0;list-style:none}a{color:var(--accent)}
 .topbar{border-bottom:1px solid var(--line);background:var(--page)}
-.topbar-in{max-width:860px;margin:0 auto;padding:11px 18px;display:flex;gap:12px;align-items:center}
+.topbar-in{max-width:760px;margin:0 auto;padding:12px 20px;display:flex;gap:12px;align-items:center}
 .brand{font-family:var(--display);font-weight:900;font-size:15.5px}.brand span{color:var(--accent)}
 .when{margin-left:auto;font-size:13px;color:var(--ink-3)}
-.hero{padding-block:clamp(26px,5vw,46px) 4px;display:grid;gap:11px}
-.kicker{display:inline-block;font-family:var(--display);font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;background:var(--ink);color:#fff;padding:6px 11px;border-radius:var(--r);justify-self:start}
-.lead{font-size:17px;color:var(--ink-2);max-width:66ch}
-.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:17px 19px;margin-top:11px;display:grid;gap:8px}
-.fix li,.good li{display:flex;gap:10px;align-items:flex-start;font-size:15px;margin-top:6px}
-.fix li::before{content:"→";color:var(--accent);font-weight:800;flex:none}
-.good li::before{content:"+";color:var(--win);font-weight:800;flex:none}
-.blk{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:16px 19px;margin-top:9px;display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:start}
-.blk .n{font-family:var(--display);font-weight:900;font-size:11px;background:var(--ink);color:#fff;width:24px;height:24px;border-radius:var(--r);display:grid;place-items:center}
-.blk .price{font-family:var(--display);font-weight:900;font-size:17px;white-space:nowrap}
-.blk small{display:block;color:var(--ink-3);font-size:13.5px;margin-top:3px}
-.total{background:var(--ink);color:#fff;border-radius:var(--r);padding:18px 20px;margin-top:14px;display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
-.total .t{font-family:var(--display);font-weight:800;font-size:17px}
-.total .v{font-family:var(--display);font-weight:900;font-size:clamp(24px,4vw,34px);letter-spacing:-.02em}
-.total small{display:block;color:#9aa6b4;font-size:13px;font-weight:500;margin-top:3px}
-.day{display:grid;grid-template-columns:92px 1fr;gap:14px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:13px 16px;margin-top:8px;align-items:baseline}
-.day b{font-family:var(--display);font-size:13px;color:var(--accent);letter-spacing:.04em;text-transform:uppercase}
-.note{background:var(--warn-soft);border-left:3px solid var(--warn);padding:12px 14px;font-size:14.5px;color:#7a4a0a;border-radius:0 var(--r) var(--r) 0;margin-top:12px}
-footer{border-top:1px solid var(--line);margin-top:32px;padding-top:16px;font-size:13px;color:var(--ink-3)}
-@media(max-width:560px){.blk{grid-template-columns:auto 1fr}.blk .price{grid-column:2}}
+.hero{padding-block:clamp(30px,6vw,56px) 0;display:grid;gap:13px}
+.kicker{display:inline-block;font-family:var(--display);font-size:11px;font-weight:800;letter-spacing:.17em;text-transform:uppercase;background:var(--ink);color:#fff;padding:6px 11px;border-radius:var(--r);justify-self:start}
+.lead{font-size:17.5px;color:var(--ink-2);max-width:60ch}
+.list{margin-top:14px;border-top:1px solid var(--line)}
+.item{border-bottom:1px solid var(--line);padding:16px 2px;display:grid;grid-template-columns:28px 1fr;gap:14px;align-items:start}
+.item .n{font-family:var(--display);font-weight:900;font-size:12px;color:var(--ink-3);padding-top:2px}
+.item b{font-family:var(--display);font-size:16.5px;font-weight:800;display:block}
+.item small{display:block;color:var(--ink-2);font-size:14.5px;margin-top:4px}
+.need{margin-top:12px;display:grid;gap:9px}
+.need li{display:flex;gap:11px;align-items:flex-start;font-size:15.5px}
+.need li::before{content:"→";color:var(--accent);font-weight:800;flex:none}
+.price{background:var(--ink);color:#fff;border-radius:var(--r);padding:26px 26px;margin-top:20px;display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}
+.price .t{font-family:var(--display);font-weight:800;font-size:17px}
+.price small{display:block;color:#9aa6b4;font-size:13.5px;font-weight:500;margin-top:4px}
+.price .v{font-family:var(--display);font-weight:900;font-size:clamp(32px,6vw,44px);letter-spacing:-.03em;line-height:1}
+.note{background:var(--warn-soft);border-left:3px solid var(--warn);padding:13px 15px;font-size:14.5px;color:#7a4a0a;border-radius:0 var(--r) var(--r) 0;margin-top:14px}
+.days{margin-top:12px;display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.day{background:var(--paper);padding:13px 16px;display:grid;grid-template-columns:96px 1fr;gap:14px;align-items:baseline}
+.day b{font-family:var(--display);font-size:12.5px;color:var(--accent);letter-spacing:.05em;text-transform:uppercase}
+footer{border-top:1px solid var(--line);margin-top:40px;padding-top:18px;font-size:13px;color:var(--ink-3)}
+@media(max-width:520px){.day{grid-template-columns:1fr;gap:3px}}
 </style>
 
 <div class="topbar"><div class="topbar-in"><div class="brand">Oll<span>inter</span></div><div class="when">13 ноября</div></div></div>
@@ -46,57 +46,40 @@ footer{border-top:1px solid var(--line);margin-top:32px;padding-top:16px;font-si
 <div class="wrap">
   <header class="hero">
     <span class="kicker">Коммерческое предложение</span>
-    <h1>Запуск одного направления под ключ</h1>
-    <p class="lead">Полный цикл по одному направлению: от разбора ниши до работающей рекламы. Своя посадочная, свои креативы, свои кампании.</p>
+    <h1>Запуск направления под ключ</h1>
+    <p class="lead">Полный цикл по одному направлению: от разбора ниши до работающей рекламы и первого месяца ведения.</p>
   </header>
 
-  <h2>Что нужно от вас до старта</h2>
-  <div class="card">
-    <ul class="fix">
-      <li><b>Выбрать направление.</b> Одно. Два сразу размажут бюджет, и мы не поймём, что сработало.</li>
-      <li><b>Набрать экспертов в нём.</b> Минимум 10 активных профилей с ценами и свободным временем. Меньше — человек приходит в пустой каталог и уходит.</li>
-      <li><b>Посадочная страница направления.</b> Структуру и смыслы даю я, вёрстка на Антоне.</li>
-      <li><b>Подтвердить, что раздел не заблокирован для рекламы.</b> Finance и Law Антон закрыл по условиям Meta — там пиксель работать не будет, и это меняет всю схему.</li>
-    </ul>
+  <h2>Что входит</h2>
+  <div class="list">
+    <div class="item"><span class="n">01</span><div><b>Разбор ниши</b><small>Кто покупает, какая боль, что крутят конкуренты в Германии. На выходе — позиционирование и список заходов</small></div></div>
+    <div class="item"><span class="n">02</span><div><b>Смыслы посадочной страницы</b><small>Структура экранов, заголовки, тексты, блоки доверия, путь до кнопки. Готовый документ для разработки</small></div></div>
+    <div class="item"><span class="n">03</span><div><b>Пять креативов</b><small>Тексты, раскадровки, подбор визуала, сборка. Под эту нишу, а не переделка существующих</small></div></div>
+    <div class="item"><span class="n">04</span><div><b>Сборка и запуск кампаний</b><small>Структура кампаний, аудитории, UTM-разметка, настройка событий, запуск</small></div></div>
+    <div class="item"><span class="n">05</span><div><b>Месяц ведения</b><small>Ежедневный контроль, отключение слабых связок, перераспределение бюджета, отчёт раз в неделю</small></div></div>
   </div>
 
-  <h2>Что делаю я</h2>
-
-  <div class="blk"><span class="n">1</span><div><b>Разбор ниши и спроса</b><small>Кто покупает, какая боль, что крутят конкуренты в этой нише в Германии. На выходе — позиционирование и список заходов</small></div><span class="price">$150</span></div>
-
-  <div class="blk"><span class="n">2</span><div><b>Смыслы посадочной страницы</b><small>Структура экранов, заголовки, тексты, блоки доверия, путь до кнопки. Готовый документ для Антона</small></div><span class="price">$150</span></div>
-
-  <div class="blk"><span class="n">3</span><div><b>Креативы</b><small>8 штук: тексты, раскадровки, подбор визуала, сборка. Под новую нишу, не переделка языковых</small></div><span class="price">$250</span></div>
-
-  <div class="blk"><span class="n">4</span><div><b>Сборка и запуск кампаний</b><small>Структура кампаний, аудитории, UTM-разметка, события в пикселе под это направление, запуск</small></div><span class="price">$200</span></div>
-
-  <div class="blk"><span class="n">5</span><div><b>Ведение первого месяца</b><small>Ежедневный контроль, отключение слабых связок, перераспределение бюджета, отчёт раз в неделю</small></div><span class="price">$500/мес</span></div>
-
-  <div class="total">
-    <div><div class="t">Запуск</div><small>единоразово, пункты 1–4</small></div>
+  <div class="price">
+    <div><div class="t">Стоимость</div><small>всё перечисленное, включая первый месяц</small></div>
     <div class="v">$750</div>
   </div>
-  <div class="total" style="background:var(--paper);color:var(--ink);border:1px solid var(--line)">
-    <div><div class="t">Ведение</div><small style="color:var(--ink-3)">ежемесячно, со второго месяца</small></div>
-    <div class="v">$500</div>
-  </div>
 
-  <div class="note"><b>Рекламный бюджет считается отдельно.</b> На тест нового направления закладываем минимум 300 € на первые две недели — меньше не хватит, чтобы алгоритм обучился и мы увидели цифры, а не шум.</div>
+  <div class="note"><b>Рекламный бюджет считается отдельно.</b> На тест направления закладываем минимум 300 € на первые две недели — меньше не хватит, чтобы алгоритм обучился и мы увидели цифры, а не шум.</div>
+
+  <h2>Что нужно с вашей стороны</h2>
+  <ul class="need">
+    <li><b>Минимум 10 активных экспертов</b> в направлении — с ценами и свободным временем. Меньше — человек приходит в пустой каталог и уходит.</li>
+    <li><b>Вёрстка посадочной страницы</b> по документу, который я передам.</li>
+    <li><b>События на сайте</b> — отслеживание действий, без него реклама оптимизируется на клики, а не на заявки.</li>
+  </ul>
 
   <h2>Сроки</h2>
-  <div class="day"><b>Дни 1–3</b><div>Разбор ниши, позиционирование, смыслы посадочной. Отдаю документ Антону</div></div>
-  <div class="day"><b>Дни 4–8</b><div>Производство креативов, параллельно Антон верстает страницу</div></div>
-  <div class="day"><b>Дни 9–10</b><div>Сборка кампаний, разметка, проверка событий на тестовом пикселе</div></div>
-  <div class="day"><b>День 11</b><div>Запуск</div></div>
-  <div class="day"><b>Дни 12–25</b><div>Накопление данных, отключение слабых связок. Первые выводы по цене действия</div></div>
-
-  <h2>Чего не делаем</h2>
-  <div class="card">
-    <ul class="fix">
-      <li>Не берём направление, где меньше 10 экспертов. Трафик в пустоту — выброшенные деньги.</li>
-      <li>Не запускаем, пока на сайте не отработают события пикселя. Иначе реклама будет оптимизироваться на клики.</li>
-      <li>Не расширяемся на второе направление, пока в этом не будет понятной цены заявки.</li>
-    </ul>
+  <div class="days">
+    <div class="day"><b>Дни 1–3</b><div>Разбор ниши, позиционирование, смыслы посадочной</div></div>
+    <div class="day"><b>Дни 4–8</b><div>Производство креативов, параллельно идёт вёрстка страницы</div></div>
+    <div class="day"><b>Дни 9–10</b><div>Сборка кампаний, разметка, проверка событий</div></div>
+    <div class="day"><b>День 11</b><div>Запуск</div></div>
+    <div class="day"><b>Дни 12–25</b><div>Накопление данных, отключение слабых связок. Первые выводы по цене заявки</div></div>
   </div>
 
   <footer>Ollinter · запуск направления, 13 ноября 2026</footer>
