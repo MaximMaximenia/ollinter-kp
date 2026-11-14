@@ -1,0 +1,112 @@
+<title>Ollinter: UTM и события для рекламы</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@500;600;700;800;900&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+:root{--ink:#0d1117;--ink-2:#4a5560;--ink-3:#8a95a1;--paper:#fff;--page:#f2f3f5;--line:#dfe3e8;
+--accent:#1659ff;--win:#117a52;--win-soft:#e2f3eb;--warn:#b3690c;--warn-soft:#fdf1e0;--hot:#e8336d;--hot-soft:#ffe9f1;
+--r:5px;--display:'Golos Text','Segoe UI',Tahoma,sans-serif;--body:'Manrope','Segoe UI',Tahoma,sans-serif;color-scheme:light}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--page);color:var(--ink);font-family:var(--body);font-size:15.5px;line-height:1.55}
+.wrap{max-width:900px;margin:0 auto;padding-inline:20px;padding-block:0 90px}
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance}
+h1{font-size:clamp(29px,5vw,46px);line-height:1.03;font-weight:900;letter-spacing:-.03em}
+h2{font-size:clamp(20px,2.6vw,27px);font-weight:800;letter-spacing:-.022em;margin-top:40px}
+h3{font-size:16.5px;font-weight:800}
+p{margin:0}ul{margin:0;padding-left:0;list-style:none}a{color:var(--accent)}
+.topbar{border-bottom:1px solid var(--line);background:var(--page)}
+.topbar-in{max-width:900px;margin:0 auto;padding:12px 20px;display:flex;gap:12px;align-items:center}
+.brand{font-family:var(--display);font-weight:900;font-size:15.5px}.brand span{color:var(--accent)}
+.when{margin-left:auto;font-size:13px;color:var(--ink-3)}
+.hero{padding-block:clamp(28px,5vw,50px) 0;display:grid;gap:12px}
+.kicker{display:inline-block;font-family:var(--display);font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;background:var(--ink);color:#fff;padding:6px 11px;border-radius:var(--r);justify-self:start}
+.lead{font-size:17px;color:var(--ink-2);max-width:66ch}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;margin-top:12px;display:grid;gap:8px}
+.fix li,.bad li{display:flex;gap:10px;align-items:flex-start;font-size:15px;margin-top:6px}
+.fix li::before{content:"→";color:var(--accent);font-weight:800;flex:none}
+.bad li::before{content:"−";color:var(--hot);font-weight:800;flex:none}
+pre{background:#0d1117;color:#e6edf3;border-radius:var(--r);padding:15px 17px;overflow-x:auto;font-size:13px;line-height:1.6;margin-top:10px;white-space:pre-wrap;word-break:break-all}
+code{background:#eef1f5;border-radius:var(--r);padding:1px 6px;font-size:13.5px}
+table{width:100%;border-collapse:collapse;margin-top:12px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;font-size:14.5px}
+th{text-align:left;font-family:var(--display);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);padding:11px 14px;border-bottom:1px solid var(--line);background:#fafbfc}
+td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td code{font-size:13px}
+.note{background:var(--warn-soft);border-left:3px solid var(--warn);padding:13px 15px;font-size:14.5px;color:#7a4a0a;border-radius:0 var(--r) var(--r) 0;margin-top:14px}
+.ok{background:var(--win-soft);border-left:3px solid var(--win);padding:13px 15px;font-size:14.5px;color:#0b5c3e;border-radius:0 var(--r) var(--r) 0;margin-top:14px}
+footer{border-top:1px solid var(--line);margin-top:40px;padding-top:18px;font-size:13px;color:var(--ink-3)}
+</style>
+
+<div class="topbar"><div class="topbar-in"><div class="brand">Oll<span>inter</span></div><div class="when">14 ноября</div></div></div>
+
+<div class="wrap">
+  <header class="hero">
+    <span class="kicker">Для рекламщика</span>
+    <h1>UTM-метки и события на сайте</h1>
+    <p class="lead">Пиксель установлен и проверен на боевом сайте, события приходят. Осталось правильно размечать ссылки, чтобы было видно, какое объявление приносит деньги.</p>
+  </header>
+
+  <h2>UTM-метки</h2>
+  <p style="margin-top:10px;color:var(--ink-2)">Вставить в поле «URL-параметры» на уровне объявления. Одна строка, копировать целиком.</p>
+
+  <pre>utm_source=meta&amp;utm_medium=paid_social&amp;utm_campaign={{campaign.name}}&amp;utm_content={{ad.name}}&amp;utm_term={{adset.name}}&amp;utm_placement={{placement}}</pre>
+
+  <div class="card">
+    <ul class="fix">
+      <li><b>Фигурные скобки не трогать</b> — Meta подставит туда настоящие названия сама.</li>
+      <li><b>Названия кампаний и объявлений — латиницей, без пробелов.</b> Вместо «Немецкий для врачей» писать <code>de-medical</code>. Пробелы и кириллица ломают отчёты.</li>
+      <li><b>utm_source всегда <code>meta</code></b> — и для Facebook, и для Instagram. Разделение по площадкам даст <code>utm_placement</code>.</li>
+    </ul>
+  </div>
+
+  <h2>Куда вести объявления</h2>
+  <div class="card">
+    <ul class="fix">
+      <li>Кампания про английский → <code>ollinter.com/de/subjects/english</code></li>
+      <li>Кампания про немецкий → <code>ollinter.com/de/subjects/german</code></li>
+      <li>Общая кампания про языки → <code>ollinter.com/de/for/languages</code></li>
+    </ul>
+    <ul class="bad">
+      <li><b>Не вести на <code>/de/search?subject=…</code></b> — эта ссылка фильтр не применяет, человек увидит вперемешку всех преподавателей и уйдёт. Проверено.</li>
+    </ul>
+  </div>
+
+  <div class="note"><b>Важно про ссылки.</b> Параметры <code>fbclid</code> и все <code>utm_*</code> должны доходить до страницы нетронутыми. Никаких сокращателей ссылок и редиректов через сторонние сервисы — они срезают метки, и вся аналитика превращается в «источник не определён».</div>
+
+  <h2>Какие события стоят на сайте</h2>
+  <p style="margin-top:10px;color:var(--ink-2)">Все проверены на живом сайте, запросы реально уходят в Meta.</p>
+
+  <table>
+    <tr><th>Событие</th><th>Когда срабатывает</th><th>Что передаёт</th></tr>
+    <tr><td><code>PageView</code></td><td>Открытие любой страницы, включая переходы внутри сайта</td><td>адрес страницы</td></tr>
+    <tr><td><code>TeachersClick</code></td><td>Клик по главной кнопке «Выбрать преподавателя»</td><td>место кнопки, язык интерфейса</td></tr>
+    <tr><td><code>ViewContent</code></td><td>Открытие карточки преподавателя</td><td>id, раздел, цена, валюта</td></tr>
+    <tr><td><code>InitiateCheckout</code></td><td>Выбрано время и нажата кнопка бронирования</td><td>id, цена, валюта</td></tr>
+    <tr><td><code>AddPaymentInfo</code></td><td>Нажата кнопка оплаты</td><td>id, цена, валюта</td></tr>
+    <tr><td><code>CompleteRegistration</code></td><td>Аккаунт создан</td><td>способ входа</td></tr>
+    <tr><td><code>Purchase</code></td><td>Оплата подтверждена</td><td>номер заказа, id, цена, валюта</td></tr>
+  </table>
+
+  <h2>На что оптимизировать</h2>
+  <div class="card">
+    <ul class="fix">
+      <li><b>Первая неделя — <code>TeachersClick</code>.</b> Самое частое событие, алгоритм наберёт данные за пару дней и выйдет из обучения.</li>
+      <li><b>Со второй недели — <code>ViewContent</code>.</b> Когда наберётся 30–50 срабатываний в неделю. Это уже реальный интерес: человек дошёл до выбора.</li>
+      <li><b>Дальше — <code>Purchase</code>.</b> Как только пойдут первые оплаты. Это главная цель, но переключаться раньше времени нельзя: алгоритму не на чем учиться.</li>
+    </ul>
+  </div>
+
+  <div class="ok"><b>Валюта.</b> Цены передаются в настоящей валюте преподавателя — в основном EUR, но встречается USD. Это нормально, Meta понимает обе. В отчётах по выручке учитывать, что суммы в разных валютах не складываются.</div>
+
+  <h2>Что проверить после запуска</h2>
+  <div class="card">
+    <ul class="fix">
+      <li>В первый день открыть Events Manager и убедиться, что события приходят с реальным трафиком, а не только с тестов.</li>
+      <li>В админке сайта, раздел Marketing, проверить, что кампании видны по именам, а не свалены в «No campaign». Если свалены — метки не долетают, искать редирект.</li>
+      <li>Сверять цифры Meta и админки: в Meta будет меньше, потому что часть людей отказывается от cookies. Это нормально, админка считает всех.</li>
+    </ul>
+  </div>
+
+  <footer>Ollinter · UTM и события, 14 ноября 2026</footer>
+</div>
