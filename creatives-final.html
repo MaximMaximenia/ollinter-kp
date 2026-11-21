@@ -5,95 +5,42 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap">
 <style>
 :root{
-  --bg:#f7f6f3; --surface:#fff; --ink:#15181d; --muted:#6a6f78;
-  --line:#e2e0da; --accent:#1f5fd8;
+  --bg:#f7f6f3; --surface:#fff; --ink:#15181d; --muted:#6a6f78; --line:#e2e0da;
   --fd:"Space Grotesk","Inter",system-ui,sans-serif;
   --fb:"Inter",system-ui,-apple-system,sans-serif;
   color-scheme:light;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--ink);font-family:var(--fb);line-height:1.5;font-size:15px}
-.wrap{max-width:1180px;margin:0 auto;padding:44px 20px 80px}
+.wrap{max-width:1180px;margin:0 auto;padding:46px 20px 80px}
 .eyebrow{font-size:11px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:10px}
-h1{font-family:var(--fd);font-size:clamp(27px,5vw,38px);line-height:1.13;letter-spacing:-.025em;margin-bottom:10px}
-.lead{color:var(--muted);max-width:62ch}
-h2{font-family:var(--fd);font-size:20px;margin:48px 0 6px;letter-spacing:-.01em}
-.hint{color:var(--muted);font-size:14px;margin-bottom:22px;max-width:62ch}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:24px}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+h1{font-family:var(--fd);font-size:clamp(28px,5vw,40px);line-height:1.12;letter-spacing:-.025em}
+.lead{color:var(--muted);max-width:60ch;margin-top:10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:24px;margin-top:38px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden}
 .card img{width:100%;display:block;background:#000}
-.meta{padding:14px 17px 16px}
-.num{font-family:var(--fd);font-size:11px;font-weight:600;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
-.ttl{font-family:var(--fd);font-size:16px;font-weight:600;margin-top:3px}
-.desc{font-size:13.5px;color:var(--muted);margin-top:5px;line-height:1.4}
-.pill{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;
-  padding:3px 9px;border-radius:999px;background:#eef2f9;color:var(--accent);margin-top:9px}
-.pill.new{background:#eafaef;color:#15803d}
-.note{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px 21px;margin-top:22px;font-size:14.5px}
-.note p+p{margin-top:9px}
-.note b{font-weight:600}
-.src{color:var(--muted);font-size:12.5px;margin-top:42px;border-top:1px solid var(--line);padding-top:15px}
+.meta{padding:13px 17px 15px;display:flex;align-items:baseline;gap:10px}
+.num{font-family:var(--fd);font-size:12px;font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums}
+.ttl{font-family:var(--fd);font-size:15.5px;font-weight:600}
+.src{color:var(--muted);font-size:12.5px;margin-top:44px;border-top:1px solid var(--line);padding-top:15px}
 </style>
 <div class="wrap">
   <p class="eyebrow">Ollinter · Германия, Австрия, Швейцария · 21 ноября 2026</p>
-  <h1>Десять креативов к перезапуску</h1>
-  <p class="lead">Пять макетов из первой партии и пять новых. Тексты — из утверждённого списка заголовков. Преподаватели в карточках настоящие, данные взяты с их профилей на ollinter.com.</p>
+  <h1>10 креативов к перезапуску</h1>
+  <p class="lead">Формат 1024 × 1536. Тексты из утверждённого списка заголовков.</p>
 
-  <h2>Первая партия</h2>
-  <p class="hint">Проверенные макеты. Два из них уже откручивались: Muttersprachler дал CTR 3,10 %, Aus aller Welt — 4,65 % и единственную регистрацию за кампанию.</p>
   <div class="grid">
-    <div class="card"><img src="img/final/01.jpg" alt="Für dein Ziel">
-      <div class="meta"><div class="num">01</div><div class="ttl">Für dein Ziel</div>
-      <div class="desc">Подбор преподавателя под конкретную задачу: разговор, экзамен, работа, переезд.</div></div></div>
-    <div class="card"><img src="img/final/02.jpg" alt="Muttersprachler">
-      <div class="meta"><div class="num">02</div><div class="ttl">Muttersprachler</div>
-      <div class="desc">Занятия с носителем языка. Живое произношение вместо записей.</div>
-      <span class="pill">CTR 3,10 %</span></div></div>
-    <div class="card"><img src="img/final/03.jpg" alt="Aus aller Welt">
-      <div class="meta"><div class="num">03</div><div class="ttl">Aus aller Welt</div>
-      <div class="desc">Преподаватели со всего мира — выбирай любого.</div>
-      <span class="pill">CTR 4,65 %</span></div></div>
-    <div class="card"><img src="img/final/04.jpg" alt="In zwei Minuten">
-      <div class="meta"><div class="num">04</div><div class="ttl">In zwei Minuten</div>
-      <div class="desc">Скорость подбора: преподаватель находится за пару минут.</div></div></div>
-    <div class="card"><img src="img/final/05.jpg" alt="Erste Stunde">
-      <div class="meta"><div class="num">05</div><div class="ttl">Erste Stunde</div>
-      <div class="desc">Первый шаг — пробное занятие.</div></div></div>
-    <div class="card"><img src="img/final/06.jpg" alt="Jede Sprache">
-      <div class="meta"><div class="num">06</div><div class="ttl">Jede Sprache</div>
-      <div class="desc">Индивидуальные занятия по любому языку. Кадр с открытым окном.</div></div></div>
+    <div class="card"><img src="img/final/01.jpg" alt=""><div class="meta"><span class="num">01</span><span class="ttl">Für dein Ziel</span></div></div>
+    <div class="card"><img src="img/final/02.jpg" alt=""><div class="meta"><span class="num">02</span><span class="ttl">Muttersprachler</span></div></div>
+    <div class="card"><img src="img/final/03.jpg" alt=""><div class="meta"><span class="num">03</span><span class="ttl">Aus aller Welt</span></div></div>
+    <div class="card"><img src="img/final/04.jpg" alt=""><div class="meta"><span class="num">04</span><span class="ttl">In zwei Minuten</span></div></div>
+    <div class="card"><img src="img/final/05.jpg" alt=""><div class="meta"><span class="num">05</span><span class="ttl">Erste Stunde</span></div></div>
+    <div class="card"><img src="img/final/06.jpg" alt=""><div class="meta"><span class="num">06</span><span class="ttl">Jede Sprache</span></div></div>
+    <div class="card"><img src="img/final/07.jpg" alt=""><div class="meta"><span class="num">07</span><span class="ttl">Wohlfühlen</span></div></div>
+    <div class="card"><img src="img/final/08.jpg" alt=""><div class="meta"><span class="num">08</span><span class="ttl">Woher deine Lehrkraft kommt</span></div></div>
+    <div class="card"><img src="img/final/09.jpg" alt=""><div class="meta"><span class="num">09</span><span class="ttl">Muttersprachler aus aller Welt</span></div></div>
+    <div class="card"><img src="img/final/10.jpg" alt=""><div class="meta"><span class="num">10</span><span class="ttl">Heute schon frei</span></div></div>
   </div>
 
-  <h2>Новые</h2>
-  <p class="hint">Живые фотографии вместо сгенерированных и карточки настоящих преподавателей. Чёрный фон, крупная типографика, тот же логотип и шрифты.</p>
-  <div class="grid">
-    <div class="card"><img src="img/final/07.jpg" alt="Wohlfühlen">
-      <div class="meta"><div class="num">07</div><div class="ttl">Eine Lehrkraft, bei der du dich wohlfühlst</div>
-      <div class="desc">Настоящий кадр занятия: преподавательница показывает карточку «Present Simple».</div>
-      <span class="pill new">новый</span></div></div>
-    <div class="card"><img src="img/final/08.jpg" alt="Карта мира">
-      <div class="meta"><div class="num">08</div><div class="ttl">Wähle, woher deine Lehrkraft kommt</div>
-      <div class="desc">Christine, Fernanda, Lingyi — карточки с карты преподавателей.</div>
-      <span class="pill new">новый</span></div></div>
-    <div class="card"><img src="img/final/09.jpg" alt="Muttersprachler aus aller Welt">
-      <div class="meta"><div class="num">09</div><div class="ttl">Muttersprachler aus aller Welt</div>
-      <div class="desc">Та же механика, другой заголовок и другая тройка: Martin, Sara, Lingyi.</div>
-      <span class="pill new">новый</span></div></div>
-    <div class="card"><img src="img/final/10.jpg" alt="Heute frei">
-      <div class="meta"><div class="num">10</div><div class="ttl">Deine Lehrkraft ist heute schon frei</div>
-      <div class="desc">Четыре преподавателя сеткой. Упор на то, что занятие можно начать сегодня.</div>
-      <span class="pill new">новый</span></div></div>
-  </div>
-
-  <h2>Преподаватели в карточках</h2>
-  <div class="note">
-    <p><b>Christine</b> — Deutsch, «Goethe war auch mal Anfänger – Entspannt Deutsch lernen», сегодня свободна.</p>
-    <p><b>Fernanda</b> — Spanisch для взрослых, разговорный и деловой, подготовка к DELE. Сегодня с 16:00.</p>
-    <p><b>Lingyi</b> — Mandarin, носитель языка. Сегодня с 15:00.</p>
-    <p><b>Martin Schröter</b> — Deutsch от A1 до C2, отдельный курс для медиков, сегодня свободен.</p>
-    <p><b>Sara Diego</b> — Spanisch для взрослых и детей. Сегодня с 12:00.</p>
-    <p>Фотографии, формулировки и доступность взяты с их профилей на ollinter.com и сверены 21 ноября. Цены в креативах не указаны: они меняются, а в объявлении это обещание. Флаги стран убраны — Fernanda преподаёт латиноамериканский испанский, и флаг Испании вводил бы в заблуждение.</p>
-  </div>
-
-  <p class="src">Формат 1024 × 1536, под ленту и Stories. Исходники макетов — в папке ollinter-creatives, рендер пересобирается скриптами mkads.</p>
+  <p class="src">Исходники макетов — в папке ollinter-creatives, рендер пересобирается скриптами mkads.</p>
 </div>
