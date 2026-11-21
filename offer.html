@@ -68,7 +68,8 @@ section[hidden]{display:none}
 .subs details{border:1px solid var(--line);border-radius:12px;background:var(--bg);padding:12px 16px}
 .subs summary{cursor:pointer;list-style:none;font-family:var(--display);font-weight:700;font-size:16px}
 .subs summary::-webkit-details-marker{display:none}
-.subs summary::after{content:"+";float:right;color:var(--accent);font-weight:900}
+.subs summary::after{content:"+";float:right;color:var(--accent);font-weight:900;margin-left:14px}
+.subs summary .p{float:right;font-family:var(--display);font-weight:700;font-size:15px;color:var(--muted)}
 .subs details[open] summary::after{content:"–"}
 .subs ul{display:grid;gap:7px;margin-top:10px}
 .subs li{display:grid;grid-template-columns:auto 1fr;gap:10px;font-size:15.5px;color:var(--muted)}
@@ -142,13 +143,18 @@ a{color:var(--accent)}
           <span class="blk-ttl"><b>Оформление</b><span>Делается один раз: проект получает вид, которому доверяют</span></span>
           <span class="blk-pr"></span>
         </label>
-        <ul class="blk-body">
-          <li>Фирменный стиль: логотип, цвета, шрифты, правила оформления</li>
-          <li>Дизайн сайта: макеты главной и внутренних страниц</li>
-          <li>Персонаж проекта: герой, от лица которого дальше идут ролики</li>
-          <li>Оформление Instagram, TikTok, Facebook и YouTube в одном стиле</li>
-          <li>8 постов о компании на старт, все тексты на мне</li>
-        </ul>
+        <div class="subs">
+          <details><summary>Фирменный стиль и дизайн сайта<span class="p">$350</span></summary><ul>
+            <li>Логотип, цвета, шрифты, правила оформления</li>
+            <li>Макеты главной и внутренних страниц</li>
+            <li>Персонаж проекта: герой, от лица которого дальше идут ролики</li></ul></details>
+          <details><summary>Оформление площадок<span class="p">$200</span></summary><ul>
+            <li>Instagram, TikTok, Facebook и YouTube в одном стиле</li>
+            <li>Шапки, аватары, описания, закреплённые блоки</li></ul></details>
+          <details><summary>Посты о компании<span class="p">$150</span></summary><ul>
+            <li>8 постов на старт, все тексты на мне</li>
+            <li>Чтобы профили не выглядели пустыми к приходу рекламы</li></ul></details>
+        </div>
       </div>
 
       <div class="blk">
@@ -158,22 +164,19 @@ a{color:var(--accent)}
           <span class="blk-pr"></span>
         </label>
         <div class="subs">
-          <details><summary>Анализ и смыслы</summary><ul>
+          <details><summary>Анализ и смыслы<span class="p">$300</span></summary><ul>
             <li>Анализ конкурентов: кто борется за тех же людей и чем берёт</li>
             <li>Анализ клиентов: кто ищет преподавателя английского и по каким причинам</li>
             <li>Продающие смыслы: что говорим ученикам и что преподавателям</li>
             <li>Путь клиента от объявления до регистрации, по шагам</li></ul></details>
-          <details><summary>Страница под сегмент</summary><ul>
+          <details><summary>Страница под сегмент<span class="p">$450</span></summary><ul>
             <li>Структура: что человек читает по порядку, чтобы зарегистрироваться</li>
             <li>Тексты под английский</li>
             <li>Экран с преподавателями: как показать их, чтобы вызывали доверие</li>
             <li>Понятное целевое действие на каждом экране</li></ul></details>
-          <details><summary>Три рекламных ролика</summary><ul>
-            <li>Сценарии под разные причины искать преподавателя</li>
-            <li>Производство под ключ: герой проекта, озвучка, монтаж</li>
-            <li>Нарезка под форматы площадок</li>
-            <li>Ролики легко переозвучить на другие языки</li></ul></details>
-          <details><summary>Реклама и аналитика</summary><ul>
+          <details><summary>Рекламные креативы<span class="p">$400</span></summary><ul>
+            <li>Количество не ограничено: делаем варианты, пока не найдём работающий</li></ul></details>
+          <details><summary>Реклама и аналитика<span class="p">$350</span></summary><ul>
             <li>Настройка кампаний: кабинеты, аудитории, объявления</li>
             <li>Запуск рекламы и ведение до конца месяца</li>
             <li>Докрутка объявлений и страницы по ходу теста</li>
@@ -190,8 +193,13 @@ a{color:var(--accent)}
       <div class="sum" id="sum">$2 200</div>
       <p class="cap">Оформление проекта и запуск рекламы на английский сегмент.</p>
       <div class="split">
-        <div><span>Оформление</span><b>$700</b></div>
-        <div><span>Запуск сегмента</span><b>$1 500</b></div>
+        <div><span>Фирменный стиль и дизайн сайта</span><b>$350</b></div>
+        <div><span>Оформление площадок</span><b>$200</b></div>
+        <div><span>Посты о компании</span><b>$150</b></div>
+        <div><span>Анализ и смыслы</span><b>$300</b></div>
+        <div><span>Страница под сегмент</span><b>$450</b></div>
+        <div><span>Рекламные креативы</span><b>$400</b></div>
+        <div><span>Реклама и аналитика</span><b>$350</b></div>
         <div style="border:none"><span><b>Итого за первый месяц</b></span><b id="split-total">$2 200</b></div>
       </div>
       <div style="display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))">
@@ -203,7 +211,7 @@ a{color:var(--accent)}
             <li>Анализ конкурентов и клиентов</li>
             <li>Продающие смыслы и путь клиента</li>
             <li>Посадочная страница под английский</li>
-            <li>Три рекламных ролика</li>
+            <li>Рекламные креативы без ограничения по количеству</li>
             <li>Настройка и ведение рекламы весь месяц</li>
             <li>Аналитика: регистрации и ключевые действия</li>
           </ul>
@@ -263,7 +271,7 @@ a{color:var(--accent)}
       <div class="day"><div class="m">Дизайн</div><div>Макеты главной и внутренних страниц, готовые к переносу на сайт.</div></div>
       <div class="day"><div class="m">Оформление площадок</div><div>Instagram, TikTok, Facebook и YouTube в одном стиле.</div></div>
       <div class="day"><div class="m">Контент</div><div>8 постов о компании с текстами, чтобы профили не выглядели пустыми.</div></div>
-      <div class="day"><div class="m">Ролики</div><div>Три рекламных ролика под сегмент, под ключ.</div></div>
+      <div class="day"><div class="m">Креативы</div><div>Рекламные креативы под сегмент. Делаем столько вариантов, сколько нужно, пока не найдём работающий.</div></div>
       <div class="day key"><div class="m">Реклама</div><div>Настройка кампаний, запуск, аналитика. Дальше — поиск рабочих связок: что даёт регистрации, то усиливаем, остальное отключаем.</div></div>
     </div>
     <p class="lead">К концу месяца известно, сколько стоит регистрация, какие объявления работают и что усиливать дальше.</p>
