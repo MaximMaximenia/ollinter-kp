@@ -1,0 +1,91 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ollinter: метки для постов</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@500;600;700&family=Manrope:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#f6f5f2;--surface:#fff;--ink:#14171b;--muted:#6b7078;--line:#e3e1dc;--accent:#1f5fd8;
+--fd:"Golos Text",system-ui,sans-serif;--fb:"Manrope",system-ui,-apple-system,sans-serif;color-scheme:light}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--fb);line-height:1.55;font-size:15px}
+.wrap{max-width:900px;margin:0 auto;padding:46px 20px 80px}
+.eyebrow{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:11px}
+h1{font-family:var(--fd);font-size:clamp(27px,5vw,36px);line-height:1.13;letter-spacing:-.02em}
+.lead{color:var(--muted);max-width:62ch;margin-top:10px}
+h2{font-family:var(--fd);font-size:19px;margin:40px 0 12px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:17px 20px;margin-bottom:14px}
+.ttl{font-family:var(--fd);font-weight:700;font-size:16px}
+.dst{font-size:13.5px;color:var(--muted);margin-top:3px}
+code{display:block;background:#15181d;color:#e8e8ec;font-size:12.5px;line-height:1.6;
+padding:13px 15px;border-radius:8px;margin-top:11px;overflow-x:auto;white-space:pre;font-family:ui-monospace,Menlo,monospace}
+.note{background:var(--surface);border:1px solid var(--line);border-left:3px solid #c2410c;border-radius:10px;padding:17px 20px;margin-top:18px}
+.note p+p{margin-top:9px}
+b{font-weight:600}
+table{border-collapse:collapse;width:100%;font-size:14px;background:var(--surface);
+border:1px solid var(--line);border-radius:10px;overflow:hidden}
+th,td{padding:11px 15px;text-align:left;border-bottom:1px solid var(--line)}
+th{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700;background:#fbfaf8}
+tbody tr:last-child td{border-bottom:none}
+.src{color:var(--muted);font-size:12.5px;margin-top:38px;border-top:1px solid var(--line);padding-top:14px}
+</style>
+<div class="wrap">
+  <p class="eyebrow">Ollinter · органические посты · 21 ноября 2026</p>
+  <h1>Метки для ссылок в постах</h1>
+  <p class="lead">Разметка под семь постов в Facebook, Instagram и TikTok. По тем же правилам, что и для рекламы: обязательный <b>src</b>, строчные латиницей через дефис.</p>
+
+  <div class="note">
+    <p><b>Перед запуском.</b> Slug <code style="display:inline;padding:2px 6px;background:#eceaf2;color:#15181d">social-de</code> должен быть заведён в админке, иначе визиты уйдут в отчёт как «Not registered». Это к разработчику, одна строка.</p>
+    <p><b>Площадка меняется только в utm_source:</b> facebook, instagram, tiktok. Всё остальное в ссылке одинаковое.</p>
+    <p>В TikTok кликабельна только ссылка в шапке профиля — там ставим ссылку поста номер один, самую общую.</p>
+  </div>
+
+  <h2>Постоянная часть</h2>
+  <table>
+    <tr><th>Параметр</th><th>Значение</th><th>Зачем</th></tr>
+    <tr><td>src</td><td>social-de</td><td>обязателен, привязывает визит к кампании</td></tr>
+    <tr><td>utm_source</td><td>facebook · instagram · tiktok</td><td>площадка</td></tr>
+    <tr><td>utm_medium</td><td>social</td><td>органика, не реклама</td></tr>
+    <tr><td>utm_campaign</td><td>posts-de</td><td>эта партия постов</td></tr>
+    <tr><td>utm_content</td><td>меняется по посту</td><td>какой пост сработал</td></tr>
+  </table>
+
+  <h2>Семь ссылок</h2>
+
+  <div class="card"><div class="ttl">1 · Eine Stunde in vier Schritten</div>
+    <div class="dst">общая страница про языки</div>
+    <code>https://ollinter.com/de/for/languages?src=social-de&utm_source=facebook&utm_medium=social&utm_campaign=posts-de&utm_content=vier-schritte</code></div>
+
+  <div class="card"><div class="ttl">2 · Angekommen. Und jetzt die Sprache?</div>
+    <div class="dst">немецкий язык — тема про переезд</div>
+    <code>https://ollinter.com/de/subjects/german?src=social-de&utm_source=facebook&utm_medium=social&utm_campaign=posts-de&utm_content=angekommen</code></div>
+
+  <div class="card"><div class="ttl">3 · Warum Einzelunterricht schneller wirkt</div>
+    <div class="dst">общая страница про языки</div>
+    <code>https://ollinter.com/de/for/languages?src=social-de&utm_source=facebook&utm_medium=social&utm_campaign=posts-de&utm_content=einzelunterricht</code></div>
+
+  <div class="card"><div class="ttl">4 · Vorstellungsgespräch auf Englisch</div>
+    <div class="dst">английский язык</div>
+    <code>https://ollinter.com/de/subjects/english?src=social-de&utm_source=facebook&utm_medium=social&utm_campaign=posts-de&utm_content=vorstellungsgespraech</code></div>
+
+  <div class="card"><div class="ttl">5 · Jeden Experten prüft ein Mensch</div>
+    <div class="dst">общая страница про языки</div>
+    <code>https://ollinter.com/de/for/languages?src=social-de&utm_source=facebook&utm_medium=social&utm_campaign=posts-de&utm_content=geprueft</code></div>
+
+  <div class="card"><div class="ttl">6 · Wofür brauchst du die Sprache?</div>
+    <div class="dst">общая страница про языки</div>
+    <code>https://ollinter.com/de/for/languages?src=social-de&utm_source=facebook&utm_medium=social&utm_campaign=posts-de&utm_content=wofuer</code></div>
+
+  <div class="card"><div class="ttl">7 · Finde deinen Experten</div>
+    <div class="dst">общая страница про языки</div>
+    <code>https://ollinter.com/de/for/languages?src=social-de&utm_source=facebook&utm_medium=social&utm_campaign=posts-de&utm_content=finde-experten</code></div>
+
+  <h2>Три поста под преподавателей</h2>
+  <p class="lead" style="margin-bottom:14px">Те, что ведут на страницу набора. Отдельный slug, чтобы не смешивать с учениками.</p>
+  <div class="card"><div class="ttl">Русский · немецкий · английский</div>
+    <div class="dst">страница для преподавателей</div>
+    <code>https://ollinter.com/teach?src=teach-social&utm_source=instagram&utm_medium=social&utm_campaign=teach-de&utm_content=ru
+https://ollinter.com/de/teach?src=teach-social&utm_source=instagram&utm_medium=social&utm_campaign=teach-de&utm_content=de
+https://ollinter.com/en/teach?src=teach-social&utm_source=instagram&utm_medium=social&utm_campaign=teach-de&utm_content=en</code></div>
+
+  <p class="src">Правила разметки — со страницы «UTM и события для рекламы» от 14 ноября. Сокращатели ссылок не использовать: срезают метки.</p>
+</div>
