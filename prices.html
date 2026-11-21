@@ -1,0 +1,49 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ollinter: стоимость работ</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@500;600;700&family=Manrope:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#f6f5f2; --surface:#fff; --ink:#14171b; --muted:#6b7078; --line:#e3e1dc; --accent:#1f5fd8;
+  --fd:"Golos Text",system-ui,sans-serif; --fb:"Manrope",system-ui,-apple-system,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--fb);line-height:1.5;font-size:16px}
+.wrap{max-width:620px;margin:0 auto;padding:60px 20px 80px}
+.eyebrow{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:12px}
+h1{font-family:var(--fd);font-size:clamp(28px,5.5vw,38px);line-height:1.12;letter-spacing:-.02em}
+.sheet{background:var(--surface);border:1px solid var(--line);border-radius:14px;margin-top:34px;overflow:hidden}
+.grp{font-family:var(--fd);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);padding:20px 24px 10px;background:#fbfaf8;border-bottom:1px solid var(--line)}
+.row{display:flex;justify-content:space-between;align-items:baseline;gap:20px;
+  padding:17px 24px;border-bottom:1px solid var(--line)}
+.row span{font-size:16.5px}
+.row b{font-family:var(--fd);font-weight:700;font-size:18px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.total{display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:24px;background:#14171b;color:#fff}
+.total span{font-family:var(--fd);font-weight:600;font-size:17px}
+.total b{font-family:var(--fd);font-weight:700;font-size:30px;font-variant-numeric:tabular-nums}
+.foot{color:var(--muted);font-size:14px;margin-top:22px}
+</style>
+<div class="wrap">
+  <p class="eyebrow">Ollinter · первый месяц</p>
+  <h1>Стоимость работ</h1>
+
+  <div class="sheet">
+    <div class="grp">Оформление</div>
+    <div class="row"><span>Фирменный стиль и дизайн сайта</span><b>$350</b></div>
+    <div class="row"><span>Оформление площадок</span><b>$200</b></div>
+    <div class="row"><span>Посты о компании</span><b>$150</b></div>
+
+    <div class="grp">Запуск сегмента</div>
+    <div class="row"><span>Анализ и смыслы</span><b>$300</b></div>
+    <div class="row"><span>Страница под сегмент</span><b>$450</b></div>
+    <div class="row"><span>Рекламные креативы</span><b>$400</b></div>
+    <div class="row"><span>Реклама и аналитика</span><b>$350</b></div>
+
+    <div class="total"><span>Итого за первый месяц</span><b>$2 200</b></div>
+  </div>
+
+  <p class="foot">Ollinter · ноябрь 2026</p>
+</div>
