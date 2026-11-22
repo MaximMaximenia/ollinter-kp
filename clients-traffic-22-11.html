@@ -1,0 +1,126 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ollinter — разбор трафика на учеников, 22 ноября</title>
+<style>
+:root{--ink:#1a1a18;--mut:#6b6a66;--line:#e3e1da;--bg:#faf9f6;--card:#fff;--ok:#0f6e56;--okbg:#e8f5ef;--bad:#a32d2d;--badbg:#fcecec;--warn:#854f0b;--warnbg:#faeeda}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.65 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;padding:48px 20px}
+.w{max-width:880px;margin:0 auto}
+h1{font-size:30px;font-weight:600;letter-spacing:-.02em}
+.date{color:var(--mut);font-size:15px;margin-top:6px}
+h2{font-size:21px;font-weight:600;margin:44px 0 16px}
+.lead{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 26px;margin-top:26px;font-size:17px}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;font-size:15px}
+th{text-align:left;font-weight:600;padding:13px 16px;border-bottom:1px solid var(--line);background:#f4f2ec}
+td{padding:13px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.ok{background:var(--okbg)}.bad{background:var(--badbg)}.warn{background:var(--warnbg)}
+.note{color:var(--mut);font-size:14px;margin-top:10px}
+ul{margin:12px 0 0 20px}li{margin-bottom:9px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 24px;margin-bottom:14px}
+.card h3{font-size:17px;font-weight:600;margin-bottom:4px}
+.meta{color:var(--mut);font-size:14px;margin-bottom:14px}
+.steps{list-style:none;margin:0;padding:0;border-left:2px solid var(--line);padding-left:18px}
+.steps li{margin-bottom:10px;position:relative}
+.steps li::before{content:"";position:absolute;left:-24px;top:9px;width:9px;height:9px;border-radius:50%;background:#b4b2a9}
+.steps li.hit::before{background:var(--ok)}
+.steps li.end::before{background:var(--bad)}
+.verdict{margin-top:14px;padding-top:14px;border-top:1px solid var(--line);font-size:15px}
+code{background:#f1efe8;padding:2px 6px;border-radius:4px;font-size:14px}
+</style></head><body><div class="w">
+
+<h1>Трафик на учеников — разбор по каждому человеку</h1>
+<div class="date">22 ноября 2026 · кампания Leads_TeachersClick · страница ollinter.com/de/for/languages</div>
+
+<div class="lead">
+За день с рекламы на сайт зашло <b>пять человек</b>. Все пятеро с телефона.
+Трое открыли карточку преподавателя и не нажали там ничего. Двое ушли с первого экрана.
+До брони не дошёл никто.
+</div>
+
+<h2>Сразу важное про время</h2>
+<p>Админка Антона <b>не хранит время суток и длительность визита</b> — прямо так и пишет в карточке:
+«This visit has no name and no time of day». Поэтому сколько минут человек провёл на сайте, сказать нельзя:
+таких данных в системе просто нет. Зато она хранит другое, и это полезнее — <b>каждый клик с точностью до блока страницы</b>.</p>
+
+<h2>Пять человек с рекламы</h2>
+
+<div class="card">
+<h3>Человек 1 — дошёл до преподавателя из блока «Люди»</h3>
+<div class="meta">Германия · телефон · кампания Languages, Germany</div>
+<ul class="steps">
+<li>Открыл страницу <code>Field: languages</code></li>
+<li class="hit">Нажал на преподавателя в блоке <b>Strip</b>, это была карточка со 2-й по 3-ю позицию</li>
+<li class="end">Открыл профиль преподавателя и <b>не сделал там ни одного клика</b></li>
+</ul>
+<div class="verdict">Самый тёплый из всех. Долистал до ленты преподавателей, выбрал конкретного человека — и на его странице не нажал ничего.</div>
+</div>
+
+<div class="card">
+<h3>Человек 2 — ткнул в первое же лицо на экране</h3>
+<div class="meta">Страна не определилась · телефон · кампания Languages, Germany</div>
+<ul class="steps">
+<li>Открыл страницу <code>Field: languages</code></li>
+<li class="hit">Нажал на преподавателя прямо в <b>первом экране</b>, в блоке Hero</li>
+<li class="end">Открыл профиль преподавателя, <b>ноль кликов</b></li>
+</ul>
+<div class="verdict">Отреагировал мгновенно, с первого экрана. И так же мгновенно встал на профиле.</div>
+</div>
+
+<div class="card">
+<h3>Человек 3 — выбрал первого в подборке</h3>
+<div class="meta">Страна не определилась · телефон · кампания Languages, Germany</div>
+<ul class="steps">
+<li>Открыл страницу <code>Field: languages</code></li>
+<li class="hit">Нажал на преподавателя в блоке <b>Bento</b>, на самую первую карточку</li>
+<li class="end">Открыл профиль преподавателя, <b>ноль кликов</b></li>
+</ul>
+<div class="verdict">Третий подряд с одинаковым финалом: профиль открыт, действий нет.</div>
+</div>
+
+<div class="card">
+<h3>Человек 4 — ушёл с первого экрана</h3>
+<div class="meta">Германия · телефон · кампания Languages, Germany</div>
+<ul class="steps">
+<li class="end">Открыл страницу <code>Field: languages</code>, <b>ноль кликов</b>, закрыл</li>
+</ul>
+<div class="verdict">Не нажал вообще ничего.</div>
+</div>
+
+<div class="card">
+<h3>Человек 5 — ушёл с первого экрана</h3>
+<div class="meta">Страна не определилась · телефон · кампания Languages, Germany</div>
+<ul class="steps">
+<li class="end">Открыл страницу <code>Field: languages</code>, <b>ноль кликов</b>, закрыл</li>
+</ul>
+<div class="verdict">То же самое.</div>
+</div>
+
+<h2>Кто ещё был на этой странице, но не с рекламы</h2>
+<table>
+<tr><th>Кто</th><th class="n">Визитов</th><th>Что делали</th></tr>
+<tr><td>Беларусь, компьютер</td><td class="n">3</td><td>двое переключали язык сайта в шапке и перезагружали страницу, один ушёл сразу</td></tr>
+<tr><td>США, компьютер</td><td class="n">1</td><td>открыл и ушёл, ноль кликов</td></tr>
+<tr><td>Ирландия, компьютер</td><td class="n">1</td><td>открыл и ушёл, ноль кликов</td></tr>
+<tr><td>Грузия, компьютер</td><td class="n">6</td><td>мои тестовые заходы при проверке меток</td></tr>
+</table>
+<div class="note">У всех этих визитов в карточке стоит «None or other» — к рекламной кампании они не привязаны.</div>
+
+<h2>Что из этого видно</h2>
+<ul>
+<li><b>Реклама приводит только с телефонов.</b> Все пять рекламных визитов — мобильные. Ни одного с компьютера.</li>
+<li><b>Трое из пяти нажали на преподавателя.</b> Это 60% — люди реагируют на лица, а не на текст. Причём нажимали из разных блоков: один с первого экрана, один из ленты, один из подборки.</li>
+<li><b>И все трое замерли на профиле преподавателя.</b> Ноль кликов. Ни кнопки брони, ни календаря, ни прокрутки — ничего, что система могла бы записать.</li>
+<li><b>Беларусы на странице для немецких учеников</b> — двое из трёх первым делом искали переключатель языка в шапке. Это органика, но симптом: страница открывается не на том языке, который человек ждёт.</li>
+</ul>
+
+<h2>Главный вывод</h2>
+<p>Узкое место не в рекламе и не в странице со списком преподавателей — до неё доходят,
+и по лицам кликают охотно. Обрыв происходит на <b>профиле конкретного преподавателя</b>:
+туда заходят и оттуда не делают ни одного действия.</p>
+<p class="note">Чтобы понять почему, нужно смотреть сам профиль глазами мобильного пользователя из Германии:
+видно ли кнопку брони без прокрутки, есть ли свободные слоты в ближайшие дни, понятна ли цена.
+Админка показывает, что в этой кампании на неделю вперёд свободны 10 преподавателей — если у выбранного окон нет, человеку просто нечего нажать.</p>
+
+</div></body></html>
