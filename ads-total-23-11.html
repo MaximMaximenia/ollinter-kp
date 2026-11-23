@@ -1,0 +1,69 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Общая статистика рекламы · Ollinter</title>
+<style>
+:root{--bg:#F6F7F6;--card:#fff;--ink:#101513;--mut:#6B7672;--ln:#E3E7E5;--grn:#0F7A58;--red:#B4342B}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.55 -apple-system,"Segoe UI",Roboto,sans-serif;padding:40px 20px}
+.w{max-width:960px;margin:0 auto}
+h1{font-size:34px;letter-spacing:-.02em;margin-bottom:6px}
+.sb{color:var(--mut);margin-bottom:32px}
+h2{font-size:21px;margin:36px 0 14px;letter-spacing:-.01em}
+.card{background:var(--card);border:1px solid var(--ln);border-radius:16px;padding:22px 24px;margin-bottom:16px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:8px}
+.k{background:var(--card);border:1px solid var(--ln);border-radius:14px;padding:16px 18px}
+.k b{display:block;font-size:27px;letter-spacing:-.02em}
+.k span{color:var(--mut);font-size:13px}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th,td{padding:11px 10px;text-align:right;border-bottom:1px solid var(--ln)}
+th:first-child,td:first-child{text-align:left}
+th{color:var(--mut);font-weight:600;font-size:13px}
+tr:last-child td{border-bottom:none}
+tfoot td{font-weight:700;border-top:2px solid var(--ln)}
+.g{color:var(--grn);font-weight:700}.r{color:var(--red);font-weight:700}
+ul{margin:8px 0 0 18px}li{margin-bottom:7px}
+.note{color:var(--mut);font-size:13px;margin-top:10px}
+.scroll{overflow-x:auto}
+</style></head><body><div class="w">
+<h1>Общая статистика рекламы</h1>
+<div class="sb">Meta Ads, кабинет Ollinter Ads · весь период открутки, данные на 23 ноября 2026</div>
+
+<div class="kpis">
+<div class="k"><b>146,27 €</b><span>потрачено всего</span></div>
+<div class="k"><b>7 186</b><span>показов</span></div>
+<div class="k"><b>116</b><span>кликов по ссылке</span></div>
+<div class="k"><b>22</b><span>дошли до сайта</span></div>
+<div class="k"><b>3</b><span>целевых действия</span></div>
+</div>
+
+<h2>По направлениям</h2>
+<div class="card scroll"><table>
+<thead><tr><th>Направление</th><th>Расход</th><th>Показы</th><th>Клики</th><th>CTR</th><th>CPC</th><th>Дошли<br>до сайта</th><th>Целевые<br>действия</th><th>Цена<br>действия</th></tr></thead>
+<tbody>
+<tr><td><b>Эксперты</b><br><span style="color:var(--mut);font-size:13px">Teachers_Reg_BY+DACH · активна</span></td><td>16,69 €</td><td>1 738</td><td>41</td><td class="g">2,36%</td><td>0,41 €</td><td>4</td><td class="g">3 регистрации</td><td>5,56 €</td></tr>
+<tr><td><b>Клиенты</b><br><span style="color:var(--mut);font-size:13px">Leads_TeachersClick · активна, чужая</span></td><td>73,90 €</td><td>3 939</td><td>64</td><td>1,62%</td><td>1,15 €</td><td>15</td><td class="r">0</td><td>—</td></tr>
+<tr><td><b>Клиенты (тест)</b><br><span style="color:var(--mut);font-size:13px">Leads_test · выключена</span></td><td>55,68 €</td><td>1 509</td><td>11</td><td class="r">0,73%</td><td>5,06 €</td><td>3</td><td class="r">0</td><td>—</td></tr>
+</tbody>
+<tfoot><tr><td>Итого</td><td>146,27 €</td><td>7 186</td><td>116</td><td>1,61%</td><td>1,26 €</td><td>22</td><td>3</td><td>48,76 €</td></tr></tfoot>
+</table>
+<div class="note">«Дошли до сайта» — просмотры целевой страницы по Meta. «Целевые действия» — событие, на которое кампания оптимизируется.</div>
+</div>
+
+<h2>Что это значит</h2>
+<div class="card"><ul>
+<li><b>Эксперты работают, клиенты нет.</b> На экспертов ушло 16,69 € и дало 3 регистрации по 5,56 €. На клиентов ушло 129,58 € — ноль целевых действий.</li>
+<li><b>CTR на экспертов в 1,5–3 раза выше.</b> 2,36% против 1,62% и 0,73%. Аудитория преподавателей реагирует на креативы заметно лучше.</li>
+<li><b>Клик дешевле в 3 раза.</b> 0,41 € против 1,15 € у клиентской и 5,06 € у тестовой.</li>
+<li><b>Узкое место — путь от клика до страницы.</b> Из 116 кликов до сайта дошли 22, это 19%. Остальные закрывают страницу до загрузки или не считаются из-за меток.</li>
+<li><b>Leads_TeachersClick учится вслепую.</b> Оптимизация идёт на событие TeachersClick, оно не сработало ни разу за весь период, поэтому алгоритму не на чем обучаться.</li>
+</ul></div>
+
+<h2>Что делать</h2>
+<div class="card"><ul>
+<li>Переносить бюджет на экспертов: это единственное направление с подтверждённой ценой результата.</li>
+<li>По клиентам менять цель оптимизации на то событие, которое реально срабатывает, иначе деньги продолжат уходить в обучение без сигнала.</li>
+<li>Зарегистрировать наши метки в админке, чтобы заходы с рекламы перестали падать в «не зарегистрировано».</li>
+</ul></div>
+
+<div class="note" style="margin-top:28px">Источник: Meta Ads Manager, период 23 окт 2023 — 22 ноя 2026 (весь срок жизни кабинета). Регистрации учеников в админке Ollinter отдаются диапазонами и здесь не используются.</div>
+</div></body></html>
