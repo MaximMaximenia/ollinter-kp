@@ -1,0 +1,140 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ollinter — путь клиента, 23 ноября</title>
+<style>
+:root{--ink:#1a1a18;--mut:#6b6a66;--line:#e3e1da;--bg:#faf9f6;--card:#fff;--ok:#0f6e56;--okbg:#e8f5ef;--bad:#a32d2d;--badbg:#fcecec;--warnbg:#faeeda;--warnln:#f0cf96}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.65 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;padding:48px 20px}
+.w{max-width:880px;margin:0 auto}
+h1{font-size:30px;font-weight:600;letter-spacing:-.02em}
+.date{color:var(--mut);font-size:15px;margin-top:6px}
+h2{font-size:21px;font-weight:600;margin:46px 0 16px}
+.lead{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 26px;margin-top:26px;font-size:17px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:12px;margin-top:22px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.kpi .lb{color:var(--mut);font-size:13px}
+.kpi .big{font-size:26px;font-weight:600;font-variant-numeric:tabular-nums;margin-top:2px}
+.warnbox{background:var(--warnbg);border:1px solid var(--warnln);border-radius:14px;padding:18px 24px;margin:24px 0;font-size:15px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 26px;margin-bottom:16px}
+.card h3{font-size:18px;font-weight:600}
+.meta{color:var(--mut);font-size:14px;margin:4px 0 18px}
+.path{list-style:none;margin:0;padding:0}
+.path li{position:relative;padding-left:34px;padding-bottom:18px;border-left:2px solid var(--line);margin-left:9px}
+.path li:last-child{border-left-color:transparent;padding-bottom:0}
+.path li::before{content:"";position:absolute;left:-9px;top:4px;width:16px;height:16px;border-radius:50%;background:#d3d1c7;border:3px solid var(--bg)}
+.path li.go::before{background:var(--ok)}
+.path li.stop::before{background:var(--bad)}
+.path .st{font-weight:500}
+.path .dt{color:var(--mut);font-size:14px}
+.verdict{margin-top:6px;padding-top:14px;border-top:1px solid var(--line);font-size:15px;color:var(--mut)}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;font-size:15px}
+th{text-align:left;font-weight:600;padding:13px 16px;border-bottom:1px solid var(--line);background:#f4f2ec}
+td{padding:13px 16px;border-bottom:1px solid var(--line)}
+tr:last-child td{border-bottom:none}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+ul{margin:12px 0 0 20px}li{margin-bottom:9px}
+code{background:#f1efe8;padding:2px 6px;border-radius:4px;font-size:14px}
+figure{margin:20px 0 0}figure img{width:100%;display:block;border:1px solid var(--line);border-radius:12px}
+figcaption{color:var(--mut);font-size:14px;margin-top:8px}
+</style></head><body><div class="w">
+
+<h1>Путь клиента — кто и что делал</h1>
+<div class="date">23 ноября 2026 · кампания на учеников · страница ollinter.com/de/for/languages</div>
+
+<div class="lead">
+С рекламы на сайт зашло <b>четыре человека</b>, все с телефона.
+Двое не нажали вообще ничего. Один открыл карточку преподавателя и замер.
+Один посмотрел язык и вернулся назад. До кнопки брони не дошёл никто.
+</div>
+
+<div class="grid">
+<div class="kpi"><div class="lb">Потрачено</div><div class="big">21,90 €</div></div>
+<div class="kpi"><div class="lb">Кликов в Meta</div><div class="big">10</div></div>
+<div class="kpi"><div class="lb">Дошли до сайта</div><div class="big">4</div></div>
+<div class="kpi"><div class="lb">Целевых действий</div><div class="big">0</div></div>
+</div>
+
+<div class="warnbox">
+<b>Про регистрацию, которую показала Meta.</b> Она не отсюда.
+Сегодня регистрировались на странице преподавателей — трое заполняли анкету.
+Meta приписала одну из них этой кампании, потому что человек сначала кликнул по её объявлению,
+а позже в тот же день зарегистрировался как преподаватель. Для кампании на учеников это чужая конверсия.
+<br><br>
+<b>И главное:</b> цель этой кампании — не регистрация, а событие <code>TeachersClick</code>, нажатие кнопки.
+За сегодня этого события <b>ноль</b>.
+</div>
+
+<h2>Четыре человека по шагам</h2>
+
+<div class="card">
+<h3>Человек 1</h3>
+<div class="meta">Германия · телефон</div>
+<ul class="path">
+<li class="stop"><span class="st">Открыл страницу</span><br><span class="dt">Ноль кликов. Закрыл.</span></li>
+</ul>
+<div class="verdict">Даже не прокрутил настолько, чтобы на что-то нажать.</div>
+</div>
+
+<div class="card">
+<h3>Человек 2 — искал по языку</h3>
+<div class="meta">Германия · телефон</div>
+<ul class="path">
+<li class="go"><span class="st">Открыл страницу</span><br><span class="dt">Долистал до блока с языками</span></li>
+<li class="go"><span class="st">Нажал на язык</span><br><span class="dt">Вторая или третья плитка в блоке «Welche Sprache möchtest du lernen?»</span></li>
+<li><span class="st">Открыл страницу этого языка</span><br><span class="dt">Ноль кликов</span></li>
+<li class="stop"><span class="st">Вернулся назад на общую страницу</span><br><span class="dt">Снова ноль кликов. Ушёл.</span></li>
+</ul>
+<div class="verdict">Единственный, кто шёл не через лица, а через язык. Зашёл в нужный раздел, ничего там не выбрал и вернулся.</div>
+</div>
+
+<div class="card">
+<h3>Человек 3 — выбрал преподавателя</h3>
+<div class="meta">Германия · телефон</div>
+<ul class="path">
+<li class="go"><span class="st">Открыл страницу</span><br><span class="dt">Долистал до блока с карточками преподавателей</span></li>
+<li class="go"><span class="st">Нажал на преподавателя</span><br><span class="dt">Позиция с 4-й по 10-ю в блоке «Finde eine Lehrkraft»</span></li>
+<li class="stop"><span class="st">Открыл карточку преподавателя</span><br><span class="dt">Ноль кликов. Ушёл.</span></li>
+</ul>
+<div class="verdict">Самый тёплый за день. Долистал почти до середины страницы, выбрал человека — и на его карточке не нажал ничего.</div>
+</div>
+
+<div class="card">
+<h3>Человек 4</h3>
+<div class="meta">Страна не определилась · телефон</div>
+<ul class="path">
+<li class="stop"><span class="st">Открыл страницу</span><br><span class="dt">Ноль кликов. Закрыл.</span></li>
+</ul>
+</div>
+
+<h2>Куда нажимали</h2>
+<figure><img src="img/b_bento.png" alt="Блок с преподавателями">
+<figcaption>Так выглядит блок с карточками преподавателей — туда пришёлся клик Человека 3.</figcaption></figure>
+
+<h2>Воронка за день</h2>
+<table>
+<tr><th>Шаг</th><th class="n">Человек</th><th class="n">Осталось</th></tr>
+<tr><td>Кликнули по рекламе (данные Meta)</td><td class="n">10</td><td class="n">100 %</td></tr>
+<tr><td>Дошли до сайта</td><td class="n">4</td><td class="n">40 %</td></tr>
+<tr><td>Нажали хоть что-то на странице</td><td class="n">2</td><td class="n">20 %</td></tr>
+<tr><td>Открыли карточку преподавателя</td><td class="n">1</td><td class="n">10 %</td></tr>
+<tr><td>Сделали что-то в карточке</td><td class="n">0</td><td class="n">0 %</td></tr>
+<tr><td>Нажали кнопку брони</td><td class="n">0</td><td class="n">0 %</td></tr>
+</table>
+
+<h2>Что видно за два дня</h2>
+<p>Вчера было пять человек, сегодня четыре. Картина повторяется один в один:</p>
+<ul>
+<li><b>Половина уходит, не нажав ничего.</b> Вчера двое из пяти, сегодня двое из четырёх.</li>
+<li><b>Кто нажимает — нажимает на лицо.</b> Вчера трое, сегодня один. Из разных блоков страницы, но всегда на преподавателя.</li>
+<li><b>Карточка преподавателя обрывает всех.</b> За два дня туда зашли четыре человека и ни один не сделал ни одного клика.</li>
+<li><b>Все заходы только с телефона.</b> Девять из девяти.</li>
+</ul>
+
+<h2>Что проверить</h2>
+<ul>
+<li>Открыть карточку преподавателя с телефона глазами немецкого ученика: видна ли кнопка брони сразу, есть ли свободное время на ближайшие дни, понятна ли цена.</li>
+<li>Админка в разделе Campaigns сама считает свободных преподавателей на неделю вперёд — их <b>10</b>. Если у выбранного окон нет, нажимать просто нечего.</li>
+<li>Цель кампании стоит на кнопке <code>TeachersClick</code>. За два дня этого события не было ни разу — значит алгоритм учится вслепую и не понимает, кого искать.</li>
+</ul>
+
+</div></body></html>
